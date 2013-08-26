@@ -1,0 +1,11 @@
+# ~/.gitignore_global
+# To add make this list global, run
+# git config --global core.excludesfile ~/.gitignore_global
+*~
+*.pdf
+_region_.*
+*.dvi
+*.log
+*.aux
+*.ps
+*.toc

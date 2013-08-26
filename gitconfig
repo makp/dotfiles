@@ -1,0 +1,21 @@
+# ~/.gitconfig
+[user]
+	name = Makmiller
+	email = makmiller@gmail.com
+[alias]
+	wdiff = diff --color-words
+[color]
+	status = auto
+	branch = auto
+	ui = auto
+	pager = true
+[core]
+	editor = emacsclient
+	pager = less -FRSX
+	excludesfile = /home/makmiller/.gitignore_global
+[merge]
+	tool = emerge
+[mergetool "emerge"]
+	path = /home/makmiller/elisp/emerge-for-git
+[credential]
+	helper = cache
