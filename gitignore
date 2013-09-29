@@ -9,3 +9,12 @@ _region_.*
 *.aux
 *.ps
 *.toc
+*.fls
+*.nav
+*.synctex.gz
+*.out
+auto/
+*.fdb_latexmk
+*.bcf
+*.blg
+*.bbl
