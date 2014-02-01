@@ -22,7 +22,7 @@ bindkey "^[t" up-line-or-history
 # VARIABLES -----------------------
 
 # path
-PATH="$PATH:/home/makmiller/scripts/myscripts:/home/makmiller/scripts/third-party-scripts"
+PATH="$PATH:$HOME/scripts/myscripts:$HOME/scripts/third-party-scripts"
 export PATH
 
 # editor
