@@ -18,3 +18,4 @@ auto/
 *.blg
 *.bbl
 ltxpng
+*.mtc*
