@@ -1,3 +1,4 @@
+# -*-conf-*-
 # source ~/.zshrc
 # In order to change the default shell, use: usermod -s /bin/<shell> <username>
 
