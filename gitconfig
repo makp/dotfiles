@@ -13,10 +13,10 @@
 [core]
 	editor = emacsclient
 	pager = less -FRSX
-	excludesfile = /home/makmiller/.gitignore_global
+	excludesfile = ~/.gitignore_global
 [merge]
 	tool = emerge
 [mergetool "emerge"]
-	path = /home/makmiller/elisp/emerge-for-git
+	path = ~/elisp/emerge-for-git
 [credential]
 	helper = cache
