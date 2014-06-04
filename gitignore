@@ -24,3 +24,4 @@ ltxpng
 *.ini
 *.cut
 *.synctex.gz(busy)
+*.snm
