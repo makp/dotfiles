@@ -19,3 +19,8 @@ auto/
 *.bbl
 ltxpng
 *.mtc*
+*.maf
+*.run.xml
+*.ini
+*.cut
+*.synctex.gz(busy)
