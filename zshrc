@@ -24,12 +24,12 @@ bindkey "^[t" up-line-or-history
 # VARIABLES -----------------------
 
 # path
-PATH="$PATH:$HOME/scripts/myscripts:$HOME/scripts/third-party-scripts"
+PATH="$PATH:/home/makmiller/scripts/myscripts:/home/makmiller/scripts/third-party-scripts"
 export PATH
 
 # editor
-export EDITOR=~/scripts/myscripts/edit.sh
-export VISUAL=~/scripts/myscripts/edit.sh
+export EDITOR=/home/makmiller/scripts/myscripts/edit.sh
+export VISUAL=/home/makmiller/scripts/myscripts/edit.sh
 export ALTERNATE_EDITOR=emacs
 
 # CDPATH
