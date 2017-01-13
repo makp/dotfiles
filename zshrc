@@ -175,12 +175,13 @@ alias emcs='emacsclient -c'
 alias Fecha-emacs='emacsclient -e "(kill-emacs)"' # doesn't prompt for saving files
 alias fecha-emacs='emacsclient -e "(client-save-kill-emacs)"' # 
 
+alias imprima-office='lp -d HP_Officejet_Pro_8100 -o sides=two-sided-long-edge'
 
 # email related
 #alias check-email='fetchmail -vk'
 
 #
-alias weather_cal='weather --id=CYYC'
+# alias weather_cal='weather --id=CYYC'
 
 alias alarme='icsy -n 0'
 
@@ -197,7 +198,7 @@ alias dirs='dirs -v'
 alias devagar='sudo cpufreq-set -g powersave; sudo cpufreq-set -c 1 -g powersave'
 alias rapido='sudo cpufreq-set -g ondemand; sudo cpufreq-set -c 1 -g ondemand'
 alias super_rapido='sudo cpufreq-set -g performance; sudo cpufreq-set -c 1 -g performance'
-alias shutdown='sudo shutdown -h now'
+# alias shutdown='sudo shutdown -h now'
 
 # tar related
 alias tarbz2='tar cjvf' #tar cjvf archive.tar.bz2 reports
@@ -211,8 +212,8 @@ alias compila='emacs -batch -f batch-byte-compile thefile.el'
 # SPECIAL ALIASES ---------------------
 
 # suffix aliases
-alias -s pdf=zathura
-alias -s djvu=zathura
+alias -s pdf=okular
+alias -s djvu=okular
 #djview4
 alias -s chm=kchmviewer
 
