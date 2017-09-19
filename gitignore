@@ -25,3 +25,4 @@ ltxpng
 *.cut
 *.synctex.gz(busy)
 *.snm
+*.fmt
