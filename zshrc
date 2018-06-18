@@ -2,7 +2,7 @@
 # source ~/.zshrc
 # In order to change the default shell, use: usermod -s /bin/<shell> <username>
 
-# load the function-based completion system
+# command completion
 autoload -U compinit
 compinit
 
@@ -36,7 +36,7 @@ export ALTERNATE_EDITOR=emacs
 # The nullstring "::" forces cd to search in the working directory
 # This is important because, without it, cd will only search the working
 # directory after the other directories in CDPATH fails. 
-export CDPATH=::$HOME:$HOME/Documents/pdfs
+export CDPATH=::$HOME:$HOME/Documents/mydocs
 
 # max size directory stack
 DIRSTACKSIZE=12
