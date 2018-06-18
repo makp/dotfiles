@@ -97,6 +97,9 @@ compinit
 # use directory-stack with tab completion
 # save my directory-stack (persistent directory stack)
 
+# autocompletion for aliases
+# setopt COMPLETE_ALIASES
+
 # zstyle
 
 # enable caching (for speed)
@@ -182,7 +185,7 @@ alias imprima-office='lp -d HP_Officejet_Pro_8100 -o sides=two-sided-long-edge'
 #
 # alias weather_cal='weather --id=CYYC'
 
-alias alarme='icsy -n 0'
+# alias alarme='icsy -n 0'
 
 # ls related
 alias ls='ls -F --color'
@@ -194,19 +197,19 @@ alias dirs='dirs -v'
 #alias ds='pwd >> $HOME/.zsh_dir-stack'
 
 # power related
-alias devagar='sudo cpufreq-set -g powersave; sudo cpufreq-set -c 1 -g powersave'
-alias rapido='sudo cpufreq-set -g ondemand; sudo cpufreq-set -c 1 -g ondemand'
-alias super_rapido='sudo cpufreq-set -g performance; sudo cpufreq-set -c 1 -g performance'
+# alias devagar='sudo cpufreq-set -g powersave; sudo cpufreq-set -c 1 -g powersave'
+# alias rapido='sudo cpufreq-set -g ondemand; sudo cpufreq-set -c 1 -g ondemand'
+# alias super_rapido='sudo cpufreq-set -g performance; sudo cpufreq-set -c 1 -g performance'
 # alias shutdown='sudo shutdown -h now'
 
 # tar related
-alias tarbz2='tar cjvf' #tar cjvf archive.tar.bz2 reports
+# alias tarbz2='tar cjvf' #tar cjvf archive.tar.bz2 reports
 
 # alias for my scripts
-alias sincro='/home/makmiller/myscripts/sincro.sh'
+# alias sincro='/home/makmiller/myscripts/sincro.sh'
 
 # alias for byte-compile with Emacs
-alias compila='emacs -batch -f batch-byte-compile thefile.el'
+# alias compila='emacs -batch -f batch-byte-compile thefile.el'
 
 # SPECIAL ALIASES ---------------------
 
@@ -214,7 +217,7 @@ alias compila='emacs -batch -f batch-byte-compile thefile.el'
 alias -s pdf=okular
 alias -s djvu=okular
 #djview4
-alias -s chm=kchmviewer
+# alias -s chm=kchmviewer
 
 
 ## music
@@ -227,9 +230,6 @@ alias -s mp4='mplayer -loop 0'
 alias -g less='less -R' # less with colors
 
 # CUSTOM FUNCTIONS ----------------
-
-
-# extract
 
 # do ls right after cd
 cd () {
