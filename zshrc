@@ -39,6 +39,9 @@ DIRSTACKSIZE=12
 
 #dirs `cat $HOME/.zsh_dir-stack` # permanent directory stack
 
+# rehash automatically
+zstyle ':completion:*' rehash true
+
 # words
 # for zsh, not just alphanumerics are part of a word, but other symbols stated by the shell variable WORDCHARS. By making this variable empty, I get the bash behavior. 
 # default value
