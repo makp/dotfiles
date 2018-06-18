@@ -2,10 +2,6 @@
 # source ~/.zshrc
 # In order to change the default shell, use: usermod -s /bin/<shell> <username>
 
-# command completion
-autoload -U compinit
-compinit
-
 # load colors
 autoload -U colors 
 colors
@@ -91,14 +87,17 @@ setopt pushd_silent   # don't print the directory stack after pushd or
 setopt hist_ignore_all_dups 
 setopt hist_ignore_space
 
-# #  ------
-# #  ZSTYLE
-# #  ------
+# COMPLETION ----
+
+# compinit
+autoload -U compinit
+compinit
 
 # THINGS TO DO 
 # use directory-stack with tab completion
 # save my directory-stack (persistent directory stack)
 
+# zstyle
 
 # enable caching (for speed)
 zstyle ':completion:*' use-cache on
