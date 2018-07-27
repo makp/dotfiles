@@ -24,7 +24,7 @@ PATH="$PATH:/home/makmiller/scripts/myscripts:/home/makmiller/scripts/third-part
 export PATH
 
 # editor
-export EDITOR=/home/makmiller/scripts/myscripts/edit.sh
+export EDITOR=/usr/bin/nano
 export VISUAL=/home/makmiller/scripts/myscripts/edit.sh
 export ALTERNATE_EDITOR=emacs
 
