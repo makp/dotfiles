@@ -100,6 +100,9 @@ compinit
 autoload predict-on
 predict-on
 
+# syntax highlighting
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 # THINGS TO DO 
 # use directory-stack with tab completion
 # save my directory-stack (persistent directory stack)
