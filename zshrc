@@ -96,6 +96,10 @@ setopt hist_ignore_space
 autoload -U compinit
 compinit
 
+# predict
+autoload predict-on
+predict-on
+
 # THINGS TO DO 
 # use directory-stack with tab completion
 # save my directory-stack (persistent directory stack)
