@@ -20,7 +20,8 @@ bindkey "^[t" up-line-or-history
 # VARIABLES -----------------------
 
 # path
-PATH="$PATH:/home/makmiller/scripts/myscripts:/home/makmiller/scripts/third-party-scripts:$(ruby -e 'print Gem.user_dir')/bin"
+PATH="$PATH:/home/makmiller/scripts/myscripts:/home/makmiller/scripts/third-party-scripts"
+# /usr/bin/vendor_perl
 export PATH
 
 # editor
