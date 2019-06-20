@@ -20,7 +20,7 @@ bindkey "^[t" up-line-or-history
 # VARIABLES -----------------------
 
 # path
-PATH="$PATH:/usr/bin/vendor_perl:/home/makmiller/scripts/myscripts:/home/makmiller/scripts/third-party-scripts"
+PATH="$PATH:/usr/bin/vendor_perl:/home/makmiller/scripts/myscripts"
 export PATH
 
 # editor
