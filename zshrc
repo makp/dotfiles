@@ -39,6 +39,14 @@ DIRSTACKSIZE=12
 
 #dirs `cat $HOME/.zsh_dir-stack` # permanent directory stack
 
+# start ssh-agent (from Arch Linux page on ssh keys)
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    ssh-agent > "$XDG_RUNTIME_DIR/ssh-agent.env"
+fi
+if [[ ! "$SSH_AUTH_SOCK" ]]; then
+    eval "$(<"$XDG_RUNTIME_DIR/ssh-agent.env")"
+fi
+
 # rehash automatically
 zstyle ':completion:*' rehash true
 
