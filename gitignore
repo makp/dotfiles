@@ -27,3 +27,4 @@ ltxpng
 *.snm
 *.fmt
 .ipynb_checkpoints/
+__pycache__/
