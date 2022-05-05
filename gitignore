@@ -28,3 +28,4 @@ ltxpng
 *.fmt
 .ipynb_checkpoints/
 __pycache__/
+slides_*.pdf
