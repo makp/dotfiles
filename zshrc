@@ -1,5 +1,5 @@
 # -*-conf-*-
-# source ~/.zshrc
+# ~/.zshrc
 # In order to change the default shell, use: usermod -s /bin/<shell> <username>
 
 # load colors
@@ -186,69 +186,6 @@ zstyle ':completion:*:*:okular:*' file-sort time
 # (i.e., complete in the middle of some text ignoring the suffix)
 bindkey '^i' expand-or-complete-prefix # binding TAB
 
-# REGULAR ALIASES ----------------
-
-# locate
-alias atualize="updatedb -v -l 0 -o /home/makmiller/elisp/locate.db -U /home/makmiller/Documents/pdfs/"
-
-# emacs related alias
-alias em='emacsclient -t'
-alias emcs='emacsclient -c'
-alias Fecha-emacs='emacsclient -e "(kill-emacs)"' # doesn't prompt for saving files
-alias fecha-emacs='emacsclient -e "(client-save-kill-emacs)"' # 
-
-alias imprima-office='lp -d HP_Officejet_Pro_8100 -o sides=two-sided-long-edge'
-
-# email related
-#alias check-email='fetchmail -vk'
-
-#
-# alias weather_cal='weather --id=CYYC'
-
-# alias alarme='icsy -n 0'
-
-# ls related
-alias ls='ls -F --color'
-alias ll='ls -lh'
-
-# directory stack
-# alias pu=pushd I don't need this any more since I'm using the autopush option
-alias dirs='dirs -v'
-#alias ds='pwd >> $HOME/.zsh_dir-stack'
-
-# power related
-# alias devagar='sudo cpufreq-set -g powersave; sudo cpufreq-set -c 1 -g powersave'
-# alias rapido='sudo cpufreq-set -g ondemand; sudo cpufreq-set -c 1 -g ondemand'
-# alias super_rapido='sudo cpufreq-set -g performance; sudo cpufreq-set -c 1 -g performance'
-# alias shutdown='sudo shutdown -h now'
-
-# tar related
-# alias tarbz2='tar cjvf' #tar cjvf archive.tar.bz2 reports
-
-# alias for my scripts
-# alias sincro='/home/makmiller/myscripts/sincro.sh'
-
-# alias for byte-compile with Emacs
-# alias compila='emacs -batch -f batch-byte-compile thefile.el'
-
-# SPECIAL ALIASES ---------------------
-
-# suffix aliases
-alias -s pdf=okular
-alias -s djvu=okular
-#djview4
-# alias -s chm=kchmviewer
-
-
-## music
-# alias -s mp3='mplayer -slave -input file=/home/makmiller/mplayer.pipe -loop 0'
-
-## video
-alias -s mp4='mplayer -loop 0'
-
-# global aliases
-alias -g less='less -R' # less with colors
-
 # CUSTOM FUNCTIONS ----------------
 
 # do ls right after cd
@@ -259,9 +196,3 @@ cd () {
     builtin cd ~ && ls
   fi
 }
-
-# renaming files
-# ren(){
-# for f in *
-# do 
-#     echo "renaming ${f} to
