@@ -2,6 +2,12 @@
 # ~/.zshrc
 # In order to change the default shell, use: usermod -s /bin/<shell> <username>
 
+
+# Load .zsh_private if it exists
+if [[ -f ~/.zsh_private ]]; then
+  source ~/.zsh_private
+fi
+
 # load colors
 autoload -U colors 
 colors
