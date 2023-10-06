@@ -29,3 +29,5 @@ ltxpng
 .ipynb_checkpoints/
 __pycache__/
 slides_*.pdf
+ltximg/
+TAGS
