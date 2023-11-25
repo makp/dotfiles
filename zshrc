@@ -112,6 +112,15 @@ setopt hist_ignore_space
 autoload -U compinit
 compinit
 
+# fzf
+# Enable fzf if it is installed
+if command -v fzf >/dev/null 2>&1; then
+    source /usr/share/fzf/key-bindings.zsh
+    source /usr/share/fzf/completion.zsh
+    # bindkey '' fzf-file-widget
+    # bindkey '' fzf-cd-widget
+fi
+
 # predict
 # autoload predict-on
 # predict-on
