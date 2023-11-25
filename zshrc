@@ -30,9 +30,9 @@ PATH="$PATH:/usr/bin/vendor_perl:/home/makmiller/scripts/myscripts:$HOME/.local/
 export PATH
 
 # editor
-export EDITOR=/usr/bin/nano
+export EDITOR=/usr/bin/vim
 export VISUAL=/home/makmiller/scripts/myscripts/edit.sh
-export ALTERNATE_EDITOR=emacs
+export ALTERNATE_EDITOR=nvim
 
 # CDPATH
 # The nullstring "::" forces cd to search in the working directory
