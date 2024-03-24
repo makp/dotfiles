@@ -1,7 +1,7 @@
 # -*-conf-*-
 # ~/.gitconfig
 [user]
-	name = Makmiller
+	name = mak-leibniz
 	email = makmiller@gmail.com
 [alias]
 	wdiff = diff --color-words
