@@ -203,11 +203,11 @@ bindkey '^i' expand-or-complete-prefix # binding TAB
 
 # CUSTOM FUNCTIONS ----------------
 
-# do ls right after cd
-cd () {
-  if [ -n $1 ]; then
-    builtin cd "$@" && ls
-  else
-    builtin cd ~ && ls
-  fi
-}
+# # do ls right after cd
+# cd () {
+#   if [ -n $1 ]; then
+#     builtin cd "$@" && ls
+#   else
+#     builtin cd ~ && ls
+#   fi
+# }
