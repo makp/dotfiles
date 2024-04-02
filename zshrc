@@ -8,9 +8,46 @@ if [[ -f ~/.zsh_private ]]; then
   source ~/.zsh_private
 fi
 
-# load colors
+# Start ssh-agent (from Arch Linux page on ssh keys)
+# This will run a ssh-agent process if there is not one already, and
+# save the output thereof. If there is one running already, we
+# retrieve the cached ssh-agent output and evaluate it which will set
+# the necessary environment variables.
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    ssh-agent > "$XDG_RUNTIME_DIR/ssh-agent.env"
+fi
+if [[ ! "$SSH_AUTH_SOCK" ]]; then
+    eval "$(<"$XDG_RUNTIME_DIR/ssh-agent.env")"
+fi
+
+
+## APPEARANCE ----------
+
+# Load colors
 autoload -U colors 
 colors
+
+# Customize command prompt
+autoload -Uz vcs_info
+setopt prompt_subst
+
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:git:*' formats "%{$fg_bold[green]%}%s %r %{$fg_no_bold[green]%}[%b] %{$fg_bold[magenta]%}%m%u%c%{$reset_color%} "
+# zstyle ':vcs_info:git:*' actionformats ' [%b|%s|%a]'
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' unstagedstr '*'
+zstyle ':vcs_info:*' stagedstr '+'
+zstyle ':vcs_info:*' untrackedstr '%'
+
+precmd_functions+=('vcs_info_pre')
+function vcs_info_pre() {
+  vcs_info
+  PS1="
+%{$fg[white]%}@%m (%*) %{$fg_bold[yellow]%}%1~/%{$reset_color%} \${vcs_info_msg_0_}%{$reset_color%}
+> "
+}
+
+
 
 ## KEYBINDINGS ---------
 
@@ -21,18 +58,22 @@ bindkey "\e[3~" delete-char # DEL
 bindkey "^[h" backward-kill-word # M-h
 
 bindkey "^[n" down-line-or-history
-bindkey "^[t" up-line-or-history
+bindkey "^[p" up-line-or-history
+
 
 # VARIABLES -----------------------
 
-# path
+# Set PATH
 PATH="$PATH:/usr/bin/vendor_perl:/home/makmiller/scripts/myscripts:$HOME/.local/bin"
 export PATH
 
-# editor
+# Set default editor for zsh
+# EDITOR is for programs that expect a line editor. VISUAL is for
+# screen-oriented programs.
 export EDITOR=/usr/bin/vim
 export VISUAL=/home/makmiller/scripts/myscripts/edit.sh
 export ALTERNATE_EDITOR=nvim
+
 
 # CDPATH
 # The nullstring "::" forces cd to search in the working directory
@@ -45,31 +86,19 @@ DIRSTACKSIZE=12
 
 #dirs `cat $HOME/.zsh_dir-stack` # permanent directory stack
 
-# start ssh-agent (from Arch Linux page on ssh keys)
-if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-    ssh-agent > "$XDG_RUNTIME_DIR/ssh-agent.env"
-fi
-if [[ ! "$SSH_AUTH_SOCK" ]]; then
-    eval "$(<"$XDG_RUNTIME_DIR/ssh-agent.env")"
-fi
-# This will run a ssh-agent process if there is not one already, and save the output thereof. If there is one running already, we retrieve the cached ssh-agent output and evaluate it which will set the necessary environment variables.
-
 
 # rehash automatically
 zstyle ':completion:*' rehash true
 
-# words
-# for zsh, not just alphanumerics are part of a word, but other symbols stated by the shell variable WORDCHARS. By making this variable empty, I get the bash behavior. 
-# default value
+# Words
+# for zsh, not just alphanumerics are part of a word, but other
+# symbols stated by the shell variable WORDCHARS. By making this
+# variable empty, I get the bash behavior. default value
 # WORDCHARS=*?_-.[]~=/&;!#$%^(){}<>
 export WORDCHARS="?[]~=&;!#$%^(){}<>"
 # I removed the symbols: *./-_
 
 
-
-# my prompt
-## PS1 (primary)
-export PS1="%{$fg[green]%}%1c> %{$reset_color%}"
 
 # history related
 HISTSIZE=2000
