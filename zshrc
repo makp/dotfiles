@@ -64,8 +64,13 @@ bindkey "^[p" up-line-or-history
 # VARIABLES -----------------------
 
 # Set PATH
-PATH="$PATH:/usr/bin/vendor_perl:/home/makmiller/scripts/myscripts:$HOME/.local/bin"
+PATH="$PATH:/usr/bin/vendor_perl:/home/makmiller/scripts/myscripts:$HOME/.local/bin:/opt/cuda/bin"
 export PATH
+
+# CUDA vars
+export NVCC_PREPEND_FLAGS='-ccbin /opt/cuda/bin'
+export LD_LIBRARY_PATH=/opt/cuda/lib64:$LD_LIBRARY_PATH
+export CUDA_VISIBLE_DEVICES=0
 
 # Set default editor for zsh
 # EDITOR is for programs that expect a line editor. VISUAL is for
@@ -240,3 +245,20 @@ bindkey '^i' expand-or-complete-prefix # binding TAB
 #     builtin cd ~ && ls
 #   fi
 # }
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/opt/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
