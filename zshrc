@@ -1,6 +1,5 @@
 # -*-conf-*-
 # ~/.zshrc
-# In order to change the default shell, use: usermod -s /bin/<shell> <username>
 
 
 # Load .zsh_private if it exists
@@ -50,6 +49,9 @@ function vcs_info_pre() {
 
 
 ## KEYBINDINGS ---------
+
+# Enable vi mode
+bindkey -v
 
 bindkey "^[[1~" beginning-of-line # HOME 
 bindkey "^[[4~" end-of-line # END
