@@ -26,6 +26,8 @@ setopt ignore_eof     #
 setopt extended_glob  # turn on more powerful pattern matching features
 setopt correct	      # enable correction commands typed
 setopt notify	      # notify when jobs finish
+setopt auto_cd	      # don't require typing cd to change directories
+# setopt COMPLETE_ALIASES # autocomplete aliases
 
 
 ## PLUGINS ----------
@@ -108,13 +110,18 @@ export NVCC_PREPEND_FLAGS='-ccbin /opt/cuda/bin'
 export LD_LIBRARY_PATH=/opt/cuda/lib64:$LD_LIBRARY_PATH
 export CUDA_VISIBLE_DEVICES=0
 
-
 # Set default editor for ZSH
 # EDITOR is for programs that expect a line editor. VISUAL is for
 # screen-oriented programs.
 export EDITOR=/usr/bin/vim
 export VISUAL=/home/makmiller/scripts/myscripts/edit.sh
 export ALTERNATE_EDITOR=nvim
+
+
+# Directory stack behavior (pushd/popd)
+setopt autopushd  # make cd always behave like pushd
+setopt pushd_ignore_dups # disable multiple copies same dir in the directory stack
+setopt pushd_silent # don't print the directory stack after pushd or popd
 
 
 # Customize history behavior
@@ -124,23 +131,16 @@ HISTFILE=~/.zsh_history
 
 setopt hist_ignore_all_dups 
 setopt hist_ignore_space
-setopt share_history	       # share history between shell instances
+setopt share_history  # share history between shell instances
 
 
-# CDPATH
-# The nullstring "::" forces cd to search in the working directory
-# This is important because, without it, cd will only search the working
-# directory after the other directories in CDPATH fails. 
-export CDPATH=::$HOME:$HOME/Documents/mydocs
 
-# max size directory stack
-DIRSTACKSIZE=12
-
+DIRSTACKSIZE=33  # max directory stack size
+# THINGS TO DO 
+# use directory-stack with tab completion
+# save my directory-stack (persistent directory stack)
 #dirs `cat $HOME/.zsh_dir-stack` # permanent directory stack
 
-
-# rehash automatically
-zstyle ':completion:*' rehash true
 
 # For ZSH, not just alphanumerics are part of a word, but other
 # symbols stated by the shell variable WORDCHARS. Making this
@@ -149,100 +149,85 @@ zstyle ':completion:*' rehash true
 # export WORDCHARS="?[]~=&;!#$%^(){}<>"  # removed symbols *./-_
 
 
-## OPTIONS --------------
-setopt auto_cd        # change directory by typing a directory name 
-# With this option, the characters ^, ~, and # become special wherever they appear unquoted
-
-# directory stack options
-setopt autopushd		# make cd always behave like pushd
-setopt pushd_ignore_dups	# disable multiple copies of the same
-				# directory on the directory stack
-setopt pushd_silent   # don't print the directory stack after pushd or
-		      # popd
-
-
-## COMPLETION ----
+## COMPLETION ------
 
 # Enable fzf if it is installed
 if command -v fzf >/dev/null 2>&1; then
     eval "$(fzf --zsh)"  # fzf keybindings and fuzzy completion
+    export FZF_COMPLETION_TRIGGER=',,'
 fi
-
-# Enable compinit
-autoload -U compinit
-compinit
-
-
-# Enable zstyle caching (for speed)
-zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path ~/.zsh/cache
-
-# General completion
-zstyle ':completion:*' menu select # activate menu selection
-zstyle ':completion:*' verbose yes # print descriptions against each match
-zstyle ':completion:*' group-name '' # separate matches in distinct related groups
 
 # Use internal pager to display matches
 zmodload zsh/complist		 
 zstyle ':completion:*:default' list-prompt '%S%M matches%s'
 bindkey -M listscroll q send-break # q exits internal pager
 
-# fuzzy matching 
-zstyle ':completion:*' completer _complete _match _approximate
-zstyle ':completion:*:match:*' original only
-zstyle ':completion:*:approximate:*' max-errors 1 numeric
-zstyle -e ':completion:*:approximate:*' \
-    max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3))numeric)' 
-# The number of errors allowed by approximate increase with the length
-# of what you have typed so far
+# Enable compinit
+autoload -U compinit
+compinit
 
-# Format messages in bold prefixed with ---- 
-zstyle ':completion:*' format '%B---- %d%b' 
+# Saner completion behavior 
+zstyle ':completion:*' rehash true # rehash automatically
+zstyle ':completion:*' menu select # activate menu selection
+zstyle ':completion:*' verbose yes # print descriptions against each match
+zstyle ':completion:*' group-name '' # separate matches in distinct related groups
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS} # applies color scheme LS_COLORS
+zstyle ':completion:*:*:*:*:processes' force-list always # even if there is only one possible completion
+zstyle ':completion:*:cd:*' ignore-parents parent pwd # never suggest parent dir
+
+
+# Enable zstyle caching (for speed)
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
+
+# Customize format during completion
+# `%B` and `%b` are used to make the text that appears between them
+# bold. %U` and `%u` are used to underline the text between them. `%d`
+# is replaced with the description of the group.
+zstyle ':completion:*' format '%B---- %d%b'
 zstyle ':completion:*:descriptions' format $'%{\e[0;31m%}completing %B%d%b%{\e[0m%}' 
 zstyle ':completion:*:messages' format '%B%U---- %d%u%b' 
-zstyle ':completion:*:warnings' format "%B$fg[red]%}---- no match for: $fg[white]%d%b"  
+zstyle ':completion:*:warnings' format "%B$fg[red]%}---- no match for: $fg[white]%d%b"
 
-# process completion
-zstyle ':completion:*:*:*:*:processes' insert-ids menu yes select 
-# when completing process IDs fall into menu selection
 
-# Always display the list (even if there is only one possible completion)
-zstyle ':completion:*:*:*:*:processes' force-list always
+# Customize fuzzy matching
+zstyle ':completion:*' completer _complete _match _approximate # used completion funcs
+# zstyle ':completion:*' special-dirs true
+zstyle ':completion:*:match:*' original only # disable transformation features
+zstyle ':completion:*:approximate:*' max-errors 1 numeric # max number of typos numeric args
+zstyle -e ':completion:*:approximate:*' \
+    max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3)))' # max number of errors
+# The number of errors allowed increase with the length of what you have typed so far
 
-# Process name completion
-zstyle ':completion:*:processes' command 'ps c -u ${USER} -o pid,%cpu,cputime,cmd' 
+
+# Customize auto-completion at specific contexts
+zstyle ':completion:*:*:*:*:processes' insert-ids menu yes select # process IDs
+zstyle ':completion:*:processes' command 'ps c -u ${USER} -o pid,%cpu,cputime,cmd'  # name completion
 # alternative completions: tty #'ps -U $(whoami) | sed "/ps/d"'
-
-# kill
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
-
-# Complete manpages by section
-zstyle ':completion:*:manuals' separate-sections true
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31' # kill
+zstyle ':completion:*:manuals' separate-sections true # manpages
 zstyle ':completion:*:manuals.*' insert-sections true
 
-# colors
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+# Use CDPATH for completion
+# The nullstring "::" forces cd to search in the working directory
+# This is important because, without it, cd will only search the working
+# directory after the other directories in CDPATH fails. 
+# export CDPATH=$HOME
+export CDPATH=::$HOME/Documents/mydocs/:$HOME/config-files/general
 
-# cd will never select the parent directory (e.g.: cd../<TAB>)
-zstyle ':completion:*:cd:*' ignore-parents parent pwd
-
-# helper functions
+# Autocompletion for PDFs
+# Open the most recently modified PDF file in the current directory by
+# default, if no parameter is given. It also configures completion for
+# this function to use a menu selection and sorts files by
+# modification time.
 okular() { command okular ${*:-*.pdf(om[1])} }
 zstyle ':completion:*:*:okular:*' menu yes select
 zstyle ':completion:*:*:okular:*' file-sort time
 
-
-# predict
+# Enable the predict feature
 # autoload predict-on
 # predict-on
 
-
-# THINGS TO DO 
-# use directory-stack with tab completion
-# save my directory-stack (persistent directory stack)
-
-# autocompletion for aliases
-# setopt COMPLETE_ALIASES
 
 
 ## KEYBINDINGS ---------
@@ -250,10 +235,8 @@ zstyle ':completion:*:*:okular:*' file-sort time
 # Enable vi mode
 bindkey -v
 
-# completing on the prefix
-# (i.e., complete in the middle of some text ignoring the suffix)
 bindkey '^ ' expand-or-complete-prefix
-
+bindkey '^i' autosuggest-accept # from zsh-autosuggestions
 
 bindkey "^[[1~" beginning-of-line # HOME 
 bindkey "^[[4~" end-of-line # END
@@ -264,8 +247,6 @@ bindkey "^[h" backward-kill-word # M-h
 bindkey "^[n" down-line-or-history
 bindkey "^[p" up-line-or-history
 
-
-bindkey '^i' autosuggest-accept # from 
 
 
 # >>> conda initialize >>>
