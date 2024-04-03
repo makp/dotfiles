@@ -20,13 +20,56 @@ if [[ ! "$SSH_AUTH_SOCK" ]]; then
 fi
 
 
+## PLUGINS ----------
+
+# Path to your oh-my-zsh installation
+ZSH=/usr/share/oh-my-zsh/
+
+# Path to custom plugins
+ZSH_CUSTOM=/usr/share/zsh/
+
+# Set theme
+# ZSH_THEME="robbyrussell"
+
+# Use case-sensitive completion.
+# CASE_SENSITIVE="true"
+
+# Use hyphen-insensitive completion
+# HYPHEN_INSENSITIVE="true"
+
+# Just remind me to update when it's time
+zstyle ':omz:update' mode reminder
+
+# Enable auto-correction
+ENABLE_CORRECTION="true"
+
+# Display red dots whilst waiting for completion
+# COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
+COMPLETION_WAITING_DOTS="true"
+
+# Vars for vi-mode plugin
+VI_MODE_SET_CURSOR=true
+VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
+
+# Enable some plugins
+plugins=(git zsh-syntax-highlighting vi-mode zsh-autosuggestions)
+
+ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
+if [[ ! -d $ZSH_CACHE_DIR ]]; then
+  mkdir $ZSH_CACHE_DIR
+fi
+
+source $ZSH/oh-my-zsh.sh
+
+
 ## APPEARANCE ----------
 
 # Load colors
 autoload -U colors 
 colors
 
-# Customize command prompt
+
+# Set command prompt
 autoload -Uz vcs_info
 setopt prompt_subst
 
@@ -47,11 +90,16 @@ function vcs_info_pre() {
 }
 
 
-
 ## KEYBINDINGS ---------
 
 # Enable vi mode
 bindkey -v
+
+
+# completing on the prefix
+# (i.e., complete in the middle of some text ignoring the suffix)
+bindkey '^ ' expand-or-complete-prefix
+
 
 bindkey "^[[1~" beginning-of-line # HOME 
 bindkey "^[[4~" end-of-line # END
@@ -63,7 +111,8 @@ bindkey "^[n" down-line-or-history
 bindkey "^[p" up-line-or-history
 
 
-# VARIABLES -----------------------
+
+## VARIABLES -----------
 
 # Set PATH
 PATH="$PATH:/usr/bin/vendor_perl:/home/makmiller/scripts/myscripts:$HOME/.local/bin:/opt/cuda/bin"
@@ -93,6 +142,8 @@ DIRSTACKSIZE=12
 
 #dirs `cat $HOME/.zsh_dir-stack` # permanent directory stack
 
+# Auto-suggestions
+bindkey '^i' autosuggest-accept
 
 # rehash automatically
 zstyle ':completion:*' rehash true
@@ -161,8 +212,6 @@ fi
 # autoload predict-on
 # predict-on
 
-# syntax highlighting
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # THINGS TO DO 
 # use directory-stack with tab completion
@@ -233,9 +282,10 @@ okular() { command okular ${*:-*.pdf(om[1])} }
 zstyle ':completion:*:*:okular:*' menu yes select
 zstyle ':completion:*:*:okular:*' file-sort time
 
-# completing on the prefix
-# (i.e., complete in the middle of some text ignoring the suffix)
-bindkey '^i' expand-or-complete-prefix # binding TAB
+
+
+
+
 
 # CUSTOM FUNCTIONS ----------------
 
