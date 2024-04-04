@@ -36,7 +36,7 @@ setopt NO_HUP	      # don't kill jobs when shell exits
 # Enable vi mode
 bindkey -v
 
-bindkey '^ ' autosuggest-accept # from zsh-autosuggestions
+# bindkey '^ ' autosuggest-accept # from zsh-autosuggestions
 
 bindkey "^[[1~" beginning-of-line # HOME 
 bindkey "^[[4~" end-of-line # END
