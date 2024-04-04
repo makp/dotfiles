@@ -73,9 +73,9 @@ fi
 # Set default editor for ZSH
 # EDITOR is for programs that expect a line editor. VISUAL is for
 # screen-oriented programs.
-export EDITOR=/usr/bin/vim
+export EDITOR=/usr/bin/nvim
 export VISUAL=/home/makmiller/scripts/myscripts/edit.sh
-export ALTERNATE_EDITOR=nvim
+export ALTERNATE_EDITOR=vim
 
 
 # Directory stack behavior (pushd/popd)
