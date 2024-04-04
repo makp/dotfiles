@@ -30,73 +30,22 @@ setopt auto_cd	      # don't require typing cd to change directories
 # setopt COMPLETE_ALIASES # autocomplete aliases
 
 
-## PLUGINS ----------
+## KEYBINDINGS ---------
 
-# Path to your oh-my-zsh installation
-ZSH=/usr/share/oh-my-zsh/
+# Enable vi mode
+bindkey -v
 
-# Path to custom plugins
-ZSH_CUSTOM=/usr/share/zsh/
+bindkey '^ ' autosuggest-accept # from zsh-autosuggestions
 
-# Set theme
-# ZSH_THEME="robbyrussell"
+bindkey "^[[1~" beginning-of-line # HOME 
+bindkey "^[[4~" end-of-line # END
+bindkey "\e[3~" delete-char # DEL
 
-# Use case-sensitive completion.
-# CASE_SENSITIVE="true"
+bindkey "^[h" backward-kill-word # M-h
 
-# Use hyphen-insensitive completion
-# HYPHEN_INSENSITIVE="true"
+bindkey "^[n" down-line-or-history
+bindkey "^[p" up-line-or-history
 
-# Just remind me to update when it's time
-zstyle ':omz:update' mode reminder
-
-# Enable auto-correction
-ENABLE_CORRECTION="true"
-
-# Display red dots whilst waiting for completion
-# COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
-COMPLETION_WAITING_DOTS="true"
-
-# Vars for vi-mode plugin
-VI_MODE_SET_CURSOR=true
-VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
-
-# Enable some plugins
-plugins=(git zsh-syntax-highlighting vi-mode zsh-autosuggestions)
-
-ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
-if [[ ! -d $ZSH_CACHE_DIR ]]; then
-  mkdir $ZSH_CACHE_DIR
-fi
-
-source $ZSH/oh-my-zsh.sh
-
-
-## APPEARANCE ----------
-
-# Load colors
-autoload -U colors 
-colors
-
-# Set command prompt
-autoload -Uz vcs_info
-setopt prompt_subst
-
-zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:git:*' formats "%{$fg_bold[green]%}%s %r %{$fg_no_bold[green]%}[%b] %{$fg_bold[magenta]%}%m%u%c%{$reset_color%} "
-# zstyle ':vcs_info:git:*' actionformats ' [%b|%s|%a]'
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' unstagedstr '*'
-zstyle ':vcs_info:*' stagedstr '+'
-zstyle ':vcs_info:*' untrackedstr '%'
-
-precmd_functions+=('vcs_info_pre')
-function vcs_info_pre() {
-  vcs_info
-  PS1="
-%{$fg[white]%}@%m (%*) %{$fg_bold[yellow]%}%1~/%{$reset_color%} \${vcs_info_msg_0_}%{$reset_color%}
-> "
-}
 
 
 ## VARIABLES -----------
@@ -147,6 +96,48 @@ DIRSTACKSIZE=33  # max directory stack size
 # variable empty reproduce bash behavior. 
 # WORDCHARS=*?_-.[]~=/&;!#$%^(){}<>  # default value
 # export WORDCHARS="?[]~=&;!#$%^(){}<>"  # removed symbols *./-_
+
+
+## PLUGINS ----------
+
+# Path to your oh-my-zsh installation
+ZSH=/usr/share/oh-my-zsh/
+
+# Path to custom plugins
+ZSH_CUSTOM=/usr/share/zsh/
+
+# Set theme
+# ZSH_THEME="robbyrussell"
+
+# Use case-sensitive completion.
+# CASE_SENSITIVE="true"
+
+# Use hyphen-insensitive completion
+# HYPHEN_INSENSITIVE="true"
+
+# Just remind me to update when it's time
+zstyle ':omz:update' mode reminder
+
+# Enable auto-correction
+ENABLE_CORRECTION="true"
+
+# Display red dots whilst waiting for completion
+# COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
+COMPLETION_WAITING_DOTS="true"
+
+# Vars for vi-mode plugin
+VI_MODE_SET_CURSOR=true
+VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
+
+# Enable some plugins
+plugins=(fzf-tab zsh-syntax-highlighting vi-mode zsh-autosuggestions copypath)
+
+ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
+if [[ ! -d $ZSH_CACHE_DIR ]]; then
+  mkdir $ZSH_CACHE_DIR
+fi
+
+source $ZSH/oh-my-zsh.sh
 
 
 ## COMPLETION ------
@@ -228,25 +219,36 @@ zstyle ':completion:*:*:okular:*' file-sort time
 # autoload predict-on
 # predict-on
 
+zstyle ':fzf-tab:*' switch-group '<' '>'
+zstyle ':fzf-tab:*' continuous-trigger '/'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 
 
-## KEYBINDINGS ---------
+## APPEARANCE ----------
 
-# Enable vi mode
-bindkey -v
+# Load colors
+autoload -U colors 
+colors
 
-bindkey '^ ' expand-or-complete-prefix
-bindkey '^i' autosuggest-accept # from zsh-autosuggestions
+# Set command prompt
+autoload -Uz vcs_info
+setopt prompt_subst
 
-bindkey "^[[1~" beginning-of-line # HOME 
-bindkey "^[[4~" end-of-line # END
-bindkey "\e[3~" delete-char # DEL
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:git:*' formats "%{$fg_bold[green]%}%s %r %{$fg_no_bold[green]%}[%b] %{$fg_bold[magenta]%}%m%u%c%{$reset_color%} "
+# zstyle ':vcs_info:git:*' actionformats ' [%b|%s|%a]'
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' unstagedstr '*'
+zstyle ':vcs_info:*' stagedstr '+'
+zstyle ':vcs_info:*' untrackedstr '%'
 
-bindkey "^[h" backward-kill-word # M-h
-
-bindkey "^[n" down-line-or-history
-bindkey "^[p" up-line-or-history
-
+precmd_functions+=('vcs_info_pre')
+function vcs_info_pre() {
+  vcs_info
+  PS1="
+%{$fg[white]%}@%m (%*) %{$fg_bold[yellow]%}%1~/%{$reset_color%} \${vcs_info_msg_0_}%{$reset_color%}
+> "
+}
 
 
 # >>> conda initialize >>>
