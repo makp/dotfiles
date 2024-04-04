@@ -27,6 +27,7 @@ setopt extended_glob  # turn on more powerful pattern matching features
 setopt correct	      # enable correction commands typed
 setopt notify	      # notify when jobs finish
 setopt auto_cd	      # don't require typing cd to change directories
+setopt NO_HUP	      # don't kill jobs when shell exits
 # setopt COMPLETE_ALIASES # autocomplete aliases
 
 
