@@ -21,6 +21,7 @@ fi
 
 
 ## USE SANER DEFAULTS ---------
+
 setopt NO_BEEP	      # disable beeping
 setopt ignore_eof     # 
 setopt extended_glob  # turn on more powerful pattern matching features
@@ -30,22 +31,15 @@ setopt auto_cd	      # don't require typing cd to change directories
 setopt NO_HUP	      # don't kill jobs when shell exits
 # setopt COMPLETE_ALIASES # autocomplete aliases
 
-
-## KEYBINDINGS ---------
-
-# Enable vi mode
-bindkey -v
-
-# bindkey '^ ' autosuggest-accept # from zsh-autosuggestions
-
-bindkey "^[[1~" beginning-of-line # HOME 
-bindkey "^[[4~" end-of-line # END
-bindkey "\e[3~" delete-char # DEL
+# Map HOME, END, and DEL keys
+bindkey "^[[1~" beginning-of-line
+bindkey "^[[4~" end-of-line
+bindkey "\e[3~" delete-char
 
 bindkey "^[h" backward-kill-word # M-h
 
-bindkey "^[n" down-line-or-history
-bindkey "^[p" up-line-or-history
+# Enable vi mode
+bindkey -v
 
 
 
@@ -78,13 +72,19 @@ export VISUAL=/home/makmiller/scripts/myscripts/edit.sh
 export ALTERNATE_EDITOR=vim
 
 
-# Directory stack behavior (pushd/popd)
-setopt autopushd  # make cd always behave like pushd
-setopt pushd_ignore_dups # disable multiple copies same dir in the directory stack
-setopt pushd_silent # don't print the directory stack after pushd or popd
+# For ZSH, not just alphanumerics are part of a word, but other
+# symbols stated by the shell variable WORDCHARS. Making this
+# variable empty reproduce bash behavior. 
+# WORDCHARS=*?_-.[]~=/&;!#$%^(){}<>  # default value
+# export WORDCHARS="?[]~=&;!#$%^(){}<>"  # removed symbols *./-_
 
+## HISTORY --------
 
-# Customize history behavior
+# Use C-n and C-p to navigate history
+bindkey "^[n" down-line-or-history
+bindkey "^[p" up-line-or-history
+
+# History settings
 HISTSIZE=2000
 SAVEHIST=2000
 HISTFILE=~/.zsh_history
@@ -94,19 +94,17 @@ setopt hist_ignore_space
 setopt share_history  # share history between shell instances
 
 
-
-DIRSTACKSIZE=33  # max directory stack size
+# Max directory stack size
+DIRSTACKSIZE=33  
 # THINGS TO DO 
 # use directory-stack with tab completion
 # save my directory-stack (persistent directory stack)
 #dirs `cat $HOME/.zsh_dir-stack` # permanent directory stack
 
-
-# For ZSH, not just alphanumerics are part of a word, but other
-# symbols stated by the shell variable WORDCHARS. Making this
-# variable empty reproduce bash behavior. 
-# WORDCHARS=*?_-.[]~=/&;!#$%^(){}<>  # default value
-# export WORDCHARS="?[]~=&;!#$%^(){}<>"  # removed symbols *./-_
+# Directory stack behavior (pushd/popd)
+setopt autopushd  # make cd always behave like pushd
+setopt pushd_ignore_dups # disable multiple copies same dir in the directory stack
+setopt pushd_silent # don't print the directory stack after pushd or popd
 
 
 ## PLUGINS ----------
@@ -233,6 +231,11 @@ zstyle ':completion:*:*:okular:*' file-sort time
 zstyle ':fzf-tab:*' switch-group '<' '>'
 zstyle ':fzf-tab:*' continuous-trigger '/'
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+
+
+# Add keybindings for autosuggestions
+# bindkey '' autosuggest-accept # from zsh-autosuggestions
+bindkey '^ ' expand-or-complete-prefix # vanilla autosuggestions
 
 
 ## APPEARANCE ----------
