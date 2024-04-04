@@ -52,13 +52,23 @@ bindkey "^[p" up-line-or-history
 ## VARIABLES -----------
 
 # Set PATH
-PATH="$PATH:/usr/bin/vendor_perl:/home/makmiller/scripts/myscripts:$HOME/.local/bin:/opt/cuda/bin"
+# `/usr/bin/vendor_perl`: biber
+# `$HOME/.local/bin`: ?
+PATH="$PATH:/usr/bin/vendor_perl:/home/makmiller/scripts/myscripts"
+
+# Conditionally add CUDA to the PATH
+if [ -d /opt/cuda/bin ]; then
+    PATH="$PATH:/opt/cuda/bin"
+fi
+
 export PATH
 
 # CUDA vars
-export NVCC_PREPEND_FLAGS='-ccbin /opt/cuda/bin'
-export LD_LIBRARY_PATH=/opt/cuda/lib64:$LD_LIBRARY_PATH
-export CUDA_VISIBLE_DEVICES=0
+if command -v nvcc >/dev/null 2>&1; then
+    export NVCC_PREPEND_FLAGS='-ccbin /opt/cuda/bin'
+    export LD_LIBRARY_PATH=/opt/cuda/lib64:$LD_LIBRARY_PATH
+    export CUDA_VISIBLE_DEVICES=0
+fi
 
 # Set default editor for ZSH
 # EDITOR is for programs that expect a line editor. VISUAL is for
