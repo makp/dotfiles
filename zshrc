@@ -1,24 +1,5 @@
 # -*-conf-*-
-# ~/.zshrc
-
-
-# Load .zsh_private if it exists
-if [[ -f ~/.zsh_private ]]; then
-  source ~/.zsh_private
-fi
-
-# Start ssh-agent (from Arch Linux page on ssh keys)
-# This will run a ssh-agent process if there is not one already, and
-# save the output thereof. If there is one running already, we
-# retrieve the cached ssh-agent output and evaluate it which will set
-# the necessary environment variables.
-if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-    ssh-agent > "$XDG_RUNTIME_DIR/ssh-agent.env"
-fi
-if [[ ! "$SSH_AUTH_SOCK" ]]; then
-    eval "$(<"$XDG_RUNTIME_DIR/ssh-agent.env")"
-fi
-
+# Config for interactive shell sessions.
 
 ## USE SANER DEFAULTS ---------
 
@@ -41,28 +22,6 @@ bindkey "^[h" backward-kill-word # M-h
 # Enable vi mode
 bindkey -v
 
-
-
-## VARIABLES -----------
-
-# Set PATH
-# `/usr/bin/vendor_perl`: biber
-# `$HOME/.local/bin`: ?
-PATH="$PATH:/usr/bin/vendor_perl:/home/makmiller/scripts/myscripts"
-
-# Conditionally add CUDA to the PATH
-if [ -d /opt/cuda/bin ]; then
-    PATH="$PATH:/opt/cuda/bin"
-fi
-
-export PATH
-
-# CUDA vars
-if command -v nvcc >/dev/null 2>&1; then
-    export NVCC_PREPEND_FLAGS='-ccbin /opt/cuda/bin'
-    export LD_LIBRARY_PATH=/opt/cuda/lib64:$LD_LIBRARY_PATH
-    export CUDA_VISIBLE_DEVICES=0
-fi
 
 # Set default editor for ZSH
 # EDITOR is for programs that expect a line editor. VISUAL is for
