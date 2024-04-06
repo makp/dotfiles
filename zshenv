@@ -24,3 +24,10 @@ if command -v nvcc >/dev/null 2>&1; then
     export LD_LIBRARY_PATH=/opt/cuda/lib64:$LD_LIBRARY_PATH
     export CUDA_VISIBLE_DEVICES=0
 fi
+
+
+# ssh-agent socket
+# The ssh-agent should have been started as a systemd user unit
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
+

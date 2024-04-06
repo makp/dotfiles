@@ -4,22 +4,7 @@
 # shell session.
 
 
-## ssh-agent
-# ssh-agent prints environment variables (e.g., SSH_AUTH_SOCK) and
-# forks to background.
-
-# Make sure ssh-agent is running (from Arch Linux page on ssh keys)
-# This will run a ssh-agent process if there is not one already, and
-# save the output thereof. If there is one running already, we
-# retrieve the cached ssh-agent output and evaluate it which will set
-# the necessary environment variables.
-if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-    ssh-agent > "$XDG_RUNTIME_DIR/ssh-agent.env"
-fi
-if [[ ! "$SSH_AUTH_SOCK" ]]; then
-    source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
-fi
-
+## OpenSSH KEYS PASSPHRASES -------
 
 # Ask for OpenSSH keys if none has been added
 if [[ -n $SSH_AUTH_SOCK ]] && ! ssh-add -l > /dev/null; then
