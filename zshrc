@@ -148,7 +148,7 @@ zstyle ':completion:*:warnings' format "%B$fg[red]%}---- no match for: $fg[white
 
 
 # Customize fuzzy matching
-zstyle ':completion:*' completer _complete _match _approximate # used completion funcs
+zstyle ':completion:*' completer _expand_alias _complete _match _approximate # used completion funcs
 # zstyle ':completion:*' special-dirs true
 zstyle ':completion:*:match:*' original only # disable transformation features
 zstyle ':completion:*:approximate:*' max-errors 1 numeric # max number of typos numeric args
