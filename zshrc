@@ -190,9 +190,23 @@ zstyle ':fzf-tab:*' continuous-trigger '/'
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 
 
-# Add keybindings for autosuggestions
+# Enable ShellGPT completions
+_sgpt_zsh() {
+if [[ -n "$BUFFER" ]]; then
+    _sgpt_prev_cmd=$BUFFER
+    BUFFER+="⌛"
+    zle -I && zle redisplay
+    BUFFER=$(sgpt --shell <<< "$_sgpt_prev_cmd" --no-interaction)
+    zle end-of-line
+fi
+}
+zle -N _sgpt_zsh
+bindkey '^ ' _sgpt_zsh
+
+alias c='sgpt '
+alias cc="sgpt --model 'gpt-4-turbo-preview' "
 # bindkey '' autosuggest-accept # from zsh-autosuggestions
-bindkey '^ ' expand-or-complete-prefix # vanilla autosuggestions
+# bindkey '' expand-or-complete-prefix # vanilla autosuggestions
 
 
 ## APPEARANCE ----------
