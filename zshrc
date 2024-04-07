@@ -56,16 +56,12 @@ setopt share_history  # share history between shell instances
 
 
 # Max directory stack size
-DIRSTACKSIZE=33  
-# THINGS TO DO 
-# use directory-stack with tab completion
-# save my directory-stack (persistent directory stack)
-#dirs `cat $HOME/.zsh_dir-stack` # permanent directory stack
+# DIRSTACKSIZE=33  
 
 # Directory stack behavior (pushd/popd)
-setopt autopushd  # make cd always behave like pushd
+# setopt autopushd  # make cd always behave like pushd
 setopt pushd_ignore_dups # disable multiple copies same dir in the directory stack
-setopt pushd_silent # don't print the directory stack after pushd or popd
+# setopt pushd_silent # don't print the directory stack after pushd or popd
 
 
 ## PLUGINS ----------
@@ -100,7 +96,7 @@ VI_MODE_SET_CURSOR=true
 VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 
 # Enable some plugins
-plugins=(fzf-tab zsh-syntax-highlighting vi-mode zsh-autosuggestions copypath)
+plugins=(fzf-tab zsh-syntax-highlighting vi-mode zsh-autosuggestions copypath dirpersist)
 
 ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
 if [[ ! -d $ZSH_CACHE_DIR ]]; then
