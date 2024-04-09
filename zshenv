@@ -18,6 +18,15 @@ fi
 export PATH
 
 
+# Set default editors for ZSH
+# EDITOR is for programs that expect a line editor. VISUAL is for
+# screen-oriented programs.
+export EDITOR=/usr/bin/nvim
+export VISUAL=/home/makmiller/scripts/myscripts/edit.sh
+export ALTERNATE_EDITOR=vim
+
+
+
 # CUDA vars
 if command -v nvcc >/dev/null 2>&1; then
     export NVCC_PREPEND_FLAGS='-ccbin /opt/cuda/bin'
@@ -29,5 +38,3 @@ fi
 # ssh-agent socket
 # The ssh-agent should have been started as a systemd user unit
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-
-

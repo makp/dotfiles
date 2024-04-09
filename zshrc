@@ -25,14 +25,6 @@ bindkey "^[h" backward-kill-word # M-h
 bindkey -v
 
 
-# Set default editor for ZSH
-# EDITOR is for programs that expect a line editor. VISUAL is for
-# screen-oriented programs.
-export EDITOR=/usr/bin/nvim
-export VISUAL=/home/makmiller/scripts/myscripts/edit.sh
-export ALTERNATE_EDITOR=vim
-
-
 # For ZSH, not just alphanumerics are part of a word, but other
 # symbols stated by the shell variable WORDCHARS. Making this
 # variable empty reproduce bash behavior. 
