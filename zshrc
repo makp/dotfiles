@@ -193,6 +193,9 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 # Enable ShellGPT completions
 _sgpt_zsh() {
 if [[ -n "$BUFFER" ]]; then
+    if [[ -z "$CONDA_INITIALIZED" ]]; then
+	conda activate ml
+    fi
     _sgpt_prev_cmd=$BUFFER
     BUFFER+="⌛"
     zle -I && zle redisplay
