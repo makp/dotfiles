@@ -263,6 +263,7 @@ function conda_initialize() {
     eval "$('/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
     export CONDA_INITIALIZED=1
     # Note that, because of the unset line above, `conda` no longer refers to the conda function defined below.
+    conda activate ml 		# select env
     conda "$@" 
 }
 
