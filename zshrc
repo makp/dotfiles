@@ -46,56 +46,10 @@ setopt hist_ignore_all_dups
 setopt hist_ignore_space
 setopt share_history  # share history between shell instances
 
-
-# Max directory stack size
-# DIRSTACKSIZE=33  
-
-# Directory stack behavior (pushd/popd)
-# setopt autopushd  # make cd always behave like pushd
+DIRSTACKSIZE=41  # max directory stack size
 setopt pushd_ignore_dups # disable multiple copies same dir in the directory stack
-# setopt pushd_silent # don't print the directory stack after pushd or popd
-
-
-## PLUGINS ----------
-
-# Path to your oh-my-zsh installation
-ZSH=/usr/share/oh-my-zsh/
-
-# Path to custom plugins
-ZSH_CUSTOM=/usr/share/zsh/
-
-# Set theme
-# ZSH_THEME="robbyrussell"
-
-# Use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Use hyphen-insensitive completion
-# HYPHEN_INSENSITIVE="true"
-
-# Just remind me to update when it's time
-zstyle ':omz:update' mode reminder
-
-# Enable auto-correction
-ENABLE_CORRECTION="true"
-
-# Display red dots whilst waiting for completion
-# COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
-COMPLETION_WAITING_DOTS="true"
-
-# Vars for vi-mode plugin
-VI_MODE_SET_CURSOR=true
-VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
-
-# Enable some plugins
-plugins=(fzf-tab zsh-syntax-highlighting vi-mode zsh-autosuggestions copypath dirpersist)
-
-ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
-if [[ ! -d $ZSH_CACHE_DIR ]]; then
-  mkdir $ZSH_CACHE_DIR
-fi
-
-source $ZSH/oh-my-zsh.sh
+setopt autopushd  # make cd always behave like pushd
+setopt pushd_silent # don't print the directory stack after pushd or popd
 
 
 ## COMPLETION ------
@@ -177,11 +131,6 @@ zstyle ':completion:*:*:okular:*' file-sort time
 # autoload predict-on
 # predict-on
 
-zstyle ':fzf-tab:*' switch-group '<' '>'
-zstyle ':fzf-tab:*' continuous-trigger '/'
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
-
-
 # Enable ShellGPT completions
 _sgpt_zsh() {
 if [[ -n "$BUFFER" ]]; then
@@ -199,6 +148,54 @@ alias c='sgpt '
 alias cc="sgpt --model 'gpt-4-turbo-preview' "
 # bindkey '' autosuggest-accept # from zsh-autosuggestions
 # bindkey '' expand-or-complete-prefix # vanilla autosuggestions
+
+
+## PLUGINS ----------
+
+# Path to your oh-my-zsh installation
+ZSH=/usr/share/oh-my-zsh/
+
+# Path to custom plugins
+ZSH_CUSTOM=/usr/share/zsh/
+
+# Set theme
+# ZSH_THEME="robbyrussell"
+
+# Use case-sensitive completion.
+# CASE_SENSITIVE="true"
+
+# Use hyphen-insensitive completion
+# HYPHEN_INSENSITIVE="true"
+
+# Just remind me to update when it's time
+zstyle ':omz:update' mode reminder
+
+# Enable auto-correction
+ENABLE_CORRECTION="true"
+
+# Display red dots whilst waiting for completion
+# COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
+COMPLETION_WAITING_DOTS="true"
+
+# Vars for vi-mode plugin
+VI_MODE_SET_CURSOR=true
+VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
+
+# Enable some plugins
+plugins=(fzf-tab zsh-syntax-highlighting vi-mode zsh-autosuggestions copypath dirpersist)
+
+ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
+if [[ ! -d $ZSH_CACHE_DIR ]]; then
+  mkdir $ZSH_CACHE_DIR
+fi
+
+source $ZSH/oh-my-zsh.sh
+
+
+# fzf-tab
+zstyle ':fzf-tab:*' switch-group '<' '>'
+zstyle ':fzf-tab:*' continuous-trigger '/'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 
 
 ## APPEARANCE ----------
