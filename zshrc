@@ -144,8 +144,8 @@ fi
 zle -N _sgpt_zsh
 bindkey '^ ' _sgpt_zsh
 
-alias c='sgpt '
-alias cc="sgpt --model 'gpt-4-turbo-preview' "
+alias c="sgpt --model 'gpt-3.5-turbo' "
+alias cc="sgpt --model 'gpt-4-turbo' "
 # bindkey '' autosuggest-accept # from zsh-autosuggestions
 # bindkey '' expand-or-complete-prefix # vanilla autosuggestions
 
