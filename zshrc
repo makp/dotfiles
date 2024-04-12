@@ -196,6 +196,7 @@ source $ZSH/oh-my-zsh.sh
 zstyle ':fzf-tab:*' switch-group '<' '>'
 zstyle ':fzf-tab:*' continuous-trigger '/'
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 
 
 ## APPEARANCE ----------
