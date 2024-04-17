@@ -26,6 +26,10 @@ export VISUAL=/home/makmiller/scripts/myscripts/edit.sh
 export ALTERNATE_EDITOR=vim
 
 
+# Git
+export GIT_AUTHOR_NAME="mak-$(hostname)"
+export GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
+
 
 # CUDA vars
 if command -v nvcc >/dev/null 2>&1; then
