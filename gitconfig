@@ -16,7 +16,5 @@
 	excludesfile = ~/.gitignore_global
 [merge]
 	tool = emerge
-[mergetool "emerge"]
-	path = ~/elisp/emerge-for-git
 [credential]
 	helper = cache
