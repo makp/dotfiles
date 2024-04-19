@@ -144,8 +144,10 @@ fi
 zle -N _sgpt_zsh
 bindkey '^ ' _sgpt_zsh
 
+# Aliases
 alias c="sgpt --model 'gpt-3.5-turbo' "
 alias cc="sgpt --model 'gpt-4-turbo' "
+alias em="emacsclient -t "
 # bindkey '' autosuggest-accept # from zsh-autosuggestions
 # bindkey '' expand-or-complete-prefix # vanilla autosuggestions
 
