@@ -78,6 +78,14 @@ return {
 		opts = { signs = false },
 	},
 
+	-- Add indentation guides even on blank lines
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		-- See `:help ibl`
+		main = "ibl",
+		opts = {},
+	},
+
 	-- Display pending keybindins
 	-- {
 	--   'folke/which-key.nvim',
