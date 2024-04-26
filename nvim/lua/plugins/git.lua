@@ -48,10 +48,10 @@ return {
 				end)
 				-- Normal mode
 				map("n", "<leader>gs", gitsigns.stage_hunk)
-				map("n", "<leader>gr", gitsigns.reset_hunk)
 				map("n", "<leader>gS", gitsigns.stage_buffer)
-				map("n", "<leader>gu", gitsigns.undo_stage_hunk)
+				map("n", "<leader>gr", gitsigns.reset_hunk)
 				map("n", "<leader>gR", gitsigns.reset_buffer)
+				map("n", "<leader>gu", gitsigns.undo_stage_hunk)
 				map("n", "<leader>gp", gitsigns.preview_hunk)
 				map("n", "<leader>gb", function()
 					gitsigns.blame_line({ full = true })
