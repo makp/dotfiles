@@ -86,6 +86,60 @@ return {
 		opts = {},
 	},
 
+	-- Interactive REPLs
+	{
+		"Vigemus/iron.nvim",
+		config = function()
+			require("iron.core").setup({
+				config = {
+					-- Discard repl?
+					scratch_repl = true,
+					--
+					-- repls
+					sh = {
+						command = { "zsh" },
+					},
+					python = {
+						command = { "ipython -i --simple-prompt" },
+					},
+				},
+				--
+				-- How repl window will be displayed
+				-- FIXME: Not working
+				repl_open_cmd = require("iron.view").bottom(40),
+				--
+				-- keymaps
+				keymaps = {
+					send_motion = "<space>sc",
+					visual_send = "<space>sc",
+					send_file = "<space>sf",
+					send_line = "<space>sl",
+					send_until_cursor = "<space>su",
+					send_mark = "<space>sm",
+					mark_motion = "<space>mc",
+					mark_visual = "<space>mc",
+					remove_mark = "<space>md",
+					cr = "<space>s<cr>",
+					interrupt = "<space>s<space>",
+					exit = "<space>sq",
+					clear = "<space>cl",
+				},
+				-- Highlight (check nvim_set_hl)
+				highlight = {
+					italic = true,
+				},
+				-- Ignore blank lines when senting visual lines?
+				ignore_blank_lines = true,
+			})
+
+			-- See :h iron-commands for all available commands
+			vim.keymap.set("n", "<space>rs", "<cmd>IronRepl<cr>")
+			vim.keymap.set("n", "<space>rr", "<cmd>IronRestart<cr>")
+			vim.keymap.set("n", "<space>rf", "<cmd>IronFocus<cr>")
+			vim.keymap.set("n", "<space>rh", "<cmd>IronHide<cr>")
+		end,
+	},
+
 	-- Display pending keybindins
 	-- {
 	--   'folke/which-key.nvim',
