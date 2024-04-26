@@ -92,22 +92,27 @@ return {
 		config = function()
 			require("iron.core").setup({
 				config = {
+					-- Highlight the last sent block with bold
+					highlight_last = "IronLastSent",
 					-- Discard repl?
 					scratch_repl = true,
-					--
+					-- Close repl window on process end
+					close_window_on_exit = true,
 					-- repls
-					sh = {
-						command = { "zsh" },
+					repl_definition = {
+						sh = {
+							command = { "zsh" },
+						},
+						python = require("iron.fts.python").ipython,
 					},
-					python = {
-						command = { "ipython -i --simple-prompt" },
-					},
+					--
+					-- How repl window will be displayed
+					--
+					repl_open_cmd = require("iron.view").bottom(15),
+					--
+					-- Ignore blank lines when senting visual lines?
+					ignore_blank_lines = true,
 				},
-				--
-				-- How repl window will be displayed
-				-- FIXME: Not working
-				repl_open_cmd = require("iron.view").bottom(40),
-				--
 				-- keymaps
 				keymaps = {
 					send_motion = "<space>sc",
@@ -128,8 +133,6 @@ return {
 				highlight = {
 					italic = true,
 				},
-				-- Ignore blank lines when senting visual lines?
-				ignore_blank_lines = true,
 			})
 
 			-- See :h iron-commands for all available commands
