@@ -15,5 +15,8 @@ vim.opt.rtp:prepend(lazypath)
 -- Load vim options
 require("vim-options")
 
+-- Load basic keymaps
+require("basic_keymaps")
+
 -- Load lua files in plugin folder
 require("lazy").setup("plugins")
