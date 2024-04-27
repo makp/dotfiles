@@ -5,7 +5,7 @@ vim.cmd("set shiftwidth=2")
 
 -- Map leader key
 vim.g.mapleader = "\\"
--- vim.g.maplocalleader
+vim.g.maplocalleader = " "
 
 -- [[ Setting options ]]
 -- See `:help vim.opt` and `:help option-list`

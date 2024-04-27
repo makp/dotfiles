@@ -27,19 +27,19 @@ return {
 			},
 			-- keymaps
 			keymaps = {
-				send_motion = "<space>sc",
-				visual_send = "<space>sc",
-				send_file = "<space>sf",
-				send_line = "<space>sl",
-				send_until_cursor = "<space>su",
-				send_mark = "<space>sm",
-				mark_motion = "<space>mc",
-				mark_visual = "<space>mc",
-				remove_mark = "<space>md",
-				cr = "<space>s<cr>",
-				interrupt = "<space>s<space>",
-				exit = "<space>sq",
-				clear = "<space>cl",
+				send_motion = "<localleader>sc",
+				visual_send = "<localleader>sc",
+				send_file = "<localleader>sf",
+				send_line = "<localleader>sl",
+				send_until_cursor = "<localleader>su",
+				send_mark = "<localleader>sm",
+				mark_motion = "<localleader>mc",
+				mark_visual = "<localleader>mc",
+				remove_mark = "<localleader>md",
+				cr = "<localleader>s<cr>",
+				interrupt = "<localleader>s<localleader>",
+				exit = "<localleader>sq",
+				clear = "<localleader>cl",
 			},
 			-- Highlight (check nvim_set_hl)
 			highlight = {
@@ -48,9 +48,9 @@ return {
 		})
 
 		-- See :h iron-commands for all available commands
-		vim.keymap.set("n", "<space>rs", "<cmd>IronRepl<cr>")
-		vim.keymap.set("n", "<space>rr", "<cmd>IronRestart<cr>")
-		vim.keymap.set("n", "<space>rf", "<cmd>IronFocus<cr>")
-		vim.keymap.set("n", "<space>rh", "<cmd>IronHide<cr>")
+		vim.keymap.set("n", "<localleader>rs", "<cmd>IronRepl<cr>")
+		vim.keymap.set("n", "<localleader>rr", "<cmd>IronRestart<cr>")
+		vim.keymap.set("n", "<localleader>rf", "<cmd>IronFocus<cr>")
+		vim.keymap.set("n", "<localleader>rh", "<cmd>IronHide<cr>")
 	end,
 }
