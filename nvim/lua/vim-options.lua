@@ -64,10 +64,6 @@ vim.opt.inccommand = "split"
 vim.opt.hlsearch = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
--- Don't inherit comment state when creating new lines with 'o'
--- FIXME: Not working
-vim.opt.formatoptions:remove("o")
-
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -78,5 +74,13 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
 	callback = function()
 		vim.highlight.on_yank()
+	end,
+})
+
+-- Don't automatically create commented lines with 'o'/'O' commds
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "lua",
+	callback = function()
+		vim.opt_local.formatoptions:remove("o")
 	end,
 })
