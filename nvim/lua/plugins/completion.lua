@@ -110,5 +110,20 @@ return {
 	{
 		-- Enable Copilot completions
 		"github/copilot.vim",
+		-- M-]/[ : cycle through suggestions
+		-- M-\ : request a suggestion
+		-- M-Right / M-C-Right : accept next word/line
+		-- Invoke :Copilot status to check the status of the plugin
+		config = function()
+			vim.keymap.set("i", "<C-\\>oc", "<cmd>Copilot panel<CR>")
+			--[[ -- Select a keybinding other than <Tab> to accept suggestion 
+			-- The argument to copilot#Accept() is the fallback for when no suggestion is
+			-- displayed.
+			vim.keymap.set("i", "<C-y>", 'copilot#Accept("\\<CR>")', {
+				expr = true,
+				replace_keycodes = false,
+			})
+			vim.g.copilot_no_tab_map = true ]]
+		end,
 	},
 }
