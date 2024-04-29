@@ -4,6 +4,12 @@ return {
 		"nvim-treesitter/nvim-treesitter-textobjects",
 	},
 	{
+		"andymass/vim-matchup",
+		config = function()
+			vim.g.matchup_surrround_enabled = 1
+		end,
+	},
+	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 		opts = {
@@ -62,6 +68,12 @@ return {
 						-- ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
 					},
 				},
+			},
+
+			-- Extend % key
+			-- z%: Go to inside nearest block
+			matchup = {
+				enable = true,
 			},
 		},
 		-- [[ Configure Treesitter ]] See `:help nvim-treesitter`
