@@ -30,6 +30,21 @@ return {
 				enable = true,
 			},
 
+			-- Incremental selection
+			incremental_selection = {
+				enable = true,
+				keymaps = {
+					-- Start incremental selection (normal mode)
+					init_selection = "gnn",
+					-- Increment to the upper named parent (visual mode)
+					node_incremental = "grn",
+					-- Increment to the upper scope (visual mode)
+					scope_incremental = "grc",
+					-- Decrement to the previous named node (visual mode)
+					node_decremental = "grm",
+				},
+			},
+
 			-- Treesitter textobjects
 			textobjects = {
 				select = {
