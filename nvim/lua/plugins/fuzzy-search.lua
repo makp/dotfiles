@@ -70,7 +70,7 @@ return {
 		vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = "[F]ind [R]ecent Files" })
 
 		-- Git
-		vim.keymap.set("n", "<leader>ogs", builtin.git_status, { desc = "[O]pen [G]it [S]tatus" })
+		vim.keymap.set("n", "<leader>gs", builtin.git_status, { desc = "[O]pen [G]it [S]tatus" })
 
 		-- Registers
 		vim.keymap.set("n", "<leader>or", builtin.registers, { desc = "[O]pen [R]egisters" })

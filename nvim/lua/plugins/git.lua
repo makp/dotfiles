@@ -62,24 +62,24 @@ return {
 					gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
 				end)
 				-- Normal mode
-				map("n", "<localleader>gs", gitsigns.stage_hunk)
-				map("n", "<localleader>gu", gitsigns.undo_stage_hunk) -- undo last stage_hunk
-				map("n", "<localleader>gS", gitsigns.stage_buffer)
-				map("n", "<localleader>gr", gitsigns.reset_hunk) -- at the cursor position
-				map("n", "<localleader>gR", gitsigns.reset_buffer)
-				map("n", "<localleader>gp", gitsigns.preview_hunk)
-				map("n", "<localleader>gb", function()
+				map("n", "<localleader>hs", gitsigns.stage_hunk)
+				map("n", "<localleader>hu", gitsigns.undo_stage_hunk) -- undo last stage_hunk
+				map("n", "<localleader>hS", gitsigns.stage_buffer)
+				map("n", "<localleader>hr", gitsigns.reset_hunk) -- at the cursor position
+				map("n", "<localleader>hR", gitsigns.reset_buffer)
+				map("n", "<localleader>hp", gitsigns.preview_hunk)
+				map("n", "<localleader>hb", function()
 					gitsigns.blame_line({ full = true })
 				end)
-				map("n", "<localleader>gd", gitsigns.diffthis, { desc = "git [d]iff against index" })
-				map("n", "<localleader>gD", function()
+				map("n", "<localleader>hd", gitsigns.diffthis, { desc = "git [d]iff against index" })
+				map("n", "<localleader>hD", function()
 					gitsigns.diffthis("@")
 				end, { desc = "git [D]iff against last commit" })
 				--
 				-- Toggles
-				map("n", "<localleader>gtb", gitsigns.toggle_current_line_blame)
-				map("n", "<localleader>gtd", gitsigns.toggle_deleted)
-				map("n", "<localleader>gtw", gitsigns.toggle_word_diff)
+				map("n", "<localleader>htb", gitsigns.toggle_current_line_blame)
+				map("n", "<localleader>htd", gitsigns.toggle_deleted)
+				map("n", "<localleader>htw", gitsigns.toggle_word_diff)
 
 				-- Hunk object
 				map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
@@ -104,7 +104,7 @@ return {
 		-- setting the keybinding for LazyGit with 'keys' is recommended in
 		-- order to load the plugin when the command is run for the first time
 		keys = {
-			{ "<localleader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+			{ "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
 		},
 	},
 }
