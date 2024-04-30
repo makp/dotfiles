@@ -81,8 +81,8 @@ return {
 						["aa"] = "@assignment.outer",
 						["ia"] = "@assignment.inner",
 
-						["as"] = "@statement.outer",
-						["is"] = "@statement.inner",
+						["at"] = "@statement.outer",
+						["it"] = "@statement.inner",
 
 						["a,"] = "@parameter.outer",
 						["i,"] = "@parameter.inner",
