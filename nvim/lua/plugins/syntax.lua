@@ -74,33 +74,66 @@ return {
 						-- Capture groups are defined in textobjects.scm
 						["af"] = "@function.outer",
 						["if"] = "@function.inner",
+
 						["ac"] = "@comment.outer",
+						["ic"] = "@comment.inner",
+
+						["aa"] = "@assignment.outer",
+						["ia"] = "@assignment.inner",
+
+						["as"] = "@statement.outer",
+						["is"] = "@statement.inner",
+
+						["ap"] = "@parameter.outer",
+						["ip"] = "@parameter.inner",
+
+						["ai"] = "@conditional.outer",
+						["ii"] = "@conditional.inner",
+
+						["a["] = "@block.outer",
+						["i["] = "@block.inner",
 						-- you can optionally set descriptions to the mappings (used in the desc parameter of nvim_buf_set_keymap
 						-- ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
 					},
 				},
 				move = {
 					enable = true,
-					set_jumps = true, -- whether to set jumps in the jumplist
+					set_jumps = true, -- set jumps in the jumplist
 					goto_next_start = {
-						["]m"] = "@function.outer",
+						["]f"] = "@function.outer",
 						["]c"] = "@comment.outer",
-						["]]"] = "@class.outer",
+						["]a"] = "@assignment.outer",
+						["]s"] = "@statement.outer",
+						["]p"] = "@parameter.outer",
+						["]i"] = "@conditional.outer",
+						["]]"] = "@block.outer",
 					},
 					goto_next_end = {
 						["]M"] = "@function.outer",
 						["]C"] = "@comment.outer",
-						["]["] = "@class.outer",
+						["]A"] = "@assignment.outer",
+						["]S"] = "@statement.outer",
+						["]P"] = "@parameter.outer",
+						["]I"] = "@conditional.outer",
+						["]["] = "@block.outer",
 					},
 					goto_previous_start = {
 						["[m"] = "@function.outer",
 						["[c"] = "@comment.outer",
-						["[["] = "@class.outer",
+						["[a"] = "@assignment.outer",
+						["[s"] = "@statement.outer",
+						["[p"] = "@parameter.outer",
+						["[i"] = "@conditional.outer",
+						["[["] = "@block.outer",
 					},
 					goto_previous_end = {
 						["[M"] = "@function.outer",
 						["[C"] = "@comment.outer",
-						["[]"] = "@class.outer",
+						["[A"] = "@assignment.outer",
+						["[S"] = "@statement.outer",
+						["[P"] = "@parameter.outer",
+						["[I"] = "@conditional.outer",
+						["[]"] = "@block.outer",
 					},
 				},
 			},
