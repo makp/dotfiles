@@ -69,7 +69,7 @@ return {
 						-- Capture groups are defined in textobjects.scm
 						["af"] = "@function.outer",
 						["if"] = "@function.inner",
-						["ac"] = "@class.outer",
+						["ac"] = "@comment.outer",
 						-- you can optionally set descriptions to the mappings (used in the desc parameter of nvim_buf_set_keymap
 						-- ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
 					},
@@ -79,18 +79,22 @@ return {
 					set_jumps = true, -- whether to set jumps in the jumplist
 					goto_next_start = {
 						["]m"] = "@function.outer",
+						["]c"] = "@comment.outer",
 						["]]"] = "@class.outer",
 					},
 					goto_next_end = {
 						["]M"] = "@function.outer",
+						["]C"] = "@comment.outer",
 						["]["] = "@class.outer",
 					},
 					goto_previous_start = {
 						["[m"] = "@function.outer",
+						["[c"] = "@comment.outer",
 						["[["] = "@class.outer",
 					},
 					goto_previous_end = {
 						["[M"] = "@function.outer",
+						["[C"] = "@comment.outer",
 						["[]"] = "@class.outer",
 					},
 				},
