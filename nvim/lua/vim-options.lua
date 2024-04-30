@@ -71,6 +71,10 @@ vim.opt.spelllang = "en_us"
 -- Use a easier keybinding for exiting terminal mode
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
+-- Move to the beginning of the paragraph (a little hacky)
+vim.api.nvim_set_keymap("n", "]_", "}j_", { noremap = true })
+vim.api.nvim_set_keymap("n", "[_", "{{j_", { noremap = true })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
