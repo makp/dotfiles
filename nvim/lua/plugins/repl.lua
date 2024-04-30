@@ -8,7 +8,7 @@ return {
 				highlight_last = "IronLastSent",
 				-- Discard repl?
 				scratch_repl = true,
-				-- Close repl window on process end
+				-- Close repl window when the process ends
 				close_window_on_exit = true,
 				-- repls
 				repl_definition = {
@@ -19,8 +19,7 @@ return {
 				},
 				--
 				-- How repl window will be displayed
-				--
-				repl_open_cmd = require("iron.view").bottom(15),
+				repl_open_cmd = require("iron.view").right(79),
 				--
 				-- Ignore blank lines when senting visual lines?
 				ignore_blank_lines = true,
@@ -33,13 +32,15 @@ return {
 				send_line = "<localleader>sl",
 				send_until_cursor = "<localleader>su",
 				send_mark = "<localleader>sm",
+				cr = "<localleader>s<cr>",
+
 				mark_motion = "<localleader>mc",
 				mark_visual = "<localleader>mc",
 				remove_mark = "<localleader>md",
-				cr = "<localleader>s<cr>",
-				interrupt = "<localleader>s<localleader>",
-				exit = "<localleader>sq",
-				clear = "<localleader>cl",
+
+				interrupt = "<localleader>r<localleader>",
+				exit = "<localleader>rd",
+				clear = "<localleader>rl",
 			},
 			-- Highlight (check nvim_set_hl)
 			highlight = {
@@ -49,8 +50,14 @@ return {
 
 		-- See :h iron-commands for all available commands
 		vim.keymap.set("n", "<localleader>rs", "<cmd>IronRepl<cr>")
+		vim.keymap.set("n", "<localleader>rh", "<cmd>IronReplHere<cr>")
+		vim.keymap.set("n", "<localleader>rf", function()
+			vim.cmd("IronFocus")
+			vim.cmd("startinsert")
+		end, {
+			noremap = true,
+			silent = true,
+		})
 		vim.keymap.set("n", "<localleader>rr", "<cmd>IronRestart<cr>")
-		vim.keymap.set("n", "<localleader>rf", "<cmd>IronFocus<cr>")
-		vim.keymap.set("n", "<localleader>rh", "<cmd>IronHide<cr>")
 	end,
 }
