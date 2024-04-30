@@ -63,15 +63,39 @@ return {
 						-- Capture groups are defined in textobjects.scm
 						["af"] = "@function.outer",
 						["if"] = "@function.inner",
-						-- ["ac"] = "@class.outer",
+						["ac"] = "@class.outer",
 						-- you can optionally set descriptions to the mappings (used in the desc parameter of nvim_buf_set_keymap
 						-- ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
 					},
 				},
+				move = {
+					enable = true,
+					set_jumps = true, -- whether to set jumps in the jumplist
+					goto_next_start = {
+						["]m"] = "@function.outer",
+						["]]"] = "@class.outer",
+					},
+					goto_next_end = {
+						["]M"] = "@function.outer",
+						["]["] = "@class.outer",
+					},
+					goto_previous_start = {
+						["[m"] = "@function.outer",
+						["[["] = "@class.outer",
+					},
+					goto_previous_end = {
+						["[M"] = "@function.outer",
+						["[]"] = "@class.outer",
+					},
+				},
 			},
 
-			-- Extend % key
-			-- z%: Go to inside nearest block
+			-- Extend % motion
+			-- % / g% : Go forwards/backwards
+			-- [% / %] : Go previous/next outer open/close word
+			-- z% : Go inside nearest block
+			-- ds% / cs% : Delete/change surrounding block
+			-- a% / i% : Select inside/outer block
 			matchup = {
 				enable = true,
 			},
