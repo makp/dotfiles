@@ -64,6 +64,10 @@ vim.opt.inccommand = "split"
 vim.opt.hlsearch = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
+-- Enable spell checking
+vim.opt.spelllang = "en_us"
+-- vim.opt.spell = true
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
