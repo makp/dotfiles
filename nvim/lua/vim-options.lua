@@ -68,6 +68,9 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.opt.spelllang = "en_us"
 -- vim.opt.spell = true
 
+-- Use a easier keybinding for exiting terminal mode
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
