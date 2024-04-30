@@ -153,8 +153,17 @@ return {
 		config = function(_, opts)
 			-- Prefer git instead of curl in order to improve connectivity in some environments
 			require("nvim-treesitter.install").prefer_git = true
+
 			-- Setup nvim-treesitter
 			require("nvim-treesitter.configs").setup(opts)
+
+			-- Search with treesitter
+			vim.keymap.set(
+				"n",
+				"<leader>st",
+				require("telescope.builtin").treesitter,
+				{ desc = "[S]earch with [T]reesitter" }
+			)
 		end,
 	},
 }
