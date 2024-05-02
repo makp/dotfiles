@@ -24,6 +24,10 @@ bindkey "^[h" backward-kill-word # M-h
 # Enable vi mode
 bindkey -v
 
+## Enable Powerlevel10k instant prompt
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
 # For ZSH, not just alphanumerics are part of a word, but other
 # symbols stated by the shell variable WORDCHARS. Making this
@@ -161,7 +165,7 @@ ZSH=/usr/share/oh-my-zsh/
 ZSH_CUSTOM=/usr/share/zsh/
 
 # Set theme
-# ZSH_THEME="robbyrussell"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -201,31 +205,35 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 # zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 
 
-## APPEARANCE ----------
+## PROMPT ----------
 
-# Load colors
-autoload -U colors 
-colors
+# Source Powerlevel10k if file exists
+# Run `p10k configure` to customize prompt
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# Set command prompt
-autoload -Uz vcs_info
-setopt prompt_subst
-
-zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:git:*' formats "%{$fg_bold[green]%}%s %r %{$fg_no_bold[green]%}[%b] %{$fg_bold[magenta]%}%m%u%c%{$reset_color%} "
-# zstyle ':vcs_info:git:*' actionformats ' [%b|%s|%a]'
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' unstagedstr '*'
-zstyle ':vcs_info:*' stagedstr '+'
-zstyle ':vcs_info:*' untrackedstr '%'
-
-precmd_functions+=('vcs_info_pre')
-function vcs_info_pre() {
-  vcs_info
-  PS1="
-%{$fg[white]%}@%m (%*) %{$fg_bold[yellow]%}%1~/%{$reset_color%} \${vcs_info_msg_0_}%{$reset_color%}
-> "
-}
-
+# # Load colors
+# autoload -U colors 
+# colors
+#
+# # Set command prompt
+# autoload -Uz vcs_info
+# setopt prompt_subst
+#
+# zstyle ':vcs_info:*' enable git
+# zstyle ':vcs_info:git:*' formats "%{$fg_bold[green]%}%s %r %{$fg_no_bold[green]%}[%b] %{$fg_bold[magenta]%}%m%u%c%{$reset_color%} "
+# # zstyle ':vcs_info:git:*' actionformats ' [%b|%s|%a]'
+# zstyle ':vcs_info:*' check-for-changes true
+# zstyle ':vcs_info:*' unstagedstr '*'
+# zstyle ':vcs_info:*' stagedstr '+'
+# zstyle ':vcs_info:*' untrackedstr '%'
+#
+# precmd_functions+=('vcs_info_pre')
+# function vcs_info_pre() {
+#   vcs_info
+#   PS1="
+# %{$fg[white]%}@%m (%*) %{$fg_bold[yellow]%}%1~/%{$reset_color%} \${vcs_info_msg_0_}%{$reset_color%}
+# > "
+# }
+#
 
 # zprof
