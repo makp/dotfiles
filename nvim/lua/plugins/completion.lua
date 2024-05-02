@@ -65,7 +65,7 @@ return {
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
 
 					-- Accept the completion
-					["<CR>"] = cmp.mapping.confirm({ select = true }),
+					["<Tab>"] = cmp.mapping.confirm({ select = true }),
 
 					["<C-l>"] = cmp.mapping(function()
 						if luasnip.expand_or_locally_jumpable() then
@@ -93,7 +93,7 @@ return {
 			cmp.setup.cmdline({ "/", "?" }, {
 				mapping = cmp.mapping.preset.cmdline(),
 				sources = {
-					{ name = "buffer" },
+					{ name = "buffer", max_item_count = 7 },
 				},
 			})
 
@@ -101,9 +101,13 @@ return {
 			cmp.setup.cmdline(":", {
 				mapping = cmp.mapping.preset.cmdline(),
 				sources = cmp.config.sources({
-					{ name = "path" },
+					{ name = "path", max_item_count = 7 },
 				}, {
-					{ name = "cmdline" },
+					{
+						name = "cmdline",
+						max_item_count = 7,
+						keyword_length = 2,
+					},
 				}),
 				-- matching = { disallow_symbol_nonprefix_matching = false },
 			})
@@ -118,15 +122,20 @@ return {
 		-- M-Right / M-C-Right : accept next word/line
 		-- Invoke :Copilot status to check the status of the plugin
 		config = function()
-			vim.keymap.set("i", "<C-\\>oc", "<cmd>Copilot panel<CR>")
-			--[[ -- Select a keybinding other than <Tab> to accept suggestion 
+			vim.g.copilot_no_mappings = true
+			-- Open copilot panel with completions
+			vim.keymap.set("i", "<C-\\>cc", "<cmd>Copilot panel<CR>")
+			-- Don't use <Tab> to accept suggestion
+			vim.g.copilot_no_tab_map = true
+			-- Select a keybinding other than <Tab> to accept suggestion
 			-- The argument to copilot#Accept() is the fallback for when no suggestion is
 			-- displayed.
-			vim.keymap.set("i", "<C-y>", 'copilot#Accept("\\<CR>")', {
-				expr = true,
-				replace_keycodes = false,
-			})
-			vim.g.copilot_no_tab_map = true ]]
+			-- vim.keymap.set("i", "<C-M-S-f>", 'copilot#Accept("\\<CR>")', {
+			-- 	expr = true,
+			-- 	replace_keycodes = false,
+			-- })
+			vim.keymap.set("i", "<C-f>", "<Plug>(copilot-accept-line)")
+			vim.keymap.set("i", "<C-M-f>", "<Plug>(copilot-accept-word)")
 		end,
 	},
 }
