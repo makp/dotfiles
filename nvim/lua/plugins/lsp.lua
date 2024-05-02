@@ -66,18 +66,19 @@ return {
 				map("<localleader>ca", vim.lsp.buf.code_action, "[c]ode [a]ction")
 
 				-- Opens a popup with documentation about the word under your cursor
-				--  See `:help K` for why this keymap.
 				map("K", vim.lsp.buf.hover, "Hover Documentation")
 
-				-- The following two autocommands are used to highlight references of the
-				-- word under your cursor when your cursor rests there for a little while.
-				--    See `:help CursorHold` for information about when this is executed
+				-- The following two autocommands are used to highlight references of
+				-- the word under your cursor when your cursor rests there for a little
+				-- while. See `:help cursorhold` for information about when this is
+				-- executed
 				--
-				-- When you move your cursor, the highlights will be cleared (the second autocommand).
+				-- when you move your cursor, the highlights will be cleared (the
+				-- second autocommand).
 				local client = vim.lsp.get_client_by_id(event.data.client_id)
-				if client and client.server_capabilities.documentHighlightProvider then
+				if client and client.server_capabilities.documenthighlightprovider then
 					local highlight_augroup = vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
-					vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+					vim.api.nvim_create_autocmd({ "cursorhold", "cursorholdi" }, {
 						buffer = event.buf,
 						group = highlight_augroup,
 						callback = vim.lsp.buf.document_highlight,
@@ -107,9 +108,10 @@ return {
 			end,
 		})
 
-		--  By default, Neovim doesn't support everything that is in the LSP specification.
-		--  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
-		--  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
+		--  By default, Neovim doesn't support everything that is in the LSP
+		--  specification. When you add nvim-cmp, luasnip, etc. Neovim now has
+		--  *more* capabilities. So, we create new capabilities with nvim cmp, and
+		--  then broadcast that to the servers.
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
 		capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
@@ -120,7 +122,6 @@ return {
 		--  - filetypes (table): Override the default list of associated filetypes for the server
 		--  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
 		--  - settings (table): Override the default settings passed when initializing the server.
-		--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 		local servers = {
 			-- See `:help lspconfig-all` for a list of all the pre-configured LSPs
 
