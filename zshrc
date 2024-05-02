@@ -37,9 +37,9 @@ fi
 
 ## HISTORY --------
 
-# Use C-n and C-p to navigate history
-bindkey "^[n" down-line-or-history
-bindkey "^[p" up-line-or-history
+# Key bindings for navigating history
+# bindkey "" down-line-or-history
+# bindkey "" up-line-or-history
 
 # History settings
 HISTSIZE=2000
@@ -152,8 +152,6 @@ bindkey '^ ' _sgpt_zsh
 alias c="sgpt --model 'gpt-3.5-turbo' "
 alias cc="sgpt --model 'gpt-4-turbo' "
 alias em="emacsclient -t "
-# bindkey '' autosuggest-accept # from zsh-autosuggestions
-# bindkey '' expand-or-complete-prefix # vanilla autosuggestions
 
 
 ## PLUGINS ----------
@@ -199,10 +197,23 @@ source $ZSH/oh-my-zsh.sh
 
 
 # fzf-tab
+# Force zsh not to show completion menu, which allows fzf-tab to capture the
+# unambiguous prefix
+zstyle ':completion:*' menu no
+
+# Switch between groups with < and >
 zstyle ':fzf-tab:*' switch-group '<' '>'
+
+# Continuous trigger key
 zstyle ':fzf-tab:*' continuous-trigger '/'
+
+# Preview dir contents with eza
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
-# zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+
+
+# Keybindings for completions
+# bindkey '^f' autosuggest-accept # zsh-autosuggestions
+# bindkey '' expand-or-complete-prefix # vanilla autosuggestions
 
 
 ## PROMPT ----------
