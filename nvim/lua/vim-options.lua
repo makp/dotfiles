@@ -60,6 +60,9 @@ vim.opt.splitbelow = true
 -- Preview substitutions live as you type
 vim.opt.inccommand = "split"
 
+-- Enable folding in markdown buffers
+vim.g.markdown_folding = 1
+
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
