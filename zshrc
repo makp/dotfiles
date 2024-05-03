@@ -59,10 +59,18 @@ setopt pushd_silent # don't print the directory stack after pushd or popd
 ## COMPLETION ------
 
 # Enable fzf if it is installed
+# C-t: pasted file/dir onto the command line.
+# M-c: cd into selected directory.
+# C-r: search history. Press C-r again to search by chronological order.
 if command -v fzf >/dev/null 2>&1; then
-    eval "$(fzf --zsh)"  # fzf keybindings and fuzzy completion
+    # Enable fzf keybindings and completion
+    eval "$(fzf --zsh)"
+    # Change trigger so that it doesn't conflict with zsh
     export FZF_COMPLETION_TRIGGER=',,'
+    # Use `tree` to display directory structure
+    export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 fi
+
 
 # Use internal pager to display matches
 zmodload zsh/complist		 
@@ -72,6 +80,10 @@ bindkey -M listscroll q send-break # q exits internal pager
 # Enable compinit
 autoload -U compinit
 compinit
+
+# Load colors
+autoload -U colors
+colors
 
 # Saner completion behavior 
 zstyle ':completion:*' rehash true # rehash automatically
@@ -212,6 +224,10 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 
 
 # Keybindings for completions
+function zvm_after_init() {
+   zvm_bindkey viins '^R' fzf-history-widget
+   # zvm_bindkey viins '^[^f' forward-char
+}
 # bindkey '^f' autosuggest-accept # zsh-autosuggestions
 # bindkey '' expand-or-complete-prefix # vanilla autosuggestions
 
@@ -222,10 +238,6 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 # Run `p10k configure` to customize prompt
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# # Load colors
-# autoload -U colors 
-# colors
-#
 # # Set command prompt
 # autoload -Uz vcs_info
 # setopt prompt_subst
