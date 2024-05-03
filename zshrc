@@ -224,11 +224,12 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 
 
 # Keybindings for completions
+# Insert mode
 function zvm_after_init() {
    zvm_bindkey viins '^R' fzf-history-widget
-   # zvm_bindkey viins '^[^f' forward-char
+   zvm_bindkey viins '^[^f' forward-word
 }
-# bindkey '^f' autosuggest-accept # zsh-autosuggestions
+# bindkey '' autosuggest-accept # zsh-autosuggestions
 # bindkey '' expand-or-complete-prefix # vanilla autosuggestions
 
 
