@@ -78,6 +78,9 @@ vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" }
 vim.api.nvim_set_keymap("n", "]_", "}j_", { noremap = true })
 vim.api.nvim_set_keymap("n", "[_", "{{j_", { noremap = true })
 
+-- Wrap lines at word boundaries
+vim.opt.linebreak = true
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -91,7 +94,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
--- Don't automatically create commented lines with 'o'/'O' commds
+-- Don't automatically create commented lines with 'o'/'O' commds in Lua
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "lua",
 	callback = function()
