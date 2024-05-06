@@ -81,6 +81,12 @@ vim.api.nvim_set_keymap("n", "[_", "{{j_", { noremap = true })
 -- Wrap lines at word boundaries
 vim.opt.linebreak = true
 
+-- Use j/k to move visual lines instead of actual lines
+vim.api.nvim_set_keymap("n", "j", "gj", { noremap = true })
+vim.api.nvim_set_keymap("n", "k", "gk", { noremap = true })
+vim.api.nvim_set_keymap("n", "gj", "j", { noremap = true })
+vim.api.nvim_set_keymap("n", "gk", "k", { noremap = true })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
