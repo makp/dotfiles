@@ -126,7 +126,20 @@ return {
 			-- See `:help lspconfig-all` for a list of all the pre-configured LSPs
 
 			pylsp = {},
-			texlab = {},
+			texlab = {
+				settings = {
+					texlab = {
+						chktex = {
+							onEdit = true,
+							onOpenAndSave = true,
+						},
+						forwardSearch = {
+							executable = "zathura",
+							args = { "--synctex-forward", "%l:1:%f", "%p" },
+						},
+					},
+				},
+			},
 			lua_ls = {
 				-- cmd = {...},
 				-- filetypes = { ...},
