@@ -160,11 +160,6 @@ fi
 zle -N _sgpt_zsh
 bindkey '^ ' _sgpt_zsh
 
-# Aliases
-alias c="sgpt --model 'gpt-3.5-turbo' "
-alias cc="sgpt --model 'gpt-4-turbo' "
-alias em="emacsclient -t "
-
 
 ## PLUGINS ----------
 
@@ -259,5 +254,27 @@ function zvm_after_init() {
 # > "
 # }
 #
+
+
+## ALIASES ---------
+
+# Shell-GPT
+alias c="sgpt --model 'gpt-3.5-turbo' "
+alias cc="sgpt --model 'gpt-4-turbo' "
+
+# Editors
+alias em="emacsclient -t "
+
+# Git
+alias gs="git status --short -b"
+alias gf="git fetch --all"
+alias ga="git add"
+alias gc="git commit -m"
+alias gC="git commit --amend"
+alias gw="git wdiff"
+alias gW="git wdiff --staged"
+alias gp="git pull"
+alias gP="git push"
+
 
 # zprof
