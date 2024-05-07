@@ -275,6 +275,7 @@ alias gw="git wdiff"
 alias gW="git wdiff --staged"
 alias gp="git pull"
 alias gP="git push"
+alias gr="git reset --soft"
 
 
 # zprof

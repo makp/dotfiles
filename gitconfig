@@ -11,7 +11,7 @@
 	ui = auto
 	pager = true
 [core]
-	editor = emacsclient
+	editor = nvim
 	pager = less -FRSX
 	excludesfile = ~/.gitignore_global
 [merge]
