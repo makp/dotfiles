@@ -68,6 +68,23 @@ return {
 				-- Opens a popup with documentation about the word under your cursor
 				map("K", vim.lsp.buf.hover, "Hover Documentation")
 
+				-- Define helper function for running TexLab cmds
+				local function texlab_command(cmd, params)
+					vim.lsp.buf.execute_command({
+						command = cmd,
+						arguments = { params } or {},
+					})
+				end
+
+				function TexlabChangeEnvironment(newName)
+					-- Get current positions pars
+					local params = vim.lsp.util.make_position_params()
+					-- Add the new name to the params
+					params["newName"] = newName
+					-- Execute the command
+					texlab_command("texlab.changeEnvironment", params)
+				end
+
 				-- The following two autocommands are used to highlight references of
 				-- the word under your cursor when your cursor rests there for a little
 				-- while. See `:help cursorhold` for information about when this is
