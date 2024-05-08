@@ -1,3 +1,13 @@
+-- TEXLAB SETUP
+
+-- Define helper function for running TexLab cmds
+local function texlab_command(cmd, params)
+	vim.lsp.buf.execute_command({
+		command = cmd,
+		arguments = { params } or {},
+	})
+end
+
 local dic = {}
 
 dic.environments = {
@@ -11,15 +21,8 @@ dic.environments = {
 	"description",
 	"figure",
 	"figure*",
+	"center",
 }
-
--- Define helper function for running TexLab cmds
-local function texlab_command(cmd, params)
-	vim.lsp.buf.execute_command({
-		command = cmd,
-		arguments = { params } or {},
-	})
-end
 
 -- Wrapper func on `texlab.changeEnvironment` command
 -- In `dic.TexlabChangeEnv`, `TexlabChangeEnv` is the key and the function itself is the value
