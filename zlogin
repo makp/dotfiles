@@ -17,6 +17,9 @@ if [[ -n $SSH_AUTH_SOCK ]] && ! ssh-add -l > /dev/null; then
 	"turing")
 	    key_path="$HOME/.ssh/turing_rsa"
 	    ;;
+	"tarski")
+	    key_path="$HOME/.ssh/tarski_rsa"
+	    ;;
 	*)
 	    echo "Hostname not recognized. SSH key not added."
 	    return 1 		# exit with error status
