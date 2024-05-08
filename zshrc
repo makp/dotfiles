@@ -103,10 +103,10 @@ zstyle ':completion:*' cache-path ~/.zsh/cache
 # `%B` and `%b` are used to make the text that appears between them
 # bold. %U` and `%u` are used to underline the text between them. `%d`
 # is replaced with the description of the group.
-zstyle ':completion:*' format '%B---- %d%b'
-zstyle ':completion:*:descriptions' format $'%{\e[0;31m%}completing %B%d%b%{\e[0m%}' 
-zstyle ':completion:*:messages' format '%B%U---- %d%u%b' 
-zstyle ':completion:*:warnings' format "%B$fg[red]%}---- no match for: $fg[white]%d%b"
+# zstyle ':completion:*' format '%B---- %d%b'
+# zstyle ':completion:*:descriptions' format $'%{\e[0;31m%}completing %B%d%b%{\e[0m%}'
+# zstyle ':completion:*:messages' format '%B%U---- %d%u%b'
+# zstyle ':completion:*:warnings' format "%B$fg[red]%}---- no match for: $fg[white]%d%b"
 
 
 # Customize fuzzy matching
@@ -268,9 +268,10 @@ alias em="emacsclient -t "
 # Git
 alias gs="git status --short -b"
 alias gf="git fetch --all"
+alias gF="git fetch --all && git show HEAD..FETCH_HEAD"
 alias ga="git add"
-alias gc="git commit -m"
-alias gC="git commit --amend"
+alias gc="git commit -m "
+alias gC="git commit --amend "
 alias gw="git wdiff"
 alias gW="git wdiff --staged"
 alias gp="git pull"
