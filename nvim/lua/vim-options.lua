@@ -44,10 +44,6 @@ vim.opt.smartcase = true
 -- Keep signcolumn on by default
 vim.opt.signcolumn = "yes"
 
--- Decrease mapped sequence wait time
--- Displays which-key popup sooner
--- vim.opt.timeoutlen = 400
-
 -- Configure how new splits should be opened
 vim.opt.splitright = true
 vim.opt.splitbelow = true
