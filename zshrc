@@ -259,8 +259,8 @@ function zvm_after_init() {
 ## ALIASES ---------
 
 # Shell-GPT
-alias c="sgpt --model 'gpt-3.5-turbo' "
-alias cc="sgpt --model 'gpt-4-turbo' "
+alias c="sgpt --model 'gpt-3.5-turbo' --temperature 1.0 "
+alias cc="sgpt --model 'gpt-4-turbo' --temperature 1.0 "
 
 # Editors
 alias em="emacsclient -t "
