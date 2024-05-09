@@ -20,3 +20,6 @@ require("basic_keymaps")
 
 -- Load lua files in plugin folder
 require("lazy").setup("plugins")
+
+-- Load Lua helper functions
+require("helper_funcs")
