@@ -17,8 +17,15 @@ local function create_buffer(buffer_name, output)
 	vim.api.nvim_buf_set_lines(0, 0, -1, false, vim.split(output, "\n"))
 end
 
+-- TODO: Create a separate function for getting text from visual selection.
+-- local mode = vim.api.nvim_get_mode().mode
+-- local line1 = vim.fn.line("'<")
+-- local line2 = vim.fn.line("'>")
+-- local text = vim.api.nvim_buf_get_lines(0, line1 - 1, line2, false)
+-- selected_text = table.concat(text, "\n")
+
 function RunScript(shell_cmd, bufname)
-	-- Get the selected text
+	-- Get text from the unnamed register
 	local selected_text = vim.fn.getreg('"')
 	-- Escape shell metacharacters
 	local escaped_text = vim.fn.shellescape(selected_text)
@@ -33,13 +40,13 @@ end
 vim.api.nvim_set_keymap(
 	"v",
 	"<leader>rs",
-	"y:lua RunScript('echo', '*ShellOutput*')<CR>",
+	"y <cmd>lua RunScript('echo', '*ShellOutput*')<CR>",
 	{ noremap = true, silent = true }
 )
 
 vim.api.nvim_set_keymap(
 	"n",
 	"<leader>rs",
-	":<C-u>lua RunScript('echo', '*ShellOutput*')<CR>",
+	"<cmd>lua RunScript('echo', '*ShellOutput*')<CR>",
 	{ noremap = true, silent = true }
 )
