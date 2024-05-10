@@ -1,0 +1,3 @@
+[submodule "nvim/lua/utils"]
+	path = nvim/lua/utils
+	url = git@github.com:makp/helper_funcs.git
