@@ -1,6 +1,9 @@
 -- HELPER FUNCS
 
 local function create_buffer(buffer_name, output)
+	-- Split window and switch to it
+	vim.api.nvim_command("vsplit")
+	vim.api.nvim_command("wincmd l")
 	-- Does buffer already exists?
 	local buffer_exists = vim.fn.bufexists(buffer_name)
 	if buffer_exists == 1 then
@@ -40,7 +43,7 @@ end
 vim.api.nvim_set_keymap(
 	"v",
 	"<leader>rs",
-	"y <cmd>lua RunScript('echo', '*ShellOutput*')<CR>",
+	"y <cmd>lua RunScript('python ~/.config/nvim/lua/utils/writing.py', '*ShellOutput*')<CR>",
 	{ noremap = true, silent = true }
 )
 
