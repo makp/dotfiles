@@ -65,7 +65,7 @@ return {
 					["<C-d>"] = cmp.mapping.scroll_docs(4),
 
 					-- Accept the completion
-					["<Tab>"] = cmp.mapping.confirm({ select = true }),
+					-- ["<Tab>"] = cmp.mapping.confirm({ select = true }),
 
 					["<C-l>"] = cmp.mapping(function()
 						if luasnip.expand_or_locally_jumpable() then
