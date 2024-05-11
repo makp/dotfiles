@@ -1,6 +1,6 @@
 -- HELPER FUNCS
 
-function Run_cmd_async(cmd, cmd_args, callback)
+local function run_cmd_async(cmd, cmd_args, callback)
 	-- Optional arguments
 	cmd_args = cmd_args or {}
 	callback = callback or function(result)
@@ -56,7 +56,7 @@ function Run_cmd_async(cmd, cmd_args, callback)
 	uv.read_start(stderr, on_read)
 end
 
-function Create_buffer(buffer_name, output)
+local function create_buffer(buffer_name, output)
 	-- Split window and switch to it
 	vim.api.nvim_command("vsplit")
 	vim.api.nvim_command("wincmd l")
@@ -78,14 +78,14 @@ end
 
 -- Run a command and display the output in a new buffer
 function RunCmdAsync(cmd, args)
-	Run_cmd_async(cmd, args, function(result)
+	run_cmd_async(cmd, args, function(result)
 		vim.schedule(function()
-			Create_buffer("*CmdOutput*", result)
+			create_buffer("*CmdOutput*", result)
 		end)
 	end)
 end
 
-function GetText()
+local function get_text()
 	-- TODO: Write procedure for getting text from visual selection.
 	-- local mode = vim.api.nvim_get_mode().mode
 	-- local line1 = vim.fn.line("'<")
@@ -101,7 +101,7 @@ end
 
 function CheckWriting()
 	local py_cmd = "python"
-	local buffer_txt = GetText()
+	local buffer_txt = get_text()
 	-- print(buffer_txt)
 	RunCmdAsync(py_cmd, {
 		"/home/makmiller/.config/nvim/lua/utils/writing.py",
