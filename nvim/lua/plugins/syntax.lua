@@ -38,6 +38,9 @@ return {
 			-- Autoinstall languages that are not installed
 			auto_install = true,
 
+			-- Ignore orgmode (suggested by orgmode plugin)
+			ignore_install = { "org" },
+
 			-- Syntax highlighting
 			highlight = {
 				enable = true,
