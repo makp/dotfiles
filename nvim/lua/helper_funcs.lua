@@ -81,6 +81,10 @@ end
 -- Run a command and display the output in a new buffer
 function RunCmdAsync(cmd, args)
 	run_cmd_async(cmd, args, function(result)
+		-- Vim cmds cannot be called within a lua loop callback. So, we need to
+		-- schedule it. See also `:help vim.schedule_wrap()` for when you need to a
+		-- wrap a function that needs to be scheduled multiple times with different
+		-- arguments.
 		vim.schedule(function()
 			create_buffer("*CmdOutput*", result)
 		end)
