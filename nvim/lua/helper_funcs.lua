@@ -1,4 +1,7 @@
 -- HELPER FUNCS
+-- See `help: luv` for more info on the `vim.loop` module. It is essentially a
+-- wrapper around libuv. For examples of Neovim processes using luv, see:
+-- https://teukka.tech/luvbook/
 
 local function run_cmd_async(cmd, cmd_args, callback)
 	-- Optional arguments
@@ -17,9 +20,10 @@ local function run_cmd_async(cmd, cmd_args, callback)
 	-- Create process handle
 	local handle
 
-	-- Stored result to be processed by the callback
+	-- Store results to be processed by the callback
 	local result = {}
 
+	-- Spawn process
 	local options = {
 		args = cmd_args,
 		stdio = { nil, stdout, stderr }, -- input, output, error
@@ -40,6 +44,9 @@ local function run_cmd_async(cmd, cmd_args, callback)
 		callback(output)
 	end
 
+	handle = uv.spawn(cmd, options, on_exit)
+
+	-- Read from stdout and stderr
 	local on_read = function(_, data)
 		if data then
 			-- print(data)
@@ -47,12 +54,7 @@ local function run_cmd_async(cmd, cmd_args, callback)
 		end
 	end
 
-	handle = uv.spawn(cmd, options, on_exit)
-
-	-- Read from stdout
 	uv.read_start(stdout, on_read)
-
-	-- Read from stderr
 	uv.read_start(stderr, on_read)
 end
 
