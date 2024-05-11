@@ -268,15 +268,16 @@ alias em="emacsclient -t "
 # Git
 alias gs="git status --short -b"
 alias gf="git fetch --all"
-alias gF="git fetch --all && git show HEAD..FETCH_HEAD"
+alias gfs="git fetch --all && git show HEAD..FETCH_HEAD"
+alias gp="git pull"
 alias ga="git add"
 alias gc="git commit -m "
-alias gC="git commit --amend "
-alias gw="git wdiff"
-alias gW="git wdiff --staged"
-alias gp="git pull"
+alias gca="git commit --amend "
+alias gd="git wdiff"
+alias gds="git wdiff --staged"
 alias gP="git push"
-alias gr="git reset --soft"
+alias grs="git reset --soft"
+alias gC="git clean -fdn"
 
 
 # zprof
