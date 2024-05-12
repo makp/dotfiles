@@ -51,6 +51,7 @@ return {
 		-- Help keymaps
 		vim.keymap.set("n", "<leader>ht", builtin.help_tags, { desc = "[H]elp [T]ags" })
 		vim.keymap.set("n", "<leader>hk", builtin.keymaps, { desc = "[H]elp [K]eymaps" })
+		vim.keymap.set("n", "<leader>hm", builtin.man_pages, { desc = "[H]elp [M]an Pages" })
 
 		-- Telescope search
 		vim.keymap.set("n", "<leader>ft", builtin.builtin, { desc = "[F]ind [T]elescope Search" })
@@ -82,12 +83,12 @@ return {
 		vim.keymap.set("n", "<leader>od", builtin.diagnostics, { desc = "[O]pen [D]iagnostics" })
 
 		-- Current buffer
-		vim.keymap.set("n", "<leader>so", function()
+		vim.keymap.set("n", "<leader>sg", function()
 			builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
 				winblend = 10,
 				previewer = false,
 			}))
-		end, { desc = "Fuzzily search in current buffer" })
+		end, { desc = "[s]earch buffer with grep" })
 
 		-- Search Neovim config files
 		vim.keymap.set("n", "<leader>fn", function()
