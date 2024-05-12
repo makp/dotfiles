@@ -6,11 +6,21 @@ return {
 			vim.opt.termguicolors = true
 		end
 
-		-- Set background
+		-- Use the dark theme
 		vim.opt.background = "dark"
 
-		-- Set contrast
-		vim.g.gruvbox_material_background = "medium"
+		-- Set foreground ('material', 'mix', 'original')
+		vim.g.gruvbox_material_foreground = "material"
+
+		-- Set background ('hard', 'medium', 'soft)
+		vim.g.gruvbox_material_background = "soft"
+
+		-- Enable bold in function names
+		vim.g.gruvbox_material_enable_bold = 1
+
+		-- FIXME: Not working
+		-- Dim inactive windows
+		vim.g.gruvbox_material_dim_inactive_windows = 1
 
 		-- For better performance
 		vim.g.gruvbox_material_better_performance = 1
