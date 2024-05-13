@@ -266,7 +266,8 @@ alias cc="sgpt --model 'gpt-4-turbo' --temperature 1.0 "
 alias em="emacsclient -t "
 
 # Git
-alias gs="git status --short -b"
+alias gg="git status --short -b"
+alias gss="git submodule status"
 alias gsa="git submodule add "
 alias gsi="git submodule update --init --recursive"
 alias gsu="git submodule update --remote --recursive"
