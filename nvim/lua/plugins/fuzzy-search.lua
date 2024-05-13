@@ -1,7 +1,5 @@
--- Use `<leader>s` for within document searches, and `<leader>f` for multiple files
-
 return {
-	-- Typing C-/ (insert mode) or ? (normal mode) lists all the keymaps
+	-- Type C-/ (insert mode) or ? (normal mode) for listing all the keymaps
 	"nvim-telescope/telescope.nvim",
 	branch = "0.1.x",
 	dependencies = {
@@ -49,50 +47,48 @@ return {
 		-- See `:help telescope.builtin`
 		local builtin = require("telescope.builtin")
 		-- Help keymaps
-		vim.keymap.set("n", "<leader>ht", builtin.help_tags, { desc = "[H]elp [T]ags" })
-		vim.keymap.set("n", "<leader>hk", builtin.keymaps, { desc = "[H]elp [K]eymaps" })
-		vim.keymap.set("n", "<leader>hm", builtin.man_pages, { desc = "[H]elp [M]an Pages" })
+		vim.keymap.set("n", "<leader>ht", builtin.help_tags, { desc = "[t]ags" })
+		vim.keymap.set("n", "<leader>hk", builtin.keymaps, { desc = "[k]eymaps" })
+		vim.keymap.set("n", "<leader>hm", builtin.man_pages, { desc = "[m]an pages" })
 
-		-- Telescope search
-		vim.keymap.set("n", "<leader>ft", builtin.builtin, { desc = "[F]ind [T]elescope Search" })
-		vim.keymap.set("n", "<leader><leader>", builtin.resume, { desc = "[S]earch [R]esume" })
+		-- Telescope
+		vim.keymap.set("n", "<leader>rt", builtin.builtin, { desc = "[t]elescope" })
+		vim.keymap.set("n", "<leader>rr", builtin.resume, { desc = "[r]esume" })
 
-		-- Multiple flles
-		vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[F]ind [F]iles" })
-		vim.keymap.set("n", "<leader>fF", builtin.buffers, { desc = "Find existing buffers" })
-		vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
-		vim.keymap.set("n", "<leader>fG", function()
+		-- Find
+		vim.keymap.set("n", "<leader>if", builtin.find_files, { desc = "[f]iles in cwd" })
+		vim.keymap.set("n", "<leader>ib", builtin.buffers, { desc = "[b]uffers" })
+		vim.keymap.set("n", "<leader>ir", builtin.oldfiles, { desc = "[r]ecent files" })
+		vim.keymap.set("n", "<leader>in", function()
+			builtin.find_files({ cwd = vim.fn.stdpath("config") })
+		end, { desc = "[n]eovim files" })
+
+		-- Grep
+		vim.keymap.set("n", "<leader>ef", builtin.live_grep, { desc = "[f]iles in cwd" })
+		vim.keymap.set("n", "<leader>ew", builtin.grep_string, { desc = "files containing [w]ord" })
+		vim.keymap.set("n", "<leader>eF", function()
 			builtin.live_grep({
 				grep_open_files = true,
 				prompt_title = "Live Grep in Open Files",
 			})
-		end, { desc = "[S]earch with Grep in Open Files" })
-		vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "[F]ind current [W]ord" })
-		vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = "[F]ind [R]ecent Files" })
-
-		-- Git
-		vim.keymap.set("n", "<leader>gs", builtin.git_status, { desc = "[O]pen [G]it [S]tatus" })
-
-		-- Registers
-		vim.keymap.set("n", "<leader>or", builtin.registers, { desc = "[O]pen [R]egisters" })
-
-		-- Jumps
-		vim.keymap.set("n", "<leader>oj", builtin.jumplist, { desc = "[O]pen [J]umplist" })
-
-		-- Diagnostics
-		vim.keymap.set("n", "<leader>od", builtin.diagnostics, { desc = "[O]pen [D]iagnostics" })
-
-		-- Current buffer
-		vim.keymap.set("n", "<leader>sg", function()
+		end, { desc = "open [F]iles" })
+		vim.keymap.set("n", "<leader>eb", function()
 			builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
 				winblend = 10,
 				previewer = false,
 			}))
-		end, { desc = "[s]earch buffer with grep" })
+		end, { desc = "current [b]uffer" })
 
-		-- Search Neovim config files
-		vim.keymap.set("n", "<leader>fn", function()
-			builtin.find_files({ cwd = vim.fn.stdpath("config") })
-		end, { desc = "[S]earch [N]eovim files" })
+		-- Git
+		vim.keymap.set("n", "<leader>gs", builtin.git_status, { desc = "[s]tatus" })
+
+		-- Registers
+		vim.keymap.set("n", "<leader>or", builtin.registers, { desc = "[r]egisters" })
+
+		-- Jumps
+		vim.keymap.set("n", "<leader>oj", builtin.jumplist, { desc = "[j]umplist" })
+
+		-- Diagnostics
+		vim.keymap.set("n", "<leader>od", builtin.diagnostics, { desc = "[d]iagnostics" })
 	end,
 }

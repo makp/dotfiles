@@ -99,10 +99,19 @@ return {
 
 			-- Document existing key chains
 			require("which-key").register({
-				["<leader>f"] = { name = "[F]ind", _ = "which_key_ignore" },
-				["<leader>g"] = { name = "[G]it", _ = "which_key_ignore" },
-				["<localleader>c"] = { name = "[C]ode", _ = "which_key_ignore" },
-				["<localleader>h"] = { name = "Git [H]unk", _ = "which_key_ignore" },
+				-- leader key chains
+				-- ["<leader>a"] = { name = "", _ = "which_key_ignore" },
+				["<leader>e"] = { name = "gr[e]p", _ = "which_key_ignore" },
+				["<leader>o"] = { name = "[o]pen", _ = "which_key_ignore" },
+				-- ["<leader>u"] = { name = "Search in b[u]ffers with", _ = "which_key_ignore" },
+				["<leader>i"] = { name = "f[i]nd", _ = "which_key_ignore" },
+				["<leader>g"] = { name = "[g]it", _ = "which_key_ignore" },
+				["<leader>h"] = { name = "[h]elp for", _ = "which_key_ignore" },
+
+				-- localleader key chains
+				["<localleader>c"] = { name = "[c]ode", _ = "which_key_ignore" },
+				["<localleader>r"] = { name = "[r]epl", _ = "which_key_ignore" },
+				["<localleader>h"] = { name = "git [h]unk", _ = "which_key_ignore" },
 			})
 			-- visual mode
 			-- require('which-key').register({
