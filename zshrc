@@ -267,17 +267,27 @@ alias em="emacsclient -t "
 
 # Git
 alias gs="git status --short -b"
+alias gsa="git submodule add "
+alias gsi="git submodule update --init --recursive"
+alias gsu="git submodule update --remote --recursive"
+# `git submodule update` updates submodules to the commit specified in the
+# parent repo. The `--remote` updates the submodules to the latest commit.
 alias gf="git fetch --all"
 alias gfs="git fetch --all && git show HEAD..FETCH_HEAD"
+alias gm="git merge "
 alias gp="git pull"
+alias gps="git pull --recurse-submodules"
+alias gpr="git pull --rebase"
+alias gP="git push"
 alias ga="git add"
 alias gc="git commit -m "
 alias gca="git commit --amend "
-alias gd="git wdiff"
-alias gds="git wdiff --staged"
-alias gP="git push"
-alias grs="git reset --soft"
 alias gC="git clean -fdn"
+alias gd="git wdiff --submodule"
+alias gds="git wdiff --staged --submodule"
+alias gl="git log -p --submodule"
+alias gr="git rebase "
+alias grs="git reset --soft"
 
 
 # zprof
