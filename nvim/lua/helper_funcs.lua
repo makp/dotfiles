@@ -116,5 +116,5 @@ function CheckWriting()
 end
 
 -- Keymaps
-vim.api.nvim_set_keymap("v", "<leader>rs", "y <cmd>CheckWriting()", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>rs", "<cmd>CheckWriting()", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<leader>rs", "y <cmd>lua CheckWriting()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>rs", "<cmd>lua CheckWriting()<CR>", { noremap = true, silent = true })
