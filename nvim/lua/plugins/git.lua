@@ -53,7 +53,7 @@ return {
 					end
 				end, { desc = "Jump to first git [h]unk" })
 
-				-- Actions
+				-- Hunk operations
 				-- Visual mode
 				map("v", "<localleader>gs", function()
 					gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
@@ -62,20 +62,27 @@ return {
 					gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
 				end)
 				-- Normal mode
-				map("n", "<localleader>hs", gitsigns.stage_hunk)
+				map("n", "<localleader>hs", function()
+					gitsigns.stage_hunk()
+					vim.cmd.normal("]h")
+				end)
 				map("n", "<localleader>hu", gitsigns.undo_stage_hunk) -- undo last stage_hunk
 				map("n", "<localleader>hS", gitsigns.stage_buffer)
 				map("n", "<localleader>hr", gitsigns.reset_hunk) -- at the cursor position
 				map("n", "<localleader>hR", gitsigns.reset_buffer)
+
+				-- Diffs
 				map("n", "<localleader>hp", gitsigns.preview_hunk)
-				map("n", "<localleader>hb", function()
-					gitsigns.blame_line({ full = true })
-				end)
 				map("n", "<localleader>hd", gitsigns.diffthis, { desc = "git [d]iff against index" })
 				map("n", "<localleader>hD", function()
 					gitsigns.diffthis("@")
 				end, { desc = "git [D]iff against last commit" })
-				--
+
+				-- Blame
+				map("n", "<localleader>hb", function()
+					gitsigns.blame_line({ full = true })
+				end)
+
 				-- Toggles
 				map("n", "<localleader>htb", gitsigns.toggle_current_line_blame)
 				map("n", "<localleader>htd", gitsigns.toggle_deleted)
@@ -101,8 +108,6 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 		},
-		-- setting the keybinding for LazyGit with 'keys' is recommended in
-		-- order to load the plugin when the command is run for the first time
 		keys = {
 			{ "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
 		},
