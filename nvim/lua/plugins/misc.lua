@@ -149,4 +149,18 @@ return {
 			{ "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
 		},
 	},
+	-- Plain text file manager
+	-- Type `g?` to see all keybindings
+	-- See `:help oil-actions` for available cmds
+	{
+		"stevearc/oil.nvim",
+		opts = {},
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			require("oil").setup({
+				view_options = { show_hidden = true },
+			})
+			vim.keymap.set("n", "<leader>o-", "<cmd>Oil<cr>", { desc = "Open parent directory" })
+		end,
+	},
 }
