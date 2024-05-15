@@ -59,30 +59,52 @@ local function run_cmd_async(cmd, cmd_args, callback)
 end
 
 local function create_buffer(buffer_name, output)
-	-- Split window and switch to it
-	vim.api.nvim_command("vsplit")
-	vim.api.nvim_command("wincmd l")
-	-- Does buffer already exists?
+	-- Does `buffer_name` already exist? 0 = no, 1 = yes.
 	local buffer_exists = vim.fn.bufexists(buffer_name)
-	if buffer_exists == 1 then
-		-- Switch to it
-		vim.api.nvim_command("buffer " .. buffer_name)
-	else
-		-- Create it
+
+	local buffer_id, wid_id
+
+	-- Create `buffer_name` if it doesn't exist
+	if buffer_exists == 0 then
+		-- Split window and switch to it
+		vim.api.nvim_command("vsplit")
+		vim.api.nvim_command("wincmd l")
+
 		vim.api.nvim_command("enew")
-		-- Rename it
-		vim.api.nvim_buf_set_name(0, buffer_name)
+		buffer_id = vim.api.nvim_get_current_buf()
+		vim.api.nvim_buf_set_name(buffer_id, buffer_name)
+
+		-- Avoid save prompts
+		vim.api.nvim_buf_set_option(buffer_id, "buftype", "nofile")
+		vim.api.nvim_buf_set_option(buffer_id, "bufhidden", "hide")
+		vim.api.nvim_buf_set_option(buffer_id, "swapfile", false)
+	else
+		-- Get buffer and window IDs
+		buffer_id = vim.fn.bufnr(buffer_name)
+		wid_id = vim.fn.bufwinnr(buffer_id)
+
+		-- Is it visible? If buffer is not displayed, `wid_id` will be -1.
+		if wid_id ~= -1 then
+			-- Switch to it
+			vim.api.nvim_command(wid_id .. "wincmd w")
+		else
+			-- Split window and switch to it
+			vim.api.nvim_command("vsplit")
+			vim.api.nvim_command("wincmd l")
+			vim.api.nvim_command("buffer " .. buffer_name)
+		end
 	end
+
 	-- Clear previous content and insert new output
-	vim.api.nvim_buf_set_lines(0, 0, -1, false, {})
-	vim.api.nvim_buf_set_lines(0, 0, -1, false, vim.split(output, "\n"))
+	vim.api.nvim_buf_set_lines(buffer_id, 0, -1, false, {})
+	vim.api.nvim_buf_set_lines(buffer_id, 0, -1, false, vim.split(output, "\n"))
 end
 
 -- Run a command and display the output in a new buffer
 function RunCmdAsync(cmd, args)
 	run_cmd_async(cmd, args, function(result)
 		-- Vim cmds cannot be called within a lua loop callback. So, we need to
-		-- schedule it. See also `:help vim.schedule_wrap()` for when you need to a
+		-- schedule them. See also `:help vim.schedule_wrap()` for when you need to a
 		-- wrap a function that needs to be scheduled multiple times with different
 		-- arguments.
 		vim.schedule(function()
