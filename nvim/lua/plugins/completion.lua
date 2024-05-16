@@ -26,6 +26,9 @@ return {
 			-- LSP completion
 			"hrsh7th/cmp-nvim-lsp",
 
+			-- Spell
+			"f3fora/cmp-spell",
+
 			-- Paths of files and folders
 			"hrsh7th/cmp-path",
 
@@ -47,6 +50,10 @@ return {
 						luasnip.lsp_expand(args.body)
 					end,
 				},
+				-- menu: show completion menu
+				-- menuone: show completion even when there is only one item
+				-- noinsert: prevents auto-insert the selected completion
+				-- noselect: prevents auto-select the first completion
 				completion = { completeopt = "menu,menuone,noinsert" },
 				window = {
 					-- completion = cmp.config.window.bordered(),
@@ -85,6 +92,19 @@ return {
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
 				}, {
+					{ name = "buffer" },
+				}),
+			})
+
+			-- Setup for text-based filetypes
+			cmp.setup.filetype({ "markdown", "latex", "org" }, {
+				completion = {
+					keyword_length = 3,
+				},
+				sources = cmp.config.sources({
+					{ name = "spell" },
+					{ name = "nvim_lsp" },
+					{ name = "luasnip" },
 					{ name = "buffer" },
 				}),
 			})
