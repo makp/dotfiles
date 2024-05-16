@@ -34,15 +34,19 @@ return {
 				map("gd", require("telescope.builtin").lsp_definitions, "jump to [d]efinition")
 
 				-- Find references for the word under your cursor.
-
-				-- Fuzzy find all the symbols in your current workspace.
-				--  Similar to document symbols, except searches over your entire project.
-				map("<localleader>cs", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[c]ode [s]ymbols")
 				map("gr", require("telescope.builtin").lsp_references, "jump to [r]eferences")
 
 				-- Fuzzy find all the symbols in your current document.
 				--  Symbols are things like variables, functions, types, etc.
-				map("<localleader>ss", require("telescope.builtin").lsp_document_symbols, "[S]earch [S]ymbols")
+				map("<localleader>cs", require("telescope.builtin").lsp_document_symbols, "[s]ymbols in current buffer")
+
+				-- Fuzzy find all the symbols in your current workspace.
+				--  Similar to document symbols, except searches over your entire project.
+				map(
+					"<localleader>cS",
+					require("telescope.builtin").lsp_dynamic_workspace_symbols,
+					"[S]ymbols in workspace"
+				)
 
 				-- Jump to the declaration of the word under your cursor
 				--  For example, in C this would take you to the header.
