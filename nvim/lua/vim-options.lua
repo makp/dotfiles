@@ -63,6 +63,9 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 -- Set spell language
 vim.opt.spelllang = "en_us"
 
+-- Enable folding in markdown buffers
+vim.g.markdown_folding = 1
+
 -- Use a easier keybinding for exiting terminal mode
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
