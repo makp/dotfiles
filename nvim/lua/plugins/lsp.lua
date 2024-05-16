@@ -31,14 +31,14 @@ return {
 
 				-- Jump to the definition of the word under your cursor
 				--  Press <C-t> to jump back
-				map("gd", require("telescope.builtin").lsp_definitions, "[g]oto [d]efinition")
+				map("gd", require("telescope.builtin").lsp_definitions, "jump to [d]efinition")
 
 				-- Find references for the word under your cursor.
-				map("gr", require("telescope.builtin").lsp_references, "[g]oto [r]eferences")
 
 				-- Fuzzy find all the symbols in your current workspace.
 				--  Similar to document symbols, except searches over your entire project.
 				map("<localleader>cs", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[c]ode [s]ymbols")
+				map("gr", require("telescope.builtin").lsp_references, "jump to [r]eferences")
 
 				-- Fuzzy find all the symbols in your current document.
 				--  Symbols are things like variables, functions, types, etc.
@@ -46,23 +46,23 @@ return {
 
 				-- Jump to the declaration of the word under your cursor
 				--  For example, in C this would take you to the header.
-				map("<localleader>cD", vim.lsp.buf.declaration, "[c]ode [D]eclaration")
+				map("<localleader>cD", vim.lsp.buf.declaration, "jump to [D]eclaration")
 
 				-- Jump to the implementation of the word under your cursor.
 				--  Useful when your language has ways of declaring types without an actual implementation
-				map("<localleader>cI", require("telescope.builtin").lsp_implementations, "[c]ode [I]mplementation")
+				map("<localleader>cI", require("telescope.builtin").lsp_implementations, "jump to [I]mplementation")
 
 				-- Jump to the type of the word under your cursor.
 				--  Useful when you're not sure what type a variable is and you want to see
 				--  the definition of its *type*, not where it was *defined*.
-				map("<localleader>cT", require("telescope.builtin").lsp_type_definitions, "[c]ode [T]ype")
+				map("<localleader>cT", require("telescope.builtin").lsp_type_definitions, "jump to [T]ype")
 
 				-- Rename the variable under your cursor.
 				--  Most Language Servers support renaming across files, etc.
-				map("<localleader>cr", vim.lsp.buf.rename, "[c]ode [r]ename")
+				map("<localleader>cr", vim.lsp.buf.rename, "[r]ename variable")
 
 				-- Execute a code action
-				map("<localleader>ca", vim.lsp.buf.code_action, "[c]ode [a]ction")
+				map("<localleader>ca", vim.lsp.buf.code_action, "execute [a]ction")
 
 				-- Opens a popup with documentation about the word under your cursor
 				map("K", vim.lsp.buf.hover, "Hover Documentation")
@@ -94,7 +94,7 @@ return {
 				if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
 					map("<localleader>ct", function()
 						vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-					end, "[c]ode [t]oggle inlay hints")
+					end, "[t]oggle inlay hints")
 				end
 			end,
 		})

@@ -81,6 +81,7 @@ return {
 
 		-- Git
 		vim.keymap.set("n", "<leader>gs", builtin.git_status, { desc = "[s]tatus" })
+		vim.keymap.set("n", "<leader>gc", builtin.git_commits, { desc = "[c]ommits" })
 
 		-- Registers
 		vim.keymap.set("n", "<leader>or", builtin.registers, { desc = "[r]egisters" })
@@ -90,5 +91,8 @@ return {
 
 		-- Diagnostics
 		vim.keymap.set("n", "<leader>od", builtin.diagnostics, { desc = "[d]iagnostics" })
+
+		-- Treesitter
+		vim.keymap.set("n", "<leader>it", builtin.treesitter, { desc = "[t]reesitter" })
 	end,
 }
