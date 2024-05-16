@@ -56,7 +56,6 @@ vim.opt.splitbelow = true
 -- Preview substitutions live as you type
 vim.opt.inccommand = "split"
 
-
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
@@ -67,12 +66,12 @@ vim.opt.spelllang = "en_us"
 -- Use a easier keybinding for exiting terminal mode
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
--- Move to the beginning of the paragraph (a little hacky)
-vim.api.nvim_set_keymap("n", "]_", "}j_", { noremap = true })
-vim.api.nvim_set_keymap("n", "[_", "{{j_", { noremap = true })
-
 -- Wrap lines at word boundaries
 vim.opt.linebreak = true
+
+--[[ -- Move to the beginning of the paragraph (a little hacky)
+vim.api.nvim_set_keymap("n", "]_", "}j_", { noremap = true })
+vim.api.nvim_set_keymap("n", "[_", "{{j_", { noremap = true }) ]]
 
 --[[ -- Use j/k to move visual lines instead of actual lines
 vim.api.nvim_set_keymap("n", "j", "gj", { noremap = true })
