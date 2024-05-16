@@ -56,16 +56,13 @@ vim.opt.splitbelow = true
 -- Preview substitutions live as you type
 vim.opt.inccommand = "split"
 
--- Enable folding in markdown buffers
-vim.g.markdown_folding = 1
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
--- Enable spell checking
+-- Set spell language
 vim.opt.spelllang = "en_us"
--- vim.opt.spell = true
 
 -- Use a easier keybinding for exiting terminal mode
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
