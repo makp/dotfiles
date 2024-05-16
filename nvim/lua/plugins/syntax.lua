@@ -56,13 +56,13 @@ return {
 				enable = true,
 				keymaps = {
 					-- Start incremental selection (normal mode)
-					init_selection = "gnn",
+					init_selection = "<C-Space>",
 					-- Increment to the upper named parent (visual mode)
-					node_incremental = "grn",
+					node_incremental = "<C-Space>",
 					-- Increment to the upper scope (visual mode)
-					scope_incremental = "grc",
+					scope_incremental = "gss", -- `gs` is "goto sleep"
 					-- Decrement to the previous named node (visual mode)
-					node_decremental = "grm",
+					node_decremental = "gsu",
 				},
 			},
 
@@ -160,14 +160,6 @@ return {
 
 			-- Setup nvim-treesitter
 			require("nvim-treesitter.configs").setup(opts)
-
-			-- Search with treesitter
-			vim.keymap.set(
-				"n",
-				"<leader>st",
-				require("telescope.builtin").treesitter,
-				{ desc = "[S]earch with [T]reesitter" }
-			)
 		end,
 	},
 }
