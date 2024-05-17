@@ -12,9 +12,11 @@
 	pager = true
 [core]
 	editor = nvim
-	pager = less -FRSX
+	pager = diff-so-fancy | less --tabs=4 -FRXS
 	excludesfile = ~/.gitignore_global
 [merge]
 	tool = emerge
 [credential]
 	helper = cache
+[interactive]
+	diffFilter = diff-so-fancy --patch

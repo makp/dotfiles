@@ -1,0 +1,5 @@
+# ! ln -s %:p ~/.config/lazygit/config.yml
+git:
+  paging:
+    colorArg: always
+    pager: diff-so-fancy
