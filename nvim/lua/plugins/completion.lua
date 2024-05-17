@@ -37,48 +37,66 @@ return {
 
 			-- Command line completion
 			"hrsh7th/cmp-cmdline",
+
+			-- Icons for LSP completion
+			"onsails/lspkind-nvim",
 		},
 		config = function()
-			-- See `:help cmp`
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
+			local lspkind = require("lspkind")
+
 			luasnip.config.setup({})
 
 			cmp.setup({
+				---@diagnostic disable-next-line: missing-fields
+				formatting = {
+					format = lspkind.cmp_format({
+						mode = "symbol_text",
+					}),
+				},
 				snippet = {
 					expand = function(args)
 						luasnip.lsp_expand(args.body)
 					end,
 				},
+				-- See `:help completeopt`
 				-- menu: show completion menu
 				-- menuone: show completion even when there is only one item
-				-- noinsert: prevents auto-insert the selected completion
 				-- noselect: prevents auto-select the first completion
-				completion = { completeopt = "menu,menuone,noinsert" },
+				-- noinsert: prevents auto-insert the first completion
+				completion = { completeopt = "menu,menuone,noselect" },
 				window = {
 					-- completion = cmp.config.window.bordered(),
 					-- documentation = cmp.config.window.bordered(),
 				},
 				-- `:help ins-completion`
-				mapping = cmp.mapping.preset.insert({
+				mapping = {
 					-- Select the [n]ext item
-					["<C-n>"] = cmp.mapping.select_next_item(),
+					["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
 
 					-- Select the [p]revious item
-					["<C-p>"] = cmp.mapping.select_prev_item(),
+					["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
 
-					-- Scroll the documentation window [b]ack / [f]orward
+					-- Scroll the documentation window
 					["<C-u>"] = cmp.mapping.scroll_docs(-4),
 					["<C-d>"] = cmp.mapping.scroll_docs(4),
 
 					-- Accept completion
-					["<Tab>"] = cmp.mapping.confirm({ select = true }),
+					["<Tab>"] = cmp.mapping(
+						cmp.mapping.confirm({
+							behavior = cmp.ConfirmBehavior.Insert,
+							select = true,
+						}),
+						{ "i", "c" }
+					),
 
 					["<C-l>"] = cmp.mapping(function()
 						if luasnip.expand_or_locally_jumpable() then
 							luasnip.expand_or_jump()
 						end
 					end, { "i", "s" }),
+
 					["<C-h>"] = cmp.mapping(function()
 						if luasnip.locally_jumpable(-1) then
 							luasnip.jump(-1)
@@ -87,12 +105,13 @@ return {
 
 					-- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
 					-- https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
-				}),
+				},
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
 				}, {
-					{ name = "buffer" },
+					{ name = "buffer", keyword_length = 4 },
+					{ name = "path" },
 				}),
 			})
 
@@ -111,9 +130,6 @@ return {
 
 			-- `/` cmdline setup
 			cmp.setup.cmdline({ "/", "?" }, {
-				mapping = cmp.mapping.preset.cmdline({
-					["<Tab>"] = cmp.mapping.confirm({ select = true }),
-				}),
 				sources = {
 					{ name = "buffer", max_item_count = 7 },
 				},
@@ -121,9 +137,6 @@ return {
 
 			-- `:` cmdline setup
 			cmp.setup.cmdline(":", {
-				mapping = cmp.mapping.preset.cmdline({
-					["<Tab>"] = cmp.mapping.confirm({ select = true }),
-				}),
 				sources = cmp.config.sources({
 					{ name = "path", max_item_count = 7 },
 				}, {
