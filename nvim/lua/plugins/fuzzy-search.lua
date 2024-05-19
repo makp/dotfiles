@@ -90,7 +90,7 @@ return {
 		vim.keymap.set("n", "<leader>oj", builtin.jumplist, { desc = "[j]umplist" })
 
 		-- Diagnostics
-		vim.keymap.set("n", "<leader>od", builtin.diagnostics, { desc = "[d]iagnostics" })
+		vim.keymap.set("n", "<leader>dj", builtin.diagnostics, { desc = "[j]ump" })
 
 		-- Treesitter
 		vim.keymap.set("n", "<leader>it", builtin.treesitter, { desc = "[t]reesitter" })

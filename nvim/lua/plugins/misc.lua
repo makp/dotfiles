@@ -69,10 +69,12 @@ return {
 				-- ["<leader>a"] = { name = "", _ = "which_key_ignore" },
 				["<leader>e"] = { name = "gr[e]p", _ = "which_key_ignore" },
 				["<leader>o"] = { name = "[o]pen", _ = "which_key_ignore" },
-				-- ["<leader>u"] = { name = "Search in b[u]ffers with", _ = "which_key_ignore" },
+				-- ["<leader>u"] = { name = "", _ = "which_key_ignore" },
 				["<leader>i"] = { name = "f[i]nd", _ = "which_key_ignore" },
+
 				["<leader>g"] = { name = "[g]it", _ = "which_key_ignore" },
 				["<leader>h"] = { name = "[h]elp for", _ = "which_key_ignore" },
+				["<leader>d"] = { name = "[d]iagnostics", _ = "which_key_ignore" },
 
 				-- localleader key chains
 				["<localleader>c"] = { name = "[c]ode", _ = "which_key_ignore" },
