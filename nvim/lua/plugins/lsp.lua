@@ -163,13 +163,19 @@ return {
 		--  To check the current status of installed tools run
 		--    :Mason
 		--
+		-- Tools are saved in `~/.local/share/nvim/mason/packages`
+		--
 		--  You can press `g?` for help in this menu.
 		require("mason").setup()
 
 		-- Add other tools for Mason to install
 		local ensure_installed = vim.tbl_keys(servers or {})
 		vim.list_extend(ensure_installed, {
-			"stylua", -- Format Lua code
+			"stylua", -- Lua formatter
+			"vale", -- Lint for text files
+			"codespell", -- Lint for spelling
+			"isort", -- Python import sorter
+			"black", -- Python formatter
 		})
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
