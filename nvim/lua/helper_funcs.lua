@@ -127,16 +127,17 @@ local function get_text()
 	return vim.fn.shellescape(selected_text)
 end
 
-function CheckWriting()
+function CheckWriting(mode)
 	local py_cmd = "python"
 	local buffer_txt = get_text()
 	-- print(buffer_txt)
 	RunCmdAsync(py_cmd, {
-		"/home/makmiller/.config/nvim/lua/utils/writing.py",
+		"/home/makmiller/.config/nvim/lua/utils/revise_prose.py",
 		buffer_txt,
+		mode,
 	})
 end
 
 -- Keymaps
-vim.api.nvim_set_keymap("v", "<leader>rs", "y <cmd>lua CheckWriting()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>rs", "<cmd>lua CheckWriting()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<leader>ra", "y <cmd>lua CheckWriting('academic')<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>ra", "<cmd>lua CheckWriting('academic')<CR>", { noremap = true, silent = true })
