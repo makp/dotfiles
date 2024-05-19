@@ -1,4 +1,12 @@
--- Set up Lazy plugin manager
+-- Main entry point for neovim configuration
+
+-- Change nvim default behavior
+require("vim-options")
+
+-- Add keymaps not requiring plugins
+require("basic_keymaps")
+
+-- Main plugin manager (Lazy)
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	vim.fn.system({
@@ -11,12 +19,6 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	})
 end
 vim.opt.rtp:prepend(lazypath)
-
--- Load vim options
-require("vim-options")
-
--- Load basic keymaps
-require("basic_keymaps")
 
 -- Load lua files in plugin folder
 require("lazy").setup("plugins")

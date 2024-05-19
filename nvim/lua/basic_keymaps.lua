@@ -19,6 +19,19 @@ vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower win
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 ]]
 
+-- Use a easier keybinding for exiting terminal mode
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+
+--[[ -- Move to the beginning of the paragraph (a little hacky)
+vim.api.nvim_set_keymap("n", "]_", "}j_", { noremap = true })
+vim.api.nvim_set_keymap("n", "[_", "{{j_", { noremap = true }) ]]
+
+--[[ -- Use j/k to move visual lines instead of actual lines
+vim.api.nvim_set_keymap("n", "j", "gj", { noremap = true })
+vim.api.nvim_set_keymap("n", "k", "gk", { noremap = true })
+vim.api.nvim_set_keymap("n", "gj", "j", { noremap = true })
+vim.api.nvim_set_keymap("n", "gk", "k", { noremap = true }) ]]
+
 -- Buffers
 vim.api.nvim_set_keymap("n", "]b", ":bnext<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "[b", ":bprevious<CR>", { noremap = true, silent = true })

@@ -66,21 +66,8 @@ vim.opt.spelllang = "en_us"
 -- Enable folding in markdown buffers
 vim.g.markdown_folding = 1
 
--- Use a easier keybinding for exiting terminal mode
-vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
-
 -- Wrap lines at word boundaries
 vim.opt.linebreak = true
-
---[[ -- Move to the beginning of the paragraph (a little hacky)
-vim.api.nvim_set_keymap("n", "]_", "}j_", { noremap = true })
-vim.api.nvim_set_keymap("n", "[_", "{{j_", { noremap = true }) ]]
-
---[[ -- Use j/k to move visual lines instead of actual lines
-vim.api.nvim_set_keymap("n", "j", "gj", { noremap = true })
-vim.api.nvim_set_keymap("n", "k", "gk", { noremap = true })
-vim.api.nvim_set_keymap("n", "gj", "j", { noremap = true })
-vim.api.nvim_set_keymap("n", "gk", "k", { noremap = true }) ]]
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
