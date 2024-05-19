@@ -75,6 +75,8 @@ return {
 				["<leader>g"] = { name = "[g]it", _ = "which_key_ignore" },
 				["<leader>h"] = { name = "[h]elp for", _ = "which_key_ignore" },
 				["<leader>d"] = { name = "[d]iagnostics", _ = "which_key_ignore" },
+				["<leader>O"] = { name = "[O]rgmode", _ = "which_key_ignore" },
+				["<leader>r"] = { name = "[r]un", _ = "which_key_ignore" },
 
 				-- localleader key chains
 				["<localleader>c"] = { name = "[c]ode", _ = "which_key_ignore" },
@@ -128,7 +130,7 @@ return {
 			require("oil").setup({
 				view_options = { show_hidden = true },
 			})
-			vim.keymap.set("n", "<leader>o-", "<cmd>Oil<cr>", { desc = "Open parent directory" })
+			vim.keymap.set("n", "<leader>o-", "<cmd>Oil<cr>", { desc = "parent directory" })
 		end,
 	},
 	-- It appears that `oil.nvim` overwrites the `gx` mapping. Using the
