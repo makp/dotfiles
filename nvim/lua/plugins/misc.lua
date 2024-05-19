@@ -56,8 +56,8 @@ return {
 			formatters_by_ft = {
 				lua = { "stylua" },
 				python = { "isort", "black" },
-				-- Run `codespell` on all files
-				["*"] = { "codespell" },
+				-- Run `` on all files
+				-- ["*"] = { "" },
 				-- Run `trim_whitespace` on all files that don't have a formatter configured
 				["_"] = { "trim_whitespace" },
 			},
