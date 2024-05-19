@@ -10,6 +10,8 @@ end
 
 local dic = {}
 
+-- TODO: I manually added the envs. There should be a way to get them from the
+-- server.
 dic.environments = {
 	"equation",
 	"equation*",
@@ -25,8 +27,7 @@ dic.environments = {
 }
 
 -- Wrapper func on `texlab.changeEnvironment` command
--- In `dic.TexlabChangeEnv`, `TexlabChangeEnv` is the key and the function itself is the value
-function dic.TexlabChangeEnv(new_env)
+local function texlab_change_env(new_env)
 	if new_env == nil then
 		print("No environment name provided")
 	else
@@ -48,7 +49,7 @@ function dic.LaTeXChangeEnv()
 		end,
 	}, function(choice)
 		if choice then
-			dic.TexlabChangeEnv(choice)
+			texlab_change_env(choice)
 		else
 			print("No environment selected!")
 		end
