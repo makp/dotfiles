@@ -14,7 +14,14 @@ vim.api.nvim_buf_set_keymap(
 )
 
 -- Build PDF
-vim.api.nvim_buf_set_keymap(0, "n", "<localleader>tc", "<cmd>TexlabBuild<CR>", { noremap = true, silent = true })
+vim.api.nvim_buf_set_keymap(0, "n", "<localleader>tb", "<cmd>TexlabBuild<CR>", { noremap = true, silent = true })
+vim.api.nvim_buf_set_keymap(
+	0,
+	"n",
+	"<localleader>tx",
+	"<cmd>lua require('texlab_setup').LaTeXCancelBuild()<CR>",
+	{ noremap = true, silent = true }
+)
 
 -- PDF forward search
-vim.api.nvim_buf_set_keymap(0, "n", "<localleader>ts", "<cmd>TexlabForward<CR>", { noremap = true, silent = true })
+vim.api.nvim_buf_set_keymap(0, "n", "<localleader>tp", "<cmd>TexlabForward<CR>", { noremap = true, silent = true })

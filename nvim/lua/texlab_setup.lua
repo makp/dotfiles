@@ -56,4 +56,9 @@ function dic.LaTeXChangeEnv()
 	end)
 end
 
+-- Wrapper func on `texlab.cancelBuild` command
+function dic.LaTeXCancelBuild()
+	texlab_command("texlab.cancelBuild")
+end
+
 return dic
