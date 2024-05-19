@@ -130,6 +130,7 @@ return {
 
 			-- `/` cmdline setup
 			cmp.setup.cmdline({ "/", "?" }, {
+				mapping = cmp.mapping.preset.cmdline(),
 				sources = {
 					{ name = "buffer", max_item_count = 7 },
 				},
@@ -137,6 +138,7 @@ return {
 
 			-- `:` cmdline setup
 			cmp.setup.cmdline(":", {
+				mapping = cmp.mapping.preset.cmdline(),
 				sources = cmp.config.sources({
 					{ name = "path", max_item_count = 7 },
 				}, {
