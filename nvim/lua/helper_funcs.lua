@@ -1,8 +1,8 @@
 -- HELPER FUNCS
+
 -- See `help: luv` for more info on the `vim.loop` module. It is essentially a
 -- wrapper around libuv. For examples of Neovim processes using luv, see:
 -- https://teukka.tech/luvbook/
-
 local function run_cmd_async(cmd, cmd_args, callback)
 	-- Optional arguments
 	cmd_args = cmd_args or {}
@@ -100,7 +100,7 @@ local function create_buffer(buffer_name, output)
 	vim.api.nvim_buf_set_lines(buffer_id, 0, -1, false, vim.split(output, "\n"))
 end
 
--- Run a command and display the output in a new buffer
+-- Run a cmd asynchronously and display the output in a new buffer
 function RunCmdAsync(cmd, args)
 	run_cmd_async(cmd, args, function(result)
 		-- Vim cmds cannot be called within a lua loop callback. So, we need to
@@ -138,6 +138,41 @@ function CheckWriting(mode)
 	})
 end
 
+function OpenOrSwitchToFile(filepath)
+	-- Expand `filepath` to its full path
+	filepath = vim.fn.expand(filepath)
+	local current_buf = vim.api.nvim_get_current_buf()
+	local current_name = vim.api.nvim_buf_get_name(current_buf)
+
+	-- If the current win is visiting `filepath`, close it
+	if current_name == filepath then
+		vim.cmd("close")
+		return
+	end
+
+	-- Look for a window displaying `filepath`
+	for _, win in ipairs(vim.api.nvim_list_wins()) do
+		local buf = vim.api.nvim_win_get_buf(win)
+		local name = vim.api.nvim_buf_get_name(buf)
+		if name == filepath then
+			-- Switch to the window displaying filepath
+			vim.api.nvim_set_current_win(win)
+			return
+		end
+	end
+
+	-- If `filepath` is not found, open it in a new window
+	vim.cmd("vsplit " .. filepath)
+end
+
 -- Keymaps
 vim.api.nvim_set_keymap("v", "<leader>ra", "y <cmd>lua CheckWriting('academic')<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>ra", "<cmd>lua CheckWriting('academic')<CR>", { noremap = true, silent = true })
+
+-- Open or switch to scratch file
+vim.api.nvim_set_keymap(
+	"n",
+	"<leader>os",
+	"<cmd>lua OpenOrSwitchToFile('~/OneDrive/computer_files/scratch_shared.md')<CR>",
+	{ noremap = true, silent = true, desc = "Open or switch to [s]cratch file" }
+)
