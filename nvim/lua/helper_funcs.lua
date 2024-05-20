@@ -219,6 +219,19 @@ function InspectCode()
 	RunCmdInTerminalBuf(cmd)
 end
 
+function SelectOneOption(menu_opts)
+	vim.ui.select(menu_opts, {
+		prompt = "Select an option:",
+	}, function(choice)
+		if choice then
+			return choice
+		else
+			print("No option selected!")
+			return nil
+		end
+	end)
+end
+
 -- Check writing
 vim.api.nvim_set_keymap(
 	"v",
