@@ -191,6 +191,18 @@ function WriteCodeToFile(filepath)
 	write_code_to_file(filepath, buffer_txt)
 end
 
+function RunCmdInTerminalBuf(cmd)
+	-- Create a terminal buffer and run a cmd in it
+	-- vim.cmd.terminal()
+	-- vim.api.nvim_chan_send(vim.bo.channel, cmd .. "\n")
+	local buf = vim.api.nvim_create_buf(false, true)
+	vim.api.nvim_set_current_buf(buf)
+	vim.fn.termopen(cmd)
+
+	-- Start insert mode
+	vim.cmd("startinsert")
+end
+
 -- Check writing
 vim.api.nvim_set_keymap(
 	"v",
