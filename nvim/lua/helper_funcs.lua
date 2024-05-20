@@ -203,6 +203,22 @@ function RunCmdInTerminalBuf(cmd)
 	vim.cmd("startinsert")
 end
 
+function InspectCode()
+	-- Write code to a file
+	local filepath = "/tmp/tmp_code.md"
+	WriteCodeToFile(filepath)
+
+	-- Split window
+	vim.cmd.split()
+
+	-- Select OpenAI model
+	local model = os.getenv("OPENAI_BASIC")
+
+	-- Run sgpt --repl in a terminal buffer
+	local cmd = "sgpt --model " .. model .. " --repl temp_code < " .. filepath
+	RunCmdInTerminalBuf(cmd)
+end
+
 -- Check writing
 vim.api.nvim_set_keymap(
 	"v",
