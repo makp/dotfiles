@@ -6,7 +6,7 @@
 ## USE SANER DEFAULTS ---------
 
 setopt NO_BEEP	      # disable beeping
-setopt ignore_eof     # 
+setopt ignore_eof     #
 setopt extended_glob  # turn on more powerful pattern matching features
 setopt correct	      # enable correction commands typed
 setopt notify	      # notify when jobs finish
@@ -31,7 +31,7 @@ fi
 
 # For ZSH, not just alphanumerics are part of a word, but other
 # symbols stated by the shell variable WORDCHARS. Making this
-# variable empty reproduce bash behavior. 
+# variable empty reproduce bash behavior.
 # WORDCHARS=*?_-.[]~=/&;!#$%^(){}<>  # default value
 # export WORDCHARS="?[]~=&;!#$%^(){}<>"  # removed symbols *./-_
 
@@ -46,7 +46,7 @@ HISTSIZE=2000
 SAVEHIST=2000
 HISTFILE=~/.zsh_history
 
-setopt hist_ignore_all_dups 
+setopt hist_ignore_all_dups
 setopt hist_ignore_space
 setopt share_history  # share history between shell instances
 
@@ -73,7 +73,7 @@ fi
 
 
 # Use internal pager to display matches
-zmodload zsh/complist		 
+zmodload zsh/complist
 zstyle ':completion:*:default' list-prompt '%S%M matches%s'
 bindkey -M listscroll q send-break # q exits internal pager
 
@@ -85,7 +85,7 @@ compinit
 autoload -U colors
 colors
 
-# Saner completion behavior 
+# Saner completion behavior
 zstyle ':completion:*' rehash true # rehash automatically
 zstyle ':completion:*' menu select # activate menu selection
 zstyle ':completion:*' verbose yes # print descriptions against each match
@@ -130,7 +130,7 @@ zstyle ':completion:*:manuals.*' insert-sections true
 # Use CDPATH for completion
 # The nullstring "::" forces cd to search in the working directory
 # This is important because, without it, cd will only search the working
-# directory after the other directories in CDPATH fails. 
+# directory after the other directories in CDPATH fails.
 # export CDPATH=$HOME
 export CDPATH=::$HOME/Documents/mydocs/:$HOME/config-files/general
 
@@ -266,6 +266,8 @@ alias cc="sgpt --model '${OPENAI_ADVANCED}' --temperature 0 "
 alias em="emacsclient -t "
 
 # Git
+alias cg="cd \$(git rev-parse --show-toplevel)"  # cd to root git repo
+alias lg="lazygit"
 alias gg="git status --short -b"
 alias gss="git submodule status"
 alias gsa="git submodule add -b"
@@ -282,6 +284,7 @@ alias gp="git pull"
 alias gpr="git pull --rebase"
 alias gps="git pull --recurse-submodules"
 alias ga="git add"
+alias gac="git commit -am "
 alias gc="git commit -m "
 alias gca="git commit --amend --no-edit"
 alias gcA="git commit --amend"
