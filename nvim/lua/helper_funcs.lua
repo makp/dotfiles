@@ -123,6 +123,8 @@ local function get_text()
 
 	-- Get text from the unnamed register
 	local selected_text = vim.fn.getreg('"')
+	-- selected_text = selected_text:gsub("^'(.*)'$", "%1")
+
 	-- Escape shell metacharacters
 	return vim.fn.shellescape(selected_text)
 end
@@ -163,6 +165,30 @@ function OpenOrSwitchToFile(filepath)
 
 	-- If `filepath` is not found, open it in a new window
 	vim.cmd("vsplit " .. filepath)
+end
+
+local function write_code_to_file(filepath, text)
+	-- Expand `filepath` to its full path
+	filepath = vim.fn.expand(filepath)
+
+	-- Get the filetype of the current buffer
+	local filetype = vim.bo.filetype
+
+	-- Open file for writing
+	local file = io.open(filepath, "w")
+
+	-- Write to `filepath` and close it
+	if file then
+		file:write("```" .. filetype .. "\n" .. text .. "\n```")
+		file:close()
+	else
+		print("Error: Could not open file for writing")
+	end
+end
+
+function WriteCodeToFile(filepath)
+	local buffer_txt = get_text()
+	write_code_to_file(filepath, buffer_txt)
 end
 
 -- Check writing
