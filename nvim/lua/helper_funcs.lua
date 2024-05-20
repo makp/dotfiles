@@ -165,9 +165,19 @@ function OpenOrSwitchToFile(filepath)
 	vim.cmd("vsplit " .. filepath)
 end
 
--- Keymaps
-vim.api.nvim_set_keymap("v", "<leader>ra", "y <cmd>lua CheckWriting('academic')<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>ra", "<cmd>lua CheckWriting('academic')<CR>", { noremap = true, silent = true })
+-- Check writing
+vim.api.nvim_set_keymap(
+	"v",
+	"<leader>rw",
+	"y <cmd>lua CheckWriting('academic')<CR>",
+	{ noremap = true, silent = true, desc = "Check academic writing" }
+)
+vim.api.nvim_set_keymap(
+	"n",
+	"<leader>rw",
+	"<cmd>lua CheckWriting('academic')<CR>",
+	{ noremap = true, silent = true, desc = "Check academic writing" }
+)
 
 -- Open or switch to scratch file
 vim.api.nvim_set_keymap(
