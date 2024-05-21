@@ -105,17 +105,32 @@ local function create_buffer(buffer_name, output)
 	vim.api.nvim_buf_set_lines(buffer_id, 0, -1, false, vim.split(output, "\n"))
 end
 
+local function is_visual_mode()
+	local mode = vim.api.nvim_get_mode().mode
+	return mode == "v" or mode == "V"
+end
+
+local function get_visual_selection()
+	-- Switch to normal mode
+	-- Neovim apparently doesn't update the visual selection when the function is called.
+	vim.cmd("normal! <Esc>")
+
+	-- Get the visual selection
+	local line1 = vim.fn.line("'<")
+	local line2 = vim.fn.line("'>")
+	local text = vim.api.nvim_buf_get_lines(0, line1 - 1, line2, false)
+	return table.concat(text, "\n")
+end
+
 -- Get text
 function H.get_text()
-	-- TODO: Write procedure for getting text from visual selection.
-	-- local mode = vim.api.nvim_get_mode().mode
-	-- local line1 = vim.fn.line("'<")
-	-- local line2 = vim.fn.line("'>")
-	-- local text = vim.api.nvim_buf_get_lines(0, line1 - 1, line2, false)
-	-- selected_text = table.concat(text, "\n")
-
-	-- Get text from the unnamed register
-	local selected_text = vim.fn.getreg('"')
+	local selected_text
+	if is_visual_mode() then
+		selected_text = get_visual_selection()
+	else
+		-- Get text from the unnamed register
+		selected_text = vim.fn.getreg('"')
+	end
 
 	-- Escape shell metacharacters
 	return vim.fn.shellescape(selected_text)

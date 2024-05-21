@@ -55,30 +55,20 @@ vim.api.nvim_set_keymap(
 	{ noremap = true, silent = true, desc = "Open or switch to [s]cratch file" }
 )
 
--- Check writing
-function CheckWriting(mode)
+-- Proofread text
+function ProofRead(style)
 	local py_cmd = "python"
 	local buffer_txt = hf.get_text()
-	-- print(buffer_txt)
 	hf.run_cmd_async(py_cmd, {
 		vim.fn.expand("~/.config/nvim/lua/utils/revise_prose.py"),
 		buffer_txt,
-		mode,
+		style,
 	})
 end
 
-vim.api.nvim_set_keymap(
-	"v",
-	"<leader>rw",
-	"y <cmd>lua CheckWriting('academic')<CR>",
-	{ noremap = true, silent = true, desc = "Check academic writing" }
-)
-vim.api.nvim_set_keymap(
-	"n",
-	"<leader>rw",
-	"<cmd>lua CheckWriting('academic')<CR>",
-	{ noremap = true, silent = true, desc = "Check academic writing" }
-)
+vim.keymap.set({ "n", "v" }, "<leader>rp", function()
+	ProofRead("academic")
+end, { desc = "Check prose writing" })
 
 -- Inspect code with GPT in a repl
 local function inspect_code_with_gpt(model)
@@ -114,15 +104,6 @@ function InspectCode()
 	end)
 end
 
-vim.api.nvim_set_keymap(
-	"v",
-	"<leader>ri",
-	"y <cmd>lua InspectCode()<CR>",
-	{ noremap = true, silent = true, desc = "[i]inspect code" }
-)
-vim.api.nvim_set_keymap(
-	"n",
-	"<leader>ri",
-	"<cmd>lua InspectCode()<CR>",
-	{ noremap = true, silent = true, desc = "[i]inspect code" }
-)
+vim.keymap.set({ "n", "v" }, "<leader>ri", function()
+	InspectCode()
+end, { desc = "Inspect code" })
