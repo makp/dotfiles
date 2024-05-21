@@ -4,7 +4,7 @@
 require("vim-options")
 
 -- Add keymaps not requiring plugins
-require("basic_keymaps")
+require("keymaps_sans_plugins")
 
 -- Main plugin manager (Lazy)
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"

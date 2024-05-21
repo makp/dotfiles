@@ -1,4 +1,4 @@
--- Keymaps that don't require any plugins
+-- Keymaps and functions that don't depend on any external plugin
 -- See `:help function-list` for built-in functions
 
 -- Map leader keys
