@@ -71,13 +71,14 @@ return {
 				grep_open_files = true,
 				prompt_title = "Live Grep in Open Files",
 			})
-		end, { desc = "open [F]iles" })
+		end, { desc = "restrict to open [F]iles" })
 		vim.keymap.set("n", "<leader>eb", function()
 			builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
 				winblend = 10,
 				previewer = false,
 			}))
 		end, { desc = "current [b]uffer" })
+		vim.keymap.set("n", "<leader>en", builtin.treesitter, { desc = "treesitter [n]odes" })
 
 		-- Git
 		vim.keymap.set("n", "<leader>gs", builtin.git_status, { desc = "[s]tatus" })
@@ -91,8 +92,5 @@ return {
 
 		-- Diagnostics
 		vim.keymap.set("n", "<leader>dj", builtin.diagnostics, { desc = "[j]ump" })
-
-		-- Treesitter
-		vim.keymap.set("n", "<leader>it", builtin.treesitter, { desc = "[t]reesitter" })
 	end,
 }
