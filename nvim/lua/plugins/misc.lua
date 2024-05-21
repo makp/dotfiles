@@ -43,7 +43,7 @@ return {
 	-- Add indentation guides even on blank lines
 	{
 		"lukas-reineke/indent-blankline.nvim",
-		version = "v3.5.4",
+		-- version = "v3.5.4",
 		-- See `:help ibl`
 		config = function()
 			require("ibl").setup()
@@ -147,5 +147,15 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = true, -- default settings
 		submodules = false, -- not needed, submodules are required only for tests
+	},
+
+	{
+		"glacambre/firenvim",
+		-- Lazy load firenvim
+		-- Explanation: https://github.com/folke/lazy.nvim/discussions/463#discussioncomment-4819297
+		lazy = not vim.g.started_by_firenvim,
+		build = function()
+			vim.fn["firenvim#install"](0)
+		end,
 	},
 }
