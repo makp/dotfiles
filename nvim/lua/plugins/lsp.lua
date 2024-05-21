@@ -1,6 +1,7 @@
 -- TODO:
 -- -- Maybe integrate LSP with breadcrumb-like feature. Maybe nvim.navic?
---
+
+-- LSP configs plus plugins
 return {
 	{
 		"neovim/nvim-lspconfig",
@@ -71,14 +72,16 @@ return {
 					-- Execute a code action
 					map("<localleader>ca", vim.lsp.buf.code_action, "execute [a]ction")
 
-					-- The following two autocommands are used to highlight references of the word under your cursor when your cursor rests there for a little when you move your cursor, the highlights will be cleared (the second autocommand).
+					-- The following two autocommands are used to highlight references of the word under your cursor when your cursor rests there for a little.
+					-- When you move your cursor, the highlights will be cleared (the second autocommand).
 					-- See `:help cursorhold` for information about when this is executed
 					--
 					local client = vim.lsp.get_client_by_id(event.data.client_id)
 					if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
 						local highlight_augroup =
 							vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
-						vim.api.nvim_create_autocmd({ "cursorhold", "cursorholdi" }, {
+
+						vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 							buffer = event.buf,
 							group = highlight_augroup,
 							callback = vim.lsp.buf.document_highlight,
@@ -88,6 +91,14 @@ return {
 							buffer = event.buf,
 							group = highlight_augroup,
 							callback = vim.lsp.buf.clear_references,
+						})
+
+						vim.api.nvim_create_autocmd("LspDetach", {
+							group = vim.api.nvim_create_augroup("kickstart-lsp-detach", { clear = true }),
+							callback = function(event2)
+								vim.lsp.buf.clear_references()
+								vim.api.nvim_clear_autocmds({ group = "kickstart-lsp-highlight", buffer = event2.buf })
+							end,
 						})
 					end
 
@@ -99,15 +110,6 @@ return {
 					end
 				end,
 			})
-
-			vim.api.nvim_create_autocmd("LspDetach", {
-				group = vim.api.nvim_create_augroup("kickstart-lsp-detach", { clear = true }),
-				callback = function(event)
-					vim.lsp.buf.clear_references()
-					vim.api.nvim_clear_autocmds({ group = "kickstart-lsp-highlight", buffer = event.buf })
-				end,
-			})
-
 			--  By default, Neovim doesn't support everything that is in the LSP
 			--  specification. When you add nvim-cmp, luasnip, etc. Neovim now has
 			--  *more* capabilities. So, we create new capabilities with nvim cmp, and
