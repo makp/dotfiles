@@ -1,17 +1,17 @@
 -- HELPER FUNCS
 
+-- Event loop
 -- See `help: luv` for more info on the `vim.loop` module. It is essentially a
 -- wrapper around libuv. For examples of Neovim processes using luv, see:
 -- https://teukka.tech/luvbook/
+local uv = vim.loop
+
 local function run_cmd_async(cmd, cmd_args, callback)
 	-- Optional arguments
 	cmd_args = cmd_args or {}
 	callback = callback or function(result)
 		print(result)
 	end
-
-	-- Event loop
-	local uv = vim.loop
 
 	-- Create pipes
 	local stdout = uv.new_pipe()
@@ -56,6 +56,19 @@ local function run_cmd_async(cmd, cmd_args, callback)
 
 	uv.read_start(stdout, on_read)
 	uv.read_start(stderr, on_read)
+end
+
+local function is_dir(path)
+	local stat = uv.fs_stat(path)
+	return stat and stat.type == "directory"
+end
+
+local function del_dir(path)
+	if is_dir(path) then
+		uv.fs_rmdir(path)
+	else
+		print("Error: Path is not a directory")
+	end
 end
 
 local function create_buffer(buffer_name, output)
@@ -192,42 +205,65 @@ function WriteCodeToFile(filepath)
 end
 
 function RunCmdInTerminalBuf(cmd)
-	-- Create a terminal buffer and run a cmd in it
-	-- vim.cmd.terminal()
-	-- vim.api.nvim_chan_send(vim.bo.channel, cmd .. "\n")
+	-- Check if `cmd` is valid
+	if type(cmd) ~= "string" or cmd == "" then
+		print("Error: Invalid command")
+		return
+	end
+
+	-- Create a terminal buffer and run the cmd in it
 	local buf = vim.api.nvim_create_buf(false, true)
 	vim.api.nvim_set_current_buf(buf)
 	vim.fn.termopen(cmd)
+
+	-- Set buffer opts
+	vim.bo.buftype = "terminal"
+	vim.bo.swapfile = false
 
 	-- Start insert mode
 	vim.cmd("startinsert")
 end
 
-function InspectCode()
+local function inspect_code_with_gpt(model)
 	-- Write code to a file
-	local filepath = "/tmp/tmp_code.md"
+	local filepath = "/tmp/temp_code.md"
 	WriteCodeToFile(filepath)
 
 	-- Split window
-	vim.cmd.split()
+	vim.cmd("vsplit")
 
-	-- Select OpenAI model
-	local model = os.getenv("OPENAI_BASIC")
+	-- Del code_chat repl folder if it exists
+	local chat_name = "code_chat"
+	local chat_path = "/tmp/chat_cache/" .. chat_name
+	del_dir(chat_path)
 
 	-- Run sgpt --repl in a terminal buffer
-	local cmd = "sgpt --model " .. model .. " --repl temp_code < " .. filepath
+	local cmd = "sgpt --model " .. model .. " --repl " .. chat_name .. "< " .. filepath
 	RunCmdInTerminalBuf(cmd)
 end
 
-function SelectOneOption(menu_opts)
+function SelectOneOption(menu_opts, callback)
 	vim.ui.select(menu_opts, {
 		prompt = "Select an option:",
 	}, function(choice)
 		if choice then
-			return choice
+			callback(choice)
 		else
 			print("No option selected!")
-			return nil
+			callback(nil)
+		end
+	end)
+end
+
+function InspectCode()
+	local model_basic = os.getenv("OPENAI_BASIC")
+	local model_advanced = os.getenv("OPENAI_ADVANCED")
+	local opts = { model_basic, model_advanced }
+	SelectOneOption(opts, function(choice)
+		if choice then
+			inspect_code_with_gpt(choice)
+		else
+			print("No model selected!")
 		end
 	end)
 end
