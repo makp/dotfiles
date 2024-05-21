@@ -11,4 +11,4 @@ function MarkdownHeader()
 	})
 end
 
-vim.api.nvim_set_keymap("n", "<localleader>mh", "<cmd>lua MarkdownHeader()<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<localleader>mh", "<cmd>lua MarkdownHeader()<CR>", { noremap = true, silent = true })

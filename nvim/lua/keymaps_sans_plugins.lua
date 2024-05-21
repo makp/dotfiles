@@ -21,22 +21,22 @@ vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper win
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 --[[ -- Move to the beginning of the paragraph (a little hacky)
-vim.api.nvim_set_keymap("n", "]_", "}j_", { noremap = true })
-vim.api.nvim_set_keymap("n", "[_", "{{j_", { noremap = true }) ]]
+vim.keymap.set("n", "]_", "}j_", { noremap = true })
+vim.keymap.set("n", "[_", "{{j_", { noremap = true }) ]]
 
 --[[ -- Use j/k to move visual lines instead of actual lines
-vim.api.nvim_set_keymap("n", "j", "gj", { noremap = true })
-vim.api.nvim_set_keymap("n", "k", "gk", { noremap = true })
-vim.api.nvim_set_keymap("n", "gj", "j", { noremap = true })
-vim.api.nvim_set_keymap("n", "gk", "k", { noremap = true }) ]]
+vim.keymap.set("n", "j", "gj", { noremap = true })
+vim.keymap.set("n", "k", "gk", { noremap = true })
+vim.keymap.set("n", "gj", "j", { noremap = true })
+vim.keymap.set("n", "gk", "k", { noremap = true }) ]]
 
 -- Buffers
-vim.api.nvim_set_keymap("n", "]b", ":bnext<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "[b", ":bprevious<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "]b", ":bnext<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "[b", ":bprevious<CR>", { noremap = true, silent = true })
 
 -- Create lines before and after the cursor
-vim.api.nvim_set_keymap("n", "]<space>", "o<Esc>k", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "[<space>", "O<Esc>j", { noremap = true, silent = true })
+vim.keymap.set("n", "]<space>", "o<Esc>k", { noremap = true, silent = true })
+vim.keymap.set("n", "[<space>", "O<Esc>j", { noremap = true, silent = true })
 
 -- Load helper functions
 local hf = require("helper_funcs")
@@ -46,7 +46,7 @@ function SwitchToScratch()
 	local scratch_file = "~/OneDrive/computer_files/scratch_shared.md"
 	hf.open_or_switch_to_file(scratch_file)
 end
-vim.api.nvim_set_keymap(
+vim.keymap.set(
 	"n",
 	"<leader>os",
 	"<cmd>lua SwitchToScratch()<CR>",
