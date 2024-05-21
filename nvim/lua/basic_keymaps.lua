@@ -1,4 +1,5 @@
---  See `:help vim.keymap.set()`
+-- Keymaps that don't require any plugins
+-- See `:help function-list` for built-in functions
 
 -- Map leader keys
 vim.g.mapleader = "\\"
@@ -38,3 +39,90 @@ vim.api.nvim_set_keymap("n", "[b", ":bprevious<CR>", { noremap = true, silent = 
 -- Create lines before and after the cursor
 vim.api.nvim_set_keymap("n", "]<space>", "o<Esc>k", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "[<space>", "O<Esc>j", { noremap = true, silent = true })
+
+-- Load helper functions
+local hf = require("helper_funcs")
+
+-- Open or switch to scratch file
+function SwitchToScratch()
+	local scratch_file = "~/OneDrive/computer_files/scratch_shared.md"
+	hf.open_or_switch_to_file(scratch_file)
+end
+vim.api.nvim_set_keymap(
+	"n",
+	"<leader>os",
+	"<cmd>lua SwitchToScratch()<CR>",
+	{ noremap = true, silent = true, desc = "Open or switch to [s]cratch file" }
+)
+
+-- Check writing
+function CheckWriting(mode)
+	local py_cmd = "python"
+	local buffer_txt = hf.get_text()
+	-- print(buffer_txt)
+	hf.run_cmd_async(py_cmd, {
+		vim.fn.expand("~/.config/nvim/lua/utils/revise_prose.py"),
+		buffer_txt,
+		mode,
+	})
+end
+
+vim.api.nvim_set_keymap(
+	"v",
+	"<leader>rw",
+	"y <cmd>lua CheckWriting('academic')<CR>",
+	{ noremap = true, silent = true, desc = "Check academic writing" }
+)
+vim.api.nvim_set_keymap(
+	"n",
+	"<leader>rw",
+	"<cmd>lua CheckWriting('academic')<CR>",
+	{ noremap = true, silent = true, desc = "Check academic writing" }
+)
+
+-- Inspect code with GPT in a repl
+local function inspect_code_with_gpt(model)
+	-- Write code to a file
+	local filepath = "/tmp/temp_code.md"
+	hf.write_code_to_file(filepath)
+
+	-- Split window
+	vim.cmd("vsplit")
+
+	-- Del past chat if it exists
+	local chat_name = "code_chat"
+	local chat_path = "/tmp/chat_cache/" .. chat_name
+	if vim.fn.filereadable(chat_path) == 1 then
+		vim.fn.delete(chat_path)
+	end
+
+	-- Run sgpt --repl in a terminal buffer
+	local cmd = string.format("sgpt --model %s --repl %s < %s", model, chat_name, filepath)
+	hf.run_cmd_in_term_buf(cmd)
+end
+
+function InspectCode()
+	local model_basic = os.getenv("OPENAI_BASIC")
+	local model_advanced = os.getenv("OPENAI_ADVANCED")
+	local opts = { model_basic, model_advanced }
+	hf.select_one_option(opts, function(choice)
+		if choice then
+			inspect_code_with_gpt(choice)
+		else
+			print("No model selected!")
+		end
+	end)
+end
+
+vim.api.nvim_set_keymap(
+	"v",
+	"<leader>ri",
+	"y <cmd>lua InspectCode()<CR>",
+	{ noremap = true, silent = true, desc = "[i]inspect code" }
+)
+vim.api.nvim_set_keymap(
+	"n",
+	"<leader>ri",
+	"<cmd>lua InspectCode()<CR>",
+	{ noremap = true, silent = true, desc = "[i]inspect code" }
+)

@@ -1,11 +1,15 @@
 -- HELPER FUNCS
 
+-- Create table to store functions
+local H = {}
+
 -- Event loop
 -- See `help: luv` for more info on the `vim.loop` module. It is essentially a
 -- wrapper around libuv. For examples of Neovim processes using luv, see:
 -- https://teukka.tech/luvbook/
 local uv = vim.loop
 
+-- Run a cmd asynchronously and call a callback with the result
 local function run_cmd_async(cmd, cmd_args, callback)
 	-- Optional arguments
 	cmd_args = cmd_args or {}
@@ -58,19 +62,7 @@ local function run_cmd_async(cmd, cmd_args, callback)
 	uv.read_start(stderr, on_read)
 end
 
-local function is_dir(path)
-	local stat = uv.fs_stat(path)
-	return stat and stat.type == "directory"
-end
-
-local function del_dir(path)
-	if is_dir(path) then
-		uv.fs_rmdir(path)
-	else
-		print("Error: Path is not a directory")
-	end
-end
-
+-- Create a buffer and display the output
 local function create_buffer(buffer_name, output)
 	-- Does `buffer_name` already exist? 0 = no, 1 = yes.
 	local buffer_exists = vim.fn.bufexists(buffer_name)
@@ -113,8 +105,45 @@ local function create_buffer(buffer_name, output)
 	vim.api.nvim_buf_set_lines(buffer_id, 0, -1, false, vim.split(output, "\n"))
 end
 
+-- Get text
+function H.get_text()
+	-- TODO: Write procedure for getting text from visual selection.
+	-- local mode = vim.api.nvim_get_mode().mode
+	-- local line1 = vim.fn.line("'<")
+	-- local line2 = vim.fn.line("'>")
+	-- local text = vim.api.nvim_buf_get_lines(0, line1 - 1, line2, false)
+	-- selected_text = table.concat(text, "\n")
+
+	-- Get text from the unnamed register
+	local selected_text = vim.fn.getreg('"')
+
+	-- Escape shell metacharacters
+	return vim.fn.shellescape(selected_text)
+end
+
+-- Write text to a file as a markdown code block
+local function write_text_as_codeblock(filepath, text)
+	-- Expand `filepath` to its full path
+	filepath = vim.fn.expand(filepath)
+
+	-- Get the filetype of the current buffer
+	local filetype = vim.bo.filetype
+
+	-- Open file for writing
+	local file = io.open(filepath, "w")
+
+	-- Write to `filepath` and close it
+	if file then
+		-- text = text:gsub("^'(.*)'$", "%1")
+		file:write("```" .. filetype .. "\n" .. text .. "\n```")
+		file:close()
+	else
+		print("Error: Could not open file for writing")
+	end
+end
+
 -- Run a cmd asynchronously and display the output in a new buffer
-function RunCmdAsync(cmd, args)
+function H.run_cmd_async_and_display_buf(cmd, args)
 	run_cmd_async(cmd, args, function(result)
 		-- Vim cmds cannot be called within a lua loop callback. So, we need to
 		-- schedule them. See also `:help vim.schedule_wrap()` for when you need to a
@@ -126,34 +155,8 @@ function RunCmdAsync(cmd, args)
 	end)
 end
 
-local function get_text()
-	-- TODO: Write procedure for getting text from visual selection.
-	-- local mode = vim.api.nvim_get_mode().mode
-	-- local line1 = vim.fn.line("'<")
-	-- local line2 = vim.fn.line("'>")
-	-- local text = vim.api.nvim_buf_get_lines(0, line1 - 1, line2, false)
-	-- selected_text = table.concat(text, "\n")
-
-	-- Get text from the unnamed register
-	local selected_text = vim.fn.getreg('"')
-	-- selected_text = selected_text:gsub("^'(.*)'$", "%1")
-
-	-- Escape shell metacharacters
-	return vim.fn.shellescape(selected_text)
-end
-
-function CheckWriting(mode)
-	local py_cmd = "python"
-	local buffer_txt = get_text()
-	-- print(buffer_txt)
-	RunCmdAsync(py_cmd, {
-		"/home/makmiller/.config/nvim/lua/utils/revise_prose.py",
-		buffer_txt,
-		mode,
-	})
-end
-
-function OpenOrSwitchToFile(filepath)
+-- Open or switch to a file
+function H.open_or_switch_to_file(filepath)
 	-- Expand `filepath` to its full path
 	filepath = vim.fn.expand(filepath)
 	local current_buf = vim.api.nvim_get_current_buf()
@@ -180,31 +183,12 @@ function OpenOrSwitchToFile(filepath)
 	vim.cmd("vsplit " .. filepath)
 end
 
-local function write_code_to_file(filepath, text)
-	-- Expand `filepath` to its full path
-	filepath = vim.fn.expand(filepath)
-
-	-- Get the filetype of the current buffer
-	local filetype = vim.bo.filetype
-
-	-- Open file for writing
-	local file = io.open(filepath, "w")
-
-	-- Write to `filepath` and close it
-	if file then
-		file:write("```" .. filetype .. "\n" .. text .. "\n```")
-		file:close()
-	else
-		print("Error: Could not open file for writing")
-	end
+function H.write_code_to_file(filepath)
+	local buffer_txt = H.get_text()
+	write_text_as_codeblock(filepath, buffer_txt)
 end
 
-function WriteCodeToFile(filepath)
-	local buffer_txt = get_text()
-	write_code_to_file(filepath, buffer_txt)
-end
-
-function RunCmdInTerminalBuf(cmd)
+function H.run_cmd_in_term_buf(cmd)
 	-- Check if `cmd` is valid
 	if type(cmd) ~= "string" or cmd == "" then
 		print("Error: Invalid command")
@@ -224,25 +208,20 @@ function RunCmdInTerminalBuf(cmd)
 	vim.cmd("startinsert")
 end
 
-local function inspect_code_with_gpt(model)
-	-- Write code to a file
-	local filepath = "/tmp/temp_code.md"
-	WriteCodeToFile(filepath)
-
-	-- Split window
-	vim.cmd("vsplit")
-
-	-- Del code_chat repl folder if it exists
-	local chat_name = "code_chat"
-	local chat_path = "/tmp/chat_cache/" .. chat_name
-	del_dir(chat_path)
-
-	-- Run sgpt --repl in a terminal buffer
-	local cmd = "sgpt --model " .. model .. " --repl " .. chat_name .. "< " .. filepath
-	RunCmdInTerminalBuf(cmd)
+local function is_dir(path)
+	local stat = uv.fs_stat(path)
+	return stat and stat.type == "directory"
 end
 
-function SelectOneOption(menu_opts, callback)
+function H.del_dir(path)
+	if is_dir(path) then
+		uv.fs_rmdir(path)
+	else
+		print("Error: Path is not a directory")
+	end
+end
+
+function H.select_one_option(menu_opts, callback)
 	vim.ui.select(menu_opts, {
 		prompt = "Select an option:",
 	}, function(choice)
@@ -255,37 +234,5 @@ function SelectOneOption(menu_opts, callback)
 	end)
 end
 
-function InspectCode()
-	local model_basic = os.getenv("OPENAI_BASIC")
-	local model_advanced = os.getenv("OPENAI_ADVANCED")
-	local opts = { model_basic, model_advanced }
-	SelectOneOption(opts, function(choice)
-		if choice then
-			inspect_code_with_gpt(choice)
-		else
-			print("No model selected!")
-		end
-	end)
-end
-
--- Check writing
-vim.api.nvim_set_keymap(
-	"v",
-	"<leader>rw",
-	"y <cmd>lua CheckWriting('academic')<CR>",
-	{ noremap = true, silent = true, desc = "Check academic writing" }
-)
-vim.api.nvim_set_keymap(
-	"n",
-	"<leader>rw",
-	"<cmd>lua CheckWriting('academic')<CR>",
-	{ noremap = true, silent = true, desc = "Check academic writing" }
-)
-
--- Open or switch to scratch file
-vim.api.nvim_set_keymap(
-	"n",
-	"<leader>os",
-	"<cmd>lua OpenOrSwitchToFile('~/OneDrive/computer_files/scratch_shared.md')<CR>",
-	{ noremap = true, silent = true, desc = "Open or switch to [s]cratch file" }
-)
+-- Return the table
+return H
