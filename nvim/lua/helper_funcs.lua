@@ -80,9 +80,9 @@ local function create_buffer(buffer_name, output)
 		vim.api.nvim_buf_set_name(buffer_id, buffer_name)
 
 		-- Avoid save prompts
-		vim.api.nvim_buf_set_option(buffer_id, "buftype", "nofile")
-		vim.api.nvim_buf_set_option(buffer_id, "bufhidden", "hide")
-		vim.api.nvim_buf_set_option(buffer_id, "swapfile", false)
+		vim.api.nvim_set_option_value("buftype", "nofile", { buf = buffer_id })
+		vim.api.nvim_set_option_value("bufhidden", "hide", { buf = buffer_id })
+		vim.api.nvim_set_option_value("swapfile", false, { buf = buffer_id })
 	else
 		-- Get buffer and window IDs
 		buffer_id = vim.fn.bufnr(buffer_name)
