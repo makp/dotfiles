@@ -71,14 +71,11 @@ return {
 					-- Execute a code action
 					map("<localleader>ca", vim.lsp.buf.code_action, "execute [a]ction")
 
-					-- Opens a popup with documentation about the word under your cursor
-					map("K", vim.lsp.buf.hover, "Hover Documentation")
-
 					-- The following two autocommands are used to highlight references of the word under your cursor when your cursor rests there for a little when you move your cursor, the highlights will be cleared (the second autocommand).
 					-- See `:help cursorhold` for information about when this is executed
 					--
 					local client = vim.lsp.get_client_by_id(event.data.client_id)
-					if client and client.server_capabilities.documenthighlightprovider then
+					if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
 						local highlight_augroup =
 							vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
 						vim.api.nvim_create_autocmd({ "cursorhold", "cursorholdi" }, {
@@ -95,9 +92,9 @@ return {
 					end
 
 					-- Toggle inlay hints in your code
-					if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+					if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
 						map("<localleader>ct", function()
-							vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+							vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
 						end, "[t]oggle inlay hints")
 					end
 				end,

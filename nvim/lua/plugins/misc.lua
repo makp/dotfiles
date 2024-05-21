@@ -2,13 +2,6 @@ return {
 	-- Detect tabstop and shiftwidth automatically
 	"tpope/vim-sleuth",
 
-	-- Comment
-	{
-		"numToStr/Comment.nvim",
-		opts = {},
-		lazy = false,
-	},
-
 	-- Surround
 	{
 		"kylechui/nvim-surround",
@@ -132,21 +125,6 @@ return {
 			})
 			vim.keymap.set("n", "<leader>o-", "<cmd>Oil<cr>", { desc = "parent directory" })
 		end,
-	},
-	-- It appears that `oil.nvim` overwrites the `gx` mapping. Using the
-	-- following plugin restores it.
-	{
-		"chrishrb/gx.nvim",
-		keys = {
-			{ "gx", "<cmd>Browse<cr>", mode = { "n", "x" } },
-		},
-		cmd = { "Browse" },
-		init = function()
-			vim.g.netrw_nogx = 1 -- disable netrw gx
-		end,
-		dependencies = { "nvim-lua/plenary.nvim" },
-		config = true, -- default settings
-		submodules = false, -- not needed, submodules are required only for tests
 	},
 
 	{
