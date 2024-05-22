@@ -125,6 +125,7 @@ local function get_visual_selection()
 end
 
 -- Get text
+-- FIXME: This function is not working when visual mode is active
 function H.get_text()
 	local selected_text
 	if is_visual_mode() then
@@ -250,6 +251,32 @@ function H.select_one_option(menu_opts, callback)
 		end
 	end)
 end
+
+function create_floating_win()
+	-- Define buffer and window options
+	local buf = vim.api.nvim_create_buf(false, true)
+	local width = 50
+	local height = 10
+
+	local opts = {
+		relative = "cursor",
+		width = width,
+		height = height,
+		col = 1,
+		row = 1,
+		style = "minimal",
+		border = "rounded", -- Opts: 'single', 'double', 'rounded', 'solid', or 'shadow'
+	}
+
+	-- Create the window
+	vim.api.nvim_open_win(buf, true, opts)
+
+	-- Set the content of the buffer
+	local lines = { "Floating window!", "Here is some info about the code." }
+	vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+end
+
+-- create_floating_win()
 
 -- Return the table
 return H
