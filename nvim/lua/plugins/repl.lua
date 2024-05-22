@@ -19,9 +19,9 @@ return {
 				},
 				--
 				-- How repl window will be displayed
-				repl_open_cmd = require("iron.view").right(79),
+				repl_open_cmd = require("iron.view").split.vertical.botright(79),
 				--
-				-- Ignore blank lines when senting visual lines?
+				-- Ignore blank lines when sending visual lines?
 				ignore_blank_lines = true,
 			},
 			-- keymaps
