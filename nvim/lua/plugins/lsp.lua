@@ -217,10 +217,10 @@ return {
 			formatters_by_ft = {
 				lua = { "stylua" },
 				python = { "isort", "black" },
-				-- Run `` on all files
-				-- ["*"] = { "" },
-				-- Run `trim_whitespace` on all files that don't have a formatter configured
-				["_"] = { "trim_whitespace" },
+				-- Run `trim_whitespace` on all files
+				["*"] = { "trim_whitespace" },
+				-- Run `` on all files that don't have a formatter configured
+				-- ["_"] = { "" },
 			},
 			-- Set up formats on save
 			format_on_save = function(bufnr)

@@ -40,8 +40,10 @@ local function run_cmd_async(cmd, cmd_args, callback)
 		uv.read_stop(stderr)
 		uv.close(stderr)
 
-		-- Close the process
-		uv.close(handle)
+		-- Close the process if running
+		if handle then
+			uv.close(handle)
+		end
 
 		-- Concatenate the result after the process is done
 		local output = table.concat(result, "\n")
