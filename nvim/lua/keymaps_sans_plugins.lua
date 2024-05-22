@@ -54,18 +54,29 @@ vim.keymap.set(
 )
 
 -- Proofread text
-function ProofRead(style)
+local function proofread(style)
 	local py_cmd = "python"
 	local buffer_txt = hf.get_text()
-	hf.run_cmd_async(py_cmd, {
+	hf.run_cmd_async_and_display_buf(py_cmd, {
 		vim.fn.expand("~/.config/nvim/lua/utils/revise_prose.py"),
 		buffer_txt,
 		style,
 	})
 end
 
+function ProofreadProse()
+	local opts = { "academic", "email" }
+	hf.select_one_option(opts, function(choice)
+		if choice then
+			proofread(choice)
+		else
+			print("No style selected!")
+		end
+	end)
+end
+
 vim.keymap.set({ "n", "v" }, "<leader>rp", function()
-	ProofRead("academic")
+	ProofreadProse()
 end, { desc = "Check prose writing" })
 
 -- Inspect code with GPT in a repl
