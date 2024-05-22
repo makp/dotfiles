@@ -9,26 +9,8 @@ vim.g.maplocalleader = " "
 vim.keymap.set("n", "<leader>ds", vim.diagnostic.open_float, { desc = "[s]how diagnostic messages" })
 vim.keymap.set("n", "<leader>dq", vim.diagnostic.setloclist, { desc = "[q]uickfix list" })
 
---[[ --  Use CTRL+<hjkl> to switch between windows
---  See `:help wincmd` for a list of all window commands
-vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
-vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
-vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
-vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
-]]
-
 -- Use a easier keybinding for exiting terminal mode
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
-
---[[ -- Move to the beginning of the paragraph (a little hacky)
-vim.keymap.set("n", "]_", "}j_", { noremap = true })
-vim.keymap.set("n", "[_", "{{j_", { noremap = true }) ]]
-
---[[ -- Use j/k to move visual lines instead of actual lines
-vim.keymap.set("n", "j", "gj", { noremap = true })
-vim.keymap.set("n", "k", "gk", { noremap = true })
-vim.keymap.set("n", "gj", "j", { noremap = true })
-vim.keymap.set("n", "gk", "k", { noremap = true }) ]]
 
 -- Buffers
 vim.keymap.set("n", "]b", ":bnext<CR>", { noremap = true, silent = true })
@@ -37,6 +19,12 @@ vim.keymap.set("n", "[b", ":bprevious<CR>", { noremap = true, silent = true })
 -- Create lines before and after the cursor
 vim.keymap.set("n", "]<space>", "o<Esc>k", { noremap = true, silent = true })
 vim.keymap.set("n", "[<space>", "O<Esc>j", { noremap = true, silent = true })
+
+--[[ -- Use j/k to move visual lines instead of actual lines
+vim.keymap.set("n", "j", "gj", { noremap = true })
+vim.keymap.set("n", "k", "gk", { noremap = true })
+vim.keymap.set("n", "gj", "j", { noremap = true })
+vim.keymap.set("n", "gk", "k", { noremap = true }) ]]
 
 -- Load helper functions
 local hf = require("helper_funcs")
@@ -50,7 +38,7 @@ vim.keymap.set(
 	"n",
 	"<leader>os",
 	"<cmd>lua SwitchToScratch()<CR>",
-	{ noremap = true, silent = true, desc = "Open or switch to [s]cratch file" }
+	{ noremap = true, silent = true, desc = "open or switch to [s]cratch file" }
 )
 
 -- Proofread text
