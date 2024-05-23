@@ -68,15 +68,8 @@ vim.keymap.set({ "n", "v" }, "<leader>rp", function()
 end, { desc = "Check prose writing" })
 
 -- Inspect code with GPT in a repl
-local function inspect_code_with_gpt(model)
-	-- Write code to a file
-	local filepath = "/tmp/temp_code.md"
-	hf.write_code_to_file(filepath)
-
-	-- Split window
-	vim.cmd("vsplit")
-
-	-- Del past chat if it exists
+local function inspect_code_with_gpt(model, filepath)
+	-- Del past sgpt chat if it exists
 	local chat_name = "code_chat"
 	local chat_path = "/tmp/chat_cache/" .. chat_name
 	if vim.fn.filereadable(chat_path) == 1 then
@@ -89,12 +82,19 @@ local function inspect_code_with_gpt(model)
 end
 
 function InspectCode()
+	-- Write code to a file
+	local filepath = "/tmp/temp_code.md"
+	hf.write_code_to_file(filepath)
+
+	-- Split window
+	vim.cmd("vsplit")
+
 	local model_basic = os.getenv("OPENAI_BASIC")
 	local model_advanced = os.getenv("OPENAI_ADVANCED")
 	local opts = { model_basic, model_advanced }
 	hf.select_one_option(opts, function(choice)
 		if choice then
-			inspect_code_with_gpt(choice)
+			inspect_code_with_gpt(choice, filepath)
 		else
 			print("No model selected!")
 		end

@@ -113,19 +113,21 @@ local function is_visual_mode()
 end
 
 local function get_visual_selection()
-	-- Switch to normal mode
-	-- Neovim apparently doesn't update the visual selection when the function is called.
-	vim.cmd("normal! <Esc>")
+	-- vim.api.nvim_input("<esc>")
+	local start_pos = vim.fn.getpos("v")
+	local end_pos = vim.fn.getpos(".")
 
-	-- Get the visual selection
-	local line1 = vim.fn.line("'<")
-	local line2 = vim.fn.line("'>")
-	local text = vim.api.nvim_buf_get_lines(0, line1 - 1, line2, false)
-	return table.concat(text, "\n")
+	-- Extract the line numbers
+	local line1 = start_pos[2]
+	local line2 = end_pos[2]
+
+	-- Get the lines in the selection
+	local lines = vim.api.nvim_buf_get_lines(0, line1 - 1, line2, false)
+
+	return table.concat(lines, "\n")
 end
 
 -- Get text
--- FIXME: This function is not working when visual mode is active
 function H.get_text()
 	local selected_text
 	if is_visual_mode() then
