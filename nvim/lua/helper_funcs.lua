@@ -154,8 +154,13 @@ local function write_text_as_codeblock(filepath, text)
 
 	-- Write to `filepath` and close it
 	if file then
-		-- text = text:gsub("^'(.*)'$", "%1")
+		-- Remove surrounding single quotes if present
+		if text:sub(1, 1) == "'" and text:sub(-1) == "'" then
+			text = text:sub(2, -2)
+		end
+		-- Place text within a markdown codeblock
 		file:write("```" .. filetype .. "\n" .. text .. "\n```")
+		-- Close the file
 		file:close()
 	else
 		print("Error: Could not open file for writing")
