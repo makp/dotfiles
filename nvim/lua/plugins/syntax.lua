@@ -113,7 +113,7 @@ return {
 						["]]"] = "@block.outer",
 					},
 					goto_next_end = {
-						["]M"] = "@function.outer",
+						["]F"] = "@function.outer",
 						["]C"] = "@comment.outer",
 						["]A"] = "@assignment.outer",
 						["]T"] = "@statement.outer",
@@ -122,7 +122,7 @@ return {
 						["]["] = "@block.outer",
 					},
 					goto_previous_start = {
-						["[m"] = "@function.outer",
+						["[f"] = "@function.outer",
 						["[c"] = "@comment.outer",
 						["[a"] = "@assignment.outer",
 						["[t"] = "@statement.outer",
@@ -131,7 +131,7 @@ return {
 						["[["] = "@block.outer",
 					},
 					goto_previous_end = {
-						["[M"] = "@function.outer",
+						["[F"] = "@function.outer",
 						["[C"] = "@comment.outer",
 						["[A"] = "@assignment.outer",
 						["[T"] = "@statement.outer",
