@@ -86,14 +86,12 @@ function InspectCode()
 	local filepath = "/tmp/temp_code.md"
 	hf.write_code_to_file(filepath)
 
-	-- Split window
-	vim.cmd("vsplit")
-
 	local model_basic = os.getenv("OPENAI_BASIC")
 	local model_advanced = os.getenv("OPENAI_ADVANCED")
 	local opts = { model_basic, model_advanced }
 	hf.select_one_option(opts, function(choice)
 		if choice then
+			vim.cmd("vsplit")
 			inspect_code_with_gpt(choice, filepath)
 		else
 			print("No model selected!")
