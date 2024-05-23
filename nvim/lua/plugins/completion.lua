@@ -72,6 +72,8 @@ return {
 				},
 				-- `:help ins-completion`
 				mapping = {
+					["<C-S-n>"] = cmp.mapping.complete(),
+
 					-- Select the [n]ext item
 					["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
 
@@ -125,6 +127,7 @@ return {
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
 					{ name = "buffer" },
+					{ name = "path" },
 				}),
 			})
 
@@ -132,7 +135,7 @@ return {
 			cmp.setup.cmdline({ "/", "?" }, {
 				mapping = cmp.mapping.preset.cmdline(),
 				sources = {
-					{ name = "buffer", max_item_count = 7 },
+					{ name = "buffer", max_item_count = 13 },
 				},
 			})
 
@@ -144,8 +147,8 @@ return {
 				}, {
 					{
 						name = "cmdline",
-						max_item_count = 7,
-						keyword_length = 2,
+						max_item_count = 13,
+						keyword_length = 1,
 					},
 				}),
 				-- matching = { disallow_symbol_nonprefix_matching = false },
