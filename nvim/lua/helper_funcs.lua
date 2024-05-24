@@ -283,8 +283,6 @@ function create_floating_win()
 	vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
 end
 
--- create_floating_win()
-
 local function extract_comment_symbol()
 	local comment_string = vim.bo.commentstring
 	if not comment_string or comment_string == "" then

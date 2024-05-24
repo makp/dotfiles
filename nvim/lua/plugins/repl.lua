@@ -29,7 +29,7 @@ return {
 				send_motion = "<localleader>sc",
 				visual_send = "<localleader>sc",
 				send_file = "<localleader>sf",
-				send_line = "<localleader>sl",
+				-- send_line = "<localleader>sl",
 				send_until_cursor = "<localleader>su",
 				send_mark = "<localleader>sm",
 				cr = "<localleader>s<cr>",
@@ -59,5 +59,9 @@ return {
 			silent = true,
 		})
 		vim.keymap.set("n", "<localleader>rr", "<cmd>IronRestart<cr>")
+		vim.keymap.set("n", "<localleader>sl", function()
+			require("iron.core").send_line()
+			require("helper_funcs").move_to_next_code_line()
+		end)
 	end,
 }
