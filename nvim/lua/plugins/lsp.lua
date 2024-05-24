@@ -170,11 +170,17 @@ return {
 			-- Add other tools for Mason to install
 			local ensure_installed = vim.tbl_keys(servers or {})
 			vim.list_extend(ensure_installed, {
+				-- "vale", -- Lint for text files
+				"prettier", -- Multi-language formatter
 				"stylua", -- Lua formatter
-				"vale", -- Lint for text files
 				"codespell", -- Lint for spelling
 				"isort", -- Python import sorter
 				"black", -- Python formatter
+				"jq", -- JSON formatter
+				"jsonlint", -- JSON linter
+				"mdformat", -- Markdown formatter
+				"markdownlint", -- Markdown linter
+				-- "mdsf", -- Codeblock format for markdown (not available)
 			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
@@ -211,12 +217,29 @@ return {
 			},
 		},
 		opts = {
-			-- notify_on_error = false,
-			--
+			formatters = {
+				injected = {
+					opts = {
+						lang_to_ext = {
+							bash = "sh",
+							javascript = "js",
+							latex = "tex",
+							markdown = "md",
+							python = "py",
+						},
+						-- Map of treesitter language to formatters to use
+						-- (defaults to the value from formatters_by_ft)
+						-- lang_to_formatters = {},
+					},
+				},
+			},
+
 			-- Define formatters
 			formatters_by_ft = {
 				lua = { "stylua" },
 				python = { "isort", "black" },
+				json = { "jq" },
+				markdown = { "mdformat", "injected" },
 				-- Run `trim_whitespace` on all files
 				["*"] = { "trim_whitespace" },
 				-- Run `` on all files that don't have a formatter configured
@@ -244,6 +267,8 @@ return {
 		config = function()
 			local lint = require("lint")
 			lint.linters_by_ft = {
+				json = { "jsonlint" },
+				markdown = { "markdownlint" },
 				-- markdown = { "vale" },
 				-- text = { "vale" },
 			}
