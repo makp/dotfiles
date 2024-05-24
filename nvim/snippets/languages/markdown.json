@@ -1,7 +1,11 @@
 {
   "Code block": {
     "prefix": "cc",
-    "body": ["```${1|python,lua,latex,comment|}", "$0", "```"],
+    "body": [
+      "```${1|python,lua,latex,comment|}",
+      "$0",
+      "```"
+    ],
     "description": "Code block"
   }
 }

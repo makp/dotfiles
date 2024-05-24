@@ -3,7 +3,9 @@
   "contributes": {
     "snippets": [
       {
-        "language": ["markdown"],
+        "language": [
+          "markdown"
+        ],
         "path": "./languages/markdown.json"
       }
     ]
