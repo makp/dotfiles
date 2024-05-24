@@ -32,7 +32,7 @@ return {
 			-- keymaps
 			keymaps = {
 				send_motion = "<localleader>sc",
-				-- visual_send = "<localleader>sc",
+				visual_send = "<localleader>sc",
 				send_file = "<localleader>sf",
 				send_until_cursor = "<localleader>su",
 				cr = "<localleader>s<cr>",

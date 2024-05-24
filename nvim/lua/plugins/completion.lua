@@ -4,20 +4,17 @@ return {
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
 		dependencies = {
+
 			-- Snippet engine
 			{
 				"L3MON4D3/LuaSnip",
 				build = (function()
-					-- Build Step is needed for regex support in snippets.
+					-- Build step is needed for regex support in snippets.
 					return "make install_jsregexp"
 				end)(),
 				dependencies = {
-					{
-						"rafamadriz/friendly-snippets",
-						config = function()
-							require("luasnip.loaders.from_vscode").lazy_load()
-						end,
-					},
+					-- Snippet collection
+					"rafamadriz/friendly-snippets",
 				},
 			},
 			-- Use snippets during auto-completion
@@ -46,7 +43,8 @@ return {
 			local luasnip = require("luasnip")
 			local lspkind = require("lspkind")
 
-			luasnip.config.setup({})
+			-- Load snippets
+			require("luasnip.loaders.from_vscode").lazy_load()
 
 			cmp.setup({
 				---@diagnostic disable-next-line: missing-fields
