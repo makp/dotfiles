@@ -285,5 +285,45 @@ end
 
 -- create_floating_win()
 
+local function extract_comment_symbol()
+	local comment_string = vim.bo.commentstring
+	if not comment_string or comment_string == "" then
+		print("No comment string for this file type")
+		return
+	else
+		-- `%s*` matches any number of spaces
+		return comment_string:match("^(%s*[^%s]+)")
+	end
+end
+
+function H.move_to_next_code_line()
+	local last_line = vim.fn.line("$")
+	local current_line = vim.fn.line(".")
+	if current_line == last_line then
+		return
+	end
+
+	local comment_symbol = extract_comment_symbol()
+	if not comment_symbol then
+		return
+	end
+
+	-- Allow for spaces before the comment symbol
+	-- `vim.fn.escape` escapes the comment symbol for use in a pattern
+	local comment_pattern = "^%s*" .. vim.fn.escape(comment_symbol, "\\^$.*[]")
+
+	for i = current_line + 1, last_line do
+		local line_content = vim.fn.getline(i)
+
+		if line_content:match(comment_pattern) == nil and line_content:match("%S") then
+			local first_nonspace_pos = line_content:find("%S")
+			vim.api.nvim_win_set_cursor(0, { i, first_nonspace_pos - 1 })
+			return
+		end
+	end
+end
+
+-- vim.keymap.set("n", "<localleader>t", move_to_next_code_line)
+
 -- Return the table
 return H
