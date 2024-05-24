@@ -45,6 +45,7 @@ return {
 
 			-- Load snippets
 			require("luasnip.loaders.from_vscode").lazy_load()
+			require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets/" } })
 
 			cmp.setup({
 				---@diagnostic disable-next-line: missing-fields
@@ -91,6 +92,18 @@ return {
 						{ "i", "c" }
 					),
 
+					["<C-e>"] = cmp.mapping(function()
+						if luasnip.choice_active() then
+							luasnip.change_choice(1)
+						end
+					end, { "i", "s" }),
+
+					["<C-y>"] = cmp.mapping(function()
+						if luasnip.choice_active() then
+							luasnip.change_choice(-1)
+						end
+					end, { "i", "s" }),
+
 					["<C-l>"] = cmp.mapping(function()
 						if luasnip.expand_or_locally_jumpable() then
 							luasnip.expand_or_jump()
@@ -118,7 +131,7 @@ return {
 			-- Setup for text-based filetypes
 			cmp.setup.filetype({ "markdown", "latex", "org" }, {
 				completion = {
-					keyword_length = 3,
+					keyword_length = 2,
 				},
 				sources = cmp.config.sources({
 					{ name = "spell" },
