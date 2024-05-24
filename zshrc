@@ -264,6 +264,7 @@ alias cc="sgpt --model '${OPENAI_ADVANCED}' --temperature 0 "
 
 # Editors
 alias em="emacsclient -t "
+alias n="nvim"
 
 # Git
 alias cg="cd \$(git rev-parse --show-toplevel)"  # cd to root git repo
@@ -279,6 +280,7 @@ alias gsu="git submodule update --remote --recursive"
 # the master branch.
 alias gf="git fetch --all"
 alias gfs="git fetch --all && git show HEAD..FETCH_HEAD"
+alias gfg="git fetch --all && git graph HEAD..FETCH_HEAD"
 alias gm="git merge "
 alias gp="git pull"
 alias gpr="git pull --rebase"
@@ -296,5 +298,7 @@ alias gl="git log -p --submodule"
 alias grh="git reset HEAD"
 alias gR="git rebase "
 
+# Pacman
+alias pu="sudo pacman -Syu"
 
 # zprof
