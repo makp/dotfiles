@@ -1,10 +1,16 @@
-vim.cmd("set expandtab")
-vim.cmd("set tabstop=2")
-vim.cmd("set softtabstop=2")
-vim.cmd("set shiftwidth=2")
-
--- [[ Setting options ]]
+-- Setting options
 -- See `:help vim.opt` and `:help option-list`
+
+-- Configure indentation
+vim.opt.expandtab = true -- Insert spaces when <Tab> is pressed
+vim.opt.tabstop = 2 -- <Tab> width
+vim.opt.softtabstop = 2 -- Number of spaces for each <Tab> press
+vim.opt.shiftwidth = 2 -- Number of spaces with < and > cmds
+
+-- Set how neovim displays certain whitespace chars in the editor
+--  See `:help 'list'` and `:help 'listchars'`
+-- vim.opt.list = true
+-- vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- Use relative line numbers
 vim.opt.number = true
@@ -48,11 +54,6 @@ vim.opt.signcolumn = "yes"
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
--- Sets how neovim displays certain whitespace chars in the editor
---  See `:help 'list'` and `:help 'listchars'`
--- vim.opt.list = true
--- vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
-
 -- Preview substitutions live as you type
 vim.opt.inccommand = "split"
 
@@ -69,8 +70,8 @@ vim.g.markdown_folding = 1
 -- Wrap lines at word boundaries
 vim.opt.linebreak = true
 
--- [[ Basic Autocommands ]]
---  See `:help lua-guide-autocommands`
+-- Autocommands
+-- See `:help lua-guide-autocommands`
 
 -- Highlight when yanking (copying) text
 --  See `:help vim.highlight.on_yank()`
