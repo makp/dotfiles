@@ -39,7 +39,7 @@ return {
 			lua = { "stylua" },
 			python = { "ruff_format" },
 			json = { "jq" },
-			markdown = { "mdformat", "injected" },
+			markdown = { "markdownlint", "injected" },
 			-- Run `trim_whitespace` on all files
 			["*"] = { "trim_whitespace" },
 			-- Run `` on all files that don't have a formatter configured
