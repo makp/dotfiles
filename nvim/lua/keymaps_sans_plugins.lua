@@ -45,7 +45,7 @@ vim.keymap.set(
 local function proofread(style, buffer_txt)
 	local py_cmd = "python"
 	hf.run_cmd_async_and_display_buf(py_cmd, {
-		vim.fn.expand("~/.config/nvim/lua/utils/revise_prose.py"),
+		vim.fn.expand("revise_prose.py"),
 		buffer_txt,
 		style,
 	})
