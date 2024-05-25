@@ -136,17 +136,4 @@ return {
 			vim.fn["firenvim#install"](0)
 		end,
 	},
-	{
-		"michaelb/sniprun",
-		branch = "master",
-
-		build = "sh install.sh",
-
-		config = function()
-			require("sniprun").setup({
-				selected_interpreters = { "Python3_fifo" },
-				repl_enable = { "Python3_fifo" },
-			})
-		end,
-	},
 }

@@ -18,8 +18,3 @@ vim.api.nvim_buf_set_keymap(
 	"<cmd>lua MarkdownHeader()<CR>",
 	{ noremap = true, silent = true }
 )
-
--- Custom keybindings for running code (`SnipRun`)
-vim.api.nvim_buf_set_keymap(0, "v", "<localleader>sc", "<Plug>SnipRun", { silent = true })
-vim.api.nvim_buf_set_keymap(0, "n", "<localleader>sl", "<Plug>SnipRun", { silent = true })
-vim.api.nvim_buf_set_keymap(0, "n", "<localleader>sc", "<Plug>SnipRunOperator", { silent = true })
