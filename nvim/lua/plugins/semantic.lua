@@ -119,7 +119,7 @@ return {
 		local servers = {
 			-- See `:help lspconfig-all` for a list of all the pre-configured LSPs
 
-			pylsp = {},
+			pyright = {},
 			texlab = {
 				settings = {
 					texlab = {
@@ -163,16 +163,13 @@ return {
 		local ensure_installed = vim.tbl_keys(servers or {})
 		vim.list_extend(ensure_installed, {
 			-- "vale", -- Lint for text files
-			"prettier", -- Multi-language formatter
 			"stylua", -- Lua formatter
 			"codespell", -- Lint for spelling
-			"isort", -- Python import sorter
-			"black", -- Python formatter
+			"ruff", -- Python formatter and linter
 			"jq", -- JSON formatter
 			"jsonlint", -- JSON linter
 			"mdformat", -- Markdown formatter
 			"markdownlint", -- Markdown linter
-			-- "mdsf", -- Codeblock format for markdown (not available)
 		})
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 

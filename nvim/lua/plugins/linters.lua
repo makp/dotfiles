@@ -8,6 +8,7 @@ return {
 		lint.linters_by_ft = {
 			json = { "jsonlint" },
 			markdown = { "markdownlint" },
+			python = { "ruff" },
 			-- markdown = { "vale" },
 			-- text = { "vale" },
 		}

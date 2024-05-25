@@ -37,7 +37,7 @@ return {
 		-- Define formatters
 		formatters_by_ft = {
 			lua = { "stylua" },
-			python = { "isort", "black" },
+			python = { "ruff_format" },
 			json = { "jq" },
 			markdown = { "mdformat", "injected" },
 			-- Run `trim_whitespace` on all files
