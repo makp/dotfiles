@@ -42,9 +42,8 @@ vim.keymap.set(
 )
 
 -- Proofread text
-local function proofread(style)
+local function proofread(style, buffer_txt)
 	local py_cmd = "python"
-	local buffer_txt = hf.get_text()
 	hf.run_cmd_async_and_display_buf(py_cmd, {
 		vim.fn.expand("~/.config/nvim/lua/utils/revise_prose.py"),
 		buffer_txt,
@@ -53,10 +52,11 @@ local function proofread(style)
 end
 
 function ProofreadProse()
+	local buffer_txt = hf.get_text()
 	local opts = { "academic", "email" }
 	hf.select_one_option(opts, function(choice)
 		if choice then
-			proofread(choice)
+			proofread(choice, buffer_txt)
 		else
 			print("No style selected!")
 		end
