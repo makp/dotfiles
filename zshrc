@@ -127,13 +127,6 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:manuals' separate-sections true # manpages
 zstyle ':completion:*:manuals.*' insert-sections true
 
-# Use CDPATH for completion
-# The nullstring "::" forces cd to search in the working directory
-# This is important because, without it, cd will only search the working
-# directory after the other directories in CDPATH fails.
-# export CDPATH=$HOME
-export CDPATH=::$HOME/Documents/mydocs/:$HOME/config-files/general
-
 # Autocompletion for PDFs
 # Open the most recently modified PDF file in the current directory by
 # default, if no parameter is given. It also configures completion for
