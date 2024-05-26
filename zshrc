@@ -252,17 +252,17 @@ function zvm_after_init() {
 ## ALIASES ---------
 
 # Shell-GPT
-alias c="sgpt --model '${OPENAI_BASIC}' --temperature 0 "
-alias cc="sgpt --model '${OPENAI_ADVANCED}' --temperature 0 "
+alias c="sgpt --model '${OPENAI_BASIC}' --temperature 1 "
+alias cc="sgpt --model '${OPENAI_ADVANCED}' --temperature 1 "
 
 # Editors
 alias em="emacsclient -t "
-alias n="nvim"
+alias n="nvim ."
 
 # Git
 alias cg="cd \$(git rev-parse --show-toplevel)"  # cd to root git repo
-alias lg="lazygit"
-alias gg="git status --short -b"
+alias gg="lazygit"
+alias gs="git status --short -b"
 alias gss="git submodule status"
 alias gsa="git submodule add -b"
 # `-b` adds info about the submodule branch to the `.gitmodules` file.
