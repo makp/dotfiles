@@ -33,7 +33,7 @@ def explain_code(content, temperature, model, max_tokens=500):
 
 
 def optimize_code(content, temperature, model):
-    """Revise academic prose."""
+    """Optimize code."""
     response = CLIENT.chat.completions.create(
         model=model,
         temperature=temperature,

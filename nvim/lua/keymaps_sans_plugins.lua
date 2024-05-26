@@ -43,9 +43,8 @@ vim.keymap.set(
 
 -- Proofread text
 local function proofread(style, buffer_txt)
-	local py_cmd = "python"
+	local py_cmd = "revise_prose.py"
 	hf.run_cmd_async_and_display_buf(py_cmd, {
-		vim.fn.expand("revise_prose.py"),
 		buffer_txt,
 		style,
 	})
@@ -53,7 +52,7 @@ end
 
 function ProofreadProse()
 	local buffer_txt = hf.get_text()
-	local opts = { "academic", "email" }
+	local opts = { "academic", "prose", "email" }
 	hf.select_one_option(opts, function(choice)
 		if choice then
 			proofread(choice, buffer_txt)
