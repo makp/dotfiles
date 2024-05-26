@@ -1,7 +1,8 @@
 -- Enable spell checking
 vim.opt_local.spell = true
 
-vim.g.markdown_indent_level = 2 -- Default is 4
+-- Unfold first level headers at startup
+vim.opt_local.foldlevel = 1
 
 -- Custom function for searching markdown headers
 function MarkdownHeader()

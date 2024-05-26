@@ -6,6 +6,7 @@ vim.opt.expandtab = true -- Insert spaces when <Tab> is pressed
 vim.opt.tabstop = 2 -- <Tab> width
 vim.opt.softtabstop = 2 -- Number of spaces for each <Tab> press
 vim.opt.shiftwidth = 2 -- Number of spaces with < and > cmds
+vim.g.markdown_indent_level = 2 -- Default is 4
 
 -- Set how neovim displays certain whitespace chars in the editor
 --  See `:help 'list'` and `:help 'listchars'`
