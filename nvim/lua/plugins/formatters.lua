@@ -36,6 +36,7 @@ return {
 
 		-- Define formatters
 		formatters_by_ft = {
+			sh = { "shfmt" },
 			lua = { "stylua" },
 			python = { "ruff_format" },
 			json = { "jq" },

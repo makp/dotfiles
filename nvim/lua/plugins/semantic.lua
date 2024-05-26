@@ -170,6 +170,7 @@ return {
 			"jsonlint", -- JSON linter
 			"mdformat", -- Markdown formatter
 			"markdownlint", -- Markdown linter
+			"shfmt", -- Shell script formatter
 		})
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
