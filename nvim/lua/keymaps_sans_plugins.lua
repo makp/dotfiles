@@ -101,3 +101,29 @@ end
 vim.keymap.set({ "n", "v" }, "<leader>ri", function()
 	InspectCode()
 end, { desc = "Inspect code" })
+
+-- Run code assistant
+-- FIXME: Add information about the filetype of the buffer
+local function run_code_assistant(mode, buffer_txt)
+	local py_cmd = "code_assistant.py"
+	hf.run_cmd_async_and_display_buf(py_cmd, {
+		buffer_txt,
+		mode,
+	})
+end
+
+function RunCodeAssistant()
+	local buffer_txt = hf.get_text()
+	local opts = { "explain", "optimize" }
+	hf.select_one_option(opts, function(choice)
+		if choice then
+			run_code_assistant(choice, buffer_txt)
+		else
+			print("No action selected!")
+		end
+	end)
+end
+
+vim.keymap.set({ "n", "v" }, "<localleader>cA", function()
+	RunCodeAssistant()
+end, { desc = "Code [A]ssistant" })

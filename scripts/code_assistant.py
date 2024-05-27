@@ -43,7 +43,7 @@ improvements using Markdown for improved readability.
 """
 
 
-def explain_code(content, temperature, model, max_tokens=500):
+def explain_code(content, temperature, model=MODEL_BASIC, max_tokens=500):
     """Explain code."""
     response = CLIENT.chat.completions.create(
         model=model,
@@ -57,7 +57,7 @@ def explain_code(content, temperature, model, max_tokens=500):
     return print(response.choices[0].message.content)
 
 
-def optimize_code(content, temperature, model):
+def optimize_code(content, temperature, model=MODEL_ADVANCED):
     """Optimize code."""
     response = CLIENT.chat.completions.create(
         model=model,
@@ -73,9 +73,9 @@ def optimize_code(content, temperature, model):
 def process_code(content, mode, temperature):
     """Process code."""
     if mode == "explain":
-        explain_code(content, temperature, model=MODEL_BASIC)
+        explain_code(content, temperature)
     elif mode == "optimize":
-        optimize_code(content, temperature, model=MODEL_ADVANCED)
+        optimize_code(content, temperature)
     else:
         raise ValueError("Invalid mode.")
 
@@ -83,5 +83,5 @@ def process_code(content, mode, temperature):
 if __name__ == "__main__":
     content = sys.argv[1]
     mode = sys.argv[2]
-    temperature = float(sys.argv[3]) if len(sys.argv) > 3 else 0
+    temperature = float(sys.argv[3]) if len(sys.argv) > 3 else 1
     process_code(content, mode, temperature)
