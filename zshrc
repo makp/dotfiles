@@ -255,9 +255,9 @@ function zvm_after_init() {
 alias c="sgpt --model '${OPENAI_BASIC}' --temperature 1 "
 alias cc="sgpt --model '${OPENAI_ADVANCED}' --temperature 1 "
 
-# Editors
-alias em="emacsclient -t "
-alias n="nvim ."
+# Nvim
+alias nf="nvim \$(fzf)"
+alias ng="run_rg.sh"
 
 # Git
 alias cg="cd \$(git rev-parse --show-toplevel)"  # cd to root git repo
