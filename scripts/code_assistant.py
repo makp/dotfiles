@@ -28,6 +28,12 @@ CODE_EXPLAIN = """
 explanation must be clear and concise.
 """
 
+CODE_EXPLAIN_LIGHT = """
+*Task*: Briefly explain the provided {programming_lang} code snippet.
+
+*Output*: Use Markdown to format the output for better readability.
+"""
+
 
 CODE_OPTIMIZE = """
 *Task*: Optimize the provided code snippet for performance in {programming_lang}.
@@ -64,7 +70,21 @@ def explain_code(content, lang, temperature, model=MODEL_BASIC):
     return print(explanation)
 
 
+def explain_code_light(content, lang, temperature, model=MODEL_BASIC):
+    """Explain code."""
+    msg_template = CODE_EXPLAIN_LIGHT
+    explanation = create_completion(content, lang, temperature, model, msg_template)
+    return print(explanation)
+
+
 def optimize_code(content, lang, temperature, model=MODEL_ADVANCED):
+    """Optimize code."""
+    msg_template = CODE_OPTIMIZE
+    optimization = create_completion(content, lang, temperature, model, msg_template)
+    return print(optimization)
+
+
+def optimize_code_light(content, lang, temperature, model=MODEL_BASIC):
     """Optimize code."""
     msg_template = CODE_OPTIMIZE
     optimization = create_completion(content, lang, temperature, model, msg_template)
@@ -73,7 +93,12 @@ def optimize_code(content, lang, temperature, model=MODEL_ADVANCED):
 
 def process_code(content, lang, mode, temperature):
     """Process code based on the specified mode."""
-    mode_functions = {"explain": explain_code, "optimize": optimize_code}
+    mode_functions = {
+        "explain": explain_code,
+        "explain_light": explain_code_light,
+        "optimize": optimize_code,
+        "optimize_light": optimize_code_light,
+    }
     try:
         mode_functions[mode](content, lang, temperature)
     except KeyError:

@@ -115,7 +115,7 @@ end
 
 function RunCodeAssistant()
 	local buffer_txt = hf.get_text()
-	local opts = { "explain", "optimize" }
+	local opts = { "explain", "optimize", "explain_light", "optmize_light" }
 	hf.select_one_option(opts, function(choice)
 		if choice then
 			run_code_assistant(choice, buffer_txt)
@@ -125,6 +125,17 @@ function RunCodeAssistant()
 	end)
 end
 
+local function code_explain_light()
+	local buffer_txt = hf.get_text()
+	local filetype = vim.bo.filetype
+	local py_cmd = "code_assistant.py"
+	hf.run_cmd_async_and_display_floating_win(py_cmd, { buffer_txt, filetype, "explain_light" })
+end
+
 vim.keymap.set({ "n", "v" }, "<localleader>cA", function()
 	RunCodeAssistant()
 end, { desc = "Code [A]ssistant" })
+
+vim.keymap.set({ "n", "v" }, "<localleader>ce", function()
+	code_explain_light()
+end, { desc = "Code [e]xplain light" })

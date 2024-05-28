@@ -260,35 +260,6 @@ function H.select_one_option(menu_opts, callback)
 	end)
 end
 
-function create_floating_win(msg)
-	-- Create buffer to display in the floating window
-	local buf = vim.api.nvim_create_buf(false, true)
-
-	-- Set the buffer style
-	local width = 50
-	local height = 10
-	local opts = {
-		relative = "cursor",
-		width = width,
-		height = height,
-		col = 1,
-		row = 1,
-		style = "minimal",
-		border = "rounded", -- Opts: 'single', 'double', 'rounded', 'solid', or 'shadow'
-	}
-
-	-- Set keymaps to close the window
-	vim.api.nvim_buf_set_keymap(buf, "n", "<C-c>", "<cmd>close<CR>", { noremap = true, silent = true })
-
-	-- Create the floating window
-	-- `true` indicates the win should be focused immediately
-	vim.api.nvim_open_win(buf, true, opts)
-
-	-- Set the content of the buffer
-	local lines = vim.split(msg, "\n")
-	vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
-end
-
 local function extract_comment_symbol()
 	local comment_string = vim.bo.commentstring
 	if not comment_string or comment_string == "" then
@@ -327,7 +298,46 @@ function H.move_to_next_code_line()
 	end
 end
 
--- vim.keymap.set("n", "<localleader>t", move_to_next_code_line)
+local function create_floating_win(msg)
+	-- Create buffer to display in the floating window
+	local buf = vim.api.nvim_create_buf(false, true)
+
+	-- Set the buffer style
+	local width = 50
+	local height = 10
+	local opts = {
+		relative = "cursor",
+		width = width,
+		height = height,
+		col = 1,
+		row = 1,
+		style = "minimal",
+		border = "rounded", -- Opts: 'single', 'double', 'rounded', 'solid', or 'shadow'
+	}
+
+	-- Set keymaps to close the window
+	vim.api.nvim_buf_set_keymap(buf, "n", "<C-c>", "<cmd>close<CR>", { noremap = true, silent = true })
+
+	-- Create the floating window
+	-- `true` indicates the win should be focused immediately
+	vim.api.nvim_open_win(buf, true, opts)
+
+	-- Set the content of the buffer
+	local lines = vim.split(msg, "\n")
+	vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+end
+
+function H.run_cmd_async_and_display_floating_win(cmd, args)
+	run_cmd_async(cmd, args, function(result)
+		-- Vim cmds cannot be called within a lua loop callback. So, we need to
+		-- schedule them. See also `:help vim.schedule_wrap()` for when you need to a
+		-- wrap a function that needs to be scheduled multiple times with different
+		-- arguments.
+		vim.schedule(function()
+			create_floating_win(result)
+		end)
+	end)
+end -- vim.keymap.set("n", "<localleader>t", move_to_next_code_line)
 
 -- Return the table
 return H
