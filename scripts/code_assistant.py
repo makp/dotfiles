@@ -15,7 +15,7 @@ if not MODEL_ADVANCED or not MODEL_BASIC:
     raise ValueError("Please set the environment variables with GPT model names.")
 
 CODE_EXPLAIN = """
-*Task*: Provide an explanation of the provided code snippet.
+*Task*: Provide an explanation of the provided code snippet for {programming_lang}.
 
 *Requirements*:
 - Describe the purpose of the code.
@@ -29,7 +29,7 @@ explanation must be clear and concise.
 
 
 CODE_OPTIMIZE = """
-*Task*: Optimize the provided code snippet for performance.
+*Task*: Optimize the provided code snippet for performance in {programming_lang}.
 
 *Requirements*:
 - Boost efficiency by considering reductions in time complexity and memory usage.
@@ -43,45 +43,45 @@ improvements using Markdown for improved readability.
 """
 
 
-def explain_code(content, temperature, model=MODEL_BASIC, max_tokens=500):
+def explain_code(content, lang, temperature, model=MODEL_BASIC, max_tokens=500):
     """Explain code."""
     response = CLIENT.chat.completions.create(
         model=model,
         max_tokens=max_tokens,
         temperature=temperature,
         messages=[
-            {"role": "system", "content": f"{CODE_EXPLAIN}"},
+            {"role": "system", "content": CODE_EXPLAIN.format(programming_lang=lang)},
             {"role": "user", "content": content},
         ],
     )
     return print(response.choices[0].message.content)
 
 
-def optimize_code(content, temperature, model=MODEL_ADVANCED):
+def optimize_code(content, lang, temperature, model=MODEL_ADVANCED):
     """Optimize code."""
     response = CLIENT.chat.completions.create(
         model=model,
         temperature=temperature,
         messages=[
-            {"role": "system", "content": f"{CODE_OPTIMIZE}"},
+            {"role": "system", "content": CODE_OPTIMIZE.format(programming_lang=lang)},
             {"role": "user", "content": content},
         ],
     )
     return print(response.choices[0].message.content)
 
 
-def process_code(content, mode, temperature):
-    """Process code."""
-    if mode == "explain":
-        explain_code(content, temperature)
-    elif mode == "optimize":
-        optimize_code(content, temperature)
-    else:
+def process_code(content, lang, mode, temperature):
+    """Process code based on the specified mode."""
+    mode_functions = {"explain": explain_code, "optimize": optimize_code}
+    try:
+        mode_functions[mode](content, lang, temperature)
+    except KeyError:
         raise ValueError("Invalid mode.")
 
 
 if __name__ == "__main__":
     content = sys.argv[1]
-    mode = sys.argv[2]
-    temperature = float(sys.argv[3]) if len(sys.argv) > 3 else 1
-    process_code(content, mode, temperature)
+    lang = sys.argv[2]
+    mode = sys.argv[3]
+    temperature = float(sys.argv[4]) if len(sys.argv) > 4 else 1
+    process_code(content, lang, mode, temperature)

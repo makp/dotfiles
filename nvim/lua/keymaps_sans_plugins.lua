@@ -103,11 +103,12 @@ vim.keymap.set({ "n", "v" }, "<leader>ri", function()
 end, { desc = "Inspect code" })
 
 -- Run code assistant
--- FIXME: Add information about the filetype of the buffer
 local function run_code_assistant(mode, buffer_txt)
 	local py_cmd = "code_assistant.py"
+	local lang = vim.bo.filetype
 	hf.run_cmd_async_and_display_buf(py_cmd, {
 		buffer_txt,
+		lang,
 		mode,
 	})
 end
