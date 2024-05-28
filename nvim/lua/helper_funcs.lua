@@ -78,6 +78,7 @@ local function create_buffer(buffer_name, output)
 		vim.api.nvim_command("wincmd l")
 
 		vim.api.nvim_command("enew")
+		vim.opt_local.filetype = "markdown"
 		buffer_id = vim.api.nvim_get_current_buf()
 		vim.api.nvim_buf_set_name(buffer_id, buffer_name)
 
@@ -259,12 +260,13 @@ function H.select_one_option(menu_opts, callback)
 	end)
 end
 
-function create_floating_win()
-	-- Define buffer and window options
+function create_floating_win(msg)
+	-- Create buffer to display in the floating window
 	local buf = vim.api.nvim_create_buf(false, true)
+
+	-- Set the buffer style
 	local width = 50
 	local height = 10
-
 	local opts = {
 		relative = "cursor",
 		width = width,
@@ -275,11 +277,15 @@ function create_floating_win()
 		border = "rounded", -- Opts: 'single', 'double', 'rounded', 'solid', or 'shadow'
 	}
 
-	-- Create the window
+	-- Set keymaps to close the window
+	vim.api.nvim_buf_set_keymap(buf, "n", "<C-c>", "<cmd>close<CR>", { noremap = true, silent = true })
+
+	-- Create the floating window
+	-- `true` indicates the win should be focused immediately
 	vim.api.nvim_open_win(buf, true, opts)
 
 	-- Set the content of the buffer
-	local lines = { "Floating window!", "Here is some info about the code." }
+	local lines = vim.split(msg, "\n")
 	vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
 end
 
