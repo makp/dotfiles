@@ -20,11 +20,11 @@ vim.keymap.set("n", "[b", ":bprevious<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "]<space>", "o<Esc>k", { noremap = true, silent = true })
 vim.keymap.set("n", "[<space>", "O<Esc>j", { noremap = true, silent = true })
 
---[[ -- Use j/k to move visual lines instead of actual lines
+-- Use j/k to move visual lines instead of actual lines
 vim.keymap.set("n", "j", "gj", { noremap = true })
 vim.keymap.set("n", "k", "gk", { noremap = true })
 vim.keymap.set("n", "gj", "j", { noremap = true })
-vim.keymap.set("n", "gk", "k", { noremap = true }) ]]
+vim.keymap.set("n", "gk", "k", { noremap = true })
 
 -- Load helper functions
 local hf = require("helper_funcs")

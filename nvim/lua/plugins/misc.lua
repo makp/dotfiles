@@ -122,8 +122,9 @@ return {
 		config = function()
 			require("oil").setup({
 				keymaps = {
-					["<C-s>"] = "actions.change_sort", -- it was vsplit
-					["<C-h>"] = "actions.toggle_hidden", -- it was split
+					["<A-s>"] = "actions.change_sort",
+					["<C-h>"] = false, -- it was split
+					["<A-h>"] = "actions.toggle_hidden",
 					["gs"] = "actions.select_split",
 					["gv"] = "actions.select_vsplit",
 					["<C-l>"] = false, -- it was refresh
