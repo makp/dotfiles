@@ -39,55 +39,50 @@ Further instructions:
 """
 
 
-def write_short_msg(content, temperature, model=MODEL_BASIC, max_tokens=500):
-    """Write a concise email with the provided content."""
+def proofread(content, temperature, model, msg_template):
+    """Proofread content."""
     response = CLIENT.chat.completions.create(
         model=model,
-        max_tokens=max_tokens,
         temperature=temperature,
         messages=[
-            {"role": "system", "content": f"{EMAIL_MAIN}\n{PROSE_STYLE}"},
+            {"role": "system", "content": msg_template},
             {"role": "user", "content": content},
         ],
     )
-    return print(response.choices[0].message.content)
+    return response.choices[0].message.content
+
+
+def write_short_msg(content, temperature, model=MODEL_BASIC):
+    """Write a concise email with the provided content."""
+    msg_template = f"{EMAIL_MAIN}\n{PROSE_STYLE}"
+    email = proofread(content, temperature, model, msg_template)
+    return print(email)
 
 
 def refine_prose(content, temperature, model=MODEL_BASIC):
     """Revise prose."""
-    response = CLIENT.chat.completions.create(
-        model=model,
-        temperature=temperature,
-        messages=[
-            {"role": "system", "content": f"{PROSE_MAIN}\n{PROSE_STYLE}"},
-            {"role": "user", "content": content},
-        ],
-    )
-    return print(response.choices[0].message.content)
+    msg_template = f"{PROSE_MAIN}\n{PROSE_STYLE}"
+    response = proofread(content, temperature, model, msg_template)
+    return print(response)
 
 
 def refine_academic_prose(content, temperature, model=MODEL_ADVANCED):
     """Revise academic prose."""
-    response = CLIENT.chat.completions.create(
-        model=model,
-        temperature=temperature,
-        messages=[
-            {"role": "system", "content": f"{PROSE_MAIN}\n{ACADEMIC_STYLE}"},
-            {"role": "user", "content": content},
-        ],
-    )
-    return print(response.choices[0].message.content)
+    msg_template = f"{PROSE_MAIN}\n{ACADEMIC_STYLE}"
+    response = proofread(content, temperature, model, msg_template)
+    return print(response)
 
 
 def process_prose(content, mode, temperature):
     """Process text."""
-    if mode == "email":
-        write_short_msg(content, temperature)
-    elif mode == "academic":
-        refine_academic_prose(content, temperature)
-    elif mode == "prose":
-        refine_prose(content, temperature)
-    else:
+    mode_functions = {
+        "email": write_short_msg,
+        "academic": refine_academic_prose,
+        "prose": refine_prose,
+    }
+    try:
+        mode_functions[mode](content, temperature)
+    except KeyError:
         raise ValueError("Invalid mode.")
 
 

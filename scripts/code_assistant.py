@@ -14,6 +14,7 @@ MODEL_BASIC = os.environ.get("OPENAI_BASIC")
 if not MODEL_ADVANCED or not MODEL_BASIC:
     raise ValueError("Please set the environment variables with GPT model names.")
 
+
 CODE_EXPLAIN = """
 *Task*: Provide an explanation of the provided code snippet for {programming_lang}.
 
@@ -43,31 +44,31 @@ improvements using Markdown for improved readability.
 """
 
 
-def explain_code(content, lang, temperature, model=MODEL_BASIC, max_tokens=500):
-    """Explain code."""
+def create_completion(content, lang, temperature, model, msg_template):
+    """Create a completion."""
     response = CLIENT.chat.completions.create(
         model=model,
-        max_tokens=max_tokens,
         temperature=temperature,
         messages=[
-            {"role": "system", "content": CODE_EXPLAIN.format(programming_lang=lang)},
+            {"role": "system", "content": msg_template.format(programming_lang=lang)},
             {"role": "user", "content": content},
         ],
     )
-    return print(response.choices[0].message.content)
+    return response.choices[0].message.content
+
+
+def explain_code(content, lang, temperature, model=MODEL_BASIC):
+    """Explain code."""
+    msg_template = CODE_EXPLAIN
+    explanation = create_completion(content, lang, temperature, model, msg_template)
+    return print(explanation)
 
 
 def optimize_code(content, lang, temperature, model=MODEL_ADVANCED):
     """Optimize code."""
-    response = CLIENT.chat.completions.create(
-        model=model,
-        temperature=temperature,
-        messages=[
-            {"role": "system", "content": CODE_OPTIMIZE.format(programming_lang=lang)},
-            {"role": "user", "content": content},
-        ],
-    )
-    return print(response.choices[0].message.content)
+    msg_template = CODE_OPTIMIZE
+    optimization = create_completion(content, lang, temperature, model, msg_template)
+    return print(optimization)
 
 
 def process_code(content, lang, mode, temperature):
