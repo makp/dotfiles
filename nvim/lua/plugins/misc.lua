@@ -121,6 +121,16 @@ return {
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
 			require("oil").setup({
+				keymaps = {
+					["<C-s>"] = "actions.change_sort", -- it was vsplit
+					["<C-h>"] = "actions.toggle_hidden", -- it was split
+					["gs"] = "actions.select_split",
+					["gv"] = "actions.select_vsplit",
+					["<C-l>"] = false, -- it was refresh
+					["gr"] = "actions.refresh",
+					["`"] = false, -- it was cd
+					["g."] = "actions.cd", -- it was toggle_hidden
+				},
 				view_options = { show_hidden = true },
 			})
 			vim.keymap.set("n", "<leader>o-", "<cmd>Oil<cr>", { desc = "parent directory" })
