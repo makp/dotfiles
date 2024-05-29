@@ -77,7 +77,7 @@ local function inspect_code_with_gpt(model, filepath)
 
 	-- Run sgpt --repl in a terminal buffer
 	local cmd = string.format("sgpt --model %s --repl %s < %s", model, chat_name, filepath)
-	hf.run_cmd_in_term_buf(cmd)
+	hf.run_cmd_in_alacritty(cmd)
 end
 
 function InspectCode()
@@ -90,7 +90,7 @@ function InspectCode()
 	local opts = { model_basic, model_advanced }
 	hf.select_one_option(opts, function(choice)
 		if choice then
-			vim.cmd("vsplit")
+			-- vim.cmd("vsplit")
 			inspect_code_with_gpt(choice, filepath)
 		else
 			print("No model selected!")

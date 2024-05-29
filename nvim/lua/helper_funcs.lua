@@ -79,6 +79,7 @@ local function create_buffer(buffer_name, output)
 
 		vim.api.nvim_command("enew")
 		vim.opt_local.filetype = "markdown"
+		vim.opt_local.foldlevel = 99
 		buffer_id = vim.api.nvim_get_current_buf()
 		vim.api.nvim_buf_set_name(buffer_id, buffer_name)
 
@@ -232,6 +233,39 @@ function H.run_cmd_in_term_buf(cmd)
 
 	-- Start insert mode
 	vim.cmd("startinsert")
+end
+
+function H.run_cmd_in_tmux_pane(cmd)
+	-- Check if `cmd` is valid
+	if type(cmd) ~= "string" or cmd == "" then
+		print("Error: Invalid command")
+		return
+	end
+
+	-- Create a new tmux pane and get its ID
+	-- `-P`: preview mode
+	local new_pane_id = vim.fn.system("tmux split-window -P -h -F '#{pane_id}'")
+	new_pane_id = vim.fn.trim(new_pane_id) -- Remove trailing newline
+
+	-- Run the cmd in a tmux pane
+	local escaped_cmd = vim.fn.shellescape(cmd)
+	local tmux_cmd = string.format("tmux send-keys -t %s %s Enter", new_pane_id, escaped_cmd)
+	vim.fn.system(tmux_cmd)
+end
+
+function H.run_cmd_in_alacritty(cmd)
+	-- Check if `cmd` is valid
+	if type(cmd) ~= "string" or cmd == "" then
+		print("Error: Invalid command")
+		return
+	end
+
+	local escaped_cmd = vim.fn.shellescape(cmd .. "; exec zsh")
+
+	local alacritty_cmd
+
+	alacritty_cmd = string.format("alacritty -e zsh -c %s", escaped_cmd)
+	vim.fn.system(alacritty_cmd)
 end
 
 local function is_dir(path)
