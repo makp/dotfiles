@@ -8,6 +8,26 @@ return {
 		-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
 	},
 	config = function()
-		vim.keymap.set('n', '<leader>ot', ':Neotree filesystem<CR>')
-	end
+		require("neo-tree").setup({
+			window = {
+				mappings = {
+					["<C-c>"] = "close_window",
+					["gv"] = "open_vsplit", -- not the best keymap
+					["gs"] = "open_split",
+				},
+			},
+			filesystem = {
+				follow_current_file = { enabled = true },
+			},
+		})
+		vim.keymap.set("n", "<leader>ob", ":Neotree buffers<CR>", { desc = "Open [b]uffers using neotree" })
+		vim.keymap.set("n", "<leader>of", ":Neotree reveal toggle<CR>", { desc = "Toggle [f]ilesystem with neotree" })
+
+		vim.keymap.set(
+			"n",
+			"<leader>gt",
+			":Neotree reveal git_status toggle<CR>",
+			{ desc = "Toggle git status with neo[t]ree" }
+		)
+	end,
 }
