@@ -130,6 +130,7 @@ return {
 					["<C-l>"] = false, -- it was refresh
 					["gr"] = "actions.refresh",
 					["`"] = false, -- it was cd
+					["~"] = false, -- it was tcd
 					["g."] = "actions.cd", -- it was toggle_hidden
 				},
 				view_options = { show_hidden = true },
