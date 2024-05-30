@@ -248,7 +248,7 @@ function H.run_cmd_in_tmux_pane(cmd)
 	new_pane_id = vim.fn.trim(new_pane_id) -- Remove trailing newline
 
 	-- Run the cmd in a tmux pane
-	local escaped_cmd = vim.fn.shellescape(cmd)
+	local escaped_cmd = vim.fn.shellescape(cmd .. "; tmux kill-pane -t " .. new_pane_id)
 	local tmux_cmd = string.format("tmux send-keys -t %s %s Enter", new_pane_id, escaped_cmd)
 	vim.fn.system(tmux_cmd)
 end

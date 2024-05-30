@@ -76,8 +76,8 @@ local function inspect_code_with_gpt(model, filepath)
 	end
 
 	-- Run sgpt --repl in a terminal buffer
-	local cmd = string.format("sgpt --model %s --repl %s < %s", model, chat_name, filepath)
-	hf.run_cmd_in_alacritty(cmd)
+	local cmd = string.format("sgpt --model %s --temperature 1 --repl %s < %s", model, chat_name, filepath)
+	hf.run_cmd_in_tmux_pane(cmd)
 end
 
 function InspectCode()
