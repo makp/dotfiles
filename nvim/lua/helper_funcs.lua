@@ -264,7 +264,7 @@ function H.run_cmd_in_alacritty(cmd)
 
 	local alacritty_cmd
 
-	alacritty_cmd = string.format("alacritty -e zsh -c %s", escaped_cmd)
+	alacritty_cmd = string.format("alacritty -e zsh -c %s &", escaped_cmd)
 	vim.fn.system(alacritty_cmd)
 end
 
