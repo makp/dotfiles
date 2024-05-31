@@ -1,6 +1,6 @@
 -- Config for linters
--- `nvim-lint` reports its results through the `vim.diagnostic` module.
 return {
+	-- `nvim-lint` reports its results through the `vim.diagnostic` module.
 	"mfussenegger/nvim-lint",
 	event = { "BufReadPre", "BufNewFile" },
 	config = function()
@@ -9,6 +9,7 @@ return {
 			json = { "jsonlint" },
 			markdown = { "markdownlint" },
 			python = { "ruff" },
+			-- tex = { "chktex" }, -- texlab is set to run chktex
 			-- markdown = { "vale" },
 			-- text = { "vale" },
 		}

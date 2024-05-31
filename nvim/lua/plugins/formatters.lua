@@ -41,6 +41,8 @@ return {
 			python = { "ruff_format" },
 			json = { "jq" },
 			markdown = { "markdownlint", "injected" },
+			-- tex = { "latexindent" }, -- texlab already does this
+			bib = { "bibtex-tidy" }, -- `bibtex-tidy` chockes on large files
 			-- Run `trim_whitespace` on all files
 			["*"] = { "trim_whitespace" },
 			-- Run `` on all files that don't have a formatter configured

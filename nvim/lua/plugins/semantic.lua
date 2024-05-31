@@ -171,6 +171,8 @@ return {
 			"mdformat", -- Markdown formatter
 			"markdownlint", -- Markdown linter
 			"shfmt", -- Shell script formatter
+			-- "latexindent", -- LaTeX formatter
+			"bibtex-tidy", -- BibTeX formatter
 		})
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
