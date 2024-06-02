@@ -13,7 +13,7 @@ return {
 		{ "j-hui/fidget.nvim", opts = {} },
 
 		-- Configure Lua LSP for Neovim config, runtime and plugins
-		{ "folke/neodev.nvim", opts = {} },
+		{ "folke/lazydev.nvim", ft = "lua", opts = {} },
 	},
 	config = function()
 		--  This function runs when LSP attaches to a particular buffer.
