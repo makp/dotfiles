@@ -23,5 +23,8 @@ vim.opt.rtp:prepend(lazypath)
 -- Load lua files in plugin folder
 require("lazy").setup("plugins")
 
+-- Run certain routines after LSP attach
+require("lsp_after_attach")
+
 -- Load Lua helper functions
 require("helper_funcs")
