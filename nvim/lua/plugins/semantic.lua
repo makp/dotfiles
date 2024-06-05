@@ -74,4 +74,7 @@ return {
 		"j-hui/fidget.nvim",
 		opts = {},
 	},
+	{
+		"aznhe21/actions-preview.nvim",
+	},
 }

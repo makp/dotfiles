@@ -35,7 +35,8 @@ local function setup_mappings(buf)
 		{ "<localleader>cT", telescope.lsp_type_definitions, "jump to [T]ype" },
 
 		{ "<localleader>cr", vim.lsp.buf.rename, "[r]ename variable" },
-		{ "<localleader>ca", vim.lsp.buf.code_action, "execute [a]ction" },
+		-- { "<localleader>ca", vim.lsp.buf.code_action, "execute [a]ction" },
+		{ "<localleader>ca", require("actions-preview").code_actions, "execute [a]ction" },
 	}
 
 	for _, map_args in ipairs(mappings) do
