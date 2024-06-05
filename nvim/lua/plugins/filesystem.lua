@@ -17,9 +17,10 @@ return {
 						["gs"] = "open_split",
 					},
 				},
-				-- filesystem = {
-				-- 	follow_current_file = { enabled = true },
-				-- },
+				filesystem = {
+					hijack_netrw_behavior = "disabled",
+					-- follow_current_file = { enabled = true },
+				},
 			})
 			vim.keymap.set("n", "<leader>ob", ":Neotree buffers<CR>", { desc = "Open [b]uffers using neotree" })
 			vim.keymap.set(
