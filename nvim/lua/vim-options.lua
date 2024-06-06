@@ -1,94 +1,122 @@
 -- Setting options
 -- See `:help vim.opt` and `:help option-list`
 
+local opt = vim.opt
+
 -- Configure indentation
-vim.opt.expandtab = true -- Insert spaces when <Tab> is pressed
-vim.opt.tabstop = 2 -- <Tab> width
-vim.opt.softtabstop = 2 -- Number of spaces for each <Tab> press
-vim.opt.shiftwidth = 2 -- Number of spaces with < and > cmds
+opt.expandtab = true -- Insert spaces when <Tab> is pressed
+opt.tabstop = 2 -- <Tab> width
+opt.softtabstop = 2 -- Number of spaces for each <Tab> press
+opt.shiftwidth = 2 -- Number of spaces with < and > cmds
+opt.smartindent = true -- Autoindent when starting a new line
 
 vim.g.markdown_indent_level = 2 -- Default is 4
 
--- Set how neovim displays certain whitespace chars in the editor
---  See `:help 'list'` and `:help 'listchars'`
--- vim.opt.list = true
--- vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
-
 -- Use relative line numbers
-vim.opt.number = true
-vim.opt.relativenumber = true
+opt.number = true
+opt.relativenumber = true
 
 -- Show which line your cursor is on
-vim.opt.cursorline = true
+opt.cursorline = true
 
 -- Decrease update time
-vim.opt.updatetime = 250
+opt.updatetime = 250
 
 -- Enable mouse mode (e.g., useful for line splits)
-vim.opt.mouse = "a"
+opt.mouse = "a"
 
 -- Sync OS and Nvim clipboard
-vim.opt.clipboard = "unnamedplus"
+opt.clipboard = "unnamedplus"
 
 -- Use nerd font
 vim.g.have_nerd_font = true
 
 -- Enable breakindent
-vim.opt.breakindent = true
+opt.breakindent = true
 
 -- Save undo history
-vim.opt.undofile = true
+opt.undofile = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 10
+opt.scrolloff = 10
 
 -- Don't show the mode, since it's already in the status line
 -- vim.opt.showmode = false
 
 -- Case-insensitive searching unless \C or one or more capital letters in the search term
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
+opt.ignorecase = true
+opt.smartcase = true
 
 -- Keep signcolumn on by default
-vim.opt.signcolumn = "yes"
+opt.signcolumn = "yes"
 
 -- Configure how new splits should be opened
-vim.opt.splitright = true
-vim.opt.splitbelow = true
+opt.splitright = true
+opt.splitbelow = true
 
 -- Preview substitutions live as you type
-vim.opt.inccommand = "split"
+opt.inccommand = "split"
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
-vim.opt.hlsearch = true
+opt.hlsearch = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- Set spell language
-vim.opt.spelllang = "en_us"
+opt.spelllang = "en_us"
 
 -- Enable folding in markdown buffers
 vim.g.markdown_folding = 1
 
 -- Wrap lines at word boundaries
-vim.opt.linebreak = true
+opt.linebreak = true
+
+-- Scroll with screen lines
+opt.smoothscroll = true
+
+-- Set minimum window width
+opt.winminwidth = 5
 
 -- Autocommands
 -- See `:help lua-guide-autocommands`
 
+local function add_augroup(name)
+	return vim.api.nvim_create_augroup("mk_" .. name, { clear = true })
+end
+
 -- Highlight when yanking (copying) text
 --  See `:help vim.highlight.on_yank()`
 vim.api.nvim_create_autocmd("TextYankPost", {
-	desc = "Highlight when yanking (copying) text",
-	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+	desc = "Highlight when yanking text",
+	group = add_augroup("highlight_yank"),
 	callback = function()
 		vim.highlight.on_yank()
 	end,
 })
 
--- Don't automatically create commented lines with 'o'/'O' commds in Lua
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "lua",
+-- Resize splits if window got resized
+vim.api.nvim_create_autocmd({ "VimResized" }, {
+	group = add_augroup("resize_splits"),
 	callback = function()
-		vim.opt_local.formatoptions:remove("o")
+		local current_tab = vim.fn.tabpagenr()
+		vim.cmd("tabdo wincmd =")
+		vim.cmd("tabnext " .. current_tab)
+	end,
+})
+
+-- Go to last loc when opening a buffer
+vim.api.nvim_create_autocmd("BufReadPost", {
+	group = add_augroup("last_loc"),
+	callback = function(event)
+		local exclude = { "gitcommit" }
+		local buf = event.buf
+		if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].lazyvim_last_loc then
+			return
+		end
+		vim.b[buf].lazyvim_last_loc = true
+		local mark = vim.api.nvim_buf_get_mark(buf, '"')
+		local lcount = vim.api.nvim_buf_line_count(buf)
+		if mark[1] > 0 and mark[1] <= lcount then
+			pcall(vim.api.nvim_win_set_cursor, 0, mark)
+		end
 	end,
 })
