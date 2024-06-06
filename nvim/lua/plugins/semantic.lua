@@ -32,6 +32,7 @@ return {
 						},
 					},
 				},
+				marksman = {},
 				lua_ls = {
 					-- cmd = {...},
 					-- filetypes = { ...},
@@ -79,6 +80,7 @@ return {
 		opts = {},
 	},
 	{
+		-- Preview LSP code actions
 		"aznhe21/actions-preview.nvim",
 	},
 }
