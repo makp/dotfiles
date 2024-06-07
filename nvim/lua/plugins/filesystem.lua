@@ -22,7 +22,7 @@ return {
 					-- follow_current_file = { enabled = true },
 				},
 			})
-			vim.keymap.set("n", "<leader>ob", ":Neotree buffers<CR>", { desc = "Open [b]uffers using neotree" })
+			vim.keymap.set("n", "<leader>ob", ":Neotree buffers toggle<CR>", { desc = "Open [b]uffers using neotree" })
 			vim.keymap.set(
 				"n",
 				"<leader>of",

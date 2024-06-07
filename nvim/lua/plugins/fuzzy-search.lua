@@ -92,5 +92,8 @@ return {
 
 		-- Diagnostics
 		vim.keymap.set("n", "<leader>dj", builtin.diagnostics, { desc = "[j]ump" })
+
+		-- Spell
+		vim.keymap.set("n", "z=", builtin.spell_suggest, { desc = "spell [c]heck" })
 	end,
 }
