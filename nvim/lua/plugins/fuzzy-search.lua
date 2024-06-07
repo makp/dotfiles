@@ -5,10 +5,10 @@ return {
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		{
+			-- Enable fzf algorithm for Telescope
 			"nvim-telescope/telescope-fzf-native.nvim",
 
-			-- `build` is used to run some command when the plugin is installed/updated.
-			-- This is only run then, not every time Neovim starts up.
+			-- `build` is used to run some command when the plugin is installed/updated. This is only run then, not every time Neovim starts up.
 			build = "make",
 
 			-- `cond` is a condition used to determine whether this plugin should be
@@ -19,17 +19,19 @@ return {
 		},
 		{ "nvim-telescope/telescope-ui-select.nvim" },
 		{ "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
+		{ "nvim-telescope/telescope-bibtex.nvim" },
 	},
 	-- [[ Configure Telescope ]]
 	-- See `:help telescope` and `:help telescope.setup()`
 	config = function()
+		local bibtex_actions = require("telescope-bibtex.actions")
+
 		require("telescope").setup({
-			-- Default mappings / updates / etc.
-			-- Info: `:help telescope.setup()`
-			--
 			defaults = {
 				mappings = {
-					i = { ["<c-enter>"] = "to_fuzzy_refine" },
+					i = {
+						["<c-enter>"] = "to_fuzzy_refine",
+					},
 				},
 			},
 			-- pickers = {}
@@ -37,15 +39,26 @@ return {
 				["ui-select"] = {
 					require("telescope.themes").get_dropdown(),
 				},
+				bibtex = {
+					global_files = { "/home/makmiller/Documents/mydocs/tex-configs/references/evol.bib" },
+					mappings = {
+						i = {
+							["<CR>"] = bibtex_actions.key_append([[\citet{%s}]]),
+							["<C-b>"] = bibtex_actions.key_append([[\citep{%s}]]),
+						},
+					},
+				},
 			},
 		})
 
 		-- Enable Telescope extensions if they are installed
 		pcall(require("telescope").load_extension, "fzf")
 		pcall(require("telescope").load_extension, "ui-select")
+		pcall(require("telescope").load_extension, "bibtex")
 
-		-- See `:help telescope.builtin`
+		-- Keymaps
 		local builtin = require("telescope.builtin")
+
 		-- Help keymaps
 		vim.keymap.set("n", "<leader>ht", builtin.help_tags, { desc = "[t]ags" })
 		vim.keymap.set("n", "<leader>hk", builtin.keymaps, { desc = "[k]eymaps" })
