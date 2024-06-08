@@ -1,7 +1,7 @@
 -- LaTeX specific config
 
 -- Enable spell checking
-vim.opt_local.spell = true
+vim.opt_local.spell = false
 
 -- Keybindings
 -- Change latex environment
