@@ -13,8 +13,10 @@ vim.keymap.set("n", "<leader>dq", vim.diagnostic.setloclist, { desc = "[q]uickfi
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- Buffers
-vim.keymap.set("n", "]b", ":bnext<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "[b", ":bprevious<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "]b", "<cmd>bnext<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "]B", "<cmd>bfirst<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "[b", "<cmd>bprevious<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "[B", "<cmd>blast<CR>", { noremap = true, silent = true })
 
 -- Create lines before and after the cursor
 vim.keymap.set("n", "]<space>", "o<Esc>k", { noremap = true, silent = true })
