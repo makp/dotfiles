@@ -55,17 +55,18 @@ return {
 
 				-- Hunk operations
 				-- Visual mode
-				map("v", "<localleader>gs", function()
+				map("v", "<localleader>hs", function()
 					gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
 				end)
-				map("v", "<localleader>gr", function()
+				map("v", "<localleader>hr", function()
 					gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
 				end)
 				-- Normal mode
-				map("n", "<localleader>hs", function()
+				map("n", "<localleader>h<space>", function()
 					gitsigns.stage_hunk()
 					vim.cmd.normal("]h")
 				end)
+				map("n", "<localleader>hs", gitsigns.stage_hunk)
 				map("n", "<localleader>hu", gitsigns.undo_stage_hunk) -- undo last stage_hunk
 				map("n", "<localleader>hS", gitsigns.stage_buffer)
 				map("n", "<localleader>hr", gitsigns.reset_hunk) -- at the cursor position
