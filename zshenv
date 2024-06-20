@@ -19,7 +19,7 @@ export PATH
 # EDITOR is for programs that expect a line editor. VISUAL is for
 # screen-oriented programs.
 export EDITOR=/usr/bin/nvim
-export VISUAL=/home/makmiller/scripts/myscripts/edit.sh
+export VISUAL=/usr/bin/nvim
 export ALTERNATE_EDITOR=vim
 
 # Set CDPATH for completion
