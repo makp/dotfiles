@@ -9,7 +9,7 @@ fi
 
 # Set PATH
 # `/usr/bin/vendor_perl`: biber
-PATH="$PATH:/usr/bin/vendor_perl:$HOME/scripts/myscripts:$HOME/config-files/general/term-configs/scripts:"
+PATH="$PATH:/usr/bin/vendor_perl:$HOME/Documents/mydocs/config_files/scripts/:"
 if [ -d /opt/cuda/bin ]; then
 	PATH="$PATH:/opt/cuda/bin"
 fi
