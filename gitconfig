@@ -1,5 +1,5 @@
-# -*-conf-*-
 # !ln -s %:p ~/.gitconfig
+# vim: ft=gitconfig
 [user]
 	email = makmiller@gmail.com
 [alias]

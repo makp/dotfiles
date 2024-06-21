@@ -222,6 +222,17 @@ function zvm_after_init() {
 # bindkey '' autosuggest-accept # zsh-autosuggestions
 # bindkey '' expand-or-complete-prefix # vanilla autosuggestions
 
+# Enable zoxide if it is installed
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init zsh)"
+  alias cd="z"
+fi
+
+# Use `exa` instead of `ls` if it is installed
+if command -v exa >/dev/null 2>&1; then
+  alias ll="exa --color=always --all --long --git --no-user"
+  alias ls="exa --color=always --all --long --git --no-user --no-permissions --no-filesize --icons=always --no-time"
+fi
 
 ## PROMPT ----------
 
