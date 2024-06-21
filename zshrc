@@ -66,7 +66,7 @@ setopt pushd_silent # don't print the directory stack after pushd or popd
 # C-r: search history. Press C-r again to search by chronological order.
 if command -v fzf >/dev/null 2>&1; then
     # Enable fzf keybindings and completion
-    eval "$(fzf --zsh)"
+    source <(fzf --zsh)
     # Change trigger so that it doesn't conflict with zsh
     export FZF_COMPLETION_TRIGGER=',,'
     # Use `tree` to display directory structure
@@ -233,6 +233,15 @@ if command -v exa >/dev/null 2>&1; then
   alias ll="exa --color=always --all --long --git --no-user"
   alias ls="exa --color=always --all --long --git --no-user --no-permissions --no-filesize --icons=always --no-time"
 fi
+
+function ff() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		cd "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
 
 ## PROMPT ----------
 
