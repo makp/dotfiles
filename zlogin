@@ -1,4 +1,6 @@
-# -*-conf-*-
+# Login shell configuration file for zsh.
+# !ln -s %:p ~/.zlogin
+#
 # This file is only sourced in login shells. Because of this, it
 # focuses on processes that should happen at the start of the login
 # shell session.

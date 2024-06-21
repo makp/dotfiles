@@ -1,4 +1,6 @@
-# -*-conf-*-
+# Environment variables for ZSH
+# !ln -s %:p ~/.zshenv
+#
 # This file is sourced in all ZSH instances, including every
 # interactive and non-interactive shells.
 

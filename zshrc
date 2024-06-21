@@ -1,5 +1,7 @@
-# -*-conf-*-
 # Config for interactive shell sessions.
+# !ln -s %:p ~/.zshrc
+#
+# zsh/zprof is used to profile the shell startup time.
 
 # zmodload zsh/zprof
 

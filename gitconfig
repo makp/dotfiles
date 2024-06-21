@@ -1,5 +1,5 @@
 # -*-conf-*-
-# ~/.gitconfig
+# !ln -s %:p ~/.gitconfig
 [user]
 	email = makmiller@gmail.com
 [alias]

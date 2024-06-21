@@ -1,4 +1,5 @@
 -- Main entry point for neovim configuration
+-- !ln -s %:p:h $HOME/.config/nvim
 
 -- Change nvim default behavior
 require("vim-options")

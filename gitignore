@@ -1,6 +1,4 @@
-# ~/.gitignore_global
-# To add make this list global, run
-# git config --global core.excludesfile ~/.gitignore_global
+# !ln -s %:p ~/.gitignore_global
 *~
 _region_.*
 *.dvi
@@ -31,3 +29,4 @@ __pycache__/
 slides_*.pdf
 ltximg/
 TAGS
+
