@@ -1,4 +1,4 @@
-# ! ln -s %:p ~/.config/lazygit/config.yml
+# !ln -s %:p ~/.config/lazygit/config.yml
 git:
   paging:
     colorArg: always
