@@ -11,9 +11,9 @@ setopt NO_BEEP	      # disable beeping
 setopt ignore_eof     #
 setopt extended_glob  # turn on more powerful pattern matching features
 setopt correct	      # enable correction commands typed
-setopt notify	      # notify when jobs finish
+setopt notify	        # notify when jobs finish
 setopt auto_cd	      # don't require typing cd to change directories
-setopt NO_HUP	      # don't kill jobs when shell exits
+setopt NO_HUP	        # don't kill jobs when shell exits
 # setopt COMPLETE_ALIASES # autocomplete aliases
 
 # Map HOME, END, and DEL keys
@@ -21,81 +21,52 @@ bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line
 bindkey "\e[3~" delete-char
 
-bindkey "^[h" backward-kill-word # M-h
-
-# Enable vi mode
-bindkey -v
-
 ## Enable Powerlevel10k instant prompt
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# For ZSH, not just alphanumerics are part of a word, but other
-# symbols stated by the shell variable WORDCHARS. Making this
-# variable empty reproduce bash behavior.
-# WORDCHARS=*?_-.[]~=/&;!#$%^(){}<>  # default value
-# export WORDCHARS="?[]~=&;!#$%^(){}<>"  # removed symbols *./-_
+# Load colors
+autoload -U colors
+colors
+
 
 ## HISTORY --------
 
-# Key bindings for navigating history
-# bindkey "" down-line-or-history
-# bindkey "" up-line-or-history
-
 # History settings
-HISTSIZE=2000
-SAVEHIST=2000
+HISTSIZE=5000
+SAVEHIST=$HISTSIZE
 HISTFILE=~/.zsh_history
+HISTDUP=erase # Erase duplicates
 
+setopt appendhistory
+setopt share_history  # share history between shell instances
 setopt hist_ignore_all_dups
 setopt hist_ignore_space
-setopt share_history  # share history between shell instances
-
-DIRSTACKSIZE=41  # max directory stack size
-setopt pushd_ignore_dups # disable multiple copies same dir in the directory stack
-setopt autopushd  # make cd always behave like pushd
-setopt pushd_silent # don't print the directory stack after pushd or popd
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
 
 
 ## COMPLETION ------
 
-# Enable fzf if it is installed
-# C-t: pasted file/dir onto the command line.
-# M-c: cd into selected directory.
-# C-r: search history. Press C-r again to search by chronological order.
-if command -v fzf >/dev/null 2>&1; then
-    # Enable fzf keybindings and completion
-    source <(fzf --zsh)
-    # Change trigger so that it doesn't conflict with zsh
-    export FZF_COMPLETION_TRIGGER=',,'
-    # Use `tree` to display directory structure
-    export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
-fi
-
+# Enable compinit
+autoload -U compinit
+compinit
 
 # Use internal pager to display matches
 zmodload zsh/complist
 zstyle ':completion:*:default' list-prompt '%S%M matches%s'
 bindkey -M listscroll q send-break # q exits internal pager
 
-# Enable compinit
-autoload -U compinit
-compinit
-
-# Load colors
-autoload -U colors
-colors
-
 # Saner completion behavior
+# zstyle ':completion:*' menu select # activate menu selection
 zstyle ':completion:*' rehash true # rehash automatically
-zstyle ':completion:*' menu select # activate menu selection
 zstyle ':completion:*' verbose yes # print descriptions against each match
 zstyle ':completion:*' group-name '' # separate matches in distinct related groups
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS} # applies color scheme LS_COLORS
 zstyle ':completion:*:*:*:*:processes' force-list always # even if there is only one possible completion
 zstyle ':completion:*:cd:*' ignore-parents parent pwd # never suggest parent dir
-
 
 # Enable zstyle caching (for speed)
 zstyle ':completion:*' use-cache on
@@ -110,7 +81,6 @@ zstyle ':completion:*' cache-path ~/.zsh/cache
 # zstyle ':completion:*:messages' format '%B%U---- %d%u%b'
 # zstyle ':completion:*:warnings' format "%B$fg[red]%}---- no match for: $fg[white]%d%b"
 
-
 # Customize fuzzy matching
 zstyle ':completion:*' completer _expand_alias _complete _match _approximate # used completion funcs
 # zstyle ':completion:*' special-dirs true
@@ -119,7 +89,6 @@ zstyle ':completion:*:approximate:*' max-errors 1 numeric # max number of typos 
 zstyle -e ':completion:*:approximate:*' \
     max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3)))' # max number of errors
 # The number of errors allowed increase with the length of what you have typed so far
-
 
 # Customize auto-completion at specific contexts
 zstyle ':completion:*:*:*:*:processes' insert-ids menu yes select # process IDs
@@ -141,6 +110,24 @@ zstyle ':completion:*:*:okular:*' file-sort time
 # Enable the predict feature
 # autoload predict-on
 # predict-on
+
+# Enable fzf if it is installed
+# C-t: pasted file/dir onto the command line.
+# M-c: cd into selected directory.
+# C-r: search history. Press C-r again to search by chronological order.
+if command -v fzf >/dev/null 2>&1; then
+    # Enable fzf keybindings and completion
+    source <(fzf --zsh)
+    # Change trigger so that it doesn't conflict with zsh
+    export FZF_COMPLETION_TRIGGER=',,'
+    # Use `tree` to display directory structure
+    export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
+fi
+
+# Enable zoxide if it is installed
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init --cmd cd zsh)"
+fi
 
 # Enable ShellGPT completions
 _sgpt_zsh() {
@@ -188,7 +175,7 @@ VI_MODE_SET_CURSOR=true
 VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 
 # Enable some plugins
-plugins=(fzf-tab zsh-syntax-highlighting zsh-vi-mode zsh-autosuggestions copypath dirpersist)
+plugins=(fzf-tab zsh-syntax-highlighting zsh-vi-mode zsh-autosuggestions copypath)
 
 ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
 if [[ ! -d $ZSH_CACHE_DIR ]]; then
@@ -209,10 +196,6 @@ zstyle ':fzf-tab:*' switch-group '<' '>'
 # Continuous trigger key
 zstyle ':fzf-tab:*' continuous-trigger '/'
 
-# Preview dir contents with eza
-# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
-
-
 # Keybindings for completions
 # Insert mode
 function zvm_after_init() {
@@ -222,10 +205,8 @@ function zvm_after_init() {
 # bindkey '' autosuggest-accept # zsh-autosuggestions
 # bindkey '' expand-or-complete-prefix # vanilla autosuggestions
 
-# Enable zoxide if it is installed
-if command -v zoxide >/dev/null 2>&1; then
-  eval "$(zoxide init --cmd cd zsh)"
-fi
+
+## MISC UTILS --------
 
 # Use `exa` instead of `ls` if it is installed
 if command -v exa >/dev/null 2>&1; then
@@ -233,6 +214,7 @@ if command -v exa >/dev/null 2>&1; then
   alias ls="exa --color=always --all --long --git --no-user --no-permissions --no-filesize --icons=always --no-time"
 fi
 
+# File explorer
 function ff() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
 	yazi "$@" --cwd-file="$tmp"
@@ -243,32 +225,9 @@ function ff() {
 }
 
 ## PROMPT ----------
-
 # Source Powerlevel10k if file exists
 # Run `p10k configure` to customize prompt
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# # Set command prompt
-# autoload -Uz vcs_info
-# setopt prompt_subst
-#
-# zstyle ':vcs_info:*' enable git
-# zstyle ':vcs_info:git:*' formats "%{$fg_bold[green]%}%s %r %{$fg_no_bold[green]%}[%b] %{$fg_bold[magenta]%}%m%u%c%{$reset_color%} "
-# # zstyle ':vcs_info:git:*' actionformats ' [%b|%s|%a]'
-# zstyle ':vcs_info:*' check-for-changes true
-# zstyle ':vcs_info:*' unstagedstr '*'
-# zstyle ':vcs_info:*' stagedstr '+'
-# zstyle ':vcs_info:*' untrackedstr '%'
-#
-# precmd_functions+=('vcs_info_pre')
-# function vcs_info_pre() {
-#   vcs_info
-#   PS1="
-# %{$fg[white]%}@%m (%*) %{$fg_bold[yellow]%}%1~/%{$reset_color%} \${vcs_info_msg_0_}%{$reset_color%}
-# > "
-# }
-#
-
 
 ## ALIASES ---------
 
@@ -279,6 +238,7 @@ alias cc="sgpt --model '${OPENAI_ADVANCED}' --temperature 1 "
 # Nvim
 alias nf="nvim \$(fzf)"
 alias ng="run_rg.sh"
+alias n="nvim ."
 
 # Git
 alias cg="cd \$(git rev-parse --show-toplevel)"  # cd to root git repo
