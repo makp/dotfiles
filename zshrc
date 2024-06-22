@@ -224,8 +224,7 @@ function zvm_after_init() {
 
 # Enable zoxide if it is installed
 if command -v zoxide >/dev/null 2>&1; then
-  eval "$(zoxide init zsh)"
-  alias cd="z"
+  eval "$(zoxide init --cmd cd zsh)"
 fi
 
 # Use `exa` instead of `ls` if it is installed
