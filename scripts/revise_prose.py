@@ -56,21 +56,21 @@ def write_short_msg(content, temperature, model=MODEL_BASIC):
     """Write a concise email with the provided content."""
     msg_template = f"{EMAIL_MAIN}\n{PROSE_STYLE}"
     email = proofread(content, temperature, model, msg_template)
-    return print(email)
+    print(email)
 
 
 def refine_prose(content, temperature, model=MODEL_BASIC):
     """Revise prose."""
     msg_template = f"{PROSE_MAIN}\n{PROSE_STYLE}"
     response = proofread(content, temperature, model, msg_template)
-    return print(response)
+    print(response)
 
 
 def refine_academic_prose(content, temperature, model=MODEL_ADVANCED):
     """Revise academic prose."""
     msg_template = f"{PROSE_MAIN}\n{ACADEMIC_STYLE}"
     response = proofread(content, temperature, model, msg_template)
-    return print(response)
+    print(response)
 
 
 def process_prose(content, mode, temperature):
