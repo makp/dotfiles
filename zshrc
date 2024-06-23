@@ -272,7 +272,10 @@ alias gl="git log -p --submodule"
 alias grh="git reset HEAD"
 alias gR="git rebase "
 
-# Pacman
+# Package manager
 alias pu="sudo pacman -Syu"
+
+# Online search
+alias os="online_search.py "
 
 # zprof
