@@ -1,70 +1,21 @@
 -- Interactive REPLs
 return {
-	"Vigemus/iron.nvim",
+	"jpalardy/vim-slime",
+	init = function()
+		vim.g.slime_no_mappings = 1
+	end,
 	config = function()
-		require("iron.core").setup({
-			config = {
-				-- Highlight the last sent block with bold
-				highlight_last = "IronLastSent",
-				-- Discard repl?
-				scratch_repl = true,
-				-- List repl buffers?
-				buflisted = true,
-				-- Close repl window when the process ends
-				close_window_on_exit = true,
-				-- repls
-				repl_definition = {
-					sh = {
-						command = { "zsh" },
-					},
-					python = require("iron.fts.python").ipython,
-				},
-				--
-				-- How repl window will be displayed
-				repl_open_cmd = require("iron.view").split.vertical.botright(79, {
-					winfixwidth = false,
-					winfixheight = false,
-				}),
-				--
-				-- Ignore blank lines when sending visual lines?
-				ignore_blank_lines = true,
-			},
-			-- keymaps
-			keymaps = {
-				send_motion = "<localleader>sc",
-				visual_send = "<localleader>sc",
-				send_file = "<localleader>sf",
-				send_until_cursor = "<localleader>su",
-				cr = "<localleader>s<cr>",
-
-				mark_motion = "<localleader>mc",
-				mark_visual = "<localleader>mc",
-				remove_mark = "<localleader>md",
-				send_mark = "<localleader>sm",
-
-				interrupt = "<localleader>rc",
-				exit = "<localleader>rq",
-				clear = "<localleader>rl",
-			},
-			-- Highlight (check nvim_set_hl)
-			highlight = {
-				italic = true,
-			},
-		})
-
-		-- See :h iron-commands for all available commands
-		vim.keymap.set("n", "<localleader>rs", "<cmd>IronRepl<cr>")
-		vim.keymap.set("n", "<localleader>rh", "<cmd>IronReplHere<cr>")
-		vim.keymap.set("n", "<localleader>rf", function()
-			vim.cmd("IronFocus")
-			vim.cmd("startinsert")
-		end, {
-			noremap = true,
-			silent = true,
-		})
-		vim.keymap.set("n", "<localleader>rr", "<cmd>IronRestart<cr>")
-		vim.keymap.set("n", "<localleader>s<localleader>", function()
-			require("iron.core").send_line()
+		vim.g.slime_target = "tmux"
+		vim.g.slime_default_config = {
+			socket_name = "default",
+			target_pane = "{right-of}",
+		}
+		vim.keymap.set("n", "<localleader>sc", "<Plug>SlimeParagraphSend")
+		vim.keymap.set("v", "<localleader>sc", "<Plug>SlimeRegionSend")
+		vim.keymap.set("n", "<localleader>sl", "<Plug>SlimeLineSend")
+		-- FIXME: Keymap not working
+		vim.keymap.set("n", "<localleader>ss", function()
+			vim.cmd.normal("<Plug>SlimeParagraphSend")
 			require("helper_funcs").move_to_next_code_line()
 		end)
 	end,
