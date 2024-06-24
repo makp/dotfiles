@@ -208,12 +208,6 @@ function zvm_after_init() {
 
 ## MISC UTILS --------
 
-# Use `exa` instead of `ls` if it is installed
-if command -v exa >/dev/null 2>&1; then
-  alias ll="exa --color=always --all --long --git --no-user"
-  alias ls="exa --color=always --all --long --git --no-user --no-permissions --no-filesize --icons=always --no-time"
-fi
-
 # File explorer
 function ff() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
@@ -231,19 +225,29 @@ function ff() {
 
 ## ALIASES ---------
 
-# Shell-GPT
-alias c="sgpt --model '${OPENAI_BASIC}' --temperature 1 "
-alias cc="sgpt --model '${OPENAI_ADVANCED}' --temperature 1 "
+# ls
+if command -v exa >/dev/null 2>&1; then
+  alias ll="exa --color=always --all --long --git --no-user"
+  alias ls="exa --color=always --all --long --git --no-user --no-permissions --no-filesize --icons=always --no-time"
+fi
 
-# Nvim
-alias nf="nvim \$(fzf)"
-alias ng="run_rg.sh"
-alias n="nvim ."
+# Assistants
+alias a="sgpt --model '${OPENAI_BASIC}' --temperature 1 "
+alias aa="sgpt --model '${OPENAI_ADVANCED}' --temperature 1 "
+alias ao="online_search.py "
+
+# Editor
+alias ef="nvim \$(fzf)"
+alias eg="run_rg.sh"
+alias e="nvim ."
 
 # Git
-alias cg="cd \$(git rev-parse --show-toplevel)"  # cd to root git repo
 alias gg="lazygit"
+
+alias cg="cd \$(git rev-parse --show-toplevel)"  # cd to root git repo
+
 alias gs="git status --short -b"
+
 alias gss="git submodule status"
 alias gsa="git submodule add -b"
 # `-b` adds info about the submodule branch to the `.gitmodules` file.
@@ -252,30 +256,42 @@ alias gsu="git submodule update --remote --recursive"
 # `git submodule update` updates submodules to the commit specified in the
 # parent repo. The `--remote` updates the submodules to the latest commit from
 # the master branch.
+
 alias gf="git fetch --all"
 alias gfs="git fetch --all && git show HEAD..FETCH_HEAD"
 alias gfg="git fetch --all && git graph HEAD..FETCH_HEAD"
-alias gm="git merge "
+
 alias gp="git pull"
 alias gpr="git pull --rebase"
 alias gps="git pull --recurse-submodules"
+
+alias gbn="git checkout -b "
+alias gbd="git branch -D "
+alias gbD="git push origin --delete "
+
 alias ga="git add"
 alias gac="git commit -am "
+
 alias gc="git commit -m "
 alias gca="git commit --amend --no-edit"
 alias gcA="git commit --amend"
+
 alias gC="git checkout -- ."
 alias gCf="git clean -fdn"
+
 alias gd="git diff --submodule"
 alias gds="git diff --staged --submodule"
+
 alias gl="git log -p --submodule"
-alias grh="git reset HEAD"
-alias gR="git rebase "
+
+alias gr="git reset "
+alias grh="git reset HEAD" # unstage changes in the staging area
+
 
 # Package manager
 alias pu="sudo pacman -Syu"
-
-# Online search
-alias os="online_search.py "
+alias pU="yay -Sua --devel"
+alias pL="pacman -Qm"
+alias pc="yay -Sc"
 
 # zprof
