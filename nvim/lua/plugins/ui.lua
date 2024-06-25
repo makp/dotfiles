@@ -2,6 +2,8 @@ return {
 	-- Color scheme
 	{
 		"sainnhe/gruvbox-material",
+		lazy = false,
+		priority = 1000,
 		config = function()
 			-- Use termguicolors if available
 			if vim.fn.has("termguicolors") == 1 then
@@ -20,7 +22,6 @@ return {
 			-- Enable bold in function names
 			vim.g.gruvbox_material_enable_bold = 1
 
-			-- FIXME: Not working
 			-- Dim inactive windows
 			vim.g.gruvbox_material_dim_inactive_windows = 1
 
@@ -28,7 +29,7 @@ return {
 			vim.g.gruvbox_material_better_performance = 1
 
 			-- Load the colorscheme
-			vim.cmd([[colorscheme gruvbox-material]])
+			vim.cmd.colorscheme("gruvbox-material")
 		end,
 	},
 
