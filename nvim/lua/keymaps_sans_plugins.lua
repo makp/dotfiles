@@ -141,3 +141,31 @@ end, { desc = "Code [A]ssistant" })
 vim.keymap.set({ "n", "v" }, "<localleader>ce", function()
 	code_explain_light()
 end, { desc = "Code [e]xplain light" })
+
+function CopyPathToClipboard()
+	-- See :help filename-modifiers
+	local opts = { "fullpath", "filename", "dirname", "relative" }
+	local function copy_to_clipboard(text)
+		-- Remove "oil://" prefix if present
+		text = string.gsub(text, "oil://", "")
+		vim.fn.setreg("+", text)
+		print("Copied to clipboard: " .. text)
+	end
+	hf.select_one_option(opts, function(choice)
+		if choice == "fullpath" then
+			copy_to_clipboard(vim.fn.expand("%"))
+		elseif choice == "filename" then
+			copy_to_clipboard(vim.fn.expand("%:t"))
+		elseif choice == "dirname" then
+			copy_to_clipboard(vim.fn.expand("%:h"))
+		elseif choice == "relative" then
+			copy_to_clipboard(vim.fn.expand("%:p:."))
+		else
+			print("No action selected!")
+		end
+	end)
+end
+
+vim.keymap.set("n", "<leader>f", function()
+	CopyPathToClipboard()
+end, { desc = "Copy file info" })
