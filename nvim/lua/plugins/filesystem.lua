@@ -49,16 +49,21 @@ return {
 		config = function()
 			require("oil").setup({
 				keymaps = {
-					["<A-s>"] = "actions.change_sort",
-					["<C-h>"] = false, -- it was split
-					["<A-h>"] = "actions.toggle_hidden",
-					["gs"] = "actions.select_split",
-					["gv"] = "actions.select_vsplit",
-					["<C-l>"] = false, -- it was refresh
-					["gr"] = "actions.refresh",
-					["`"] = false, -- it was cd
+					["<A-v>"] = {
+						"actions.select",
+						opts = { vertical = true },
+						desc = "Open the entry in a vertical split",
+					},
+					["<A-s>"] = {
+						"actions.select",
+						opts = { horizontal = true },
+						desc = "Open the entry in a horizontal split",
+					},
 					["~"] = false, -- it was tcd
+					["`"] = false, -- it was cd
 					["g."] = "actions.cd", -- it was toggle_hidden
+					["<C-h>"] = "actions.toggle_hidden", -- it was hor split
+					["<C-s>"] = "actions.change_sort", -- it was vert split
 				},
 				view_options = { show_hidden = true },
 			})
