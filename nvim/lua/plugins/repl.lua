@@ -13,9 +13,9 @@ return {
 		vim.keymap.set("n", "<localleader>sc", "<Plug>SlimeParagraphSend")
 		vim.keymap.set("v", "<localleader>sc", "<Plug>SlimeRegionSend")
 		vim.keymap.set("n", "<localleader>sl", "<Plug>SlimeLineSend")
-		-- FIXME: Keymap not working
 		vim.keymap.set("n", "<localleader>ss", function()
-			vim.cmd.normal("<Plug>SlimeParagraphSend")
+			local keys = vim.api.nvim_replace_termcodes("<Plug>SlimeParagraphSend", true, false, true)
+			vim.api.nvim_feedkeys(keys, "n", true)
 			require("helper_funcs").move_to_next_code_line()
 		end)
 	end,
