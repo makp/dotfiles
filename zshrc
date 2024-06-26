@@ -206,24 +206,15 @@ function zvm_after_init() {
 # bindkey '' expand-or-complete-prefix # vanilla autosuggestions
 
 
-## MISC UTILS --------
-
-# File explorer
-function ff() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
-	yazi "$@" --cwd-file="$tmp"
-	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		cd "$cwd"
-	fi
-	rm -f -- "$tmp"
-}
-
 ## PROMPT ----------
 # Source Powerlevel10k if file exists
 # Run `p10k configure` to customize prompt
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 ## ALIASES ---------
+
+# Default applications
+alias gx="xdg-open"
 
 # ls
 if command -v exa >/dev/null 2>&1; then
@@ -237,9 +228,10 @@ alias aa="sgpt --model '${OPENAI_ADVANCED}' --temperature 1 "
 alias ao="online_search.py "
 
 # Editor
+alias e="nvim "
+alias eh="nvim ."
 alias ef="nvim \$(fzf)"
 alias eg="run_rg.sh"
-alias e="nvim ."
 
 # Git
 alias gg="lazygit"
