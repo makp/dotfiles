@@ -230,7 +230,7 @@ alias ao="online_search.py "
 # Editor
 alias e="nvim "
 alias eh="nvim ."
-alias ef="nvim \$(fzf)"
+alias ef="nvim \$(__fzf_select)"
 alias eg="run_rg.sh"
 
 # Git
