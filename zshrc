@@ -118,6 +118,8 @@ zstyle ':completion:*:*:okular:*' file-sort time
 if command -v fzf >/dev/null 2>&1; then
     # Enable fzf keybindings and completion
     source <(fzf --zsh)
+    export FZF_DEFAULT_COMMAND="fd --type f --strip-cwd-prefix --no-ignore --hidden --exclude .git"
+    export FZF_DEFAULT_OPTS="--bind 'ctrl-d:reload(fd --type d --strip-cwd-prefix --no-ignore --hidden --exclude .git),ctrl-f:reload(eval $FZF_DEFAULT_COMMAND)' --height 50% --layout=reverse"
     # Change trigger so that it doesn't conflict with zsh
     export FZF_COMPLETION_TRIGGER=',,'
     # Use `tree` to display directory structure
@@ -214,7 +216,7 @@ function zvm_after_init() {
 ## ALIASES ---------
 
 # Default applications
-alias gx="xdg-open"
+alias o="xdg-open"
 
 # ls
 if command -v exa >/dev/null 2>&1; then
@@ -229,8 +231,8 @@ alias ao="online_search.py "
 
 # Editor
 alias e="nvim "
+alias ef="fzf --multi --bind 'enter:become(nvim {+})'"
 alias eh="nvim ."
-alias ef="nvim \$(__fzf_select)"
 alias eg="run_rg.sh"
 
 # Git
