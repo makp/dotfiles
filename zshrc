@@ -118,12 +118,18 @@ zstyle ':completion:*:*:okular:*' file-sort time
 if command -v fzf >/dev/null 2>&1; then
     # Enable fzf keybindings and completion
     source <(fzf --zsh)
-    export FZF_DEFAULT_COMMAND="fd --type f --strip-cwd-prefix --no-ignore --hidden --exclude .git"
-    export FZF_DEFAULT_OPTS="--bind 'ctrl-d:reload(fd --type d --strip-cwd-prefix --no-ignore --hidden --exclude .git),ctrl-f:reload(eval $FZF_DEFAULT_COMMAND)' --height 50% --layout=reverse"
+    export FIND_DIRS_CMD="fd --type d --strip-cwd-prefix --no-ignore --hidden --exclude .git"
+    export FIND_FILES_CMD="fd --type f --strip-cwd-prefix --no-ignore --hidden --exclude .git"
+    export FZF_DEFAULT_COMMAND="fd --strip-cwd-prefix --no-ignore --hidden --exclude .git"
+    export FZF_DEFAULT_OPTS="--prompt 'All > ' \
+      --header 'CTRL-D: Dirs / CTRL-F: Files' \
+      --bind 'ctrl-d:change-prompt(Dirs> )+reload(eval $FIND_DIRS_CMD)' \
+      --bind 'ctrl-f:change-prompt(Files> )+reload(eval $FIND_FILES_CMD)' \
+      --bind 'ctrl-a:change-prompt(All> )+reload(eval $FZF_DEFAULT_COMMAND)' \
+      --height 50% --layout=reverse"
+    export FZF_ALT_C_OPTS="" # "--preview 'eza -T --colour=always --icons=always {}'"
     # Change trigger so that it doesn't conflict with zsh
     export FZF_COMPLETION_TRIGGER=',,'
-    # Use `tree` to display directory structure
-    export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 fi
 
 # Enable zoxide if it is installed
@@ -231,8 +237,8 @@ alias ao="online_search.py "
 
 # Editor
 alias e="nvim "
-alias ef="fzf --multi --bind 'enter:become(nvim {+})'"
 alias eh="nvim ."
+alias ef="fzf --multi --bind 'enter:become(nvim {+})'"
 alias eg="run_rg.sh"
 
 # Git
