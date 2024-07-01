@@ -219,9 +219,9 @@ function zvm_after_init() {
 alias o="xdg-open"
 
 # ls
-if command -v exa >/dev/null 2>&1; then
-  alias ll="exa --color=always --all --long --git --no-user"
-  alias ls="exa --color=always --all --long --git --no-user --no-permissions --no-filesize --icons=always --no-time"
+if command -v eza >/dev/null 2>&1; then
+  alias ll="eza --color=always --all --long --git --no-user"
+  alias ls="eza --color=always --all --long --git --no-user --no-permissions --no-filesize --icons=always --no-time"
 fi
 
 # Assistants
