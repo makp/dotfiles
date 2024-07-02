@@ -121,11 +121,16 @@ if command -v fzf >/dev/null 2>&1; then
     export FIND_DIRS_CMD="fd --type d --strip-cwd-prefix --no-ignore --hidden --exclude .git"
     export FIND_FILES_CMD="fd --type f --strip-cwd-prefix --no-ignore --hidden --exclude .git"
     export FZF_DEFAULT_COMMAND="fd --strip-cwd-prefix --no-ignore --hidden --exclude .git"
-    export FZF_DEFAULT_OPTS="--prompt 'All > ' \
-      --header 'CTRL-D: Dirs / CTRL-F: Files' \
-      --bind 'ctrl-d:change-prompt(Dirs> )+reload(eval $FIND_DIRS_CMD)' \
-      --bind 'ctrl-f:change-prompt(Files> )+reload(eval $FIND_FILES_CMD)' \
-      --bind 'ctrl-a:change-prompt(All> )+reload(eval $FZF_DEFAULT_COMMAND)' \
+    export FZF_DEFAULT_OPTS="--prompt 'All> ' \
+      --header 'ALT-D: Dirs / ALT-F: Files / ALT-A: All / ALT-P: Preview' \
+      --bind 'alt-d:change-prompt(Dirs> )+reload(eval $FIND_DIRS_CMD)' \
+      --bind 'alt-f:change-prompt(Files> )+reload(eval $FIND_FILES_CMD)' \
+      --bind 'alt-a:change-prompt(All> )+reload(eval $FZF_DEFAULT_COMMAND)' \
+      --bind 'alt-p:toggle-preview' \
+      --preview '[[ -d {} ]] && eza -T --level=2 --git --colour=always --icons {} || bat --color=always --style=numbers,header,grid --line-range=:500 {}' \
+      --preview-window='hidden' \
+      --bind 'ctrl-u:preview-up' \
+      --bind 'ctrl-d:preview-down' \
       --height 50% --layout=reverse"
     export FZF_ALT_C_OPTS="" # "--preview 'eza -T --colour=always --icons=always {}'"
     # Change trigger so that it doesn't conflict with zsh
