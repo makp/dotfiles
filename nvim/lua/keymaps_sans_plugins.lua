@@ -5,9 +5,16 @@
 vim.g.mapleader = "\\"
 vim.g.maplocalleader = " "
 
+-- Quickfix keymaps
+vim.keymap.set("n", "<leader>oq", "<cmd>copen<CR>", { desc = "open [q]uickfix window" })
+vim.keymap.set("n", "]q", "<cmd>cnext<CR>", { desc = "Go to the *next* item quickfix list" })
+vim.keymap.set("n", "]Q", "<cmd>clast<CR>", { desc = "Go to the *last* item quickfix list" })
+vim.keymap.set("n", "[q", "<cmd>cprev<CR>", { desc = "Go to the *previous* item quickfix list" })
+vim.keymap.set("n", "[Q", "<cmd>cfirst<CR>", { desc = "Go to the *first* item quickfix list" })
+
 -- Diagnostic keymaps
 vim.keymap.set("n", "<leader>ds", vim.diagnostic.open_float, { desc = "[s]how diagnostic messages" })
-vim.keymap.set("n", "<leader>dq", vim.diagnostic.setloclist, { desc = "[q]uickfix list" })
+vim.keymap.set("n", "<leader>dq", vim.diagnostic.setloclist, { desc = "diagnostic [q]uickfix list" })
 
 -- Use a easier keybinding for exiting terminal mode
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
