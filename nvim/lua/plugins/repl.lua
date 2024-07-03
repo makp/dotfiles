@@ -3,6 +3,7 @@ return {
 	"jpalardy/vim-slime",
 	init = function()
 		vim.g.slime_no_mappings = 1
+		vim.g.slime_python_ipython = 1 -- Use %cpaste with IPython to avoid indentation errors
 	end,
 	config = function()
 		vim.g.slime_target = "tmux"
