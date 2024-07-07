@@ -270,27 +270,28 @@ alias gp="git pull"
 alias gpr="git pull --rebase"
 alias gps="git pull --recurse-submodules"
 
+alias gb="git branch --all"
 alias gbn="git checkout -b "
 alias gbd="git branch -D "
 alias gbD="git push origin --delete "
 
 alias ga="git add"
-alias gac="git commit -am "
+alias gac="git commit -a "
 
-alias gc="git commit -m "
+alias gc="git commit "
 alias gca="git commit --amend --no-edit"
 alias gcA="git commit --amend"
-
-alias gC="git checkout -- ."
-alias gCf="git clean -fdn"
 
 alias gd="git diff --submodule"
 alias gds="git diff --staged --submodule"
 
 alias gl="git log -p --submodule"
 
+alias gC="git clean -fd" # delete untracked files and dirs
+
 alias gr="git reset "
 alias grh="git reset HEAD" # unstage changes in the staging area
+alias grH="git reset --hard HEAD" # reset repo to the last commit
 
 
 # Package manager
