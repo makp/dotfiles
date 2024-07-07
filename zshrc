@@ -287,7 +287,17 @@ alias gds="git diff --staged --submodule"
 
 alias gl="git log -p --submodule"
 
-alias gC="git clean -fd" # delete untracked files and dirs
+function git_clean_confirm() {
+ git clean -fd --dry-run
+ echo
+ read "REPLY?Proceed with git clean -fd? (y/n): "
+ if [[ $REPLY =~ ^[Yy]$ ]]; then
+   git clean -fd
+ else
+   echo "git clean -fd aborted."
+ fi
+}
+alias gC="git_clean_confirm"
 
 alias gr="git reset "
 alias grh="git reset HEAD" # unstage changes in the staging area
