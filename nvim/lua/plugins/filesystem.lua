@@ -48,6 +48,13 @@ return {
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
 			require("oil").setup({
+				skip_confirm_for_simple_edits = true,
+				view_options = {
+					show_hidden = true,
+					is_always_hidden = function(name, _)
+						return name == ".." or name == ".git"
+					end,
+				},
 				keymaps = {
 					["<A-v>"] = {
 						"actions.select",
@@ -65,7 +72,6 @@ return {
 					["<C-h>"] = "actions.toggle_hidden", -- it was hor split
 					["<C-s>"] = "actions.change_sort", -- it was vert split
 				},
-				view_options = { show_hidden = true },
 			})
 			vim.keymap.set("n", "<leader>o-", "<cmd>Oil<cr>", { desc = "parent directory" })
 		end,
