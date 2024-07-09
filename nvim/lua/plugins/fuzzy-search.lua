@@ -27,13 +27,7 @@ return {
 		local bibtex_actions = require("telescope-bibtex.actions")
 
 		require("telescope").setup({
-			defaults = {
-				mappings = {
-					i = {
-						["<c-enter>"] = "to_fuzzy_refine",
-					},
-				},
-			},
+			-- defaults = {},
 			-- pickers = {}
 			extensions = {
 				["ui-select"] = {
