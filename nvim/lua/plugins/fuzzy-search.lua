@@ -4,8 +4,20 @@ return {
 		-- optional for icon support
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
-			-- calling `setup` is optional for customization
-			require("fzf-lua").setup({})
+			local fzflua = require("fzf-lua")
+
+			fzflua.setup({})
+
+			-- Find
+			vim.keymap.set("n", "<leader>if", fzflua.files, { desc = "[f]iles in cwd" })
+			vim.keymap.set("n", "<leader>ib", fzflua.buffers, { desc = "[b]uffers" })
+			vim.keymap.set("n", "<leader>ir", fzflua.oldfiles, { desc = "[r]ecent files" })
+
+			-- Grep
+			vim.keymap.set("n", "<leader>eb", fzflua.lgrep_curbuf, { desc = "current [b]uffer" })
+			vim.keymap.set("n", "<leader>ef", fzflua.live_grep, { desc = "[f]iles in cwd" })
+			vim.keymap.set("n", "<leader>ew", fzflua.grep_cword, { desc = "files containing [w]ord" })
+			vim.keymap.set("n", "<leader>eW", fzflua.grep_cWORD, { desc = "files containing [W]ORD" })
 		end,
 	},
 	{
@@ -73,28 +85,11 @@ return {
 			vim.keymap.set("n", "<leader>rr", builtin.resume, { desc = "[r]esume" })
 
 			-- Find
-			vim.keymap.set("n", "<leader>if", builtin.find_files, { desc = "[f]iles in cwd" })
-			vim.keymap.set("n", "<leader>ib", builtin.buffers, { desc = "[b]uffers" })
-			vim.keymap.set("n", "<leader>ir", builtin.oldfiles, { desc = "[r]ecent files" })
 			vim.keymap.set("n", "<leader>in", function()
 				builtin.find_files({ cwd = vim.fn.stdpath("config") })
 			end, { desc = "[n]eovim files" })
 
 			-- Grep
-			vim.keymap.set("n", "<leader>ef", builtin.live_grep, { desc = "[f]iles in cwd" })
-			vim.keymap.set("n", "<leader>ew", builtin.grep_string, { desc = "files containing [w]ord" })
-			vim.keymap.set("n", "<leader>eF", function()
-				builtin.live_grep({
-					grep_open_files = true,
-					prompt_title = "Live Grep in Open Files",
-				})
-			end, { desc = "restrict to open [F]iles" })
-			vim.keymap.set("n", "<leader>eb", function()
-				builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-					winblend = 10,
-					previewer = false,
-				}))
-			end, { desc = "current [b]uffer" })
 			vim.keymap.set("n", "<leader>en", builtin.treesitter, { desc = "treesitter [n]odes" })
 
 			-- Git
