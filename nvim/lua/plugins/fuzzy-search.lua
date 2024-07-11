@@ -10,9 +10,8 @@ return {
 				keymap = {
 					builtin = {
 						["<F1>"] = "toggle-help",
-						["<F2>"] = "toggle-fullscreen",
+						["<C-z>"] = "toggle-fullscreen",
 						-- Only valid with the 'builtin' previewer
-						["<F3>"] = "toggle-preview-wrap",
 						["<F4>"] = "toggle-preview",
 						-- Rotate preview clockwise/counter-clockwise
 						["<F5>"] = "toggle-preview-ccw",
@@ -23,8 +22,25 @@ return {
 						["<C-u>"] = "preview-page-up",
 						-- ["<S-left>"] = "preview-page-reset",
 					},
+					fzf = {
+						-- fzf '--bind=' options
+						["ctrl-f"] = "half-page-down",
+						["ctrl-b"] = "half-page-up",
+						["ctrl-a"] = "beginning-of-line",
+						["ctrl-e"] = "end-of-line",
+						["alt-a"] = "toggle-all",
+						-- Only valid with fzf previewers (bat/cat/git/etc)
+						["alt-w"] = "toggle-preview-wrap",
+						["f4"] = "toggle-preview",
+						["ctrl-d"] = "preview-page-down",
+						["ctrl-u"] = "preview-page-up", -- it was "unix-line-discard"
+					},
 				},
 			})
+			-- Help keymaps
+			vim.keymap.set("n", "<leader>ht", fzflua.helptags, { desc = "[t]ags" })
+			vim.keymap.set("n", "<leader>hk", fzflua.keymaps, { desc = "[k]eymaps" })
+			vim.keymap.set("n", "<leader>hm", fzflua.manpages, { desc = "[m]an pages" })
 
 			-- Find
 			vim.keymap.set("n", "<leader>if", fzflua.files, { desc = "[f]iles in cwd" })
@@ -36,6 +52,16 @@ return {
 			vim.keymap.set("n", "<leader>ef", fzflua.live_grep, { desc = "[f]iles in cwd" })
 			vim.keymap.set("n", "<leader>ew", fzflua.grep_cword, { desc = "files containing [w]ord" })
 			vim.keymap.set("n", "<leader>eW", fzflua.grep_cWORD, { desc = "files containing [W]ORD" })
+
+			-- Registers
+			vim.keymap.set("n", "<leader>or", fzflua.registers, { desc = "[r]egisters" })
+
+			-- Diagnostics
+			vim.keymap.set("n", "<leader>db", fzflua.diagnostics_document, { desc = "jump in current [b]uffer" })
+			vim.keymap.set("n", "<leader>dw", fzflua.diagnostics_workspace, { desc = "jump in [w]orkspace" })
+
+			-- Spell
+			vim.keymap.set("n", "z=", fzflua.spell_suggest, { desc = "spell check" })
 		end,
 	},
 	{
@@ -93,19 +119,9 @@ return {
 			-- Keymaps
 			local builtin = require("telescope.builtin")
 
-			-- Help keymaps
-			vim.keymap.set("n", "<leader>ht", builtin.help_tags, { desc = "[t]ags" })
-			vim.keymap.set("n", "<leader>hk", builtin.keymaps, { desc = "[k]eymaps" })
-			vim.keymap.set("n", "<leader>hm", builtin.man_pages, { desc = "[m]an pages" })
-
 			-- Telescope
 			vim.keymap.set("n", "<leader>rt", builtin.builtin, { desc = "[t]elescope" })
 			vim.keymap.set("n", "<leader>rr", builtin.resume, { desc = "[r]esume" })
-
-			-- Find
-			vim.keymap.set("n", "<leader>in", function()
-				builtin.find_files({ cwd = vim.fn.stdpath("config") })
-			end, { desc = "[n]eovim files" })
 
 			-- Grep
 			vim.keymap.set("n", "<leader>en", builtin.treesitter, { desc = "treesitter [n]odes" })
@@ -114,17 +130,8 @@ return {
 			vim.keymap.set("n", "<leader>gs", builtin.git_status, { desc = "[s]tatus" })
 			vim.keymap.set("n", "<leader>gc", builtin.git_commits, { desc = "[c]ommits" })
 
-			-- Registers
-			vim.keymap.set("n", "<leader>or", builtin.registers, { desc = "[r]egisters" })
-
 			-- Jumps
 			vim.keymap.set("n", "<leader>oj", builtin.jumplist, { desc = "[j]umplist" })
-
-			-- Diagnostics
-			vim.keymap.set("n", "<leader>dj", builtin.diagnostics, { desc = "[j]ump" })
-
-			-- Spell
-			vim.keymap.set("n", "z=", builtin.spell_suggest, { desc = "spell [c]heck" })
 		end,
 	},
 }
