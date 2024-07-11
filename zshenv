@@ -24,12 +24,8 @@ export EDITOR=/usr/bin/nvim
 export VISUAL=/usr/bin/nvim
 export ALTERNATE_EDITOR=vim
 
-# Set CDPATH for completion
-# The nullstring "::" forces cd to search in the working directory
-# This is important because, without it, cd will only search the working
-# directory after the other directories in CDPATH fails.
-# export CDPATH=$HOME
-export CDPATH=::$HOME/Documents/mydocs/:
+# Use `bat` as a pager for `man`
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # Git
 export GIT_AUTHOR_NAME="mak-$(hostname)"
