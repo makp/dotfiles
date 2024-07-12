@@ -79,8 +79,4 @@ return {
 		"j-hui/fidget.nvim",
 		opts = {},
 	},
-	{
-		-- Preview LSP code actions
-		"aznhe21/actions-preview.nvim",
-	},
 }

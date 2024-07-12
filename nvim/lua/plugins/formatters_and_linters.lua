@@ -9,7 +9,7 @@ return {
 		-- lazy = false,
 		keys = {
 			{
-				"<leader>rf",
+				"<leader>rF",
 				function()
 					require("conform").format({ async = true, lsp_fallback = true })
 				end,

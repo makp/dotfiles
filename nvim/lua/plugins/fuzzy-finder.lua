@@ -37,6 +37,10 @@ return {
 					},
 				},
 			})
+			-- Fzf-Lua keymaps
+			vim.keymap.set("n", "<leader>rr", fzflua.resume, { desc = "[r]esume" })
+			vim.keymap.set("n", "<leader>rf", fzflua.builtin, { desc = "[t]elescope" })
+
 			-- Help keymaps
 			vim.keymap.set("n", "<leader>ht", fzflua.helptags, { desc = "[t]ags" })
 			vim.keymap.set("n", "<leader>hk", fzflua.keymaps, { desc = "[k]eymaps" })
@@ -52,9 +56,18 @@ return {
 			vim.keymap.set("n", "<leader>ef", fzflua.live_grep, { desc = "[f]iles in cwd" })
 			vim.keymap.set("n", "<leader>ew", fzflua.grep_cword, { desc = "files containing [w]ord" })
 			vim.keymap.set("n", "<leader>eW", fzflua.grep_cWORD, { desc = "files containing [W]ORD" })
+			-- vim.keymap.set("n", "<leader>en", treesitter, { desc = "treesitter [n]odes" })
+
+			-- Git
+			vim.keymap.set("n", "<leader>gs", fzflua.git_status, { desc = "[s]tatus" })
+			vim.keymap.set("n", "<leader>gc", fzflua.git_commits, { desc = "[c]ommits" })
+			vim.keymap.set("n", "<leader>gb", fzflua.git_branches, { desc = "[b]ranches" })
 
 			-- Registers
 			vim.keymap.set("n", "<leader>or", fzflua.registers, { desc = "[r]egisters" })
+
+			-- Jumps
+			vim.keymap.set("n", "<leader>oj", fzflua.jumps, { desc = "[j]umplist" })
 
 			-- Diagnostics
 			vim.keymap.set("n", "<leader>db", fzflua.diagnostics_document, { desc = "jump in current [b]uffer" })
@@ -115,23 +128,6 @@ return {
 			pcall(require("telescope").load_extension, "fzf")
 			pcall(require("telescope").load_extension, "ui-select")
 			pcall(require("telescope").load_extension, "bibtex")
-
-			-- Keymaps
-			local builtin = require("telescope.builtin")
-
-			-- Telescope
-			vim.keymap.set("n", "<leader>rt", builtin.builtin, { desc = "[t]elescope" })
-			vim.keymap.set("n", "<leader>rr", builtin.resume, { desc = "[r]esume" })
-
-			-- Grep
-			vim.keymap.set("n", "<leader>en", builtin.treesitter, { desc = "treesitter [n]odes" })
-
-			-- Git
-			vim.keymap.set("n", "<leader>gs", builtin.git_status, { desc = "[s]tatus" })
-			vim.keymap.set("n", "<leader>gc", builtin.git_commits, { desc = "[c]ommits" })
-
-			-- Jumps
-			vim.keymap.set("n", "<leader>oj", builtin.jumplist, { desc = "[j]umplist" })
 		end,
 	},
 }

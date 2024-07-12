@@ -3,6 +3,7 @@
 -- LSP keybindings
 local function setup_mappings(buf)
 	local telescope = require("telescope.builtin")
+	local fzflua = require("fzf-lua")
 
 	local function map(keys, func, desc)
 		vim.keymap.set("n", keys, func, { buffer = buf, desc = "LSP: " .. desc })
@@ -10,8 +11,9 @@ local function setup_mappings(buf)
 
 	local mappings = {
 		--  Press <C-t> to jump back
-		{ "gd", telescope.lsp_definitions, "jump to [d]efinition" },
-		{ "gr", telescope.lsp_references, "jump to [r]eferences" },
+		{ "gd", vim.lsp.buf.definition, "Jump to [d]efinition" },
+
+		{ "gr", fzflua.lsp_references, "List [r]eferences" },
 
 		-- Fuzzy find all the symbols in your current document.
 		-- Symbols are things like variables, functions, types, etc.
@@ -36,7 +38,7 @@ local function setup_mappings(buf)
 
 		{ "<localleader>cr", vim.lsp.buf.rename, "[r]ename variable" },
 		-- { "<localleader>ca", vim.lsp.buf.code_action, "execute [a]ction" },
-		{ "<localleader>ca", require("actions-preview").code_actions, "execute [a]ction" },
+		{ "<localleader>ca", fzflua.lsp_code_actions, "execute [a]ction" },
 	}
 
 	for _, map_args in ipairs(mappings) do
