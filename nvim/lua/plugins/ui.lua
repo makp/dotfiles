@@ -67,38 +67,27 @@ return {
 	-- Display pending keybindings
 	{
 		"folke/which-key.nvim",
-		event = "VimEnter",
-		config = function()
-			-- Decrease mapped sequence wait time
-			-- Displays which-key popup sooner
-			vim.opt.timeoutlen = 300
-
-			require("which-key").setup()
-
+		event = "VeryLazy",
+		dependencies = { "echasnovski/mini.icons", version = false },
+		opts = {
 			-- Document existing key chains
-			require("which-key").register({
-				-- leader key chains
-				-- ["<leader>a"] = { name = "", _ = "which_key_ignore" },
-				["<leader>e"] = { name = "gr[e]p", _ = "which_key_ignore" },
-				["<leader>o"] = { name = "[o]pen", _ = "which_key_ignore" },
-				-- ["<leader>u"] = { name = "", _ = "which_key_ignore" },
-				["<leader>i"] = { name = "f[i]nd", _ = "which_key_ignore" },
+			-- leader key chains
+			-- "<leader>a"
+			{ "<leader>e", group = "gr[e]p" },
+			{ "<leader>o", group = "[o]pen" },
+			-- ["<leader>u"] = { group = "",  },
+			{ "<leader>i", group = "f[i]nd" },
 
-				["<leader>g"] = { name = "[g]it", _ = "which_key_ignore" },
-				["<leader>h"] = { name = "[h]elp for", _ = "which_key_ignore" },
-				["<leader>d"] = { name = "[d]iagnostics", _ = "which_key_ignore" },
-				["<leader>O"] = { name = "[O]rgmode", _ = "which_key_ignore" },
-				["<leader>r"] = { name = "[r]un", _ = "which_key_ignore" },
+			{ "<leader>g", group = "[g]it" },
+			{ "<leader>h", group = "[h]elp for" },
+			{ "<leader>d", group = "[d]iagnostics" },
+			{ "<leader>O", group = "[O]rgmode" },
+			{ "<leader>r", group = "[r]un" },
 
-				-- localleader key chains
-				["<localleader>c"] = { name = "[c]ode", _ = "which_key_ignore" },
-				["<localleader>r"] = { name = "[r]epl", _ = "which_key_ignore" },
-				["<localleader>h"] = { name = "git [h]unk", _ = "which_key_ignore" },
-			})
-			-- visual mode
-			-- require('which-key').register({
-			-- 	['<leader>h'] = { 'Git [H]unk' },
-			-- 	}, { mode = 'v' })
-		end,
+			-- localleader key chains
+			{ "<localleader>c", group = "[c]ode" },
+			{ "<localleader>r", group = "[r]epl" },
+			{ "<localleader>h", group = "git [h]unk" },
+		},
 	},
 }
