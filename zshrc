@@ -238,22 +238,18 @@ alias cg="cd \$(git rev-parse --show-toplevel)"  # cd to root git repo
 
 alias gs="git status --short -b"
 
-alias gss="git submodule status"
-alias gsa="git submodule add -b"
-# `-b` adds info about the submodule branch to the `.gitmodules` file.
-alias gsi="git submodule update --init --recursive"
-alias gsu="git submodule update --remote --recursive"
-# `git submodule update` updates submodules to the commit specified in the
-# parent repo. The `--remote` updates the submodules to the latest commit from
-# the master branch.
+alias gss="git submodule foreach 'git status --short'"
+alias gsa="git submodule add "
+alias gsi="git submodule update --init --recursive" # commit specified by the parent repo
+alias gsu="git submodule update --remote --recursive" # latest commit
 
 alias gf="git fetch --all"
 alias gfs="git fetch --all && git show HEAD..FETCH_HEAD"
 alias gfg="git fetch --all && git graph HEAD..FETCH_HEAD"
 
 alias gp="git pull"
-alias gpr="git pull --rebase"
 alias gps="git pull --recurse-submodules"
+alias gpr="git pull --rebase"
 
 alias gb="git branch --all"
 alias gbn="git checkout -b "
