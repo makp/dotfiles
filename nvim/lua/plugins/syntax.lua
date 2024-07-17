@@ -8,10 +8,10 @@ return {
 			vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
 			vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
 
-			vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f)
-			vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F)
-			vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t)
-			vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T)
+			vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f_expr, { expr = true })
+			vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true })
+			vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
+			vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
 		end,
 	},
 	{
@@ -25,13 +25,16 @@ return {
 		build = ":TSUpdate",
 		opts = {
 			ensure_installed = {
+				"c",
 				"bash",
 				"html",
 				"lua",
 				"luadoc",
 				"markdown",
+				"markdown_inline",
 				"vim",
 				"vimdoc",
+				"query",
 				"python",
 				"latex",
 			},
