@@ -22,8 +22,7 @@ return {
 						["<C-u>"] = "preview-page-up",
 						-- ["<S-left>"] = "preview-page-reset",
 					},
-					fzf = {
-						-- fzf '--bind=' options
+					fzf = { -- fzf '--bind=' options
 						["ctrl-f"] = "half-page-down",
 						["ctrl-b"] = "half-page-up",
 						["ctrl-a"] = "beginning-of-line",
@@ -39,7 +38,7 @@ return {
 			})
 			-- Fzf-Lua keymaps
 			vim.keymap.set("n", "<leader>rr", fzflua.resume, { desc = "[r]esume" })
-			vim.keymap.set("n", "<leader>rf", fzflua.builtin, { desc = "[t]elescope" })
+			vim.keymap.set("n", "<leader>rf", fzflua.builtin, { desc = "[f]zf-lua" })
 
 			-- Help keymaps
 			vim.keymap.set("n", "<leader>ht", fzflua.helptags, { desc = "[t]ags" })
@@ -75,6 +74,9 @@ return {
 
 			-- Spell
 			vim.keymap.set("n", "z=", fzflua.spell_suggest, { desc = "spell check" })
+
+			-- fzf-bibtex configuration
+			require("fzf-bibtex_config")
 		end,
 	},
 	{
@@ -98,13 +100,10 @@ return {
 			},
 			{ "nvim-telescope/telescope-ui-select.nvim" },
 			{ "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
-			{ "nvim-telescope/telescope-bibtex.nvim" },
 		},
 		-- [[ Configure Telescope ]]
 		-- See `:help telescope` and `:help telescope.setup()`
 		config = function()
-			local bibtex_actions = require("telescope-bibtex.actions")
-
 			require("telescope").setup({
 				-- defaults = {},
 				-- pickers = {}
@@ -112,22 +111,12 @@ return {
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown(),
 					},
-					bibtex = {
-						global_files = { "/home/makmiller/Documents/mydocs/tex-configs/references/evol.bib" },
-						mappings = {
-							i = {
-								["<CR>"] = bibtex_actions.key_append([[\citet{%s}]]),
-								["<C-b>"] = bibtex_actions.key_append([[\citep{%s}]]),
-							},
-						},
-					},
 				},
 			})
 
 			-- Enable Telescope extensions if they are installed
 			pcall(require("telescope").load_extension, "fzf")
 			pcall(require("telescope").load_extension, "ui-select")
-			pcall(require("telescope").load_extension, "bibtex")
 		end,
 	},
 }
