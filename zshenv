@@ -32,8 +32,8 @@ export GIT_AUTHOR_NAME="mak-$(hostname)"
 export GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
 
 # AI models
-export OPENAI_BASIC='gpt-3.5-turbo'
-export OPENAI_ADVANCED='gpt-4o'
+export OPENAI_BASIC="gpt-4o-mini"
+export OPENAI_ADVANCED="gpt-4o"
 
 # CUDA vars
 if command -v nvcc >/dev/null 2>&1; then
