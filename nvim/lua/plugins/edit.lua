@@ -8,6 +8,14 @@ return {
 		end,
 	},
 
+	-- Improved commenting
+	{
+		"numToStr/Comment.nvim",
+		config = function()
+			require("Comment").setup()
+		end,
+	},
+
 	-- Autopair
 	{
 		"windwp/nvim-autopairs",
