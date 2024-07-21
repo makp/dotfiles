@@ -4,11 +4,6 @@ vim.opt_local.spell = false
 -- Unfold first level headers at startup
 vim.opt_local.foldlevel = 1
 
--- Set indentation
-vim.bo.shiftwidth = 2 -- Num spaces with < and > cmds
-vim.bo.tabstop = 2 -- <Tab> width
-vim.bo.softtabstop = 2 -- Num spaces for each <Tab> press
-
 -- Custom function for searching markdown headers
 function MarkdownHeader()
 	require("telescope.builtin").grep_string({
