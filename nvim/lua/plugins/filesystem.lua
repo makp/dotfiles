@@ -22,17 +22,17 @@ return {
 					-- follow_current_file = { enabled = true },
 				},
 			})
-			vim.keymap.set("n", "<leader>ob", ":Neotree buffers toggle<CR>", { desc = "Open [b]uffers using neotree" })
+			vim.keymap.set("n", "<leader>tb", ":Neotree buffers toggle<CR>", { desc = "Open [b]uffers using neotree" })
 			vim.keymap.set(
 				"n",
-				"<leader>of",
+				"<leader>tf",
 				":Neotree reveal toggle<CR>",
 				{ desc = "Toggle [f]ilesystem with neotree" }
 			)
 
 			vim.keymap.set(
 				"n",
-				"<leader>gt",
+				"<leader>tg",
 				":Neotree reveal git_status toggle<CR>",
 				{ desc = "Toggle git status with neo[t]ree" }
 			)
