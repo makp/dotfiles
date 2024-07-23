@@ -2,7 +2,6 @@
 
 -- LSP keybindings
 local function setup_mappings(buf)
-	local telescope = require("telescope.builtin")
 	local fzflua = require("fzf-lua")
 
 	local function map(keys, func, desc)
@@ -17,11 +16,10 @@ local function setup_mappings(buf)
 
 		-- Fuzzy find all the symbols in your current document.
 		-- Symbols are things like variables, functions, types, etc.
-		{ "<localleader>cs", telescope.lsp_document_symbols, "[s]ymbols in current buffer" },
+		{ "<localleader>cs", fzflua.lsp_document_symbols, "[s]ymbols in current buffer" },
 
 		-- Fuzzy find all the symbols in your current workspace.
-		-- Similar to document symbols, except searches over your entire project.
-		{ "<localleader>cS", telescope.lsp_dynamic_workspace_symbols, "[S]ymbols in workspace" },
+		{ "<localleader>cS", fzflua.lsp_live_workspace_symbols, "[S]ymbols in workspace" },
 
 		-- Jump to the declaration of the word under your cursor
 		--  For example, in C this would take you to the header.
@@ -29,12 +27,12 @@ local function setup_mappings(buf)
 
 		-- Jump to the implementation of the word under your cursor.
 		-- Useful when your language has ways of declaring types without an actual implementation
-		{ "<localleader>cI", telescope.lsp_implementations, "jump to [I]mplementation" },
+		{ "<localleader>cI", fzflua.lsp_implementations, "jump to [I]mplementation" },
 
 		-- Jump to the type of the word under your cursor.
 		--  Useful when you're not sure what type a variable is and you want to see
 		--  the definition of its *type*, not where it was *defined*.
-		{ "<localleader>cT", telescope.lsp_type_definitions, "jump to [T]ype" },
+		{ "<localleader>cT", fzflua.lsp_typedefs, "jump to [T]ype" },
 
 		{ "<localleader>cr", vim.lsp.buf.rename, "[r]ename variable" },
 		-- { "<localleader>ca", vim.lsp.buf.code_action, "execute [a]ction" },
