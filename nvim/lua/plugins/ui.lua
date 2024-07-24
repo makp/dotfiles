@@ -33,6 +33,10 @@ return {
 		end,
 	},
 
+	{
+		"stevearc/dressing.nvim",
+		opts = {},
+	},
 	-- Status line
 	{
 		"nvim-lualine/lualine.nvim",

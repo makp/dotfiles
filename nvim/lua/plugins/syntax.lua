@@ -47,6 +47,7 @@ return {
 			-- Syntax highlighting
 			highlight = {
 				enable = true,
+				additional_vim_regex_highlighting = false,
 			},
 
 			-- Indentation for the = operator
