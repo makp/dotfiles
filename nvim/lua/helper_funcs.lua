@@ -7,7 +7,7 @@ local H = {}
 -- See `help: luv` for more info on the `vim.loop` module. It is essentially a
 -- wrapper around libuv. For examples of Neovim processes using luv, see:
 -- https://teukka.tech/luvbook/
-local uv = vim.loop
+local uv = vim.uv
 
 -- Run a cmd asynchronously and call a callback with the result
 local function run_cmd_async(cmd, cmd_args, callback)
