@@ -21,6 +21,9 @@ return {
 		end,
 	},
 	{
+		"nvim-treesitter/nvim-treesitter-context",
+	},
+	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 		opts = {
@@ -164,6 +167,11 @@ return {
 
 			-- Setup nvim-treesitter
 			require("nvim-treesitter.configs").setup(opts)
+
+			--
+			vim.keymap.set("n", "<leader>p", function()
+				require("treesitter-context").go_to_context(vim.v.count1)
+			end, { silent = true })
 		end,
 	},
 }
