@@ -12,6 +12,30 @@ return {
 		-- DAP extension for python
 		"mfussenegger/nvim-dap-python",
 	},
+	-- Debugging keymaps
+	keys = function(_, keys)
+		local dap = require("dap")
+		local dapui = require("dapui")
+		return {
+			{ "<localleader>ds", dap.continue, desc = "Debug: Start/Continue" },
+			{ "<localleader>di", dap.step_into, desc = "Debug: Step Into" },
+			{ "<localleader>dn", dap.step_over, desc = "Debug: Step Over" },
+			{ "<localleader>do", dap.step_out, desc = "Debug: Step Out" },
+			{ "<localleader>db", dap.toggle_breakpoint, desc = "Debug: Toggle Breakpoint" },
+			{
+				"<localleader>dB",
+				function()
+					dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
+				end,
+				desc = "Debug: Set Breakpoint",
+			},
+			{ "n", "<localleader>dr", dap.repl.open, desc = "Debug: Open REPL" },
+
+			-- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
+			{ "<localleader>dt", dapui.toggle, desc = "Debug: See last session result." },
+			unpack(keys),
+		}
+	end,
 	config = function()
 		local dap = require("dap")
 		local dapui = require("dapui")
@@ -25,27 +49,12 @@ return {
 			ensure_installed = { "python" },
 		})
 
-		-- Basic debugging keymaps
-		vim.keymap.set("n", "<localleader>ds", dap.continue, { desc = "Debug: Start/Continue" })
-		vim.keymap.set("n", "<localleader>di", dap.step_into, { desc = "Debug: Step Into" })
-		vim.keymap.set("n", "<localleader>dn", dap.step_over, { desc = "Debug: Step Over" })
-		vim.keymap.set("n", "<localleader>do", dap.step_out, { desc = "Debug: Step Out" })
-		vim.keymap.set("n", "<localleader>db", dap.toggle_breakpoint, { desc = "Debug: Toggle Breakpoint" })
-		vim.keymap.set("n", "<localleader>dB", function()
-			dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
-		end, { desc = "Debug: Set Breakpoint" })
-		vim.keymap.set("n", "<localleader>dr", dap.repl.open, { desc = "Debug: Open REPL" })
-
 		-- Dap UI setup
 		dapui.setup(
 			-- 	{
 			-- 	icons = { expanded = "▾", collapsed = "▸", current_frame = "*" },
 			-- }
 		)
-
-		-- Toggle to see last session result. Without this, you can't see session
-		-- output in case of unhandled exception.
-		vim.keymap.set("n", "<localleader>dt", dapui.toggle, { desc = "Debug: See last session result." })
 
 		-- Use DAP events to open and close the UI
 		dap.listeners.after.event_initialized["dapui_config"] = dapui.open
