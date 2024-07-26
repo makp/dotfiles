@@ -17,7 +17,7 @@ return {
 	},
 
 	-- Autopair
-	{
+	--[[ {
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
 		dependencies = { "hrsh7th/nvim-cmp" },
@@ -28,5 +28,12 @@ return {
 			local cmp = require("cmp")
 			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 		end,
+	}, ]]
+
+	{
+		"altermo/ultimate-autopair.nvim",
+		event = { "InsertEnter", "CmdlineEnter" },
+		branch = "v0.6",
+		opts = {},
 	},
 }
