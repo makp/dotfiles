@@ -35,6 +35,7 @@ export GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
 # AI models
 export OPENAI_BASIC="gpt-4o-mini"
 export OPENAI_ADVANCED="gpt-4o"
+export PPLX_MODEL="llama-3.1-sonar-large-128k-online"
 
 # CUDA vars
 if command -v nvcc >/dev/null 2>&1; then

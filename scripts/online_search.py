@@ -6,7 +6,7 @@ import sys
 from openai import OpenAI
 
 API_KEY = os.getenv("PPLX_API_KEY")
-MODEL = "llama-3-sonar-large-32k-online"
+MODEL = os.getenv("PPLX_MODEL")
 BASE_URL = "https://api.perplexity.ai"
 
 CLIENT = OpenAI(api_key=API_KEY, base_url=BASE_URL)
@@ -19,7 +19,7 @@ You are an artificial intelligence assistant and you need to engage in a helpful
 def answer_question(question):
     """Answer a user's question."""
     response_stream = CLIENT.chat.completions.create(
-        model=MODEL,
+        model=str(MODEL),
         messages=[
             {"role": "system", "content": PROSE_STYLE},
             {"role": "user", "content": question},
