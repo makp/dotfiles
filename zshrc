@@ -291,4 +291,7 @@ alias pU="yay -Sua --devel"
 alias pL="pacman -Qm"
 alias pc="yay -Sc"
 
+# Convert between file formats
+alias cmh="pandoc -s -f markdown -t html "
+
 # zprof
