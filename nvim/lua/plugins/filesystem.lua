@@ -19,21 +19,16 @@ return {
 				},
 				filesystem = {
 					hijack_netrw_behavior = "disabled",
-					-- follow_current_file = { enabled = true },
+					follow_current_file = { enabled = true },
 				},
 			})
 			vim.keymap.set("n", "<leader>tb", ":Neotree buffers toggle<CR>", { desc = "Open [b]uffers using neotree" })
-			vim.keymap.set(
-				"n",
-				"<leader>tf",
-				":Neotree reveal toggle<CR>",
-				{ desc = "Toggle [f]ilesystem with neotree" }
-			)
+			vim.keymap.set("n", "<leader>tf", ":Neotree toggle<CR>", { desc = "Toggle [f]ilesystem with neotree" })
 
 			vim.keymap.set(
 				"n",
 				"<leader>tg",
-				":Neotree reveal git_status toggle<CR>",
+				":Neotree git_status toggle<CR>",
 				{ desc = "Toggle git status with neo[t]ree" }
 			)
 		end,
