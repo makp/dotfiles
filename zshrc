@@ -292,6 +292,6 @@ alias pL="pacman -Qm"
 alias pc="yay -Sc"
 
 # Convert between file formats
-alias cmh="pandoc -s -f markdown -t html "
+alias cmh="convert_md_to_html.py"
 
 # zprof
