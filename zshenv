@@ -11,7 +11,7 @@ fi
 
 # Set PATH
 # `/usr/bin/vendor_perl`: biber
-PATH="$PATH:/usr/bin/vendor_perl:$HOME/Documents/mydocs/config_files/scripts/:"
+PATH="$PATH:/usr/bin/vendor_perl:$HOME/Documents/mydocs/config_files/scripts:$HOME/Documents/mydocs/teaching/teaching_struct/teaching_utils:"
 if [ -d /opt/cuda/bin ]; then
 	PATH="$PATH:/opt/cuda/bin"
 fi
