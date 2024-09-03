@@ -293,5 +293,7 @@ alias pc="yay -Sc"
 
 # Convert between file formats
 alias cmh="convert_md_to_html.py"
+alias cms="pandoc -i -t revealjs -s "
+alias com="pandoc -t gfm -f org "
 
 # zprof
