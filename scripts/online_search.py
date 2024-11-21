@@ -3,31 +3,51 @@
 import os
 import sys
 
-from openai import OpenAI
+import requests
 
 API_KEY = os.getenv("PPLX_API_KEY")
 MODEL = os.getenv("PPLX_MODEL")
-BASE_URL = "https://api.perplexity.ai"
+URL = "https://api.perplexity.ai/chat/completions"
 
-CLIENT = OpenAI(api_key=API_KEY, base_url=BASE_URL)
 
 PROSE_STYLE = """
 You are an artificial intelligence assistant and you need to engage in a helpful and detailed conversation with a user.
 """
 
 
+def format_citations(citations):
+    formatted_citations = ""
+    for idx, citation in enumerate(citations):
+        formatted_citations += f"{idx + 1}. {citation}\n"
+    return formatted_citations
+
+
 def answer_question(question):
-    """Answer a user's question."""
-    response_stream = CLIENT.chat.completions.create(
-        model=str(MODEL),
-        messages=[
-            {"role": "system", "content": PROSE_STYLE},
-            {"role": "user", "content": question},
+    payload = {
+        "model": MODEL,
+        "messages": [
+            {
+                "role": "system",
+                "content": PROSE_STYLE,
+            },
+            {
+                "role": "user",
+                "content": question,
+            },
         ],
-        stream=True,
-    )
-    for chunk in response_stream:
-        print(chunk.choices[0].delta.content or "", end="")
+        "stream": False,
+        "return_related_questions": False,
+    }
+
+    headers = {
+        "Authorization": "Bearer " + str(API_KEY),
+        "Content-Type": "application/json",
+    }
+
+    response = requests.request("POST", URL, json=payload, headers=headers)
+    content = response.json()["choices"][0]["message"]["content"]
+    citations = response.json()["citations"]
+    print(content + "\nCitations:\n" + format_citations(citations))
 
 
 if __name__ == "__main__":
