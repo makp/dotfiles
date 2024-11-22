@@ -1,6 +1,8 @@
 # !ln -s %:p:h $HOME/.config/yazi/keymap.toml
 
-[[manager.prepend_keymap]]
-on   = "!"
-run  = 'shell "$SHELL" --block --confirm'
-desc = "Open shell here"
+[manager]
+
+prepend_keymap = [
+  { on   = "!", run  = 'shell "$SHELL" --block --confirm', desc = "Open shell here" },
+  { on = [ "c", "g" ], run = '''shell 'ya pub dds-cd --str "$(git rev-parse --show-toplevel)"' --confirm''', desc = "Open git root"},
+]
