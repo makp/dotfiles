@@ -1,0 +1,6 @@
+# !ln -s %:p:h $HOME/.config/yazi/keymap.toml
+
+[[manager.prepend_keymap]]
+on   = "!"
+run  = 'shell "$SHELL" --block --confirm'
+desc = "Open shell here"

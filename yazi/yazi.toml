@@ -1,0 +1,4 @@
+# !ln -s %:p:h $HOME/.config/yazi/yazi.toml
+
+[preview]
+wrap = "yes"
