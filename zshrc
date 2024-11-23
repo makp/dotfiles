@@ -214,11 +214,23 @@ function zvm_after_init() {
 # Default applications
 alias o="xdg-open"
 
+# Wrapper to change cwd when exiting yazi
+# From https://yazi-rs.github.io/docs/quick-start
+function oh() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
 # ls
 if command -v eza >/dev/null 2>&1; then
   alias ll="eza --color=always --all --long --git --no-user"
   alias ls="eza --color=always --all --long --git --no-user --no-permissions --no-filesize --icons=always --no-time"
 fi
+
 
 # Assistants
 alias a="sgpt --model '${OPENAI_BASIC}' --temperature 1 "
