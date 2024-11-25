@@ -241,7 +241,7 @@ alias ao="assistant_online-search.py"
 # Editor
 alias e="nvim "
 alias eh="nvim ."
-alias ef="fzf_files_and_dirs.sh"
+alias ef="run_fzf-on-files-and-dirs.sh"
 alias eg="run_rg.sh"
 
 # Git
@@ -250,6 +250,7 @@ alias gg="lazygit"
 alias cg="cd \$(git rev-parse --show-toplevel)"  # cd to root git repo
 
 alias gs="git status --short -b"
+alias gS="check-git-repos-status-recursive.sh"
 
 alias gss="git submodule foreach 'git status --short'"
 alias gsa="git submodule add "
