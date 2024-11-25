@@ -52,7 +52,7 @@ vim.keymap.set(
 
 -- Proofread text
 local function proofread(style, buffer_txt)
-	local py_cmd = "revise_prose.py"
+	local py_cmd = "assistant_revise-prose.py"
 	hf.run_cmd_async_and_display_buf(py_cmd, {
 		buffer_txt,
 		style,
@@ -113,7 +113,7 @@ end, { desc = "Inspect code" })
 
 -- Run code assistant
 local function run_code_assistant(mode, buffer_txt)
-	local py_cmd = "code_assistant.py"
+	local py_cmd = "assistant_coding.py"
 	local lang = vim.bo.filetype
 	hf.run_cmd_async_and_display_buf(py_cmd, {
 		buffer_txt,
@@ -137,7 +137,7 @@ end
 local function code_explain_light()
 	local buffer_txt = hf.get_text()
 	local filetype = vim.bo.filetype
-	local py_cmd = "code_assistant.py"
+	local py_cmd = "assistant_coding.py"
 	hf.run_cmd_async_and_display_floating_win(py_cmd, { buffer_txt, filetype, "explain_light" })
 end
 
