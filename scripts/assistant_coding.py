@@ -8,8 +8,8 @@ import sys
 from openai import OpenAI
 
 CLIENT = OpenAI()
-MODEL_ADVANCED = os.environ.get("OPENAI_ADVANCED")
-MODEL_BASIC = os.environ.get("OPENAI_BASIC")
+MODEL_ADVANCED = os.environ.get("OPENAI_REASON")
+MODEL_BASIC = os.environ.get("OPENAI_REASON_MINI")
 
 if not MODEL_ADVANCED or not MODEL_BASIC:
     raise ValueError("Please set the environment variables with GPT model names.")
