@@ -56,7 +56,7 @@ def create_completion(content, lang, temperature, model, msg_template):
         model=model,
         temperature=temperature,
         messages=[
-            {"role": "system", "content": msg_template.format(programming_lang=lang)},
+            {"role": "user", "content": msg_template.format(programming_lang=lang)},
             {"role": "user", "content": content},
         ],
     )
