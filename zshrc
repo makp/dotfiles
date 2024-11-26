@@ -173,7 +173,7 @@ VI_MODE_SET_CURSOR=true
 VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 
 # Enable some plugins
-plugins=(fzf-tab zsh-syntax-highlighting zsh-vi-mode zsh-autosuggestions copypath)
+plugins=(fzf-tab zsh-syntax-highlighting zsh-vi-mode zsh-autosuggestions copypath direnv)
 
 ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
 if [[ ! -d $ZSH_CACHE_DIR ]]; then
