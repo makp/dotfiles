@@ -49,6 +49,47 @@ CODE_OPTIMIZE = """
 improvements using Markdown for improved readability.
 """
 
+CODE_REVIEW = """
+*Task*: Review the provided code snippet in {programming_lang} for potential errors and improvements.
+
+*Requirements*:
+- Check for any syntax errors and correct them if present.
+- Analyze the code for any logical errors and propose fixes.
+- Ensure the code runs as expected.
+- Identify any potential improvements to the code.
+- Provide explanations for any changes made.
+
+*Output*: Present the reviewed code along with explanations of the changes
+made using Markdown for improved readability.
+"""
+
+CODE_REVIEW_LIGHT = """
+*Task*: Review the provided {programming_lang} code snippet for potential errors and improvements.
+
+*Output*: Present the reviewed code along with explanations of the changes
+made using Markdown for improved readability.
+"""
+
+CODE_DEBUG = """
+*Task*: Debug the provided code snippet in {programming_lang}.
+
+*Requirements*:
+- Identify and correct any syntax errors.
+- Identify and correct any logical errors.
+- Ensure the code runs as expected.
+- Provide explanations for any changes made.
+
+*Output*: Present the corrected code along with explanations of the changes
+made using Markdown for improved readability.
+"""
+
+CODE_DEBUG_LIGHT = """
+*Task*: Debug the provided {programming_lang} code snippet.
+
+*Output*: Present the corrected code along with explanations of the changes
+made using Markdown for improved readability.
+"""
+
 
 def create_completion(content, lang, temperature, model, msg_template):
     """Create a completion."""
