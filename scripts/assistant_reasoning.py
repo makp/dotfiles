@@ -8,6 +8,7 @@ import os
 from openai import OpenAI
 
 CLIENT = OpenAI()
+
 MODEL_ADVANCED = os.environ.get("OPENAI_REASON")
 MODEL_BASIC = os.environ.get("OPENAI_REASON_MINI")
 
@@ -17,16 +18,22 @@ if not MODEL_ADVANCED or not MODEL_BASIC:
 
 def process_task(filepath, model):
     """Complete task described in the file at the given path."""
-    with open(filepath, "r") as file:
-        content = file.read()
+    try:
+        with open(filepath, "r") as file:
+            content = file.read()
+    except IOError as e:
+        raise IOError(f"Error reading the file '{filepath}': {e}")
 
-    response = CLIENT.chat.completions.create(
-        model=model,
-        messages=[
-            {"role": "system", "content": content},
-        ],
-    )
-    return response.choices[0].message.content
+    try:
+        response = CLIENT.chat.completions.create(
+            model=model,
+            messages=[
+                {"role": "system", "content": content},
+            ],
+        )
+        return response.choices[0].message.content
+    except Exception as e:
+        raise RuntimeError(f"OpenAI API request failed: {e}")
 
 
 if __name__ == "__main__":
@@ -37,9 +44,28 @@ if __name__ == "__main__":
     )
 
     parser.add_argument(
-        "-m", "--model", type=str, default=MODEL_ADVANCED, help="Model name to use."
+        "-m",
+        "--mini",
+        action="store_true",  # Sets the value to True if the flag is present
+        help="Use mini model",
+    )
+
+    parser.add_argument(
+        "-o",
+        "--output",
+        action="store_true",
+        help="Output the result to a file",
     )
 
     args = parser.parse_args()
 
-    print(process_task(args.filepath, args.model))
+    model_to_use = MODEL_BASIC if args.mini else MODEL_ADVANCED
+    if not model_to_use:
+        raise ValueError("Please set the environment variables with GPT model names.")
+
+    if args.output:
+        output = process_task(args.filepath, model_to_use)
+        with open("output.txt", "w") as file:
+            file.write(str(output))
+    else:
+        print(process_task(args.filepath, model_to_use))
