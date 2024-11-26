@@ -124,7 +124,7 @@ end
 
 function RunCodeAssistant()
 	local buffer_txt = hf.get_text()
-	local opts = { "explain", "optimize", "explain_light", "optmize_light" }
+	local opts = { "explain", "optimize", "explain_light", "optimize_light" }
 	hf.select_one_option(opts, function(choice)
 		if choice then
 			run_code_assistant(choice, buffer_txt)
