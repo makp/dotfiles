@@ -5,7 +5,7 @@
 # load. The functions should lazily load the conda environment.
 
 # Workaround for the issue with miniconda
-export CRYPTOGRAPHY_OPENSSL_NO_LEGACY = 1
+export CRYPTOGRAPHY_OPENSSL_NO_LEGACY=1
 
 function conda_initialize_hardcore() {
     # Store shell commmands in a variable
