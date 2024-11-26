@@ -28,7 +28,7 @@ def process_task(filepath, model):
         response = CLIENT.chat.completions.create(
             model=model,
             messages=[
-                {"role": "system", "content": content},
+                {"role": "user", "content": content},
             ],
         )
         return response.choices[0].message.content
