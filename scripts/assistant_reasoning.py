@@ -54,7 +54,7 @@ if __name__ == "__main__":
         "-o",
         "--output",
         action="store_true",
-        help="Output the result to a file named 'output.md'",
+        help="Output the result to a file named 'assistant_output.md'",
     )
 
     args = parser.parse_args()
@@ -65,7 +65,7 @@ if __name__ == "__main__":
 
     if args.output:
         output = process_task(args.filepath, model_to_use)
-        with open("output.md", "w") as file:
+        with open("assistant_output.md", "w") as file:
             file.write(str(output))
     else:
         print(process_task(args.filepath, model_to_use))
