@@ -300,11 +300,17 @@ alias grh="git reset HEAD" # unstage changes in the staging area
 alias grH="git reset --hard HEAD" # reset repo to the last commit
 
 
-# Package manager
+# Linux pkg manager
 alias pu="sudo pacman -Syu"
 alias pU="yay -Sua --devel"
 alias pL="pacman -Qm"
 alias pc="yay -Sc"
+
+# Python pkg manager
+alias pyl="conda env export --from-history"
+alias pyL="conda env export --from-history > environment.yml"
+alias pyC="clone-and-update-conda-env.sh "
+
 
 # Convert between file formats
 alias cmh="convert_md_to_html.py"
