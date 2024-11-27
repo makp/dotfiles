@@ -235,7 +235,8 @@ fi
 # Assistants
 alias a="sgpt --model '${OPENAI_BASIC}' --temperature 1 "
 alias aa="sgpt --model '${OPENAI_ADVANCED}' --temperature 1 "
-alias ar="assistant_reasoning.py"
+alias ar="assistant_reasoning.py -m -o "
+alias aR="assistant_reasoning.py -o "
 alias ao="assistant_online-search.py"
 
 # Editor
