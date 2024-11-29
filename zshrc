@@ -235,8 +235,8 @@ fi
 # Assistants
 alias a="sgpt --model '${OPENAI_BASIC}' --temperature 1 "
 alias aa="sgpt --model '${OPENAI_ADVANCED}' --temperature 1 "
-alias ar="assistant_reasoning.py -m -o "
-alias aR="assistant_reasoning.py -o "
+alias ar="assistant_reasoning.py -m "
+alias aR="assistant_reasoning.py "
 alias ao="assistant_online-search.py"
 
 # Editor
@@ -307,8 +307,9 @@ alias pL="pacman -Qm"
 alias pc="yay -Sc"
 
 # Python pkg manager
-alias pyl="conda env export --from-history"
-alias pyL="conda env export --from-history > environment.yml"
+alias pyl="conda env export | bat -l yml"
+alias pyh="conda env export --from-history | bat -l yml"
+alias pyH="conda env export --from-history > environment.yml"
 alias pyC="clone-and-update-conda-env.sh "
 
 
