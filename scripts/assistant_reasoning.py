@@ -4,31 +4,26 @@
 
 import argparse
 import os
+import subprocess
 
 from openai import OpenAI
 
 CLIENT = OpenAI()
 
-MODEL_ADVANCED = os.environ.get("OPENAI_REASON")
-MODEL_BASIC = os.environ.get("OPENAI_REASON_MINI")
+MODEL_ADVANCED = os.getenv("OPENAI_REASON")
+MODEL_BASIC = os.getenv("OPENAI_REASON_MINI")
 
 if not MODEL_ADVANCED or not MODEL_BASIC:
     raise ValueError("Please set the environment variables with GPT model names.")
 
 
-def process_task(filepath, model):
-    """Complete task described in the file at the given path."""
-    try:
-        with open(filepath, "r") as file:
-            content = file.read()
-    except IOError as e:
-        raise IOError(f"Error reading the file '{filepath}': {e}")
-
+def process_task(query, model):
+    """Complete task described query."""
     try:
         response = CLIENT.chat.completions.create(
             model=model,
             messages=[
-                {"role": "user", "content": content},
+                {"role": "user", "content": query},
             ],
         )
         return response.choices[0].message.content
@@ -40,21 +35,16 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Assistant for reasoning tasks.")
 
     parser.add_argument(
-        "filepath", type=str, help="Path to the file with the task description."
-    )
-
-    parser.add_argument(
         "-m",
         "--mini",
         action="store_true",  # Sets the value to True if the flag is present
-        help="Use mini model",
+        help="Use mini reasoning model",
     )
 
     parser.add_argument(
-        "-o",
-        "--output",
-        action="store_true",
-        help="Output the result to a file named 'assistant_output.md'",
+        "query",
+        type=str,
+        help="Query for the assistant.",
     )
 
     args = parser.parse_args()
@@ -63,9 +53,18 @@ if __name__ == "__main__":
     if not model_to_use:
         raise ValueError("Please set the environment variables with GPT model names.")
 
-    if args.output:
-        output = process_task(args.filepath, model_to_use)
-        with open("assistant_output.md", "w") as file:
-            file.write(str(output))
-    else:
-        print(process_task(args.filepath, model_to_use))
+    question = args.query
+    if os.path.isfile(args.query):
+        print(f"Reading the query from the file '{args.query}'")
+        try:
+            with open(args.query, "r") as file:
+                question = file.read()
+        except IOError as e:
+            raise IOError(f"Error reading the file '{args.query}': {e}")
+
+    output = process_task(question, model_to_use)
+
+    with open("/tmp/assistant-reasoning_output.md", "w") as file:
+        file.write(str(output))
+
+    subprocess.run(["xdg-open", "/tmp/assistant-reasoning_output.md"])
