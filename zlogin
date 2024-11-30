@@ -5,6 +5,7 @@
 # focuses on processes that should happen at the start of the login
 # shell session.
 
+echo "Running .zlogin..."
 
 ## OpenSSH KEYS PASSPHRASES -------
 
@@ -39,4 +40,3 @@ fi
 ## INITIALIZE CONDA ------
 echo "Setting up conda..."
 source load_conda.sh
-conda activate ml
