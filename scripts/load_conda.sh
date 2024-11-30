@@ -1,40 +1,43 @@
-#!/bin/sh
+#!/bin/bash
 
+#
 # Funcs for initializing conda in zsh
-# The contents of `conda_initialize_hardcore` was taking too long to
-# load. The functions should lazily load the conda environment.
+#
 
 # Workaround for the issue with miniconda
 export CRYPTOGRAPHY_OPENSSL_NO_LEGACY=1
 
-function conda_initialize_hardcore() {
-    # Store shell commmands in a variable
-    __conda_setup="$('/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-    if [ $? -eq 0 ]; then 	# check if previous command was successful
-	eval "$__conda_setup"
-    else
-	if [ -f "/opt/miniconda3/etc/profile.d/conda.sh" ]; then
-	    . "/opt/miniconda3/etc/profile.d/conda.sh"
-	else
-	    export PATH="/opt/miniconda3/bin:$PATH"
-	fi
-    fi
-    unset __conda_setup  # del temp shell var
-}
-
 function conda_initialize() {
-    unset -f conda_initialize conda # -f is used bc the names are funcs
-    eval "$('/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
-    export CONDA_INITIALIZED=1
-    # Note that, because of the unset line above, `conda` no longer refers to the conda function defined below.
-    conda activate ml 		# select env
-    conda "$@"
+  # Ensure there are no naming conflicts
+  unset -f conda_initialize conda # -f is used bc the names are funcs
+
+  # Execute conda for Zsh and capture the ouput
+  __conda_setup="$('/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
+
+  # If previous command was successful, eval the returned setup cmds.
+  # Otherwise, source the conda.sh script if it exists or add conda to the PATH
+  if [ $? -eq 0 ]; then # check if previous command was successful
+    eval "$__conda_setup"
+  else
+    if [ -f "/opt/miniconda3/etc/profile.d/conda.sh" ]; then
+      source "/opt/miniconda3/etc/profile.d/conda.sh"
+    else
+      export PATH="/opt/miniconda3/bin:$PATH"
+    fi
+  fi
+  unset __conda_setup # del temp shell var
+
 }
 
+# Var to keep track of conda initialization
+export CONDA_INITIALIZED=0
+
+# Wrap conda command to ensure it is initialized before use
 function conda() {
-    if [ -z "$CONDA_INITIALIZED" ]; then
-        conda_initialize "$@"
-    else
-        echo "Conda not initialized properly. Use the command `conda_initialize_hardcore`."
-    fi
+  if [ -z "$CONDA_INITIALIZED" ]; then
+    conda_initialize
+    export CONDA_INITIALIZED=1
+  fi
+  # Execute conda with the given arguments
+  command conda "$@"
 }
