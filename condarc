@@ -1,0 +1,10 @@
+# !ln -s %:p ~/.condarc
+channels:
+  - conda-forge
+  - https://repo.anaconda.com/pkgs/main
+  - https://repo.anaconda.com/pkgs/r
+create_default_packages:
+  - pip
+  - ipython
+  - openai
+  - mamba
