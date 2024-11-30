@@ -36,9 +36,7 @@ if [[ -n $SSH_AUTH_SOCK ]] && ! ssh-add -l > /dev/null; then
 fi
 
 
-## SET UP CONDA ------
-if [[ -z "$CONDA_INITIALIZED" ]]; then
-    echo "Initializing conda..."
-    source load_conda.sh
-    conda activate ml
-fi
+## INITIALIZE CONDA ------
+echo "Setting up conda..."
+source load_conda.sh
+conda activate ml

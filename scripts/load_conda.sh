@@ -26,15 +26,12 @@ function conda_initialize() {
     fi
   fi
   unset __conda_setup # del temp shell var
-
 }
-
-# Var to keep track of conda initialization
-export CONDA_INITIALIZED=0
 
 # Wrap conda command to ensure it is initialized before use
 function conda() {
   if [ -z "$CONDA_INITIALIZED" ]; then
+    echo "Conda is not initialized. Initializing conda..."
     conda_initialize
     export CONDA_INITIALIZED=1
   fi
