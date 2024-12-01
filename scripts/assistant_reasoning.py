@@ -67,4 +67,8 @@ if __name__ == "__main__":
     with open("/tmp/assistant-reasoning_output.md", "w") as file:
         file.write(str(output))
 
-    subprocess.run(["xdg-open", "/tmp/assistant-reasoning_output.md"])
+    # Get the default editor or use less if not set
+    editor = os.getenv("EDITOR", "less")
+
+    # Display the output in the editor
+    subprocess.run([editor, "/tmp/assistant-reasoning_output.md"])
