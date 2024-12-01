@@ -4,7 +4,8 @@ channels:
   - defaults
 create_default_packages:
   - pip
-  - requests
   - ipython
+  - requests
   - openai
+  - anthropic
   - mamba

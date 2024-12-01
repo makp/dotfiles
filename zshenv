@@ -38,6 +38,7 @@ export OPENAI_ADVANCED="gpt-4o"
 export OPENAI_REASON_MINI="o1-mini"
 export OPENAI_REASON="o1-preview"
 export PPLX_MODEL="llama-3.1-sonar-huge-128k-online"
+export ANTHROPIC_MODEL="claude-3-5-sonnet-latest"
 
 # CUDA vars
 if command -v nvcc >/dev/null 2>&1; then
