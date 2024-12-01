@@ -1,10 +1,10 @@
 # !ln -s %:p ~/.condarc
 channels:
   - conda-forge
-  - https://repo.anaconda.com/pkgs/main
-  - https://repo.anaconda.com/pkgs/r
+  - defaults
 create_default_packages:
   - pip
+  - requests
   - ipython
   - openai
   - mamba
