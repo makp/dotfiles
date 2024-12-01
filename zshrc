@@ -233,11 +233,12 @@ fi
 
 
 # Assistants
-alias a="sgpt --model '${OPENAI_BASIC}' --temperature 1 "
+alias a="sgpt --model '${OPENAI_BASIC}' --temperature 0.3 "
+alias aA="aichat --model anthropic:${ANTHROPIC_MODEL} "
 alias aa="sgpt --model '${OPENAI_ADVANCED}' --temperature 1 "
 alias ar="assistant_reasoning.py -m "
 alias aR="assistant_reasoning.py "
-alias ao="assistant_online-search.py"
+alias ao="assistant_online-search.py "
 
 # Editor
 alias e="nvim "
