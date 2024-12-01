@@ -61,7 +61,7 @@ end
 
 function ProofreadProse()
 	local buffer_txt = hf.get_text()
-	local opts = { "academic", "prose", "email" }
+	local opts = { "academic_anthropic", "academic", "prose", "email" }
 	hf.select_one_option(opts, function(choice)
 		if choice then
 			proofread(choice, buffer_txt)

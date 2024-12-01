@@ -1,19 +1,22 @@
 #!/usr/bin/env python
 
-"""Helper functions for proofreading emails and other text."""
+"""Helper functions for proofreading emails and other types of text."""
 
 import os
 import sys
 
+import anthropic
 from openai import OpenAI
 
-CLIENT = OpenAI()
+CLIENT_OPENAI = OpenAI()
+CLIENT_ANTHROPIC = anthropic.Anthropic()
 
-MODEL_ADVANCED = os.environ.get("OPENAI_ADVANCED")
-MODEL_BASIC = os.environ.get("OPENAI_BASIC")
+MODEL_ADVANCED = os.getenv("OPENAI_ADVANCED")
+MODEL_BASIC = os.getenv("OPENAI_BASIC")
+MODEL_ANTHROPIC = os.getenv("ANTHROPIC_MODEL")
 
-if not MODEL_ADVANCED or not MODEL_BASIC:
-    raise ValueError("Please set the environment variables with GPT model names.")
+if not MODEL_ADVANCED or not MODEL_BASIC or not MODEL_ANTHROPIC:
+    raise ValueError("Please set the environment variables with assistant model names.")
 
 
 EMAIL_MAIN = """
@@ -39,9 +42,9 @@ Further instructions:
 """
 
 
-def proofread(content, temperature, model, msg_template):
+def proofread_openai(content, temperature, model, msg_template):
     """Proofread content."""
-    response = CLIENT.chat.completions.create(
+    response = CLIENT_OPENAI.chat.completions.create(
         model=model,
         temperature=temperature,
         messages=[
@@ -52,24 +55,45 @@ def proofread(content, temperature, model, msg_template):
     return response.choices[0].message.content
 
 
+def proofread_anthropic(content, temperature, model, msg_template):
+    """Proofread content using one of the Anthropic models."""
+    response = CLIENT_ANTHROPIC.messages.create(
+        max_tokens=1024,  # mandatory par
+        model=model,
+        temperature=temperature,
+        system=msg_template,
+        messages=[
+            {"role": "user", "content": [{"type": "text", "text": content}]},
+        ],
+    )
+    return response.content[0].text  # type: ignore
+
+
 def write_short_msg(content, temperature, model=MODEL_BASIC):
     """Write a concise email with the provided content."""
     msg_template = f"{EMAIL_MAIN}\n{PROSE_STYLE}"
-    email = proofread(content, temperature, model, msg_template)
+    email = proofread_openai(content, temperature, model, msg_template)
     print(email)
 
 
 def refine_prose(content, temperature, model=MODEL_BASIC):
     """Revise prose."""
     msg_template = f"{PROSE_MAIN}\n{PROSE_STYLE}"
-    response = proofread(content, temperature, model, msg_template)
+    response = proofread_openai(content, temperature, model, msg_template)
     print(response)
 
 
 def refine_academic_prose(content, temperature, model=MODEL_ADVANCED):
     """Revise academic prose."""
     msg_template = f"{PROSE_MAIN}\n{ACADEMIC_STYLE}"
-    response = proofread(content, temperature, model, msg_template)
+    response = proofread_openai(content, temperature, model, msg_template)
+    print(response)
+
+
+def refine_academic_prose_anthropic(content, temperature, model=MODEL_ANTHROPIC):
+    """Revise academic prose."""
+    msg_template = f"{PROSE_MAIN}\n{ACADEMIC_STYLE}"
+    response = proofread_anthropic(content, temperature, model, msg_template)
     print(response)
 
 
@@ -78,6 +102,7 @@ def process_prose(content, mode, temperature):
     mode_functions = {
         "email": write_short_msg,
         "academic": refine_academic_prose,
+        "academic_anthropic": refine_academic_prose_anthropic,
         "prose": refine_prose,
     }
     try:
