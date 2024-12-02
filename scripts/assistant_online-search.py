@@ -5,6 +5,9 @@ import os
 import sys
 
 import requests
+from rich.console import Console
+from rich.live import Live
+from rich.markdown import Markdown
 
 API_KEY = os.getenv("PPLX_API_KEY")
 MODEL = os.getenv("PPLX_MODEL")
@@ -14,6 +17,8 @@ URL = "https://api.perplexity.ai/chat/completions"
 PROSE_STYLE = """
 You are an artificial intelligence assistant and you need to engage in a helpful and detailed conversation with a user.
 """
+
+console = Console()
 
 
 def get_response(question):
@@ -60,33 +65,35 @@ def format_citations(citations):
 def process_response(response):
     """Process response from perplexity API."""
     citations = []
+    markdown_buffer = ""
 
     try:
         response.raise_for_status()  # Check if request was successful
 
-        for line in response.iter_lines():
-            if line:
-                line_content = line.decode("utf-8").strip()
-                if line_content.startswith("data: "):
-                    line_content = line_content[6:]
-                try:
-                    data = json.loads(line_content)
-                    for choice in data.get("choices", []):
-                        message_content = choice.get("delta", {}).get("content")
-                        if message_content:
-                            # Ensure the output is written to the terminal immediately without waiting for a newline character
-                            # print(message_content, end="", flush=True)
-                            sys.stdout.write(message_content)
-                            sys.stdout.flush()
+        with Live(Markdown(""), console=console, refresh_per_second=0.5) as live:
+            for line in response.iter_lines():
+                if line:
+                    line_content = line.decode("utf-8").strip()
+                    if line_content.startswith("data: "):
+                        line_content = line_content[6:]
+                    try:
+                        data = json.loads(line_content)
+                        for choice in data.get("choices", []):
+                            message_content = choice.get("delta", {}).get("content")
+                            if message_content:
+                                markdown_buffer += message_content
+                                live.update(Markdown(markdown_buffer))
 
-                    if not citations and "citations" in data:
-                        citations = data.get("citations", [])
+                        if not citations and "citations" in data:
+                            citations = data.get("citations", [])
 
-                except json.JSONDecodeError:
-                    continue  # Ignore malformed JSON
+                    except json.JSONDecodeError:
+                        continue  # Ignore malformed JSON
 
-        if citations:
-            print("\n\nCitations:\n" + format_citations(citations))
+            if citations:
+                formatted_citations = format_citations(citations)
+                markdown_buffer += f"\n\n# Citations**\n\n{formatted_citations}"
+                live.update(Markdown(markdown_buffer))
 
     except requests.exceptions.RequestException as e:
         print(f"Deu bode: {e}")
