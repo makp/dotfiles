@@ -58,7 +58,7 @@ def format_citations(citations):
     """Format citations."""
     formatted_citations = ""
     for idx, citation in enumerate(citations):
-        formatted_citations += f"[{idx + 1}] {citation}\n"
+        formatted_citations += f"[{idx + 1}] {citation}\n\n"
     return formatted_citations
 
 
@@ -92,7 +92,7 @@ def process_response(response):
 
             if citations:
                 formatted_citations = format_citations(citations)
-                markdown_buffer += f"\n\n# Citations**\n\n{formatted_citations}"
+                markdown_buffer += f"\n\n # Citations\n\n{formatted_citations}"
                 live.update(Markdown(markdown_buffer))
 
     except requests.exceptions.RequestException as e:
