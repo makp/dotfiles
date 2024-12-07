@@ -300,6 +300,10 @@ alias gr="git reset "
 alias grh="git reset HEAD" # unstage changes in the staging area
 alias grH="git reset --hard HEAD" # reset repo to the last commit
 
+# Add gh aliases: ghcs and ghce
+# Instructions for setting up gh with copilot:
+# https://docs.github.com/en/copilot/managing-copilot/configure-personal-settings/installing-github-copilot-in-the-cli
+eval "$(gh copilot alias -- zsh)"
 
 # Linux pkg manager
 alias pu="sudo pacman -Syu"
