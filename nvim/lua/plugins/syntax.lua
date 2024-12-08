@@ -162,9 +162,6 @@ return {
 		-- [[ Configure Treesitter ]] See `:help nvim-treesitter`
 		-- Run :TSModuleInfo to check if a module is enabled
 		config = function(_, opts)
-			-- Prefer git instead of curl in order to improve connectivity in some environments
-			require("nvim-treesitter.install").prefer_git = true
-
 			-- Setup nvim-treesitter
 			require("nvim-treesitter.configs").setup(opts)
 
