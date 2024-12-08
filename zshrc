@@ -214,8 +214,9 @@ function zvm_after_init() {
 # Default applications
 alias o="xdg-open"
 
-# Wrapper to change cwd when exiting yazi
-# From https://yazi-rs.github.io/docs/quick-start
+# Wrapper to change cwd when exiting yazi with `q`
+# Press `Q` to exit yazi without changing the cwd
+# Source: https://yazi-rs.github.io/docs/quick-start
 function oh() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
 	yazi "$@" --cwd-file="$tmp"
