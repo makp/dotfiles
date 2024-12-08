@@ -26,7 +26,9 @@ opt.updatetime = 250
 opt.mouse = "a"
 
 -- Sync OS and Nvim clipboard
-opt.clipboard = "unnamedplus"
+vim.schedule(function()
+	opt.clipboard = "unnamedplus"
+end)
 
 -- Use nerd font
 vim.g.have_nerd_font = true
