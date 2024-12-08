@@ -170,6 +170,7 @@ return {
 	-- Enable Copilot completions
 	{
 		"github/copilot.vim",
+		-- Type `# q:` for asking questions
 		-- M-]/[ : cycle through suggestions
 		-- M-\ : request a suggestion
 		-- M-Right / M-C-Right : accept next word/line
