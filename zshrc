@@ -260,8 +260,6 @@ alias gsi="git submodule update --init --recursive" # commit specified by the pa
 alias gsu="git submodule update --remote --recursive" # latest commit
 
 alias gf="git fetch --all"
-alias gfs="git fetch --all && git show HEAD..FETCH_HEAD"
-alias gfg="git fetch --all && git graph HEAD..FETCH_HEAD"
 
 alias gp="git pull"
 alias gps="git pull --recurse-submodules"
@@ -283,6 +281,7 @@ alias gd="git diff --submodule"
 alias gds="git diff --staged --submodule"
 
 alias gl="git log -p --submodule"
+alias glo="git graph origin..HEAD"
 
 function git_clean_confirm() {
  git clean -fd --dry-run
