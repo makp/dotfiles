@@ -57,8 +57,8 @@ opt.splitbelow = true
 -- Preview substitutions live as you type
 opt.inccommand = "split"
 
--- Set highlight on search, but clear on pressing <Esc> in normal mode
-opt.hlsearch = true
+-- Clear highlight when pressing <Esc> in normal mode
+-- See `:help hlsearch`
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- Set spell language
