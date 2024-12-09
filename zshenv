@@ -9,13 +9,17 @@ if [[ -f ~/.zsh_private ]]; then
 	source ~/.zsh_private
 fi
 
+# Path to config files
+export CONFIG_FILES="$HOME/Documents/mydocs/config_files"
+
 # Set PATH
 # `/usr/bin/vendor_perl`: biber
-PATH="$PATH:/usr/bin/vendor_perl:$HOME/Documents/mydocs/config_files/scripts:$HOME/Documents/mydocs/teaching/teaching_struct/teaching_utils:"
+PATH="$PATH:/usr/bin/vendor_perl:$CONFIG_FILES/scripts:$HOME/Documents/mydocs/teaching/teaching_struct/teaching_utils:"
 if [ -d /opt/cuda/bin ]; then
 	PATH="$PATH:/opt/cuda/bin"
 fi
 export PATH
+
 
 # Set default editors for ZSH
 # EDITOR is for programs that expect a line editor. VISUAL is for
