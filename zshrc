@@ -16,6 +16,12 @@ setopt auto_cd	      # don't require typing cd to change directories
 setopt NO_HUP	        # don't kill jobs when shell exits
 # setopt COMPLETE_ALIASES # autocomplete aliases
 
+# Don't perform security checks with `compinit` to speed up shell startup
+ZSH_DISABLE_COMPFIX="true"
+
+# Define var for storing plugins
+plugins=()
+
 # Map HOME, END, and DEL keys
 bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line
@@ -25,10 +31,6 @@ bindkey "\e[3~" delete-char
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-
-# Load colors
-autoload -U colors
-colors
 
 
 ## HISTORY --------
@@ -50,67 +52,6 @@ setopt hist_find_no_dups
 
 ## COMPLETION ------
 
-# Enable compinit
-autoload -U compinit
-compinit
-
-# Use internal pager to display matches
-zmodload zsh/complist
-zstyle ':completion:*:default' list-prompt '%S%M matches%s'
-bindkey -M listscroll q send-break # q exits internal pager
-
-# Saner completion behavior
-# zstyle ':completion:*' menu select # activate menu selection
-zstyle ':completion:*' rehash true # rehash automatically
-zstyle ':completion:*' verbose yes # print descriptions against each match
-zstyle ':completion:*' group-name '' # separate matches in distinct related groups
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS} # applies color scheme LS_COLORS
-zstyle ':completion:*:*:*:*:processes' force-list always # even if there is only one possible completion
-zstyle ':completion:*:cd:*' ignore-parents parent pwd # never suggest parent dir
-
-# Enable zstyle caching (for speed)
-zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path ~/.zsh/cache
-
-# Customize format during completion
-# `%B` and `%b` are used to make the text that appears between them
-# bold. %U` and `%u` are used to underline the text between them. `%d`
-# is replaced with the description of the group.
-# zstyle ':completion:*' format '%B---- %d%b'
-# zstyle ':completion:*:descriptions' format $'%{\e[0;31m%}completing %B%d%b%{\e[0m%}'
-# zstyle ':completion:*:messages' format '%B%U---- %d%u%b'
-# zstyle ':completion:*:warnings' format "%B$fg[red]%}---- no match for: $fg[white]%d%b"
-
-# Customize fuzzy matching
-zstyle ':completion:*' completer _expand_alias _complete _match _approximate # used completion funcs
-# zstyle ':completion:*' special-dirs true
-zstyle ':completion:*:match:*' original only # disable transformation features
-zstyle ':completion:*:approximate:*' max-errors 1 numeric # max number of typos numeric args
-zstyle -e ':completion:*:approximate:*' \
-    max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3)))' # max number of errors
-# The number of errors allowed increase with the length of what you have typed so far
-
-# Customize auto-completion at specific contexts
-zstyle ':completion:*:*:*:*:processes' insert-ids menu yes select # process IDs
-zstyle ':completion:*:processes' command 'ps c -u ${USER} -o pid,%cpu,cputime,cmd'  # name completion
-# alternative completions: tty #'ps -U $(whoami) | sed "/ps/d"'
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31' # kill
-zstyle ':completion:*:manuals' separate-sections true # manpages
-zstyle ':completion:*:manuals.*' insert-sections true
-
-# Autocompletion for PDFs
-# Open the most recently modified PDF file in the current directory by
-# default, if no parameter is given. It also configures completion for
-# this function to use a menu selection and sorts files by
-# modification time.
-okular() { command okular ${*:-*.pdf(om[1])} }
-zstyle ':completion:*:*:okular:*' menu yes select
-zstyle ':completion:*:*:okular:*' file-sort time
-
-# Enable the predict feature
-# autoload predict-on
-# predict-on
-
 # Enable fzf if it is installed
 if command -v fzf >/dev/null 2>&1; then
     # Enable fzf keybindings and completion
@@ -120,6 +61,7 @@ if command -v fzf >/dev/null 2>&1; then
     source <(fzf --zsh)
     # Change trigger so that it doesn't conflict with zsh
     export FZF_COMPLETION_TRIGGER=',,'
+    plugins+=(fzf-tab) # Add fzf-tab to the list of plugins
 fi
 
 # Enable zoxide if it is installed
@@ -158,9 +100,6 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Use hyphen-insensitive completion
 # HYPHEN_INSENSITIVE="true"
 
-# Just remind me to update when it's time
-zstyle ':omz:update' mode reminder
-
 # Enable auto-correction
 ENABLE_CORRECTION="true"
 
@@ -173,15 +112,15 @@ VI_MODE_SET_CURSOR=true
 VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 
 # Enable some plugins
-plugins=(fzf-tab zsh-syntax-highlighting zsh-vi-mode zsh-autosuggestions copypath direnv)
+plugins+=(zsh-syntax-highlighting zsh-vi-mode zsh-autosuggestions copypath direnv)
 
 ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
 if [[ ! -d $ZSH_CACHE_DIR ]]; then
   mkdir $ZSH_CACHE_DIR
 fi
 
+# Source Oh My Zsh
 source $ZSH/oh-my-zsh.sh
-
 
 # fzf-tab
 # Force zsh not to show completion menu, which allows fzf-tab to capture the
