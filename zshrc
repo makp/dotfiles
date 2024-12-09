@@ -19,7 +19,7 @@ setopt NO_HUP	        # don't kill jobs when shell exits
 # Don't perform security checks with `compinit` to speed up shell startup
 ZSH_DISABLE_COMPFIX="true"
 
-# Define var for storing plugins
+# Define var to store plugin names
 plugins=()
 
 # Map HOME, END, and DEL keys
@@ -51,6 +51,11 @@ setopt hist_find_no_dups
 
 
 ## COMPLETION ------
+
+ENABLE_CORRECTION="true" # Enable auto-correction
+# CASE_SENSITIVE="true" # Use case-sensitive completion.
+# HYPHEN_INSENSITIVE="true" # Use hyphen-insensitive completion
+
 
 # Enable fzf if it is installed
 if command -v fzf >/dev/null 2>&1; then
@@ -93,19 +98,6 @@ ZSH_CUSTOM=/usr/share/zsh/
 
 # Set theme
 ZSH_THEME="powerlevel10k/powerlevel10k"
-
-# Use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Use hyphen-insensitive completion
-# HYPHEN_INSENSITIVE="true"
-
-# Enable auto-correction
-ENABLE_CORRECTION="true"
-
-# Display red dots whilst waiting for completion
-# COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
-COMPLETION_WAITING_DOTS="true"
 
 # Vars for vi-mode plugin
 VI_MODE_SET_CURSOR=true
