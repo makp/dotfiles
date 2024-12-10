@@ -241,8 +241,9 @@ fi
 # Linux pkg manager
 alias pu="sudo pacman -Syu"
 alias pU="yay -Sua --devel"
-alias pL="pacman -Qm"
+alias pL="pacman -Qm" # List foreign packages
 alias pc="yay -Sc"
+alias pf="yay -Ql" # List files in a package
 
 # Python pkg manager
 alias pyl="conda env export | bat -l yml"
