@@ -18,20 +18,6 @@ return {
 			},
 		},
 		opts = {
-			formatters = {
-				injected = {
-					opts = {
-						lang_to_ext = {
-							bash = "sh",
-							javascript = "js",
-							latex = "tex",
-							markdown = "md",
-							python = "py",
-						},
-					},
-				},
-			},
-
 			-- Define formatters
 			formatters_by_ft = {
 				sh = { "shfmt" },
