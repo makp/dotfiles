@@ -18,14 +18,29 @@ zinit wait lucid light-mode for \
 # Change fzf trigger key
 export FZF_COMPLETION_TRIGGER=',,'
 
-# Force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
+
+#
+# Configure completion style (zstyle)
+# Source: https://github.com/Aloxaf/fzf-tab?tab=readme-ov-file#configure
+#
+# Rehash automatically
+zstyle ':completion:*' rehash true
+# Disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+# Set descriptions format to enable group support
+# NOTE: don't use escape sequences (like '%F{red}%d%f') here, fzf-tab will ignore them
+zstyle ':completion:*:descriptions' format '[%d]'
+# Set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# Use custom fzf flags
+# NOTE: fzf-tab does not follow FZF_DEFAULT_OPTS by default
+zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept
+# Force zsh not to show completion menu
 zstyle ':completion:*' menu no
-
-# Continuous trigger key for fzf-tab
-zstyle ':fzf-tab:*' continuous-trigger '/'
-
 # Switch between groups with < and >
 zstyle ':fzf-tab:*' switch-group '<' '>'
+# Continuous trigger key for fzf-tab
+zstyle ':fzf-tab:*' continuous-trigger '/'
 
 
 # Enable ShellGPT completions
