@@ -1,12 +1,12 @@
-# CASE_SENSITIVE="true" # Use case-sensitive completion.
-# HYPHEN_INSENSITIVE="true" # Use hyphen-insensitive completion
-
-
-
 # fzf keybindings:
 # C-t: pasted file/dir onto the command line.
 # M-c: cd into selected directory.
 # C-r: search history. Press C-r again to search by chronological order.
+
+# CASE_SENSITIVE="true" # Use case-sensitive completion.
+# HYPHEN_INSENSITIVE="true" # Use hyphen-insensitive completion
+
+ZOXIDE_CMD_OVERRIDE="cd"
 
 #
 zinit wait lucid light-mode for \
