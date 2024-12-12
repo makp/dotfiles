@@ -42,19 +42,14 @@ zstyle ':fzf-tab:*' switch-group '<' '>'
 # Continuous trigger key for fzf-tab
 zstyle ':fzf-tab:*' continuous-trigger '/'
 
-
-# Enable ShellGPT completions
-_sgpt_zsh() {
-if [[ -n "$BUFFER" ]]; then
-    _sgpt_prev_cmd=$BUFFER
-    BUFFER+="⌛"
-    zle -I && zle redisplay
-    BUFFER=$(sgpt --shell <<< "$_sgpt_prev_cmd" --no-interaction)
-    zle end-of-line
-fi
+# Define a custom widget for alias expansion without triggering fzf-tab
+expand-alias-only() {
+  zle _expand_alias
+  zle redisplay
 }
-zle -N _sgpt_zsh
-bindkey '^ ' _sgpt_zsh
+
+zle -N expand-alias-only # Register the widget
+bindkey '^ ' expand-alias-only
 
 
 # Enable autosuggestions and syntax highlighting
