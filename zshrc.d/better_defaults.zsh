@@ -15,7 +15,6 @@ ENABLE_CORRECTION="true" # Enable auto-correction
 
 # Enable zsh-vi-mode
 # zsh-vi-mode must be installed via AUR
-zinit ice wait"!0" lucid
 zinit light "$PATH_PLUGINS/zsh-vi-mode/"
 
 # Add keybindings for completions in insert mode
