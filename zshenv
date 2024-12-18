@@ -40,7 +40,7 @@ export GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
 export OPENAI_BASIC="gpt-4o-mini"
 export OPENAI_ADVANCED="gpt-4o"
 export OPENAI_REASON_MINI="o1-mini"
-export OPENAI_REASON="o1-preview"
+export OPENAI_REASON="o1"
 export PPLX_MODEL="llama-3.1-sonar-huge-128k-online"
 export ANTHROPIC_MODEL="claude-3-5-sonnet-latest"
 
