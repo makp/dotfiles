@@ -1,7 +1,9 @@
 # Config for interactive shell sessions.
 # !ln -s %:p ~/.zshrc
 #
-# zsh/zprof is used to profile the shell startup time.
+# - zsh/zprof profiles the shell startup time.
+# - Run the cmd `bindkey` to list ZSH keybindings, and `showkey -a` to show
+# keycodes.
 
 # zmodload zsh/zprof
 #
@@ -24,7 +26,7 @@ done
 # Plugins that don't need to be loaded quickly
 
 # Load `copypath` and `direnv`
-zinit wait"2" lucid light-mode for \
+zinit wait"1" lucid light-mode for \
   "$PATH_OMZ/copypath/" \
   "$PATH_OMZ/direnv/"
 

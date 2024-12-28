@@ -18,6 +18,9 @@ zinit wait lucid light-mode for \
 # Change fzf trigger key
 export FZF_COMPLETION_TRIGGER=',,'
 
+# Bind `Ctrl+Alt+/` to zoxide interactive mode
+zle -N cdi
+bindkey '^[^_' cdi
 
 #
 # Configure completion style (zstyle)
