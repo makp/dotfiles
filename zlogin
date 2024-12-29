@@ -40,3 +40,7 @@ fi
 ## INITIALIZE CONDA ------
 echo "Setting up conda..."
 source load_conda.sh
+
+
+## START WM ------
+[ "$(tty)" = "/dev/tty1" ] && [ "$(hostname)" = "leibniz" ] && exec sway
