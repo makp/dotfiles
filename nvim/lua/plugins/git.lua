@@ -27,7 +27,7 @@ return {
 					else
 						gitsigns.nav_hunk("next")
 					end
-				end, { desc = "Jump to next git [h]unk" })
+				end, { desc = "Jump to NEXT git hunk" })
 
 				map("n", "]H", function()
 					if vim.wo.diff then
@@ -35,7 +35,7 @@ return {
 					else
 						gitsigns.nav_hunk("last")
 					end
-				end, { desc = "Jump to last git [h]unk" })
+				end, { desc = "Jump to LAST git hunk" })
 
 				map("n", "[h", function()
 					if vim.wo.diff then
@@ -43,7 +43,7 @@ return {
 					else
 						gitsigns.nav_hunk("prev")
 					end
-				end, { desc = "Jump to previous git [h]unk" })
+				end, { desc = "Jump to PREVIOUS git hunk" })
 
 				map("n", "[H", function()
 					if vim.wo.diff then
@@ -51,29 +51,29 @@ return {
 					else
 						gitsigns.nav_hunk("first")
 					end
-				end, { desc = "Jump to first git [h]unk" })
+				end, { desc = "Jump to FIRST git hunk" })
 
 				-- Hunk operations
 				-- Visual mode
 				map("v", "<localleader>hs", function()
 					gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
-				end)
+				end, { desc = "[s]tage hunk" })
 				map("v", "<localleader>hr", function()
 					gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
-				end)
+				end, { desc = "[r]eset hunk" })
 				-- Normal mode
 				map("n", "<localleader>h<space>", function()
 					gitsigns.stage_hunk()
 					vim.cmd.normal("]h")
 				end)
-				map("n", "<localleader>hs", gitsigns.stage_hunk)
-				map("n", "<localleader>hu", gitsigns.undo_stage_hunk) -- undo last stage_hunk
-				map("n", "<localleader>hS", gitsigns.stage_buffer)
-				map("n", "<localleader>hr", gitsigns.reset_hunk) -- at the cursor position
-				map("n", "<localleader>hR", gitsigns.reset_buffer)
+				map("n", "<localleader>hs", gitsigns.stage_hunk, { desc = "stage hunk" })
+				map("n", "<localleader>hu", gitsigns.undo_stage_hunk, { desc = "undo stage hunk" })
+				map("n", "<localleader>hr", gitsigns.reset_hunk, { desc = "reset hunk" })
+				map("n", "<localleader>hS", gitsigns.stage_buffer, { desc = "stage buffer" })
+				map("n", "<localleader>hR", gitsigns.reset_buffer, { desc = "reset buffer" })
 
 				-- Diffs
-				map("n", "<localleader>hp", gitsigns.preview_hunk)
+				map("n", "<localleader>hp", gitsigns.preview_hunk, { desc = "git [p]review hunk" })
 				map("n", "<localleader>hd", gitsigns.diffthis, { desc = "git [d]iff against index" })
 				map("n", "<localleader>hD", function()
 					gitsigns.diffthis("@")
@@ -82,12 +82,12 @@ return {
 				-- Blame
 				map("n", "<localleader>hb", function()
 					gitsigns.blame_line({ full = true })
-				end)
+				end, { desc = "git [b]lame line" })
 
 				-- Toggles
-				map("n", "<localleader>htb", gitsigns.toggle_current_line_blame)
-				map("n", "<localleader>htd", gitsigns.toggle_deleted)
-				map("n", "<localleader>htw", gitsigns.toggle_word_diff)
+				map("n", "<localleader>htb", gitsigns.toggle_current_line_blame, { desc = "toggle [b]lame line" })
+				map("n", "<localleader>htd", gitsigns.toggle_deleted, { desc = "toggle [d]eleted" })
+				map("n", "<localleader>htw", gitsigns.toggle_word_diff, { desc = "toggle [w]ord diff" })
 
 				-- Hunk object
 				map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
