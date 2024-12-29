@@ -19,8 +19,12 @@ zinit wait lucid light-mode for \
 export FZF_COMPLETION_TRIGGER=',,'
 
 # Bind `Ctrl+Alt+/` to zoxide interactive mode
-zle -N cdi
-bindkey '^[^_' cdi
+zoxide_query() {
+  cdi
+  zle accept-line # Simulate pressing Enter
+}
+zle -N zoxide_query
+bindkey '^[^_' zoxide_query
 
 #
 # Configure completion style (zstyle)
