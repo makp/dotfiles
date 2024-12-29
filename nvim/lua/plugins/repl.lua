@@ -11,10 +11,11 @@ return {
 			socket_name = "default",
 			target_pane = "{right-of}",
 		}
-		vim.keymap.set("n", "<localleader>sc", "<Plug>SlimeParagraphSend")
-		vim.keymap.set("v", "<localleader>sc", "<Plug>SlimeRegionSend")
-		vim.keymap.set("n", "<localleader>sl", "<Plug>SlimeLineSend")
-		vim.keymap.set("n", "<localleader>ss", function()
+		vim.keymap.set("n", "<localleader>ss", "<Plug>SlimeMotionSend", { desc = "Send motion" })
+		vim.keymap.set("x", "<localleader>ss", "<Plug>SlimeRegionSend", { desc = "Send selection" })
+		vim.keymap.set("n", "<localleader>sl", "<Plug>SlimeLineSend", { desc = "Send line" })
+		vim.keymap.set("n", "<localleader>sp", "<Plug>SlimeParagraphSend", { desc = "Send paragraph" })
+		vim.keymap.set("n", "<localleader>sP", function()
 			local key1 = vim.api.nvim_replace_termcodes("<Plug>SlimeParagraphSend", true, false, true)
 			local key2 = vim.api.nvim_replace_termcodes(
 				"<cmd>lua require('helper_funcs').move_to_next_code_line() <CR>",
@@ -25,6 +26,6 @@ return {
 			vim.api.nvim_feedkeys(key1, "n", true)
 			vim.api.nvim_feedkeys("}", "n", true)
 			vim.api.nvim_feedkeys(key2, "n", true)
-		end)
+		end, { desc = "Send paragraph and move to next code block" })
 	end,
 }
