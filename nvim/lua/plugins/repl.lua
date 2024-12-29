@@ -2,15 +2,19 @@
 return {
 	"jpalardy/vim-slime",
 	init = function()
+		vim.g.slime_target = "neovim"
 		vim.g.slime_no_mappings = 1
 		vim.g.slime_python_ipython = 1 -- Use %cpaste with IPython to avoid indentation errors
 	end,
 	config = function()
-		vim.g.slime_target = "tmux"
-		vim.g.slime_default_config = {
-			socket_name = "default",
-			target_pane = "{right-of}",
-		}
+		vim.g.slime_suggest_default = 1
+		vim.g.slime_input_pid = 0
+		vim.g.slime_menu_config = 1
+		vim.g.slime_neovim_ignore_unlisted = 0
+		-- vim.g.slime_default_config = {
+		-- 	socket_name = "default",
+		-- 	target_pane = "{right-of}",
+		-- }
 		vim.keymap.set("n", "<localleader>ss", "<Plug>SlimeMotionSend", { desc = "Send motion" })
 		vim.keymap.set("x", "<localleader>ss", "<Plug>SlimeRegionSend", { desc = "Send selection" })
 		vim.keymap.set("n", "<localleader>sl", "<Plug>SlimeLineSend", { desc = "Send line" })
