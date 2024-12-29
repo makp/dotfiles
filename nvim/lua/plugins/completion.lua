@@ -200,5 +200,13 @@ return {
 		},
 		build = "make tiktoken", -- Only on MacOS or Linux
 		opts = {},
+		keys = {
+			{
+				"<localleader>cct",
+				"<cmd>CopilotChatToggle<cr>",
+				mode = { "n", "v" },
+				desc = "[t]oggle coding chat",
+			},
+		},
 	},
 }
