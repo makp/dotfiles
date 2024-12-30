@@ -93,15 +93,4 @@ return {
 			},
 		},
 	},
-
-	{
-		"akinsho/toggleterm.nvim",
-		version = "*",
-		config = function()
-			local tterm = require("toggleterm")
-			vim.keymap.set("n", "<leader>ot", function()
-				tterm.toggle()
-			end, { desc = "Toggle terminal" })
-		end,
-	},
 }

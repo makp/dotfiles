@@ -90,12 +90,12 @@ return {
 				{ "<leader>e", group = "gr[e]p" },
 				{ "<leader>o", group = "[o]pen" },
 				{ "<leader>i", group = "f[i]nd" },
-
 				{ "<leader>f", group = "[f]ile" },
 				{ "<leader>g", group = "[g]it" },
 				{ "<leader>h", group = "[h]elp for" },
 				{ "<leader>d", group = "[d]iagnostics" },
 				{ "<leader>r", group = "[r]un" },
+				{ "<leader>t", group = "[t]erminal" },
 
 				-- localleader key chains
 				{ "<localleader>c", group = "[c]ode" },
