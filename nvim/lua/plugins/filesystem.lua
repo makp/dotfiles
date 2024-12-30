@@ -84,15 +84,24 @@ return {
 			{
 				"<leader>odw",
 				"<cmd>Yazi cwd<cr>",
-				desc = "Open the file manager in nvim's cwd",
+				desc = "Open the file manager in cwd",
 			},
 			{
 				"<leader>odr",
 				"<cmd>Yazi toggle<cr>",
-				desc = "Resume the last yazi session",
+				desc = "Resume the last file manager session",
 			},
 		},
 	},
 
-	{ "akinsho/toggleterm.nvim", version = "*", config = true },
+	{
+		"akinsho/toggleterm.nvim",
+		version = "*",
+		config = function()
+			local tterm = require("toggleterm")
+			vim.keymap.set("n", "<leader>ot", function()
+				tterm.toggle()
+			end, { desc = "Toggle terminal" })
+		end,
+	},
 }
