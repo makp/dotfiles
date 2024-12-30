@@ -82,10 +82,10 @@ return {
 			-- ["<leader>u"] = { group = "",  },
 			{ "<leader>i", group = "f[i]nd" },
 
+			{ "<leader>f", group = "[f]ile" },
 			{ "<leader>g", group = "[g]it" },
 			{ "<leader>h", group = "[h]elp for" },
 			{ "<leader>d", group = "[d]iagnostics" },
-			{ "<leader>O", group = "[O]rgmode" },
 			{ "<leader>r", group = "[r]un" },
 
 			-- localleader key chains
