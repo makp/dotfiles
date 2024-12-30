@@ -69,29 +69,39 @@ return {
 	},
 
 	-- Display pending keybindings
+	-- Run `checkhealth which_key` to see if there are any issues
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
 		dependencies = { "echasnovski/mini.icons", version = false },
+		keys = {
+			{
+				"<leader>?",
+				function()
+					require("which-key").show({ global = false })
+				end,
+				desc = "Buffer Local Keymaps",
+			},
+		},
 		opts = {
-			-- Document existing key chains
-			-- leader key chains
-			-- "<leader>a"
-			{ "<leader>e", group = "gr[e]p" },
-			{ "<leader>o", group = "[o]pen" },
-			-- ["<leader>u"] = { group = "",  },
-			{ "<leader>i", group = "f[i]nd" },
+			spec = {
+				-- Document existing key chains
+				-- leader key chains
+				{ "<leader>e", group = "gr[e]p" },
+				{ "<leader>o", group = "[o]pen" },
+				{ "<leader>i", group = "f[i]nd" },
 
-			{ "<leader>f", group = "[f]ile" },
-			{ "<leader>g", group = "[g]it" },
-			{ "<leader>h", group = "[h]elp for" },
-			{ "<leader>d", group = "[d]iagnostics" },
-			{ "<leader>r", group = "[r]un" },
+				{ "<leader>f", group = "[f]ile" },
+				{ "<leader>g", group = "[g]it" },
+				{ "<leader>h", group = "[h]elp for" },
+				{ "<leader>d", group = "[d]iagnostics" },
+				{ "<leader>r", group = "[r]un" },
 
-			-- localleader key chains
-			{ "<localleader>c", group = "[c]ode" },
-			{ "<localleader>r", group = "[r]epl" },
-			{ "<localleader>h", group = "git [h]unk" },
+				-- localleader key chains
+				{ "<localleader>c", group = "[c]ode" },
+				{ "<localleader>h", group = "git [h]unk" },
+				{ "<localleader>d", group = "[d]ebug" },
+			},
 		},
 	},
 }
