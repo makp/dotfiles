@@ -6,7 +6,7 @@ vim.g.mapleader = "\\"
 vim.g.maplocalleader = " "
 
 -- Quickfix keymaps
-vim.keymap.set("n", "<leader>oq", "<cmd>copen<CR>", { desc = "open [q]uickfix window" })
+vim.keymap.set("n", "<leader>uq", "<cmd>copen<CR>", { desc = "open [q]uickfix window" })
 vim.keymap.set("n", "]q", "<cmd>cnext<CR>", { desc = "Go to the *next* item quickfix list" })
 vim.keymap.set("n", "]Q", "<cmd>clast<CR>", { desc = "Go to the *last* item quickfix list" })
 vim.keymap.set("n", "[q", "<cmd>cprev<CR>", { desc = "Go to the *previous* item quickfix list" })
@@ -45,7 +45,7 @@ function SwitchToScratch()
 end
 vim.keymap.set(
 	"n",
-	"<leader>os",
+	"<leader>us",
 	"<cmd>lua SwitchToScratch()<CR>",
 	{ noremap = true, silent = true, desc = "open or switch to [s]cratch file" }
 )
@@ -173,6 +173,6 @@ function CopyPathToClipboard()
 	end)
 end
 
-vim.keymap.set("n", "<leader>f", function()
+vim.keymap.set("n", "<leader>fy", function()
 	CopyPathToClipboard()
 end, { desc = "Copy file info" })

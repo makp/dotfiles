@@ -22,12 +22,12 @@ return {
 					follow_current_file = { enabled = true },
 				},
 			})
-			vim.keymap.set("n", "<leader>tb", ":Neotree buffers toggle<CR>", { desc = "Open [b]uffers using neotree" })
-			vim.keymap.set("n", "<leader>tf", ":Neotree toggle<CR>", { desc = "Toggle [f]ilesystem with neotree" })
+			vim.keymap.set("n", "<leader>otb", ":Neotree buffers toggle<CR>", { desc = "Open [b]uffer tree" })
+			vim.keymap.set("n", "<leader>otf", ":Neotree toggle<CR>", { desc = "Toggle [f]ilesystem tree" })
 
 			vim.keymap.set(
 				"n",
-				"<leader>tg",
+				"<leader>otg",
 				":Neotree git_status toggle<CR>",
 				{ desc = "Toggle git status with neo[t]ree" }
 			)
@@ -77,17 +77,17 @@ return {
 		event = "VeryLazy",
 		keys = {
 			{
-				"<leader>odh",
+				"<leader>oh",
 				"<cmd>Yazi<cr>",
 				desc = "Open file manager at the current file",
 			},
 			{
-				"<leader>odw",
+				"<leader>ow",
 				"<cmd>Yazi cwd<cr>",
 				desc = "Open the file manager in cwd",
 			},
 			{
-				"<leader>odr",
+				"<leader>or",
 				"<cmd>Yazi toggle<cr>",
 				desc = "Resume the last file manager session",
 			},

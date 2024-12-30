@@ -63,10 +63,10 @@ return {
 			vim.keymap.set("n", "<leader>gb", fzflua.git_branches, { desc = "[b]ranches" })
 
 			-- Registers
-			vim.keymap.set("n", "<leader>or", fzflua.registers, { desc = "open [r]egisters" })
+			vim.keymap.set("n", "<leader>ur", fzflua.registers, { desc = "open [r]egisters" })
 
 			-- Jumps
-			vim.keymap.set("n", "<leader>oj", fzflua.jumps, { desc = "open [j]umplist" })
+			vim.keymap.set("n", "<leader>uj", fzflua.jumps, { desc = "open [j]umplist" })
 
 			-- Diagnostics
 			vim.keymap.set("n", "<leader>db", fzflua.diagnostics_document, { desc = "jump in current [b]uffer" })
