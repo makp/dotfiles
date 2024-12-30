@@ -160,7 +160,7 @@ function CopyPathToClipboard()
 	end
 	hf.select_one_option(opts, function(choice)
 		if choice == "fullpath" then
-			copy_to_clipboard(vim.fn.expand("%"))
+			copy_to_clipboard(vim.fn.expand("%:p"))
 		elseif choice == "filename" then
 			copy_to_clipboard(vim.fn.expand("%:t"))
 		elseif choice == "dirname" then
