@@ -43,4 +43,9 @@ source load_conda.sh
 
 
 ## START WM ------
-[ "$(tty)" = "/dev/tty1" ] && [ "$(hostname)" = "leibniz" ] && exec sway
+if [ "$(tty)" = "/dev/tty1" ]; then
+  case "$(hostname)" in
+    leibniz) exec sway ;;
+    turing) exec startx turing ;;
+  esac
+fi
