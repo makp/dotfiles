@@ -122,3 +122,14 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 		end
 	end,
 })
+
+-- Remove auto-commenting for all filetypes
+-- `c`: Don't auto-wrap comments
+-- `r`: Don't continue comments after hitting ENTER in insert mode
+-- `o`: Don't continue comments after hitting 'o' or 'O' in normal mode
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "*",
+	callback = function()
+		vim.opt_local.formatoptions:remove({ "o" })
+	end,
+})
