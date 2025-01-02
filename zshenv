@@ -14,7 +14,7 @@ export CONFIG_FILES="$HOME/Documents/mydocs/config_files"
 
 # Set PATH
 # `/usr/bin/vendor_perl`: biber
-PATH="$PATH:/usr/bin/vendor_perl:$CONFIG_FILES/scripts:$HOME/Documents/mydocs/teaching/teaching_struct/teaching_utils:"
+PATH="$PATH:/usr/bin/vendor_perl:$CONFIG_FILES/scripts:$HOME/Documents/mydocs/teaching/teaching_struct/teaching_utils:$HOME/.luarocks/bin:"
 if [ -d /opt/cuda/bin ]; then
 	PATH="$PATH:/opt/cuda/bin"
 fi
