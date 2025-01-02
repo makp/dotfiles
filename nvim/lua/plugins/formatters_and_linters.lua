@@ -88,25 +88,33 @@ return {
 			-- Tools are saved in `~/.local/share/nvim/mason/packages`
 			require("mason").setup()
 
-			-- Get all formatters and linters
+			--
 			local linters_and_formatters = {}
-			local formatters = require("conform").formatters_by_ft
-			local formatters_to_exclude = { "injected", "trim_whitespace", "ruff_organize_imports", "ruff_format" }
-			for _, tbl in pairs(formatters) do
-				for _, formatter in ipairs(tbl) do
-					local add_formatter = true
-					for _, formatter_to_exclude in ipairs(formatters_to_exclude) do
-						if formatter == formatter_to_exclude then
-							add_formatter = false
-							break
-						end
+
+			-- Helper function to ignore
+			local function should_ignore(value, ignore_list)
+				for _, ignore_value in ipairs(ignore_list) do
+					if value == ignore_value then
+						return true
 					end
-					if add_formatter then
+				end
+				return false
+			end
+
+			-- Get all formatters
+			local formatters = require("conform").formatters_by_ft
+			local formatters_to_ignore = { "injected", "trim_whitespace", "ruff_organize_imports", "ruff_format" }
+
+			for _, tbl in pairs(formatters) do
+				---@diagnostic disable-next-line: param-type-mismatch
+				for _, formatter in ipairs(tbl) do
+					if not should_ignore(formatter, formatters_to_ignore) then
 						table.insert(linters_and_formatters, formatter)
 					end
 				end
 			end
 
+			-- Get all linters
 			local linters = require("lint").linters_by_ft
 			for _, tbl in pairs(linters) do
 				for _, linter in ipairs(tbl) do
@@ -114,10 +122,13 @@ return {
 				end
 			end
 
-			local other_tools_tbl = {}
-			for _, tool in ipairs(other_tools_tbl) do
-				table.insert(linters_and_formatters, tool)
-			end
+			-- Add other tools
+			-- local other_tools_tbl = {}
+			-- for _, tool in ipairs(other_tools_tbl) do
+			-- 	table.insert(linters_and_formatters, tool)
+			-- end
+
+			-- print("linters_and_formatters", vim.inspect(linters_and_formatters))
 
 			require("mason-tool-installer").setup({
 				ensure_installed = linters_and_formatters,
