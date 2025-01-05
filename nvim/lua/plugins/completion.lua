@@ -204,10 +204,18 @@ return {
 		},
 		keys = {
 			{
-				"<localleader>cc",
+				"<localleader>cct",
 				"<cmd>CopilotChatToggle<cr>",
 				mode = { "n", "v" },
 				desc = "[t]oggle coding chat",
+			},
+			{
+				"<localleader>cca",
+				function()
+					local actions = require("CopilotChat.actions")
+					require("CopilotChat.integrations.fzflua").pick(actions.prompt_actions())
+				end,
+				desc = "Select [a]ction for chat",
 			},
 		},
 	},
