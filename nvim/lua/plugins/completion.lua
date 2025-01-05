@@ -211,6 +211,7 @@ return {
 			},
 			{
 				"<localleader>cca",
+				mode = { "n", "v" },
 				function()
 					local actions = require("CopilotChat.actions")
 					require("CopilotChat.integrations.fzflua").pick(actions.prompt_actions())
