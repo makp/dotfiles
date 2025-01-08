@@ -25,9 +25,8 @@ done
 ## EXTRA PLUGINS ----------
 # Plugins that don't need to be loaded quickly
 
-# Load `copypath` and `direnv`
+# Load `direnv`
 zinit wait"1" lucid light-mode for \
-  "$PATH_OMZ/copypath/" \
   "$PATH_OMZ/direnv/"
 
 # zprof
