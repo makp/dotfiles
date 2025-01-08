@@ -13,21 +13,32 @@ ENABLE_CORRECTION="true" # Enable auto-correction
 
 ## KEY BINDINGS --------
 
+# Use vi keybindings
+bindkey -v
+bindkey -M viins '^[^f' forward-word
+# viins '^R' fzf-history-widget
+
 # Enable zsh-vi-mode
 # zsh-vi-mode must be installed via AUR
-zinit light "$PATH_PLUGINS/zsh-vi-mode/"
-
+# zinit light "$PATH_PLUGINS/zsh-vi-mode/"
 # Add keybindings for completions in insert mode
-function zvm_after_init() {
-   zvm_bindkey viins '^R' fzf-history-widget
-   zvm_bindkey viins '^[^f' forward-word
-}
+# function zvm_after_init() {
+#    zvm_bindkey viins '^R' fzf-history-widget
+#    zvm_bindkey viins '^[^f' forward-word
+# }
+
+
 
 # Map HOME, END, and DEL keys
 bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line
 bindkey "\e[3~" delete-char
 
+
+## MISC --------
+
+# direnv
+zinit light "$PATH_OMZ/direnv/"
 
 # Dynamically set the window title for Alacritty
 # Source: <https://wiki.gentoo.org/wiki/Alacritty#Zsh>
@@ -49,7 +60,6 @@ then
     }
 fi
 
-zinit light "$PATH_OMZ/direnv/"
 
 ## HISTORY --------
 
