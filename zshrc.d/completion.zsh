@@ -16,6 +16,8 @@ zinit wait lucid light-mode for \
 # Change fzf trigger key
 export FZF_COMPLETION_TRIGGER=',,'
 
+# bindekey -M viins '^R' fzf-history-widget
+
 # Bind `Ctrl+Alt+/` to zoxide interactive mode
 zoxide_query() {
   cdi
@@ -66,5 +68,7 @@ zinit wait"1" lucid light-mode for \
   "$PATH_PLUGINS/zsh-autosuggestions/" \
   "$PATH_PLUGINS/zsh-syntax-highlighting/"
 
-# bindkey '' autosuggest-accept # zsh-autosuggestions
+bindkey -M viins '^[^f' forward-word
+bindkey -M viins '^f' autosuggest-accept
+
 # bindkey '' expand-or-complete-prefix # vanilla autosuggestions

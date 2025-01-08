@@ -15,8 +15,6 @@ ENABLE_CORRECTION="true" # Enable auto-correction
 
 # Use vi keybindings
 bindkey -v
-bindkey -M viins '^[^f' forward-word
-# viins '^R' fzf-history-widget
 
 # Edit command line with $EDITOR
 autoload edit-command-line
