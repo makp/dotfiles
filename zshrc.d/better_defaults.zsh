@@ -49,6 +49,8 @@ then
     }
 fi
 
+zinit light "$PATH_OMZ/direnv/"
+
 ## HISTORY --------
 
 HISTSIZE=5000

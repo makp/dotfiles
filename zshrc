@@ -11,6 +11,9 @@
 # ZSH_DISABLE_COMPFIX="true"
 
 # Load ZSH pkg manager (zinit)
+# `light` (instead of `load`): sans report
+# `lucid`: non-verbose
+# `ice`: provides modifier next cmd
 source /usr/share/zinit/zinit.zsh
 
 # Path to plugins
@@ -21,12 +24,5 @@ PATH_PLUGINS=/usr/share/zsh/plugins
 for config_file ($CONFIG_FILES/zshrc.d/*.zsh(N)) ; do
  source "$config_file"
 done
-
-## EXTRA PLUGINS ----------
-# Plugins that don't need to be loaded quickly
-
-# Load `direnv`
-zinit wait"1" lucid light-mode for \
-  "$PATH_OMZ/direnv/"
 
 # zprof

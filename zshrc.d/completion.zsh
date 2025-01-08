@@ -11,9 +11,7 @@ ZOXIDE_CMD_OVERRIDE="cd"
 #
 zinit wait lucid light-mode for \
   $PATH_OMZ/zoxide/ \
-  $PATH_OMZ/fzf/ \
-  atinit"zicompinit; zicdreplay" \
-    $PATH_PLUGINS/fzf-tab-git/
+  $PATH_OMZ/fzf/
 
 # Change fzf trigger key
 export FZF_COMPLETION_TRIGGER=',,'
@@ -59,11 +57,13 @@ zle -N expand-alias-only # Register the widget
 bindkey '^ ' expand-alias-only
 
 
-# Enable autosuggestions and syntax highlighting
-# TODO: Consider using fast-syntax-highlighting
+# Load remaining plugins with a delay
+# Consider using fast-syntax-highlighting
 zinit wait"1" lucid light-mode for \
+  atinit"zicompinit; zicdreplay" \
+  $PATH_PLUGINS/fzf-tab-git \
   atload"_zsh_autosuggest_start" \
-    "$PATH_PLUGINS/zsh-autosuggestions/" \
+  "$PATH_PLUGINS/zsh-autosuggestions/" \
   "$PATH_PLUGINS/zsh-syntax-highlighting/"
 
 # bindkey '' autosuggest-accept # zsh-autosuggestions
