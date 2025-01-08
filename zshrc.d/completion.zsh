@@ -39,7 +39,7 @@ zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # Use custom fzf flags
 # NOTE: fzf-tab does not follow FZF_DEFAULT_OPTS by default
-zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept
+# zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept
 # Force zsh not to show completion menu
 zstyle ':completion:*' menu no
 # Switch between groups with < and >
