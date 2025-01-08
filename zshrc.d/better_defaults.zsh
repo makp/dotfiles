@@ -18,15 +18,11 @@ bindkey -v
 bindkey -M viins '^[^f' forward-word
 # viins '^R' fzf-history-widget
 
-# Enable zsh-vi-mode
-# zsh-vi-mode must be installed via AUR
-# zinit light "$PATH_PLUGINS/zsh-vi-mode/"
-# Add keybindings for completions in insert mode
-# function zvm_after_init() {
-#    zvm_bindkey viins '^R' fzf-history-widget
-#    zvm_bindkey viins '^[^f' forward-word
-# }
-
+# Edit command line with $EDITOR
+autoload edit-command-line
+zle -N edit-command-line
+bindkey -M viins ^E edit-command-line
+bindkey -M vicmd ^E edit-command-line
 
 
 # Map HOME, END, and DEL keys
