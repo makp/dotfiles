@@ -61,6 +61,8 @@ bindkey '^ ' expand-alias-only
 
 # Load remaining plugins with a delay
 # Consider using fast-syntax-highlighting
+# The cmds `atinit` and `atload` are used to run commands before and after
+# loading the plugin
 zinit wait"1" lucid light-mode for \
   atinit"zicompinit; zicdreplay" \
   $PATH_PLUGINS/fzf-tab-git \
