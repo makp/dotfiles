@@ -24,6 +24,28 @@ zle -N edit-command-line
 bindkey -M viins ^E edit-command-line
 bindkey -M vicmd ^E edit-command-line
 
+# Change cursor shape for different vi modes
+function zle-keymap-select {
+  if [[ ${KEYMAP} == vicmd ]] ||
+     [[ $1 = 'block' ]]; then
+    echo -ne '\e[1 q' # Block cursor
+  elif [[ ${KEYMAP} == main ]] ||
+       [[ ${KEYMAP} == viins ]] ||
+       [[ ${KEYMAP} = '' ]] ||
+       [[ $1 = 'beam' ]]; then
+    echo -ne '\e[5 q' # Beam cursor
+  fi
+}
+zle -N zle-keymap-select
+
+zle-line-init() {
+    zle -K viins
+    echo -ne '\e[5 q' # Beam cursor
+}
+zle -N zle-line-init
+
+echo -ne '\e[5 q' # Start with beam cursor
+
 
 # Map HOME, END, and DEL keys
 bindkey "^[[1~" beginning-of-line
