@@ -36,4 +36,8 @@ return {
 		branch = "v0.6",
 		opts = {},
 	},
+
+	{
+		"Konfekt/vim-CtrlXA",
+	},
 }
