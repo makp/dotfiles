@@ -7,6 +7,10 @@ return {
 			local fzflua = require("fzf-lua")
 
 			fzflua.setup({
+				oldfiles = {
+					prompt = "History (CWD)❯ ",
+					cwd_only = true,
+				},
 				keymap = {
 					builtin = {
 						["<F1>"] = "toggle-help",
