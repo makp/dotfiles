@@ -104,6 +104,7 @@ return {
 				{ "<localleader>c", group = "[c]ode" },
 				{ "<localleader>h", group = "git [h]unk" },
 				{ "<localleader>d", group = "[d]ebug" },
+				{ "<localleader>s", group = "[s]end" },
 			},
 		},
 	},
