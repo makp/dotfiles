@@ -2,6 +2,9 @@ return {
 	-- Use signs to show git info
 	{
 		"lewis6991/gitsigns.nvim",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter-textobjects",
+		},
 		opts = {
 			signs = {
 				add = { text = "+" },
@@ -20,7 +23,16 @@ return {
 					vim.keymap.set(mode, l, r, opts)
 				end
 
-				-- -- Hunk navigation
+				-- Hunk navigation
+				local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
+				local next_hunk_repeat, prev_hunk_repeat = ts_repeat_move.make_repeatable_move_pair(function()
+					gitsigns.nav_hunk("next")
+				end, function()
+					gitsigns.nav_hunk("prev")
+				end)
+				vim.keymap.set({ "n", "x", "o" }, "]h", next_hunk_repeat)
+				vim.keymap.set({ "n", "x", "o" }, "[h", prev_hunk_repeat)
+
 				-- map("n", "]h", function()
 				-- 	if vim.wo.diff then
 				-- 		vim.cmd.normal({ "]h", bang = true })
@@ -29,14 +41,6 @@ return {
 				-- 	end
 				-- end, { desc = "Jump to NEXT git hunk" })
 
-				map("n", "]H", function()
-					if vim.wo.diff then
-						vim.cmd.normal({ "]H", bang = true })
-					else
-						gitsigns.nav_hunk("last")
-					end
-				end, { desc = "Jump to LAST git hunk" })
-
 				-- map("n", "[h", function()
 				-- 	if vim.wo.diff then
 				-- 		vim.cmd.normal({ "[h", bang = true })
@@ -44,6 +48,14 @@ return {
 				-- 		gitsigns.nav_hunk("prev")
 				-- 	end
 				-- end, { desc = "Jump to PREVIOUS git hunk" })
+
+				map("n", "]H", function()
+					if vim.wo.diff then
+						vim.cmd.normal({ "]H", bang = true })
+					else
+						gitsigns.nav_hunk("last")
+					end
+				end, { desc = "Jump to LAST git hunk" })
 
 				map("n", "[H", function()
 					if vim.wo.diff then
