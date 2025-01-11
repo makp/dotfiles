@@ -42,6 +42,9 @@ return {
 		opts = {},
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
+			-- Initially toggle file details?
+			local detail = false
+
 			-- Define global function to display current dir
 			function _G.get_oil_winbar()
 				local bufnr = vim.api.nvim_win_get_buf(vim.g.statusline_winid)
@@ -53,6 +56,8 @@ return {
 					return vim.api.nvim_buf_get_name(0)
 				end
 			end
+
+			-- Setup oil
 			require("oil").setup({
 				skip_confirm_for_simple_edits = true,
 				view_options = {
@@ -77,11 +82,24 @@ return {
 					["g."] = "actions.cd", -- it was toggle_hidden
 					["<C-h>"] = "actions.toggle_hidden", -- it was hor split
 					["<C-s>"] = "actions.change_sort", -- it was vert split
+					["gd"] = {
+						desc = "Toggle file detail view",
+						callback = function()
+							detail = not detail
+							if detail then
+								require("oil").set_columns({ "icon", "permissions", "size", "mtime" })
+							else
+								require("oil").set_columns({ "icon" })
+							end
+						end,
+					},
 				},
 				win_options = {
 					winbar = "%!v:lua.get_oil_winbar()",
 				},
 			})
+
+			--
 			vim.keymap.set("n", "<leader>o-", "<cmd>Oil<cr>", { desc = "parent directory" })
 		end,
 	},
