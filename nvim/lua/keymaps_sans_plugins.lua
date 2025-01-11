@@ -35,6 +35,12 @@ vim.keymap.set("n", "k", "gk", { noremap = true })
 vim.keymap.set("n", "gj", "j", { noremap = true })
 vim.keymap.set("n", "gk", "k", { noremap = true })
 
+-- Use Alt to navigate between windows
+vim.keymap.set({ "n", "v" }, "<A-h>", "<C-w>h", { noremap = true })
+vim.keymap.set({ "n", "v" }, "<A-j>", "<C-w>j", { noremap = true })
+vim.keymap.set({ "n", "v" }, "<A-k>", "<C-w>k", { noremap = true })
+vim.keymap.set({ "n", "v" }, "<A-l>", "<C-w>l", { noremap = true })
+
 -- Load helper functions
 local hf = require("helper_funcs")
 
