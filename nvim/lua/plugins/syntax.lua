@@ -12,6 +12,16 @@ return {
 			vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true })
 			vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
 			vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
+
+			-- Make next/previous hunk movement repeatable
+			local gs = require("gitsigns")
+			local next_hunk_repeat, prev_hunk_repeat = ts_repeat_move.make_repeatable_move_pair(function()
+				gs.nav_hunk("next")
+			end, function()
+				gs.nav_hunk("prev")
+			end)
+			vim.keymap.set({ "n", "x", "o" }, "]h", next_hunk_repeat)
+			vim.keymap.set({ "n", "x", "o" }, "[h", prev_hunk_repeat)
 		end,
 	},
 	{

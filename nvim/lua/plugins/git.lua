@@ -20,14 +20,14 @@ return {
 					vim.keymap.set(mode, l, r, opts)
 				end
 
-				-- Hunk navigation
-				map("n", "]h", function()
-					if vim.wo.diff then
-						vim.cmd.normal({ "]h", bang = true })
-					else
-						gitsigns.nav_hunk("next")
-					end
-				end, { desc = "Jump to NEXT git hunk" })
+				-- -- Hunk navigation
+				-- map("n", "]h", function()
+				-- 	if vim.wo.diff then
+				-- 		vim.cmd.normal({ "]h", bang = true })
+				-- 	else
+				-- 		gitsigns.nav_hunk("next")
+				-- 	end
+				-- end, { desc = "Jump to NEXT git hunk" })
 
 				map("n", "]H", function()
 					if vim.wo.diff then
@@ -37,13 +37,13 @@ return {
 					end
 				end, { desc = "Jump to LAST git hunk" })
 
-				map("n", "[h", function()
-					if vim.wo.diff then
-						vim.cmd.normal({ "[h", bang = true })
-					else
-						gitsigns.nav_hunk("prev")
-					end
-				end, { desc = "Jump to PREVIOUS git hunk" })
+				-- map("n", "[h", function()
+				-- 	if vim.wo.diff then
+				-- 		vim.cmd.normal({ "[h", bang = true })
+				-- 	else
+				-- 		gitsigns.nav_hunk("prev")
+				-- 	end
+				-- end, { desc = "Jump to PREVIOUS git hunk" })
 
 				map("n", "[H", function()
 					if vim.wo.diff then
