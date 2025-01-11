@@ -179,9 +179,13 @@ return {
 		vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
 		vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
 
-		-- Add key to view context
-		vim.keymap.set("n", "<leader>c", function()
+		-- Add keys to view context
+		vim.keymap.set("n", "[p", function()
 			require("treesitter-context").go_to_context(vim.v.count1)
+		end, { silent = true })
+
+		vim.keymap.set("n", "[P", function()
+			require("treesitter-context").go_to_context(-1)
 		end, { silent = true })
 
 		-- Matchup configuration
