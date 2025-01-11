@@ -80,26 +80,40 @@ return {
 
 					keymaps = {
 						-- Capture groups are defined in textobjects.scm
+						["aa"] = "@assignment.outer", -- assignment.lhs/rhs
+						["ia"] = "@assignment.inner",
+
 						["af"] = "@function.outer",
 						["if"] = "@function.inner",
 
-						["ac"] = "@comment.outer",
-						["ic"] = "@comment.inner",
+						["ar"] = "@return.outer",
+						["ir"] = "@return.inner",
 
-						["aa"] = "@assignment.outer",
-						["ia"] = "@assignment.inner",
+						["ac"] = "@class.outer",
+						["ic"] = "@class.inner",
 
-						["at"] = "@statement.outer",
-						["it"] = "@statement.inner",
+						["au"] = "@call.outer", -- func calls
+						["iu"] = "@call.inner",
 
 						["a,"] = "@parameter.outer",
 						["i,"] = "@parameter.inner",
 
+						["ae"] = "@statement.outer", -- there is no inner statement textobject
+
+						["ax"] = "@block.outer",
+						["ix"] = "@block.inner",
+
 						["ai"] = "@conditional.outer",
 						["ii"] = "@conditional.inner",
 
-						["a["] = "@block.outer",
-						["i["] = "@block.inner",
+						["ao"] = "@loop.outer",
+						["io"] = "@loop.inner",
+
+						["in"] = "@number.inner", -- there is no outer number textobject
+
+						["ak"] = "@comment.outer",
+						["ik"] = "@comment.inner",
+
 						-- you can optionally set descriptions to the mappings (used in the desc parameter of nvim_buf_set_keymap
 						-- ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
 					},
@@ -108,40 +122,52 @@ return {
 					enable = true,
 					set_jumps = true, -- set jumps in the jumplist
 					goto_next_start = {
-						["]f"] = "@function.outer",
-						["]c"] = "@comment.outer",
 						["]a"] = "@assignment.outer",
-						["]t"] = "@statement.outer",
+						["]f"] = "@function.outer",
+						["]u"] = "@call.outer",
 						["],"] = "@parameter.outer",
+						["]e"] = "@statement.outer",
 						["]i"] = "@conditional.outer",
-						["]]"] = "@block.outer",
+						["]o"] = "@loop.outer",
+						["]x"] = "@block.outer",
+						["]n"] = "@number.inner",
+						["]k"] = "@comment.outer",
 					},
 					goto_next_end = {
-						["]F"] = "@function.outer",
-						["]C"] = "@comment.outer",
 						["]A"] = "@assignment.outer",
-						["]T"] = "@statement.outer",
+						["]F"] = "@function.outer",
+						["]U"] = "@call.outer",
 						["]<"] = "@parameter.outer",
+						["]E"] = "@statement.outer",
 						["]I"] = "@conditional.outer",
-						["]["] = "@block.outer",
+						["]O"] = "@loop.outer",
+						["]X"] = "@block.outer",
+						["]N"] = "@number.inner",
+						["]K"] = "@comment.outer",
 					},
 					goto_previous_start = {
-						["[f"] = "@function.outer",
-						["[c"] = "@comment.outer",
 						["[a"] = "@assignment.outer",
-						["[t"] = "@statement.outer",
+						["[f"] = "@function.outer",
+						["[u"] = "@call.outer",
 						["[,"] = "@parameter.outer",
+						["[e"] = "@statement.outer",
 						["[i"] = "@conditional.outer",
-						["[["] = "@block.outer",
+						["[o"] = "@loop.outer",
+						["[x"] = "@block.outer",
+						["[n"] = "@number.inner",
+						["[k"] = "@comment.outer",
 					},
 					goto_previous_end = {
-						["[F"] = "@function.outer",
-						["[C"] = "@comment.outer",
 						["[A"] = "@assignment.outer",
-						["[T"] = "@statement.outer",
+						["[F"] = "@function.outer",
+						["[U"] = "@call.outer",
 						["[<"] = "@parameter.outer",
+						["[E"] = "@statement.outer",
 						["[I"] = "@conditional.outer",
-						["[]"] = "@block.outer",
+						["[O"] = "@loop.outer",
+						["[X"] = "@block.outer",
+						["[N"] = "@number.inner",
+						["[K"] = "@comment.outer",
 					},
 				},
 			},
