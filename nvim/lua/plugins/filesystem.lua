@@ -96,12 +96,21 @@ return {
 				},
 				win_options = {
 					winbar = "%!v:lua.get_oil_winbar()",
+					signcolumn = "yes:2", -- allow 2 sign columns for `oil-git-status.nvim`
 				},
 			})
 
 			--
 			vim.keymap.set("n", "<leader>o-", "<cmd>Oil<cr>", { desc = "parent directory" })
 		end,
+	},
+
+	{
+		"refractalize/oil-git-status.nvim",
+		dependencies = {
+			"stevearc/oil.nvim",
+		},
+		config = true,
 	},
 
 	{
