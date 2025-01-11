@@ -72,7 +72,8 @@ return {
 				-- `:help ins-completion`
 				mapping = {
 
-					["<C-m>"] = cmp.mapping(function(fallback)
+
+					["<C-M-m>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							return cmp.complete_common_string()
 						end
