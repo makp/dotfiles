@@ -71,7 +71,13 @@ return {
 				},
 				-- `:help ins-completion`
 				mapping = {
-					["<C-S-n>"] = cmp.mapping.complete(),
+
+					["<C-m>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							return cmp.complete_common_string()
+						end
+						fallback()
+					end, { "i", "c" }),
 
 					-- Select the [n]ext item
 					["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
