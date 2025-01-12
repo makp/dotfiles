@@ -158,7 +158,7 @@ return {
 		-- [% / %] : Go previous/next outer open/close word
 		-- z% : Go inside nearest block
 		-- ds% / cs% : Delete/change surrounding block
-		-- a% / i% : Select inside/outer block
+		-- a% / i% : textobjects
 		matchup = {
 			enable = true,
 		},
