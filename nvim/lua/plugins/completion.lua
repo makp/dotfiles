@@ -71,8 +71,6 @@ return {
 				},
 				-- `:help ins-completion`
 				mapping = {
-
-
 					["<C-M-m>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							return cmp.complete_common_string()
@@ -122,7 +120,6 @@ return {
 							luasnip.jump(-1)
 						end
 					end, { "i", "s" }),
-
 					-- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
 					-- https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
 				},
@@ -130,8 +127,8 @@ return {
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
 				}, {
-					{ name = "buffer", keyword_length = 4 },
-					{ name = "path" },
+					{ name = "buffer", keyword_length = 2 },
+					{ name = "path", keyword_length = 1 },
 				}),
 			})
 
@@ -161,11 +158,11 @@ return {
 			cmp.setup.cmdline(":", {
 				mapping = cmp.mapping.preset.cmdline(),
 				sources = cmp.config.sources({
-					{ name = "path", max_item_count = 7 },
+					{ name = "path", max_item_count = 13 },
 				}, {
 					{
 						name = "cmdline",
-						max_item_count = 13,
+						max_item_count = 23,
 						keyword_length = 1,
 					},
 				}),
