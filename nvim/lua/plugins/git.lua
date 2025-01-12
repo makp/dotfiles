@@ -125,4 +125,9 @@ return {
 			{ "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
 		},
 	},
+
+	-- Vim fugitive
+	{
+		"tpope/vim-fugitive",
+	},
 }
