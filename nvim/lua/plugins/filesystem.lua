@@ -1,39 +1,4 @@
 return {
-	{
-		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v3.x",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons", -- not strictly required
-			"MunifTanjim/nui.nvim",
-			-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
-		},
-		config = function()
-			require("neo-tree").setup({
-				window = {
-					mappings = {
-						["<C-c>"] = "close_window",
-						["<A-v>"] = "open_vsplit", -- not the best keymap
-						["<A-s>"] = "open_split",
-					},
-				},
-				filesystem = {
-					hijack_netrw_behavior = "disabled",
-					follow_current_file = { enabled = true },
-				},
-			})
-			vim.keymap.set("n", "<leader>otb", ":Neotree buffers toggle<CR>", { desc = "Open [b]uffer tree" })
-			vim.keymap.set("n", "<leader>otf", ":Neotree toggle<CR>", { desc = "Toggle [f]ilesystem tree" })
-
-			vim.keymap.set(
-				"n",
-				"<leader>otg",
-				":Neotree git_status toggle<CR>",
-				{ desc = "Toggle git status with neo[t]ree" }
-			)
-		end,
-	},
-
 	-- Plain text file manager
 	-- Type `g?` to see all keybindings
 	-- See `:help oil-actions` for available cmds
@@ -104,15 +69,6 @@ return {
 			vim.keymap.set("n", "<leader>o-", "<cmd>Oil<cr>", { desc = "parent directory" })
 		end,
 	},
-
-	{
-		"refractalize/oil-git-status.nvim",
-		dependencies = {
-			"stevearc/oil.nvim",
-		},
-		config = true,
-	},
-
 	{
 		"mikavilpas/yazi.nvim",
 		event = "VeryLazy",
