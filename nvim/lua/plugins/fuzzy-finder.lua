@@ -65,9 +65,12 @@ return {
 			vim.keymap.set("n", "<leader>en", fzflua.treesitter, { desc = "treesitter [n]odes" })
 
 			-- Git
-			vim.keymap.set("n", "<leader>gs", fzflua.git_status, { desc = "[s]tatus" })
-			vim.keymap.set("n", "<leader>gc", fzflua.git_commits, { desc = "[c]ommits" })
-			vim.keymap.set("n", "<leader>gb", fzflua.git_branches, { desc = "[b]ranches" })
+			vim.keymap.set("n", "<localleader>es", fzflua.git_status, { desc = "[s]tatus" })
+			vim.keymap.set("n", "<localleader>ec", fzflua.git_commits, { desc = "[c]ommits" })
+			vim.keymap.set("n", "<localleader>eb", fzflua.git_branches, { desc = "[b]ranghes" })
+			vim.keymap.set("n", "<localleader>er", function()
+				fzflua.command_history({ query = "^G " }) -- Restrict to fugitive cmds
+			end, { desc = "Run git cmd from history" })
 
 			-- Registers
 			vim.keymap.set("n", "<leader>ur", fzflua.registers, { desc = "open [r]egisters" })

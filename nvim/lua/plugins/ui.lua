@@ -94,13 +94,13 @@ return {
 				{ "<leader>u", group = "j[u]mp" },
 
 				{ "<leader>f", group = "[f]ile" },
-				{ "<leader>g", group = "[g]it" },
 				{ "<leader>h", group = "[h]elp for" },
 				{ "<leader>d", group = "[d]iagnostics" },
 				{ "<leader>r", group = "[r]un" },
-				{ "<leader>t", group = "[t]erminal" },
 
 				-- localleader key chains
+				{ "<localleader>e", group = "v[e]rsion control" },
+
 				{ "<localleader>c", group = "[c]ode" },
 				{ "<localleader>h", group = "git [h]unk" },
 				{ "<localleader>d", group = "[d]ebug" },
