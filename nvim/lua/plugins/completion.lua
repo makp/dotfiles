@@ -203,9 +203,13 @@ return {
 			{ "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
 		},
 		build = "make tiktoken", -- Only on MacOS or Linux
-		opts = {
-			model = "claude-3.5-sonnet",
-		},
+
+		config = function()
+			require("CopilotChat").setup({
+				system_prompt = require("CopilotChat.prompts").COPILOT_EXPLAIN,
+				model = "claude-3.5-sonnet",
+			})
+		end,
 		keys = {
 			{
 				"<localleader>cct",
