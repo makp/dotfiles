@@ -26,3 +26,8 @@
   navigate = true
   dark = true
   syntax-theme = gruvbox-dark
+[pager]
+  diff = delta
+  log = delta
+  reflog = delta
+  show = delta
