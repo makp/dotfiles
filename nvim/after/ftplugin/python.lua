@@ -2,6 +2,14 @@ vim.api.nvim_buf_set_keymap(
 	0,
 	"n",
 	"<localleader>cR",
-	"<cmd>80vsplit term://ipython<CR>",
+	"<cmd>vsplit term://ipython<CR><C-w>h",
 	{ desc = "open REPL for Python" }
+)
+
+vim.api.nvim_buf_set_keymap(
+	0,
+	"n",
+	"<localleader>sz",
+	"<cmd>wincmd l<CR>G<cmd>normal! zz<CR><C-w>h",
+	{ desc = "Center terminal window" }
 )
