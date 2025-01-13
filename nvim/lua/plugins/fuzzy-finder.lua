@@ -37,8 +37,12 @@ return {
 				},
 			})
 			-- Fzf-Lua keymaps
-			vim.keymap.set("n", "<leader>rr", fzflua.resume, { desc = "[r]esume" })
 			vim.keymap.set("n", "<leader>rf", fzflua.builtin, { desc = "[f]zf-lua" })
+			vim.keymap.set("n", "<leader>rF", fzflua.resume, { desc = "[r]esume" })
+
+			-- Cmds
+			vim.keymap.set("n", "<leader>rc", fzflua.commands, { desc = "commands" })
+			vim.keymap.set("n", "<leader>rr", fzflua.command_history, { desc = "command history" })
 
 			-- Help keymaps
 			vim.keymap.set("n", "<leader>ht", fzflua.helptags, { desc = "[t]ags" })
@@ -58,7 +62,7 @@ return {
 			vim.keymap.set("n", "<leader>ef", fzflua.live_grep, { desc = "[f]iles in cwd" })
 			vim.keymap.set("n", "<leader>ew", fzflua.grep_cword, { desc = "files containing [w]ord" })
 			vim.keymap.set("n", "<leader>eW", fzflua.grep_cWORD, { desc = "files containing [W]ORD" })
-			-- vim.keymap.set("n", "<leader>en", treesitter, { desc = "treesitter [n]odes" })
+			vim.keymap.set("n", "<leader>en", fzflua.treesitter, { desc = "treesitter [n]odes" })
 
 			-- Git
 			vim.keymap.set("n", "<leader>gs", fzflua.git_status, { desc = "[s]tatus" })
