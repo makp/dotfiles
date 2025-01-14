@@ -185,6 +185,9 @@ return {
 			vim.keymap.set("i", "<C-\\>cc", "<cmd>Copilot panel<CR>")
 			-- Don't use <Tab> to accept suggestion
 			vim.g.copilot_no_tab_map = true
+			vim.g.copilot_filetypes = {
+				gitcommit = true,
+			}
 			-- Select a keybinding other than <Tab> to accept suggestion
 			-- The argument to copilot#Accept() is the fallback for when no suggestion is
 			-- displayed.
