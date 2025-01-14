@@ -53,7 +53,7 @@ return {
 			vim.keymap.set("n", "<leader>if", fzflua.files, { desc = "[f]iles in cwd" })
 			vim.keymap.set("n", "<leader>ib", fzflua.buffers, { desc = "[b]uffers" })
 			vim.keymap.set("n", "<leader>ir", function()
-				return fzflua.oldfiles({ cwd_only = true, prompt = "History (CWD)❯ " })
+				fzflua.oldfiles({ cwd_only = true, prompt = "History (CWD)❯ " })
 			end, { desc = "[r]ecent files in cwd" })
 			vim.keymap.set("n", "<leader>iR", fzflua.oldfiles, { desc = "[r]ecent files" })
 
