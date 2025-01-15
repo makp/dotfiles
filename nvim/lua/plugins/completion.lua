@@ -174,6 +174,8 @@ return {
 	-- Enable Copilot completions
 	{
 		"github/copilot.vim",
+		event = "InsertEnter",
+		cmd = "Copilot",
 		-- Type `# q:` for asking questions
 		-- M-]/[ : cycle through suggestions
 		-- M-\ : request a suggestion

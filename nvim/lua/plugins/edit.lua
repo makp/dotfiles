@@ -11,6 +11,10 @@ return {
 	-- Improved commenting
 	{
 		"numToStr/Comment.nvim",
+		keys = {
+			{ "gc", mode = { "n", "v" } },
+			{ "gb", mode = { "n", "v" } },
+		},
 		config = function()
 			require("Comment").setup()
 		end,
@@ -39,5 +43,9 @@ return {
 
 	{
 		"Konfekt/vim-CtrlXA",
+		keys = {
+			{ "<C-a>", mode = { "n", "v" } },
+			{ "<C-x>", mode = { "n", "v" } },
+		},
 	},
 }

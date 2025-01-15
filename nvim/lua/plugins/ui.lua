@@ -33,10 +33,13 @@ return {
 		end,
 	},
 
+	-- UI enhancements
 	{
 		"stevearc/dressing.nvim",
+		event = "VeryLazy",
 		opts = {},
 	},
+
 	-- Status line
 	{
 		"nvim-lualine/lualine.nvim",

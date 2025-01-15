@@ -3,6 +3,16 @@ return {
 		"ibhagwan/fzf-lua",
 		-- optional for icon support
 		dependencies = { "nvim-tree/nvim-web-devicons" },
+		keys = {
+			"<leader>r",
+			"<leader>h",
+			"<leader>i",
+			"<leader>e",
+			"<leader>u",
+			"<leader>d",
+			"<localleader>e",
+			"z=",
+		},
 		config = function()
 			local fzflua = require("fzf-lua")
 
