@@ -11,6 +11,7 @@ return {
 			vim.g.slime_target = "neovim"
 			vim.g.slime_no_mappings = 1
 			vim.g.slime_python_ipython = 1 -- Use %cpaste with IPython to avoid indentation errors
+			-- vim.g.slime_bracketed_paste = 1
 		end,
 		keys = {
 			{ "<localleader>s", "<Plug>SlimeMotionSend", desc = "Send motion" },
