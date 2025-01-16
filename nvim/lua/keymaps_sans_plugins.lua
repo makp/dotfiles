@@ -147,11 +147,11 @@ local function code_explain_light()
 	hf.run_cmd_async_and_display_floating_win(py_cmd, { buffer_txt, filetype, "explain_light" })
 end
 
-vim.keymap.set({ "n", "v" }, "<localleader>cA", function()
+vim.keymap.set({ "n", "v" }, "<localleader>oA", function()
 	RunCodeAssistant()
 end, { desc = "Code [A]ssistant" })
 
-vim.keymap.set({ "n", "v" }, "<localleader>ce", function()
+vim.keymap.set({ "n", "v" }, "<localleader>oe", function()
 	code_explain_light()
 end, { desc = "Code [e]xplain light" })
 

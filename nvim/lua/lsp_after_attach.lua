@@ -16,27 +16,27 @@ local function setup_mappings(buf)
 
 		-- Fuzzy find all the symbols in your current document.
 		-- Symbols are things like variables, functions, types, etc.
-		{ "<localleader>cs", fzflua.lsp_document_symbols, "[s]ymbols in current buffer" },
+		{ "<localleader>os", fzflua.lsp_document_symbols, "[s]ymbols in current buffer" },
 
 		-- Fuzzy find all the symbols in your current workspace.
-		{ "<localleader>cS", fzflua.lsp_live_workspace_symbols, "[S]ymbols in workspace" },
+		{ "<localleader>oS", fzflua.lsp_live_workspace_symbols, "[S]ymbols in workspace" },
 
 		-- Jump to the declaration of the word under your cursor
 		--  For example, in C this would take you to the header.
-		{ "<localleader>cD", vim.lsp.buf.declaration, "jump to [D]eclaration" },
+		{ "<localleader>oD", vim.lsp.buf.declaration, "jump to [D]eclaration" },
 
 		-- Jump to the implementation of the word under your cursor.
 		-- Useful when your language has ways of declaring types without an actual implementation
-		{ "<localleader>cI", fzflua.lsp_implementations, "jump to [I]mplementation" },
+		{ "<localleader>oI", fzflua.lsp_implementations, "jump to [I]mplementation" },
 
 		-- Jump to the type of the word under your cursor.
 		--  Useful when you're not sure what type a variable is and you want to see
 		--  the definition of its *type*, not where it was *defined*.
-		{ "<localleader>cT", fzflua.lsp_typedefs, "jump to [T]ype" },
+		{ "<localleader>oT", fzflua.lsp_typedefs, "jump to [T]ype" },
 
-		{ "<localleader>cr", vim.lsp.buf.rename, "[r]ename variable" },
-		-- { "<localleader>ca", vim.lsp.buf.code_action, "execute [a]ction" },
-		{ "<localleader>ca", fzflua.lsp_code_actions, "execute [a]ction" },
+		{ "<localleader>or", vim.lsp.buf.rename, "[r]ename variable" },
+		-- { "<localleader>oa", vim.lsp.buf.code_action, "execute [a]ction" },
+		{ "<localleader>oa", fzflua.lsp_code_actions, "execute [a]ction" },
 	}
 
 	for _, map_args in ipairs(mappings) do
@@ -85,7 +85,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 			-- Toggle inlay hints
 			if client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
-				vim.keymap.set("n", "<localleader>ct", function()
+				vim.keymap.set("n", "<localleader>ot", function()
 					vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
 				end, { buffer = event.buf, desc = "LSP: " .. "[t]oggle inlay hints" })
 			end

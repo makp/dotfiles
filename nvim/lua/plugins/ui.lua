@@ -72,7 +72,7 @@ return {
 	},
 
 	-- Display pending keybindings
-	-- Run `checkhealth which_key` to see if there are any issues
+	-- Run `checkhealth which-key` to see if there are any issues
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
@@ -90,22 +90,21 @@ return {
 			spec = {
 				-- Document existing key chains
 				-- leader key chains
-				-- { "<leader>a", group = ""},
-				{ "<leader>o", group = "expl[o]re" },
-				{ "<leader>e", group = "gr[e]p" },
-				{ "<leader>i", group = "f[i]nd" },
-				{ "<leader>u", group = "j[u]mp" },
+				{ "<leader>u", group = "nao sei" },
 
 				{ "<leader>f", group = "[f]ile" },
-				{ "<leader>h", group = "[h]elp for" },
-				{ "<leader>d", group = "[d]iagnostics" },
+				{ "<leader>h", group = "[h]elp" },
+				{ "<leader>d", group = "[d]iagnose" },
 				{ "<leader>r", group = "[r]un" },
 
 				-- localleader key chains
-				{ "<localleader>e", group = "v[e]rsion control" },
+				{ "<localleader>a", group = "se[a]rch" },
+				{ "<localleader>o", group = "c[o]de" },
+				{ "<localleader>e", group = "r[e]view" },
+				{ "<localleader>u", group = "j[u]mp" },
+				{ "<localleader>i", group = "nav[i]gate" },
 
-				{ "<localleader>c", group = "[c]ode" },
-				{ "<localleader>h", group = "git [h]unk" },
+				{ "<localleader>h", group = "[h]unk" },
 				{ "<localleader>d", group = "[d]ebug" },
 				{ "<localleader>s", group = "[s]end" },
 			},

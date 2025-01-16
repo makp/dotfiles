@@ -6,8 +6,8 @@ return {
 		keys = {
 			"<leader>r",
 			"<leader>h",
-			"<leader>i",
-			"<leader>e",
+			"<localleader>u",
+			"<localleader>a",
 			"<leader>u",
 			"<leader>d",
 			"<localleader>e",
@@ -60,19 +60,19 @@ return {
 			vim.keymap.set("n", "<leader>hm", fzflua.manpages, { desc = "[m]an pages" })
 
 			-- Find
-			vim.keymap.set("n", "<leader>if", fzflua.files, { desc = "[f]iles in cwd" })
-			vim.keymap.set("n", "<leader>ib", fzflua.buffers, { desc = "[b]uffers" })
-			vim.keymap.set("n", "<leader>ir", function()
+			vim.keymap.set("n", "<localleader>uf", fzflua.files, { desc = "[f]iles in cwd" })
+			vim.keymap.set("n", "<localleader>ub", fzflua.buffers, { desc = "[b]uffers" })
+			vim.keymap.set("n", "<localleader>ur", function()
 				fzflua.oldfiles({ cwd_only = true, prompt = "History (CWD)❯ " })
 			end, { desc = "[r]ecent files in cwd" })
-			vim.keymap.set("n", "<leader>iR", fzflua.oldfiles, { desc = "[r]ecent files" })
+			vim.keymap.set("n", "<localleader>uR", fzflua.oldfiles, { desc = "[r]ecent files" })
 
 			-- Grep
-			vim.keymap.set("n", "<leader>eb", fzflua.lgrep_curbuf, { desc = "current [b]uffer" })
-			vim.keymap.set("n", "<leader>ef", fzflua.live_grep, { desc = "[f]iles in cwd" })
-			vim.keymap.set("n", "<leader>ew", fzflua.grep_cword, { desc = "files containing [w]ord" })
-			vim.keymap.set("n", "<leader>eW", fzflua.grep_cWORD, { desc = "files containing [W]ORD" })
-			vim.keymap.set("n", "<leader>en", fzflua.treesitter, { desc = "treesitter [n]odes" })
+			vim.keymap.set("n", "<localleader>ab", fzflua.lgrep_curbuf, { desc = "current [b]uffer" })
+			vim.keymap.set("n", "<localleader>af", fzflua.live_grep, { desc = "[f]iles in cwd" })
+			vim.keymap.set("n", "<localleader>aw", fzflua.grep_cword, { desc = "files containing [w]ord" })
+			vim.keymap.set("n", "<localleader>aW", fzflua.grep_cWORD, { desc = "files containing [W]ORD" })
+			vim.keymap.set("n", "<localleader>an", fzflua.treesitter, { desc = "treesitter [n]odes" })
 
 			-- Git
 			vim.keymap.set("n", "<localleader>ed", fzflua.git_status, { desc = "[d]iffs" })

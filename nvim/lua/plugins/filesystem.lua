@@ -66,24 +66,24 @@ return {
 			})
 
 			--
-			vim.keymap.set("n", "<leader>o-", "<cmd>Oil<cr>", { desc = "parent directory" })
+			vim.keymap.set("n", "<localleader>i-", "<cmd>Oil<cr>", { desc = "parent directory" })
 		end,
 	},
 	{
 		"mikavilpas/yazi.nvim",
 		keys = {
 			{
-				"<leader>oh",
+				"<localleader>ih",
 				"<cmd>Yazi<cr>",
 				desc = "Open file manager at the current file",
 			},
 			{
-				"<leader>ow",
+				"<localleader>iw",
 				"<cmd>Yazi cwd<cr>",
 				desc = "Open the file manager in cwd",
 			},
 			{
-				"<leader>or",
+				"<localleader>ir",
 				"<cmd>Yazi toggle<cr>",
 				desc = "Resume the last file manager session",
 			},

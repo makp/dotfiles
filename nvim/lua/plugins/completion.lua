@@ -218,13 +218,13 @@ return {
 		end,
 		keys = {
 			{
-				"<localleader>cct",
+				"<localleader>oct",
 				"<cmd>CopilotChatToggle<cr>",
 				mode = { "n", "v" },
 				desc = "[t]oggle coding chat",
 			},
 			{
-				"<localleader>cca",
+				"<localleader>oca",
 				mode = { "n", "v" },
 				function()
 					local actions = require("CopilotChat.actions")
