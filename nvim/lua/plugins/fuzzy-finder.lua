@@ -75,7 +75,7 @@ return {
 			vim.keymap.set("n", "<leader>en", fzflua.treesitter, { desc = "treesitter [n]odes" })
 
 			-- Git
-			vim.keymap.set("n", "<localleader>es", fzflua.git_status, { desc = "[s]tatus" })
+			vim.keymap.set("n", "<localleader>ed", fzflua.git_status, { desc = "[d]iffs" })
 			vim.keymap.set("n", "<localleader>ec", fzflua.git_commits, { desc = "[c]ommits" })
 			vim.keymap.set("n", "<localleader>eb", fzflua.git_branches, { desc = "[b]ranghes" })
 			vim.keymap.set("n", "<localleader>er", function()

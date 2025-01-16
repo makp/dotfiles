@@ -130,9 +130,7 @@ return {
 	{
 		"tpope/vim-fugitive",
 		config = function()
-			vim.keymap.set("n", "<localleader>ee", ":Git<CR>", { desc = "Git summary window" })
-			vim.keymap.set("n", "<localleader>ew", ":Gwrite<CR>", { desc = "G[w]rite" })
-			vim.keymap.set("n", "<localleader>eR", ":Gread<CR>", { desc = "G[r]ead" })
+			vim.keymap.set("n", "<localleader>es", ":Git<CR>", { desc = "Git summary window" })
 		end,
 	},
 }
