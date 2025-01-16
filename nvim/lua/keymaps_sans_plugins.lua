@@ -157,7 +157,7 @@ end, { desc = "Code [e]xplain light" })
 
 function CopyPathToClipboard()
 	-- See :help filename-modifiers
-	local opts = { "fullpath", "filename", "dirname", "relative" }
+	local opts = { "absolute path", "absolute dir", "filename", "relative path", "relative dir" }
 	local function copy_to_clipboard(text)
 		-- Remove "oil://" prefix if present
 		text = string.gsub(text, "oil://", "")
@@ -165,14 +165,16 @@ function CopyPathToClipboard()
 		print("Copied to clipboard: " .. text)
 	end
 	hf.select_one_option(opts, function(choice)
-		if choice == "fullpath" then
+		if choice == "absolute path" then
 			copy_to_clipboard(vim.fn.expand("%:p"))
+		elseif choice == "absolute dir" then
+			copy_to_clipboard(vim.fn.expand("%:p:h"))
 		elseif choice == "filename" then
 			copy_to_clipboard(vim.fn.expand("%:t"))
-		elseif choice == "dirname" then
-			copy_to_clipboard(vim.fn.expand("%:h"))
-		elseif choice == "relative" then
+		elseif choice == "relative path" then
 			copy_to_clipboard(vim.fn.expand("%:p:."))
+		elseif choice == "relative dir" then
+			copy_to_clipboard(vim.fn.expand("%:h"))
 		else
 			print("No action selected!")
 		end
