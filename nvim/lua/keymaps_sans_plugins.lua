@@ -160,6 +160,7 @@ function CopyPathToClipboard()
 	local opts = { "absolute path", "absolute dir", "filename", "relative path", "relative dir" }
 	local function copy_to_clipboard(text)
 		-- Remove "oil://" prefix if present
+		-- note: the relative paths don't work in oil
 		text = string.gsub(text, "oil://", "")
 		vim.fn.setreg("+", text)
 		print("Copied to clipboard: " .. text)
@@ -174,7 +175,7 @@ function CopyPathToClipboard()
 		elseif choice == "relative path" then
 			copy_to_clipboard(vim.fn.expand("%:p:."))
 		elseif choice == "relative dir" then
-			copy_to_clipboard(vim.fn.expand("%:h"))
+			copy_to_clipboard(vim.fn.expand("%:p:.:h")) -- %:h
 		else
 			print("No action selected!")
 		end
