@@ -12,6 +12,7 @@ return {
 			"<leader>d",
 			"<localleader>e",
 			"z=",
+			"<C-\\>",
 		},
 		config = function()
 			local fzflua = require("fzf-lua")
@@ -94,6 +95,9 @@ return {
 
 			-- Spell
 			vim.keymap.set("n", "z=", fzflua.spell_suggest, { desc = "spell check" })
+
+			-- Completetion
+			vim.keymap.set("i", "<C-\\>p", fzflua.complete_path, { desc = "complete path" })
 
 			-- fzf-bibtex configuration
 			require("fzf-bibtex_config")
