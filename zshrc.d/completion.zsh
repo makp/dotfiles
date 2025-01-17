@@ -9,7 +9,7 @@
 ZOXIDE_CMD_OVERRIDE="cd"
 
 #
-zinit wait lucid light-mode for \
+zinit light-mode for \
   $PATH_OMZ/zoxide/ \
   $PATH_OMZ/fzf/
 
