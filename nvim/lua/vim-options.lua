@@ -36,6 +36,10 @@ vim.g.have_nerd_font = true
 -- Enable breakindent
 opt.breakindent = true
 
+-- Window title
+opt.title = true
+opt.titlestring = "%{getcwd()}"
+
 -- Save undo history
 opt.undofile = true
 
