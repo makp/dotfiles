@@ -38,7 +38,7 @@ opt.breakindent = true
 
 -- Window title
 opt.title = true
-opt.titlestring = "%{getcwd()}"
+opt.titlestring = "%{fnamemodify(getcwd(), ':~')}"
 
 -- Save undo history
 opt.undofile = true
