@@ -6,7 +6,7 @@ vim.g.mapleader = "\\"
 vim.g.maplocalleader = " "
 
 -- Quickfix keymaps
-vim.keymap.set("n", "<leader>uq", "<cmd>copen<CR>", { desc = "open [q]uickfix window" })
+vim.keymap.set("n", "<leader>oq", "<cmd>copen<CR>", { desc = "open [q]uickfix window" })
 vim.keymap.set("n", "]q", "<cmd>cnext<CR>", { desc = "Go to the *next* item quickfix list" })
 vim.keymap.set("n", "]Q", "<cmd>clast<CR>", { desc = "Go to the *last* item quickfix list" })
 vim.keymap.set("n", "[q", "<cmd>cprev<CR>", { desc = "Go to the *previous* item quickfix list" })
@@ -51,7 +51,7 @@ function SwitchToScratch()
 end
 vim.keymap.set(
 	"n",
-	"<leader>us",
+	"<leader>os",
 	"<cmd>lua SwitchToScratch()<CR>",
 	{ noremap = true, silent = true, desc = "open or switch to [s]cratch file" }
 )
@@ -77,7 +77,7 @@ function ProofreadProse()
 	end)
 end
 
-vim.keymap.set({ "n", "v" }, "<leader>rp", function()
+vim.keymap.set({ "n", "v" }, "<leader>up", function()
 	ProofreadProse()
 end, { desc = "Check prose writing" })
 
@@ -113,7 +113,7 @@ function InspectCode()
 	end)
 end
 
-vim.keymap.set({ "n", "v" }, "<leader>ri", function()
+vim.keymap.set({ "n", "v" }, "<leader>ui", function()
 	InspectCode()
 end, { desc = "Inspect code" })
 

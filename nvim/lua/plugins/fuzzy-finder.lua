@@ -4,11 +4,11 @@ return {
 		-- optional for icon support
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		keys = {
-			"<leader>r",
-			"<leader>h",
+			"<leader>u",
+			"<leader>e",
 			"<localleader>u",
 			"<localleader>a",
-			"<leader>u",
+			"<leader>o",
 			"<leader>d",
 			"<localleader>e",
 			"z=",
@@ -48,17 +48,17 @@ return {
 				},
 			})
 			-- Fzf-Lua keymaps
-			vim.keymap.set("n", "<leader>rf", fzflua.builtin, { desc = "[f]zf-lua" })
-			vim.keymap.set("n", "<leader>rF", fzflua.resume, { desc = "[r]esume" })
+			vim.keymap.set("n", "<leader>uf", fzflua.builtin, { desc = "[f]zf-lua" })
+			vim.keymap.set("n", "<leader>uF", fzflua.resume, { desc = "[r]esume" })
 
 			-- Cmds
-			vim.keymap.set("n", "<leader>rc", fzflua.commands, { desc = "commands" })
-			vim.keymap.set("n", "<leader>rr", fzflua.command_history, { desc = "command history" })
+			vim.keymap.set("n", "<leader>uc", fzflua.commands, { desc = "commands" })
+			vim.keymap.set("n", "<leader>ur", fzflua.command_history, { desc = "command history" })
 
 			-- Help keymaps
-			vim.keymap.set("n", "<leader>ht", fzflua.helptags, { desc = "[t]ags" })
-			vim.keymap.set("n", "<leader>hk", fzflua.keymaps, { desc = "[k]eymaps" })
-			vim.keymap.set("n", "<leader>hm", fzflua.manpages, { desc = "[m]an pages" })
+			vim.keymap.set("n", "<leader>et", fzflua.helptags, { desc = "[t]ags" })
+			vim.keymap.set("n", "<leader>ek", fzflua.keymaps, { desc = "[k]eymaps" })
+			vim.keymap.set("n", "<leader>em", fzflua.manpages, { desc = "[m]an pages" })
 
 			-- Find
 			vim.keymap.set("n", "<localleader>uf", fzflua.files, { desc = "[f]iles in cwd" })
@@ -84,10 +84,10 @@ return {
 			end, { desc = "Run git cmd from history" })
 
 			-- Registers
-			vim.keymap.set("n", "<leader>ur", fzflua.registers, { desc = "open [r]egisters" })
+			vim.keymap.set("n", "<leader>or", fzflua.registers, { desc = "open [r]egisters" })
 
 			-- Jumps
-			vim.keymap.set("n", "<leader>uj", fzflua.jumps, { desc = "open [j]umplist" })
+			vim.keymap.set("n", "<leader>oj", fzflua.jumps, { desc = "open [j]umplist" })
 
 			-- Diagnostics
 			vim.keymap.set("n", "<leader>db", fzflua.diagnostics_document, { desc = "jump in current [b]uffer" })

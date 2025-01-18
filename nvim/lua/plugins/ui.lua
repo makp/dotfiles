@@ -90,12 +90,12 @@ return {
 			spec = {
 				-- Document existing key chains
 				-- leader key chains
-				{ "<leader>u", group = "nao sei" },
+				{ "<leader>o", group = "[o]pen" },
+				{ "<leader>e", group = "h[e]lp" },
+				{ "<leader>u", group = "r[u]n" },
 
 				{ "<leader>f", group = "[f]ile" },
-				{ "<leader>h", group = "[h]elp" },
 				{ "<leader>d", group = "[d]iagnose" },
-				{ "<leader>r", group = "[r]un" },
 
 				-- localleader key chains
 				{ "<localleader>a", group = "se[a]rch" },
