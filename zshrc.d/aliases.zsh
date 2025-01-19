@@ -51,7 +51,7 @@ alias ef="run_fzf-on-files-and-dirs.sh"
 alias eg="run_rg.sh"
 
 # Git
-alias gg="lazygit"
+alias gt="lazygit"
 
 alias cg="cd \$(git rev-parse --show-toplevel)"  # cd to root git repo
 
@@ -121,5 +121,6 @@ alias pyC="clone-and-update-conda-env.sh "
 # Convert between file formats
 alias cmh="convert_md_to_html.py"
 alias cms="pandoc -i -t revealjs -s "
-alias com="pandoc -t gfm -f org "
 alias cmn="jupytext --to notebook "
+alias com="pandoc -t gfm -f org "
+alias cpt="pdftotext "
