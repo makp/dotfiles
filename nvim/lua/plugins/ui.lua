@@ -90,9 +90,11 @@ return {
 			spec = {
 				-- Document existing key chains
 				-- leader key chains
+				{ "<leader>a", group = "p[a]ste" },
 				{ "<leader>o", group = "[o]pen" },
 				{ "<leader>e", group = "h[e]lp" },
 				{ "<leader>u", group = "r[u]n" },
+				-- { "<leader>i", group = "[i]nsert" },
 
 				{ "<leader>f", group = "[f]ile" },
 				{ "<leader>d", group = "[d]iagnose" },

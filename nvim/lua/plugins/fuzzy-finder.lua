@@ -47,20 +47,24 @@ return {
 					},
 				},
 			})
-			-- Fzf-Lua keymaps
+			-- Run
+			vim.keymap.set("n", "<leader>uc", fzflua.commands, { desc = "commands" })
+			vim.keymap.set("n", "<leader>ur", fzflua.command_history, { desc = "command from history" })
 			vim.keymap.set("n", "<leader>uf", fzflua.builtin, { desc = "[f]zf-lua" })
 			vim.keymap.set("n", "<leader>uF", fzflua.resume, { desc = "[r]esume" })
 
-			-- Cmds
-			vim.keymap.set("n", "<leader>uc", fzflua.commands, { desc = "commands" })
-			vim.keymap.set("n", "<leader>ur", fzflua.command_history, { desc = "command history" })
-
-			-- Help keymaps
+			-- Help with
 			vim.keymap.set("n", "<leader>et", fzflua.helptags, { desc = "[t]ags" })
 			vim.keymap.set("n", "<leader>ek", fzflua.keymaps, { desc = "[k]eymaps" })
 			vim.keymap.set("n", "<leader>em", fzflua.manpages, { desc = "[m]an pages" })
 
-			-- Find
+			-- Paste
+			vim.keymap.set("n", "<leader>ar", fzflua.registers, { desc = "[r]egisters" })
+			vim.keymap.set("n", "<leader>al", fzflua.complete_line, { desc = "[l]ines" })
+			vim.keymap.set("n", "<leader>ap", fzflua.complete_path, { desc = "complete [p]ath" })
+			vim.keymap.set("i", "<C-\\>p", fzflua.complete_path, { desc = "complete [p]ath" })
+
+			-- Jump to
 			vim.keymap.set("n", "<localleader>uf", fzflua.files, { desc = "[f]iles in cwd" })
 			vim.keymap.set("n", "<localleader>ub", fzflua.buffers, { desc = "[b]uffers" })
 			vim.keymap.set("n", "<localleader>ur", function()
@@ -68,14 +72,14 @@ return {
 			end, { desc = "[r]ecent files in cwd" })
 			vim.keymap.set("n", "<localleader>uR", fzflua.oldfiles, { desc = "[r]ecent files" })
 
-			-- Grep
+			-- Search
 			vim.keymap.set("n", "<localleader>ab", fzflua.lgrep_curbuf, { desc = "current [b]uffer" })
 			vim.keymap.set("n", "<localleader>af", fzflua.live_grep, { desc = "[f]iles in cwd" })
 			vim.keymap.set("n", "<localleader>aw", fzflua.grep_cword, { desc = "files containing [w]ord" })
 			vim.keymap.set("n", "<localleader>aW", fzflua.grep_cWORD, { desc = "files containing [W]ORD" })
 			vim.keymap.set("n", "<localleader>an", fzflua.treesitter, { desc = "treesitter [n]odes" })
 
-			-- Git
+			-- Review
 			vim.keymap.set("n", "<localleader>ed", fzflua.git_status, { desc = "[d]iffs" })
 			vim.keymap.set("n", "<localleader>ec", fzflua.git_commits, { desc = "[c]ommits" })
 			vim.keymap.set("n", "<localleader>eb", fzflua.git_branches, { desc = "[b]ranghes" })
@@ -83,11 +87,8 @@ return {
 				fzflua.command_history({ query = "^G " }) -- Restrict to fugitive cmds
 			end, { desc = "Run git cmd from history" })
 
-			-- Registers
-			vim.keymap.set("n", "<leader>or", fzflua.registers, { desc = "open [r]egisters" })
-
-			-- Jumps
-			vim.keymap.set("n", "<leader>oj", fzflua.jumps, { desc = "open [j]umplist" })
+			-- Open
+			vim.keymap.set("n", "<leader>oj", fzflua.jumps, { desc = "[j]umplist" })
 
 			-- Diagnostics
 			vim.keymap.set("n", "<leader>db", fzflua.diagnostics_document, { desc = "jump in current [b]uffer" })
@@ -97,7 +98,6 @@ return {
 			vim.keymap.set("n", "z=", fzflua.spell_suggest, { desc = "spell check" })
 
 			-- Completetion
-			vim.keymap.set("i", "<C-\\>p", fzflua.complete_path, { desc = "complete path" })
 
 			-- fzf-bibtex configuration
 			require("fzf-bibtex_config")
