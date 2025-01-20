@@ -16,6 +16,15 @@ zinit light-mode for \
 # Change fzf trigger key
 export FZF_COMPLETION_TRIGGER=',,'
 
+# Add key to run fzf without trigger char
+fzf-completion-widget() {
+    LBUFFER="${LBUFFER},,"
+    zle fzf-completion
+}
+zle -N fzf-completion-widget
+bindkey '^[f' fzf-completion-widget # Alt-f
+
+
 # bindekey -M viins '^R' fzf-history-widget
 
 # Bind `Ctrl+Alt+/` to zoxide interactive mode
