@@ -1,3 +1,49 @@
+#
+# Configure ZSH completion
+#
+
+# Enable autocomplete
+autoload -Uz compinit
+compinit
+
+# Enable autocompletion interface (double tab)
+zstyle ':completion:*' menu select
+
+# Rehash automatically
+zstyle ':completion:*' rehash true
+
+# Set descriptions format to enable group support
+zstyle ':completion:*:descriptions' format '[%d]'
+
+# Set list-colors to enable filename colorizing
+autoload -U colors && colors
+if [[ -z "$LS_COLORS" ]]; then # Make sure LS_COLORS is set
+    eval "$(dircolors -b)"
+fi
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+# Cache completion for better performance
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/.zcompcache"
+
+# Never suggest parent dir
+zstyle ':completion:*:cd:*' ignore-parents parent pwd
+
+# Fuzzy matching of completions
+# Specify completion funcs
+zstyle ':completion:*' completer _expand_alias _complete _match _approximate
+
+#
+# zstyle ':completion:*:match:*' original only
+
+# Make the num of errors increase with the length of what you have typed
+zstyle -e ':completion:*:approximate:*' \
+    max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3)))' # max number of errors
+
+#
+# fzf and zoxide
+#
+
 # fzf keybindings:
 # C-t: pasted file/dir onto the command line.
 # M-c: cd into selected directory.
@@ -13,7 +59,7 @@ zinit light-mode for \
   $PATH_OMZ/zoxide/ \
   $PATH_OMZ/fzf/
 
-# Change fzf trigger key
+# Change fzf trigger key to avoid conflict with `**`
 export FZF_COMPLETION_TRIGGER=',,'
 
 # Add key to run fzf without trigger char
@@ -35,46 +81,15 @@ zoxide_query() {
 zle -N zoxide_query
 bindkey '^[^_' zoxide_query
 
+
+
 #
-# Configure completion style (zstyle)
-# Source: https://github.com/Aloxaf/fzf-tab?tab=readme-ov-file#configure
-#
-# Rehash automatically
-zstyle ':completion:*' rehash true
-# Disable sort when completing `git checkout`
-zstyle ':completion:*:git-checkout:*' sort false
-# Set descriptions format to enable group support
-# NOTE: don't use escape sequences (like '%F{red}%d%f') here, fzf-tab will ignore them
-zstyle ':completion:*:descriptions' format '[%d]'
-# Set list-colors to enable filename colorizing
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-# Use custom fzf flags
-# NOTE: fzf-tab does not follow FZF_DEFAULT_OPTS by default
-# zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept
-# Force zsh not to show completion menu
-zstyle ':completion:*' menu no
-# Switch between groups with < and >
-zstyle ':fzf-tab:*' switch-group '<' '>'
-# Continuous trigger key for fzf-tab
-zstyle ':fzf-tab:*' continuous-trigger '/'
-
-# Define a custom widget for alias expansion without triggering fzf-tab
-expand-alias-only() {
-  zle _expand_alias
-  zle redisplay
-}
-
-zle -N expand-alias-only # Register the widget
-bindkey '^ ' expand-alias-only
-
-
 # Load remaining plugins with a delay
-# Consider using fast-syntax-highlighting
+#
+
 # The cmds `atinit` and `atload` are used to run commands before and after
 # loading the plugin
 zinit wait"1" lucid light-mode for \
-  atinit"zicompinit; zicdreplay" \
-  $PATH_PLUGINS/fzf-tab-git \
   atload"_zsh_autosuggest_start" \
   "$PATH_PLUGINS/zsh-autosuggestions/" \
   "$PATH_PLUGINS/zsh-syntax-highlighting/"
