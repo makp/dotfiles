@@ -47,8 +47,8 @@ alias acr="gh copilot suggest "
 # Editor
 alias e="nvim "
 alias eh="nvim ."
-alias ef="run_fzf-on-files-and-dirs.sh"
-alias eg="run_rg.sh"
+alias eu="run_fzf-on-files-and-dirs.sh"
+alias ea="run_rg.sh"
 
 # Git
 alias gt="lazygit"
@@ -107,7 +107,8 @@ alias grH="git reset --hard HEAD" # reset repo to the last commit
 # Linux pkg manager
 alias pu="sudo pacman -Syu"
 alias pU="yay -Sua --devel"
-alias pL="pacman -Qm" # List foreign packages
+alias pp="pacman -Q | grep -i " # Search for a pkg
+alias pP="pacman -Qm" # List foreign packages
 alias pc="yay -Sc"
 alias pf="yay -Ql" # List files in a package
 
@@ -124,3 +125,13 @@ alias cms="pandoc -i -t revealjs -s "
 alias cmn="jupytext --to notebook "
 alias com="pandoc -t gfm -f org "
 alias cpt="pdftotext "
+
+# Linux logs
+# https://wiki.archlinux.org/title/Systemd/Journal#Filtering_output
+# The `x` flag shows explanations of log fields
+alias lb="journalctl -xb -0" # Show logs since last boot
+alias lB="journalctl --list-boots" # List boots
+alias lc="journalctl -p err..alert -b 0 -x" # Show logs with priority error, critical, and alert
+alias lu="journalctl -ux " # Show logs for a specific unit
+alias la="journalctl --grep=" # Search log matching a pattern
+alias lk="journalctl -xk" # Show kernel logs
