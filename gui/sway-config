@@ -1,0 +1,425 @@
+# !ln -s %:p ~/.config/sway/config
+
+###
+# Conventions:
+# - Use `$mod + Shift` to move windows around
+# - Use `$mod + $meta` to resize windows
+# - Stick to vim-like movement keys
+
+# Notes:
+# - It seems that this config doesn't properly handle comments at the end of
+# lines.
+# - Wayland alternatives to X11 tools:
+#   - `xrandr` -> `swaymsg output`
+#   - `xev` -> `wev` (to identify keycodes)
+#   - `xprop` -> `wlprop` (to identify class/instance of a window)
+#   - `xclip` -> `wl-clipboard`
+###
+
+###
+### Set some keys
+###
+
+# Mod keys
+set $mod Mod4
+set $meta Mod1
+
+# Use vim movement keys
+set $left h
+set $down j
+set $up k
+set $right l
+
+
+###
+### Appearance
+###
+
+# Zenburn (from i3 FAQ)
+set $bg     #2c2c2e
+set $fg     #9f9f9f
+set $hi     #efef8f
+set $ac     #a0afa0
+set $tx     #040404
+set $ia     #8f8f8f
+set $be     #8faf9f
+set $yw     #ccdc90
+set $gn     #88b090
+set $rd     #e89393
+
+#                          border     background  text
+client.focused              $ac        $ac         $tx
+client.unfocused            $bg        $bg         $ia
+client.focused_inactive     $bg        $bg         $ac
+client.urgent               $rd        $rd         $tx
+
+# Set the font
+# Sway uses Pango. Run `pango-list | grep font` to find font name in Pango format.
+font pango:Hack Nerd Font Mono 10
+
+
+###
+### Outputs
+###
+
+# Configure screen outputs
+# You can get the names of your outputs by running: swaymsg -t get_outputs
+# `swaybg` needs to be installed to set the wallpaper
+output eDP-1 {
+  resolution 1920x1080 position 1920,0
+  bg $HOME/Pictures/wallpapers/02154_standalonecleanwallpaper_1920x1080.jpg fill
+  }
+
+# Poor man's version of swap
+bindsym $mod+Control+s mark sec; focus output right; mark prim; [con_mark="sec"] focus; move workspace to output right; [con_mark="prim"] focus; move workspace to output right; [con_mark="prim"] focus
+
+# Move windows/containers between outputs
+# bindsym $mod+Shift+n move container to output right; focus output right
+# bindsym $mod+Shift+p move container to output left; focus output left
+bindsym $mod+Shift+f move workspace to output right
+bindsym $mod+Shift+b move workspace to output left
+
+
+###
+### Screen lock
+###
+
+# Lock screen after 300 seconds of inactivity, then turn off your displays
+# after another 300 seconds, and turn screens back on when resumed. Lock your
+# screen before your computer goes to sleep.
+exec swayidle -w \
+         timeout 300 'swaylock -f -c 000000' \
+         timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+         before-sleep 'swaylock -f -c 000000'
+
+bindsym $mod+Control+l exec 'swaylock -c 616160'
+
+###
+### Inputs
+###
+
+input "type:keyboard" {
+    xkb_layout us
+    xkb_variant dvorak
+    xkb_options caps:swapescape
+}
+
+# Example configuration:
+#
+#   input "2:14:SynPS/2_Synaptics_TouchPad" {
+#       dwt enabled
+#       tap enabled
+#       natural_scroll enabled
+#       middle_emulation enabled
+#   }
+#
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+
+
+###
+### Sway
+###
+
+set $x_keys SwayWM: [e]xit re[l]oad re[s]tart
+bindsym $mod+x mode "$x_keys"
+mode "$x_keys" {
+    bindsym e mode "default", exit
+    bindsym l mode "default", reload
+    bindsym s mode "default", restart
+
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
+}
+
+# Exit sway (logs you out of your Wayland session)
+# bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
+
+###
+### Windows
+###
+
+# Don't focus window upon opening (from i3 config)
+# no_focus [window_role="pop-up"]
+
+# Kill focused window
+bindsym $mod+Shift+c kill
+
+# Focus
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+# Or use $mod+[up|down|left|right]
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move focused window
+bindsym $mod+Shift+$left move left 150px
+bindsym $mod+Shift+$down move down 150px
+bindsym $mod+Shift+$up move up 150px
+bindsym $mod+Shift+$right move right 150px
+# Ditto, with arrow keys
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+
+# Drag floating windows by holding down $mod and left mouse button.
+# Resize them with right mouse button + $mod.
+# Despite the name, also works for non-floating windows.
+# Change normal to inverse to use left mouse button for resizing and right
+# mouse button for dragging.
+floating_modifier $mod normal
+
+# Move focus to the parent container
+bindsym $mod+minus focus parent
+bindsym $mod+plus focus child
+
+###
+### Workspaces
+###
+
+# Cycle through workspaces
+bindsym $mod+bracketright workspace next_on_output
+bindsym $mod+bracketleft workspace prev_on_output
+
+# Back and forth between workspaces
+workspace_auto_back_and_forth yes
+bindsym $mod+r workspace back_and_forth
+
+# Create new workspace
+bindsym $mod+n exec "sway_create-new-workspace.sh"
+
+# Rename workspace
+# TODO: Use a more suitable tool for entering input than rofi
+bindsym $mod+$meta+r exec swaymsg rename workspace to "$(rofi -dmenu)"
+
+# Switch to a particular workspace
+bindsym $mod+$meta+slash exec swaymsg workspace "$(swaymsg -t get_workspaces | jq '.[].name' | rofi -dmenu)"
+
+
+# Switch to workspace
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+
+# Move focused container to workspace and follow it
+bindsym $mod+$meta+1 move container to workspace number 1; workspace 1
+bindsym $mod+$meta+2 move container to workspace number 2; workspace 2
+bindsym $mod+$meta+3 move container to workspace number 3; workspace 3
+bindsym $mod+$meta+4 move container to workspace number 4; workspace 4
+bindsym $mod+$meta+5 move container to workspace number 5; workspace 5
+bindsym $mod+$meta+6 move container to workspace number 6; workspace 6
+bindsym $mod+$meta+7 move container to workspace number 7; workspace 7
+bindsym $mod+$meta+8 move container to workspace number 8; workspace 8
+bindsym $mod+$meta+9 move container to workspace number 9; workspace 9
+
+
+# Scratchpad
+# Refs on scratchpads:
+# https://faq.i3wm.org/question/378/start-urxvt-in-a-scratchpad.1.html
+# https://faq.i3wm.org/question/138/multiple-scratchpad.1.html
+
+# Move the currently focused window to the scratchpad
+bindsym $mod+Shift+0 move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+$meta+0 scratchpad show
+
+
+###
+### Layout
+###
+
+# Splits
+bindsym $mod+v splith
+bindsym $mod+s splitv
+
+# Switch between different layout styles
+bindsym $mod+$meta+n layout stacking
+bindsym $mod+$meta+t layout tabbed
+bindsym $mod+$meta+s layout toggle split
+
+# Fullscreen
+# popup_during_fullscreen smart
+bindsym $mod+z fullscreen
+
+# Swap focus between the tiling area and the floating area
+bindsym $mod+space focus mode_toggle
+
+# Toggle the current focus between tiling and floating mode
+bindsym $mod+Shift+space floating toggle
+
+
+###
+### Output navigation
+###
+
+bindsym $mod+f focus output right
+bindsym $mod+b focus output right
+
+###
+### Containers
+###
+
+# Resize containers
+bindsym $mod+$meta+h resize shrink width 100 px or 1 ppt
+bindsym $mod+$meta+k resize grow height 100 px or 1 ppt
+bindsym $mod+$meta+j resize shrink height 100 px or 1 ppt
+bindsym $mod+$meta+l resize grow width 100 px or 1 ppt
+
+
+# mode "resize" {
+#     bindsym $left resize shrink width 10px
+#     bindsym $down resize grow height 10px
+#     bindsym $up resize shrink height 10px
+#     bindsym $right resize grow width 10px
+#
+#     bindsym Left resize shrink width 10px
+#     bindsym Down resize grow height 10px
+#     bindsym Up resize shrink height 10px
+#     bindsym Right resize grow width 10px
+#
+#     # Return to default mode
+#     bindsym Return mode "default"
+#     bindsym Escape mode "default"
+# }
+
+###
+### Media keys
+###
+
+# Volume
+bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
+# bindsym XF86AudioMute exec "amixer sset Master toggle"
+bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
+# bindsym XF86AudioLowerVolume exec "amixer sset Master 1%- unmute && volume.sh"
+bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
+# bindsym XF86AudioRaiseVolume exec "amixer sset Master 1%+ unmute && volume.sh"
+bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+
+# Brightness keys
+bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+
+# Screenshot
+bindsym Print exec grim
+
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+bar {
+    mode hide
+    position bottom
+    status_command i3status --config $CONFIG_FILES/x-configs/i3status-$(hostname).conf
+    # status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+    font -misc-fixed-medium-r-normal--14-120-75-75-C-70-iso10646-1
+    font pango:Hack Nerd Font Mono 10
+
+    colors {
+      background          $bg
+      statusline          $fg
+      separator           $hi
+      focused_workspace   $gn        $ac        $tx
+      active_workspace    $gn        $bg        $ac
+      inactive_workspace  $bg        $bg        $ia
+      urgent_workspace    $rd        $bg        $ac
+    }
+}
+
+bindsym $mod+$meta+b bar hidden_state toggle
+
+###
+### Utilities
+###
+
+# Preferred applications
+set $term alacritty
+set $term_other kitty
+set $switch_win rofi -show window
+set $run_app rofi -show drun
+set $browser brave
+set $browser_class Brave-browser
+set $music_player youtube-music
+set $music_player_class com.github.th_ch.youtube_music
+
+# Scratchpad terminal
+exec --no-startup-id create-term-scratchpad-window.sh
+for_window [title="term_scratchpad"] floating enable, move to scratchpad, border pixel 1
+bindsym $mod+t [title="term_scratchpad"] scratchpad show
+
+# Show certain windows from the scratchpad
+bindsym $mod+0 [title="^(?!term_scratchpad)" class="^(?!$music_player_class)(?!$browser_class)"] scratchpad show
+
+# Tmux terminal
+bindsym $mod+Control+t exec $term -e tmux attach
+
+# Switch windows
+bindsym $mod+slash exec $switch_win
+
+# Open terminal
+bindsym $mod+Return exec choose_project.sh
+bindsym $mod+$meta+Return exec $term
+
+# Default browser
+bindsym $mod+Control+w exec $browser
+bindsym $mod+w [class=$browser_class] scratchpad show
+
+# Music
+bindsym $mod+Control+m exec $music_player
+bindsym $mod+m [class=$music_player_class] scratchpad show
+
+set $launch_misc_apps Launch: bro[w]ser [t]erminal
+bindsym $mod+o mode "$launch_misc_apps"
+
+bindsym $mod+Control+r exec $run_app
+
+
+mode "$launch_misc_apps" {
+    bindsym w exec google-chrome-stable, mode "default"
+    bindsym t exec $term_other, mode "default"
+
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
+}
+
+# Origin windows
+# They tend to clutter the workspace
+# assign [title="^Origin$"] Origin
+# for_window [title="^Origin$"] floating enable
+
+#
+# exec conky
+
+#
+exec insync start
+
+
+####
+include /etc/sway/config.d/*
+
+# vim: ft=swayconfig

@@ -1,0 +1,282 @@
+# !mkdir -p ~/.config/i3
+# !ln -s %:p ~/.config/i3/config
+
+# Helpful applications:
+# xprop: identify class and instance of a window
+
+# TODO list:
+# + Fix xautolock behavior. Resource:
+#   https://unix.stackexchange.com/questions/144843/get-xautolock-status
+
+#######################################################
+
+# Set mod keys
+set $mod Mod4
+set $meta Mod1
+
+# Font for window titles. This font will also be used by the bar
+# unless a different font is used in the bar {} block below.
+font pango:DejaVu Sans Mono 10
+
+# Zenburn styled i3 (from i3 FAQ)
+set $bg     #2c2c2e
+set $fg     #9f9f9f
+set $hi     #efef8f
+set $ac     #a0afa0
+set $tx     #040404
+set $ia     #8f8f8f
+set $be     #8faf9f
+set $yw     #ccdc90
+set $gn     #88b090
+set $rd     #e89393
+
+# Set some nice colors      border     background  text
+client.focused              $ac        $ac         $tx
+client.unfocused            $bg        $bg         $ia
+client.focused_inactive     $bg        $bg         $ac
+client.urgent               $rd        $rd         $tx
+
+# Don't focus window upon opening
+no_focus [window_role="pop-up"]
+force_focus_wrapping yes
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# Automatic back-and-forth when switching to the current workspace
+workspace_auto_back_and_forth yes
+bindsym $mod+r workspace back_and_forth
+
+set $switch_win rofi -show window
+set $run_app rofi -show drun
+bindsym $mod+$meta+slash exec i3-msg workspace "$(i3-msg -t get_workspaces | jq '.[].name' | rofi -dmenu)"
+bindsym $mod+slash exec $switch_win
+bindsym $mod+Control+r exec $run_app
+
+# Move to next workspace
+bindsym $mod+bracketright workspace next_on_output
+bindsym $mod+bracketleft workspace prev_on_output
+bindsym $mod+n exec --no-startup-id "i3-new-workspace.sh"
+
+# Kill focused window
+bindsym $mod+Shift+c kill
+
+bindsym $mod+f focus output right
+bindsym $mod+b focus output right
+
+
+set $x_keys i3WM: [e]xit re[l]oad re[s]tart
+bindsym $mod+x mode "$x_keys"
+mode "$x_keys" {
+    bindsym e mode "default", exit
+    bindsym l mode "default", reload
+    bindsym s mode "default", restart
+
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
+}
+
+# navigation
+bindsym $mod+h focus left
+bindsym $mod+l focus right
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+h move left 150px
+bindsym $mod+Shift+j move down 150px
+bindsym $mod+Shift+k move up 150px
+bindsym $mod+Shift+l move right 150px
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# splits
+bindsym $mod+v split h
+bindsym $mod+s split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+z fullscreen
+
+popup_during_fullscreen smart
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+$meta+n layout stacking
+bindsym $mod+$meta+t layout tabbed
+bindsym $mod+$meta+s layout toggle split
+
+
+bindsym $mod+minus focus parent
+bindsym $mod+plus focus child
+
+bindsym $mod+space focus mode_toggle
+bindsym $mod+Shift+space floating toggle
+
+# focus the child container
+
+# rename workspace
+bindsym $mod+$meta+r exec i3-input -F 'rename workspace to "%s"' -P 'Novo nome: '
+
+# volume control
+bindsym XF86AudioLowerVolume exec "amixer sset Master 1%- unmute && volume.sh"
+#(0            , 0x1008ff11)
+bindsym $mod+F2 exec "amixer sset Master 1%- unmute && volume.sh"
+
+bindsym XF86AudioRaiseVolume exec "amixer sset Master 1%+ unmute && volume.sh"
+# (0            , 0x1008ff13)
+bindsym $mod+F3 exec "amixer sset Master 1%+ unmute && volume.sh"
+
+bindsym XF86AudioMute exec "amixer sset Master toggle"
+# (0            , 0x1008ff12)
+bindsym $mod+F1 exec "amixer sset Master toggle"
+
+
+# Move windows/containers between outputs
+bindsym $mod+Shift+n move container to output right; focus output right
+bindsym $mod+Shift+p move container to output left; focus output left
+bindsym $mod+Shift+f move workspace to output right
+bindsym $mod+Shift+b move workspace to output left
+
+
+# poor man's version of swap
+bindsym $mod+Control+s mark sec; focus output right; mark prim; [con_mark="sec"] focus; move workspace to output right; [con_mark="prim"] focus; move workspace to output right; [con_mark="prim"] focus
+# move workspace to output right; focus output right; workspace prev_on_output; move workspace to output right
+
+# automatically put workspace 9 primary monitor
+# TODO: use primary as opposed to HDMI-0 doesn't work
+workspace 9 output HDMI-0
+
+# switch to workspace
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1; workspace 1
+bindsym $mod+Shift+2 move container to workspace 2; workspace 2
+bindsym $mod+Shift+3 move container to workspace 3; workspace 3
+bindsym $mod+Shift+4 move container to workspace 4; workspace 4
+bindsym $mod+Shift+5 move container to workspace 5; workspace 5
+bindsym $mod+Shift+6 move container to workspace 6; workspace 6
+bindsym $mod+Shift+7 move container to workspace 7; workspace 7
+bindsym $mod+Shift+8 move container to workspace 8; workspace 8
+bindsym $mod+Shift+9 move container to workspace 9; workspace 9
+
+# move focused container to workspace and follow it
+bindsym $mod+$meta+1 move container to workspace 1
+bindsym $mod+$meta+2 move container to workspace 2
+bindsym $mod+$meta+3 move container to workspace 3
+bindsym $mod+$meta+4 move container to workspace 4
+bindsym $mod+$meta+5 move container to workspace 5
+bindsym $mod+$meta+6 move container to workspace 6
+bindsym $mod+$meta+7 move container to workspace 7
+bindsym $mod+$meta+8 move container to workspace 8
+bindsym $mod+$meta+9 move container to workspace 9
+
+
+# resize window
+bindsym $mod+$meta+h resize shrink width 100 px or 1 ppt
+bindsym $mod+$meta+k resize grow height 100 px or 1 ppt
+bindsym $mod+$meta+j resize shrink height 100 px or 1 ppt
+bindsym $mod+$meta+l resize grow width 100 px or 1 ppt
+
+
+# Status bar
+bar {
+  mode hide
+  status_command i3status --config $CONFIG_FILES/x-configs/i3status-$(hostname).conf
+	tray_output primary
+	i3bar_command i3bar
+  font -misc-fixed-medium-r-normal--14-120-75-75-C-70-iso10646-1
+  font pango:Hack Nerd Font Mono 10
+
+  colors {
+    background          $bg
+    statusline          $fg
+    separator           $hi
+    focused_workspace   $gn        $ac        $tx
+    active_workspace    $gn        $bg        $ac
+    inactive_workspace  $bg        $bg        $ia
+    urgent_workspace    $rd        $bg        $ac
+  }
+}
+
+bindsym $mod+$meta+b bar hidden_state toggle
+
+
+## ===============
+## App keybindings
+## ===============
+
+# Set default programs
+set $term alacritty
+set $other_term kitty
+set $browser brave
+set $browser_class Brave-browser
+set $music_player youtube-music
+set $music_player_class com.github.th_ch.youtube_music
+
+# Main browser
+bindsym $mod+Control+w exec $browser
+bindsym $mod+w [class=$browser_class] scratchpad show
+
+# Terminals
+exec --no-startup-id create-term-scratchpad-window.sh
+bindsym $mod+Control+t exec $term -e tmux attach
+for_window [title="term_scratchpad"] floating enable, move to scratchpad, border pixel 1
+bindsym $mod+t [title="term_scratchpad"] scratchpad show
+bindsym $mod+Return exec choose_project.sh
+bindsym $mod+$meta+Return exec $term
+
+# Music
+bindsym $mod+Control+m exec $music_player
+bindsym $mod+m [class=$music_player_class] scratchpad show
+
+# Scratchpad
+bindsym $mod+0 [title="^(?!term_scratchpad)" class="^(?!$music_player_class)(?!$browser_class)"] scratchpad show
+bindsym $mod+$meta+0 scratchpad show
+bindsym $mod+Shift+0 move container to scratchpad
+
+# Screen lock
+bindsym $mod+Control+l exec lock_screen.sh
+
+# origin windows
+assign [title="^Origin$"] Origin
+for_window [title="^Origin$"] floating enable
+
+#
+set $launch_misc_apps Launch: bro[w]ser [t]erminal
+bindsym $mod+o mode "$launch_misc_apps"
+
+mode "$launch_misc_apps" {
+    bindsym w exec google-chrome-stable, mode "default"
+    bindsym t exec $other_term, mode "default"
+
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
+}
+# Refs on scratchpads:
+# https://faq.i3wm.org/question/378/start-urxvt-in-a-scratchpad.1.html
+# https://faq.i3wm.org/question/138/multiple-scratchpad.1.html
+
+## ========================
+## Start a few applications
+## ========================
+exec conky
+exec xautolock -detectsleep -time 15 -locker 'lock_screen.sh'
+exec insync start
+
+# vim: ft=i3config

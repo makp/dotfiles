@@ -1,0 +1,36 @@
+# !ln -s %:p ~/.config/ghostty/config
+
+font-family = "Hack Nerd Font Mono"
+theme = "GruvboxDark"
+mouse-hide-while-typing = true
+copy-on-select = true
+window-decoration = false
+shell-integration = zsh
+gtk-tabs-location = bottom
+confirm-close-surface = false
+
+# Tab keybindings
+keybind = shift+ctrl+t>/=toggle_tab_overview
+keybind = shift+ctrl+t>l=next_tab
+keybind = shift+ctrl+t>h=previous_tab
+
+# Creating and closing splits
+keybind = shift+ctrl+w>l=new_split:right
+keybind = shift+ctrl+w>h=new_split:left
+keybind = shift+ctrl+w>j=new_split:down
+keybind = shift+ctrl+w>k=new_split:up
+keybind = shift+ctrl+w>c=close_surface
+keybind = shift+ctrl+w>z=toggle_split_zoom
+
+# Navigating between splits
+keybind = shift+ctrl+l=goto_split:right
+keybind = shift+ctrl+h=goto_split:left
+keybind = shift+ctrl+j=goto_split:bottom
+keybind = shift+ctrl+k=goto_split:top
+
+# Resizing splits
+keybind = shift+ctrl+r>l=resize_split:right,20
+keybind = shift+ctrl+r>h=resize_split:left,20
+keybind = shift+ctrl+r>j=resize_split:down,20
+keybind = shift+ctrl+r>k=resize_split:up,20
+

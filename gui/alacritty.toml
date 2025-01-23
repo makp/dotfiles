@@ -1,0 +1,32 @@
+# Alacritty configuration file
+# !mkdir ~/.config/alacritty
+# !ln -s %:p ~/.config/alacritty/alacritty.toml
+
+# Select color theme
+# The color themes were installed via the AUR pkg `alacritty-theme-git`
+# See https://github.com/alacritty/alacritty-theme
+general.import = [
+    "/usr/share/alacritty/themes/gruvbox_dark.toml"
+]
+
+[font]
+size = 10.0
+
+[font.normal]
+family = "Hack Nerd Font Mono"
+style = "Regular"
+
+[font.bold]
+family = "Hack Nerd Font Mono"
+style = "Bold"
+
+[font.bold_italic]
+family = "Hack Nerd Font Mono"
+style = "Bold Italic"
+
+[font.italic]
+family = "Hack Nerd Font Mono"
+style = "Italic"
+
+[keyboard]
+bindings = [{ key = "Enter", mods = "Control | Shift", action = "CreateNewWindow" }]

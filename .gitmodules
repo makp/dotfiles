@@ -1,4 +1,0 @@
-[submodule "x-configs"]
-	path = x-configs
-	url = git@github.com:makp/x-configs.git
-	branch = master
