@@ -33,7 +33,9 @@ return {
 						["<C-u>"] = "preview-page-up",
 						-- ["<S-left>"] = "preview-page-reset",
 					},
-					fzf = { -- fzf '--bind=' options
+
+					-- fzf '--bind=' options
+					fzf = {
 						["ctrl-f"] = "half-page-down",
 						["ctrl-b"] = "half-page-up",
 						["ctrl-a"] = "beginning-of-line",
@@ -44,6 +46,14 @@ return {
 						["f4"] = "toggle-preview",
 						["ctrl-d"] = "preview-page-down",
 						["ctrl-u"] = "preview-page-up", -- it was "unix-line-discard"
+					},
+				},
+				-- "accept" mappings
+				actions = {
+					files = {
+						true, -- inherit default mappings
+						["alt-s"] = fzflua.actions.file_split,
+						["alt-v"] = fzflua.actions.file_vsplit,
 					},
 				},
 			})
