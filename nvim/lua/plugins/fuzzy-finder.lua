@@ -20,6 +20,7 @@ return {
 			fzflua.setup({
 				keymap = {
 					builtin = {
+						true,
 						["<F1>"] = "toggle-help",
 						["<C-z>"] = "toggle-fullscreen",
 						-- Only valid with the 'builtin' previewer
@@ -36,6 +37,7 @@ return {
 
 					-- fzf '--bind=' options
 					fzf = {
+						true,
 						["ctrl-f"] = "half-page-down",
 						["ctrl-b"] = "half-page-up",
 						["ctrl-a"] = "beginning-of-line",
