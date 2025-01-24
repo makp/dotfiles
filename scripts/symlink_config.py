@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+
+import argparse
 import os
 from pathlib import Path
 
@@ -24,3 +27,12 @@ def create_symlinks(key):
 
     os.symlink(source, path)
     print(f"Symlink created: {source} -> {path}")
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Create symlinks for config files.")
+    parser.add_argument("config", help="Config file to symlink")
+
+    args = parser.parse_args()
+
+    create_symlinks(args.config)
