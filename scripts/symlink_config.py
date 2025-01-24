@@ -12,21 +12,21 @@ CONFIG_MAP = {
 }
 
 
-def create_symlinks(key):
-    path = Path(CONFIG_MAP[key]).expanduser()
+def create_symlinks(config_file):
+    source = Path(CONFIG_MAP[config_file]).expanduser()
 
-    if path.exists():
-        print(f"Symlink already exists: {path}")
+    if source.exists():
+        print(f"Symlink already exists: {source}")
         input("Press Enter to remove it and create a new one...")
-        os.remove(path)
+        os.remove(source)
 
     # Create parent directories if they don't exist
-    path.parent.mkdir(parents=True, exist_ok=True)
+    source.parent.mkdir(parents=True, exist_ok=True)
 
-    source = Path(key).resolve()
+    destination = Path(config_file).resolve()
 
-    os.symlink(source, path)
-    print(f"Symlink created: {source} -> {path}")
+    os.symlink(destination, source)
+    print(f"Symlink created: {source} -> {destination}")
 
 
 if __name__ == "__main__":
