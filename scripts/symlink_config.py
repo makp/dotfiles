@@ -37,7 +37,12 @@ CONFIG_MAP = {
 
 
 def create_symlinks(config_file):
-    source = Path(CONFIG_MAP[config_file]).expanduser()
+    value = CONFIG_MAP.get(config_file)
+
+    if value is None:
+        raise ValueError(f"Config file not mapped: {config_file}")
+
+    source = Path(value).expanduser()
 
     if source.exists():
         print(f"Symlink already exists: {source}")
