@@ -35,6 +35,9 @@ set $right l
 ### Appearance
 ###
 
+default_border pixel 1
+default_floating_border pixel 1
+
 # Zenburn (from i3 FAQ)
 set $bg     #2c2c2e
 set $fg     #9f9f9f
