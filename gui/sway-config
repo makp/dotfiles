@@ -378,15 +378,14 @@ bindsym $mod+t [title="term_scratchpad"] scratchpad show
 # Show certain windows from the scratchpad
 bindsym $mod+0 [title="^(?!term_scratchpad)" class="^(?!$music_player_class)(?!$browser_class)"] scratchpad show
 
-# Tmux terminal
-bindsym $mod+Control+t exec $term -e tmux attach
+
 
 # Switch windows
 bindsym $mod+slash exec $switch_win
 
 # Open terminal
 bindsym $mod+Return exec choose_project.sh
-bindsym $mod+$meta+Return exec $term
+bindsym $mod+Control+t exec $term
 
 # Default browser
 bindsym $mod+Control+w exec $browser
