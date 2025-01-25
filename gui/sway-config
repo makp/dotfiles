@@ -415,7 +415,7 @@ mode "$launch_misc_apps" {
 # for_window [title="^Origin$"] floating enable
 
 #
-# exec conky
+exec conky
 
 #
 exec insync start

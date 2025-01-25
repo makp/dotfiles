@@ -1,6 +1,6 @@
 conky.config = {
-	-- out_to_x = no,
-	-- out_to_wayland = yes,
+	out_to_x = false,
+	out_to_wayland = true,
 	alignment = "top_left",
 	gap_x = 30, -- add padding to the left
 	gap_y = 30,
@@ -94,7 +94,6 @@ ${fs_bar /}
 # ${fs_bar /tmp/}
 # Root:    ${fs_free /} / ${fs_size /}
 # ${fs_bar /}
-
 ${hr 1}
 ${color darkred}${top_mem name 1}${top_mem mem 1}
 ${color 051404}${top_mem name 2}${top_mem mem 2}
