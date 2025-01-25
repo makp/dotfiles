@@ -41,7 +41,7 @@ export OPENAI_BASIC="gpt-4o-mini"
 export OPENAI_ADVANCED="gpt-4o"
 export OPENAI_REASON_MINI="o1-mini"
 export OPENAI_REASON="o1"
-export PPLX_MODEL="llama-3.1-sonar-huge-128k-online"
+export PPLX_MODEL="sonar-pro"
 export ANTHROPIC_MODEL="claude-3-5-sonnet-latest"
 
 # CUDA vars
