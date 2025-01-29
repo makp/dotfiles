@@ -40,7 +40,8 @@ def create_symlinks(config_file):
     value = CONFIG_MAP.get(config_file)
 
     if value is None:
-        raise ValueError(f"Config file not mapped: {config_file}")
+        print(f"Config file not mapped: {config_file}")
+        return
 
     source = Path(value).expanduser()
 
