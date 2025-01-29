@@ -1,5 +1,6 @@
 # ~/.config/aichat/config.yaml
-# see https://github.com/sigoden/aichat/blob/main/config.example.yaml
+# For a config example, see https://github.com/sigoden/aichat/blob/main/config.example.yaml
+# Available models: https://github.com/sigoden/aichat/blob/main/models.yaml
 
 model: openai:gpt-4o-mini
 temperature: 1
@@ -9,13 +10,10 @@ wrap: auto
 clients:
   - type: claude
     name: anthropic
-    models:
-      - name: claude-3-5-sonnet-latest
-        max_output_tokens: 2192
-        require_max_tokens: true
   - type: openai
   - type: openai-compatible
     name: pplx
     api_base: https://api.perplexity.ai
     models:
-      - name: llama-3.1-sonar-huge-128k-online
+      - name: sonar-pro
+      - name: sonar
