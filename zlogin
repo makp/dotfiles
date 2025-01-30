@@ -9,6 +9,9 @@ echo "Running .zlogin..."
 
 ## OpenSSH KEYS PASSPHRASES -------
 
+# This portion assumes that the ssh-agent is running. You can set it up as a
+# systemd user unit (`ssh-agent.service`). Don't forget the `--user` flag!
+
 # Ask for OpenSSH keys if none has been added
 if [[ -n $SSH_AUTH_SOCK ]] && ! ssh-add -l > /dev/null; then
     unset SSH_ASKPASS		# don't use a graphical prompt
