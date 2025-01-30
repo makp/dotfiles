@@ -64,8 +64,8 @@ return {
 					["aa"] = "@assignment.outer", -- assignment.lhs/rhs
 					["ia"] = "@assignment.inner",
 
-					["af"] = "@function.outer",
-					["if"] = "@function.inner",
+					["am"] = "@function.outer",
+					["im"] = "@function.inner",
 
 					["ar"] = "@return.outer",
 					["ir"] = "@return.inner",
@@ -104,7 +104,7 @@ return {
 				set_jumps = true, -- set jumps in the jumplist
 				goto_next_start = {
 					["]a"] = "@assignment.outer",
-					["]f"] = "@function.outer",
+					["]m"] = "@function.outer",
 					["]u"] = "@call.outer",
 					["],"] = "@parameter.outer",
 					["]e"] = "@statement.outer",
@@ -116,7 +116,7 @@ return {
 				},
 				goto_next_end = {
 					["]A"] = "@assignment.outer",
-					["]F"] = "@function.outer",
+					["]M"] = "@function.outer",
 					["]U"] = "@call.outer",
 					["]<"] = "@parameter.outer",
 					["]E"] = "@statement.outer",
@@ -128,7 +128,7 @@ return {
 				},
 				goto_previous_start = {
 					["[a"] = "@assignment.outer",
-					["[f"] = "@function.outer",
+					["[m"] = "@function.outer",
 					["[u"] = "@call.outer",
 					["[,"] = "@parameter.outer",
 					["[e"] = "@statement.outer",
@@ -140,7 +140,7 @@ return {
 				},
 				goto_previous_end = {
 					["[A"] = "@assignment.outer",
-					["[F"] = "@function.outer",
+					["[M"] = "@function.outer",
 					["[U"] = "@call.outer",
 					["[<"] = "@parameter.outer",
 					["[E"] = "@statement.outer",
