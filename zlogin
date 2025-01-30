@@ -23,6 +23,9 @@ if [[ -n $SSH_AUTH_SOCK ]] && ! ssh-add -l > /dev/null; then
 	"tarski")
 	    key_path="$HOME/.ssh/tarski_rsa"
 	    ;;
+	"lovelace")
+	    key_path="$HOME/.ssh/lovelace_rsa"
+	    ;;
 	*)
 	    echo "Hostname not recognized. SSH key not added."
 	    return 1 		# exit with error status
