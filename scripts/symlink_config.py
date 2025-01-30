@@ -44,10 +44,14 @@ def create_symlinks(config_file):
 
     source = Path(value).expanduser()
 
-    if source.exists():
+    if source.is_symlink():
         print(f"Symlink already exists: {source}")
         input("Press Enter to remove it and create a new one...")
-        os.remove(source)
+        source.unlink()
+    elif source.exists():
+        print(f"File/directory already exists: {source}")
+        input("Press Enter to remove it and create a new one...")
+        source.unlink()
 
     # Create parent directories if they don't exist
     source.parent.mkdir(parents=True, exist_ok=True)
