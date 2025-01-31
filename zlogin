@@ -9,8 +9,9 @@ echo "Running .zlogin..."
 
 ## OpenSSH KEYS PASSPHRASES -------
 
-# This portion assumes that the ssh-agent is running. You can set it up as a
-# systemd user unit (`ssh-agent.service`). Don't forget the `--user` flag!
+# This portion assumes that the ssh-agent is running. You can set it up by
+# enabling the systemd user unit `ssh-agent.service`. Don't forget the `--user`
+# flag!!!
 
 # Ask for OpenSSH keys if none has been added
 if [[ -n $SSH_AUTH_SOCK ]] && ! ssh-add -l > /dev/null; then
@@ -41,11 +42,6 @@ if [[ -n $SSH_AUTH_SOCK ]] && ! ssh-add -l > /dev/null; then
 	echo "Key file not found: $key_path"
     fi
 fi
-
-
-## INITIALIZE CONDA ------
-# echo "Setting up conda..."
-# source load_conda.sh
 
 
 ## START WM ------
