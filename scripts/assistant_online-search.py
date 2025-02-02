@@ -10,7 +10,7 @@ from rich.live import Live
 from rich.markdown import Markdown
 
 API_KEY = os.getenv("PPLX_API_KEY")
-MODEL = os.getenv("PPLX_MODEL")
+MODEL = os.getenv("PPLX_BASIC")
 URL = "https://api.perplexity.ai/chat/completions"
 
 
