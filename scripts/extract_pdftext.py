@@ -1,4 +1,4 @@
-#! /usr/bin/env python3
+#!/home/makmiller/Documents/mydocs/config_files/scripts/.venv/bin/python
 
 import argparse
 

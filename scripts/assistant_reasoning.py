@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/home/makmiller/Documents/mydocs/config_files/scripts/.venv/bin/python
 
 """Assistant for reasoning tasks."""
 
