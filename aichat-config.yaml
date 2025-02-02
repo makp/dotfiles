@@ -17,3 +17,4 @@ clients:
     models:
       - name: sonar-pro
       - name: sonar
+      - name: sonar-reasoning
