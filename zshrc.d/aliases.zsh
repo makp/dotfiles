@@ -26,9 +26,9 @@ fi
 #
 
 # Assistants - General
-alias a="sgpt --model '${OPENAI_BASIC}' --temperature 0.3 "
+alias a="aichat --model openai:${OPENAI_BASIC} --temperature 0.3 "
+alias aa="aichat --model openai:${OPENAI_ADVANCED} --temperature 1 "
 alias aA="aichat --model anthropic:${ANTHROPIC_MODEL} "
-alias aa="sgpt --model '${OPENAI_ADVANCED}' --temperature 1 "
 
 # Assistant - reasoning
 alias ar="assistant_reasoning.py -m "
@@ -107,16 +107,15 @@ alias grH="git reset --hard HEAD" # reset repo to the last commit
 # Linux pkg manager
 alias pu="sudo pacman -Syu"
 alias pU="yay -Sua --devel"
-alias pp="pacman -Q | grep -i " # Search for a pkg
-alias pP="pacman -Qm" # List foreign packages
+alias pl="pacman -Q | grep -i " # Search for a pkg
+alias pL="pacman -Qm" # List foreign packages
 alias pc="yay -Sc"
 alias pf="yay -Ql" # List files in a package
+alias po='yay -Qo' # Which pkg owns a file
+alias pi='yay -Qi' # Info about a pkg
 
 # Python pkg manager
-alias pyl="conda env export | bat -l yml"
-alias pyh="conda env export --from-history | bat -l yml"
-alias pyH="conda env export --from-history > environment.yml"
-alias pyC="clone-and-update-conda-env.sh "
+
 
 
 # Convert between file formats
