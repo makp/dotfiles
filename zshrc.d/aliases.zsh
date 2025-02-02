@@ -26,8 +26,8 @@ fi
 #
 
 # Assistants - General
-alias a="aichat --model openai:${OPENAI_BASIC} --temperature 0.3 "
-alias aa="aichat --model openai:${OPENAI_ADVANCED} --temperature 1 "
+alias a="aichat --model openai:${OPENAI_BASIC} "
+alias aa="aichat --model openai:${OPENAI_ADVANCED} "
 alias aA="aichat --model anthropic:${ANTHROPIC_MODEL} "
 
 # Assistant - reasoning
