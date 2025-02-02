@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
+import argparse
 import json
 import os
-import sys
 
 import requests
 from rich.console import Console
@@ -21,10 +21,10 @@ You are an artificial intelligence assistant and you need to engage in a helpful
 console = Console()
 
 
-def get_response(question):
+def get_response(question, model):
     """Get response from perplexity API."""
     payload = {
-        "model": MODEL,
+        "model": model,
         "messages": [
             {
                 "role": "system",
@@ -100,5 +100,20 @@ def process_response(response):
 
 
 if __name__ == "__main__":
-    question = sys.argv[1]
-    process_response(get_response(question))
+    parser = argparse.ArgumentParser(description="Assistant for online search.")
+
+    parser.add_argument(
+        "query",
+        type=str,
+        help="Query for the assistant.",
+    )
+    parser.add_argument(
+        "-m",
+        "--model",
+        type=str,
+        default=MODEL,
+        help="Model to use for the assistant.",
+    )
+    args = parser.parse_args()
+
+    process_response(get_response(args.query, args.model))
