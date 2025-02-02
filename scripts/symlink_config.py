@@ -22,7 +22,6 @@ CONFIG_MAP = {
     "nvim/": "~/.config/nvim",
     "yazi/": None,
     "aichat-config.yaml": "~/.config/aichat/config.yaml",
-    "condarc": "~/.condarc",
     "config.fish": None,
     "gitconfig": "~/.gitconfig",
     "gitignore": "~/.gitignore_global",
