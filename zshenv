@@ -39,7 +39,7 @@ export GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
 # AI models
 export OPENAI_BASIC="gpt-4o-mini"
 export OPENAI_ADVANCED="gpt-4o"
-export OPENAI_REASON_MINI="o1-mini"
+export OPENAI_REASON_MINI="o3-mini"
 export OPENAI_REASON="o1-preview"
 export PPLX_BASIC="sonar"
 export PPLX_ADVANCED="sonar-pro"
