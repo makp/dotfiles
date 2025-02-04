@@ -57,7 +57,6 @@ alias gt="lazygit"
 alias cg="cd \$(git rev-parse --show-toplevel)"  # cd to root git repo
 
 alias gs="git status --short -b"
-alias gS="check-git-repos-status-recursive.sh"
 
 alias gss="git submodule foreach 'git status --short'"
 alias gsa="git submodule add "

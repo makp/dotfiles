@@ -60,7 +60,7 @@ bindsym $mod+Control+r exec $run_app
 # Move to next workspace
 bindsym $mod+bracketright workspace next_on_output
 bindsym $mod+bracketleft workspace prev_on_output
-bindsym $mod+n exec --no-startup-id "i3-new-workspace.sh"
+bindsym $mod+n exec --no-startup-id "i3_create-new-workspace.sh"
 
 # Kill focused window
 bindsym $mod+Shift+c kill
@@ -254,7 +254,7 @@ bindsym $mod+$meta+0 scratchpad show
 bindsym $mod+Shift+0 move container to scratchpad
 
 # Screen lock
-bindsym $mod+Control+l exec lock_screen.sh
+bindsym $mod+Control+l exec i3_lock-screen.sh
 
 # origin windows
 assign [title="^Origin$"] Origin
@@ -279,7 +279,7 @@ mode "$launch_misc_apps" {
 ## Start a few applications
 ## ========================
 exec conky
-exec xautolock -detectsleep -time 15 -locker 'lock_screen.sh'
+exec xautolock -detectsleep -time 15 -locker 'i3_lock-screen.sh'
 exec insync start
 
 # vim: ft=i3config

@@ -69,7 +69,7 @@ font pango:Hack Nerd Font Mono 10
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 # `swaybg` needs to be installed to set the wallpaper
 output eDP-1 {
-  resolution 1920x1080 position 1920,0
+  resolution 1920x1080 position 0,0
   bg $HOME/Pictures/wallpapers/02154_standalonecleanwallpaper_1920x1080.jpg fill
   }
 
@@ -416,10 +416,6 @@ mode "$launch_misc_apps" {
 
 #
 exec conky
-
-#
-exec insync start
-
 
 ####
 include /etc/sway/config.d/*
