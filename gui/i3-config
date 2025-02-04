@@ -238,11 +238,11 @@ bindsym $mod+Control+w exec $browser
 bindsym $mod+w [class=$browser_class] scratchpad show
 
 # Terminals
-exec --no-startup-id create-term-scratchpad-window.sh
+exec --no-startup-id term_scratchpad-window.sh
 bindsym $mod+Control+t exec $term
 for_window [title="term_scratchpad"] floating enable, move to scratchpad, border pixel 1
 bindsym $mod+t [title="term_scratchpad"] scratchpad show
-bindsym $mod+Return exec choose_project.sh
+bindsym $mod+Return exec term_interactive-zoxide.sh
 
 # Music
 bindsym $mod+Control+m exec $music_player

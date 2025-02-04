@@ -371,7 +371,7 @@ set $music_player youtube-music
 set $music_player_class com.github.th_ch.youtube_music
 
 # Scratchpad terminal
-exec --no-startup-id create-term-scratchpad-window.sh
+exec --no-startup-id term_scratchpad-window.sh
 for_window [title="term_scratchpad"] floating enable, move to scratchpad, border pixel 1
 bindsym $mod+t [title="term_scratchpad"] scratchpad show
 
@@ -384,7 +384,7 @@ bindsym $mod+0 [title="^(?!term_scratchpad)" class="^(?!$music_player_class)(?!$
 bindsym $mod+slash exec $switch_win
 
 # Open terminal
-bindsym $mod+Return exec choose_project.sh
+bindsym $mod+Return exec term_interactive-zoxide.sh
 bindsym $mod+Control+t exec $term
 
 # Default browser
