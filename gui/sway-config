@@ -416,6 +416,7 @@ mode "$launch_misc_apps" {
 
 #
 exec conky
+exec insync start
 
 ####
 include /etc/sway/config.d/*
