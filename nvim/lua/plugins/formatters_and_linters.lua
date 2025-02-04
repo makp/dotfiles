@@ -80,7 +80,7 @@ return {
 		dependencies = {
 			-- Mason - Installer for third-party tools
 			-- Tools are saved in `~/.local/share/nvim/mason/packages`
-			"WhoIsSethDaniel/mason.nvim",
+			"williamboman/mason.nvim",
 			config = true,
 		},
 		config = function()
