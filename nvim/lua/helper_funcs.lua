@@ -206,8 +206,8 @@ function H.open_or_switch_to_file(filepath)
 		end
 	end
 
-	-- If `filepath` is not found, open it in a new window
-	vim.cmd("vsplit " .. filepath)
+	-- If `filepath` is not found, open it
+	vim.cmd("e " .. filepath)
 end
 
 function H.write_code_to_file(filepath)
