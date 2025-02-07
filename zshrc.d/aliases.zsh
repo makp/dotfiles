@@ -50,6 +50,7 @@ alias eh="nvim ."
 alias eu="run_fzf-on-files-and-dirs.sh"
 alias ea="run_rg.sh"
 alias er="nvim +'FzfLua oldfiles cwd_only=true'"
+alias es="nvim +'lua SwitchToScratch()'"
 
 # Git
 alias gt="lazygit"
