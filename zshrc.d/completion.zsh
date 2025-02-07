@@ -80,7 +80,7 @@ zoxide_query() {
 }
 zle -N zoxide_query
 bindkey '^[^_' zoxide_query
-
+bindkey -M vicmd '^[^_' zoxide_query # normal mode
 
 
 #
