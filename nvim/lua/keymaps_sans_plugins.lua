@@ -40,6 +40,7 @@ vim.keymap.set({ "n", "v" }, "<A-h>", "<C-w>h", { noremap = true })
 vim.keymap.set({ "n", "v" }, "<A-j>", "<C-w>j", { noremap = true })
 vim.keymap.set({ "n", "v" }, "<A-k>", "<C-w>k", { noremap = true })
 vim.keymap.set({ "n", "v" }, "<A-l>", "<C-w>l", { noremap = true })
+vim.keymap.set({ "n", "v" }, "<A-n>", "<C-w>w", { noremap = true })
 
 -- Load helper functions
 local hf = require("helper_funcs")
