@@ -30,5 +30,27 @@ config.use_fancy_tab_bar = false
 config.tab_and_split_indices_are_zero_based = true
 config.hide_tab_bar_if_only_one_tab = true
 
+-- Unix domain
+config.unix_domains = {
+	{
+		name = "unix",
+	},
+}
+-- Run `wezterm connect unix` by default
+-- config.default_gui_startup_args = { "connect", "unix" }
+
+-- SSH domains
+-- Run `wezterm connect <domain_name>` to connect to the remote host
+config.ssh_domains = {
+	{
+		-- Domain name
+		name = "lovelace",
+		-- Address of the remote host
+		remote_address = "lovelace.local",
+		-- username on the remote host
+		username = "makmiller",
+	},
+}
+
 -- Return the configuration to wezterm
 return config
