@@ -15,6 +15,7 @@ clients:
     name: pplx
     api_base: https://api.perplexity.ai
     models:
-      - name: sonar-pro
       - name: sonar
+      - name: sonar-pro
       - name: sonar-reasoning
+      - name: sonar-reasoning-pro
