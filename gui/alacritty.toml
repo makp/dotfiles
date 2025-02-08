@@ -29,7 +29,7 @@ family = "Hack Nerd Font Mono"
 style = "Italic"
 
 [keyboard]
-bindings = [{ key = "Enter", mods = "Control | Shift", action = "CreateNewWindow" }]
+bindings = [{ key = "n", mods = "Control | Shift", action = "CreateNewWindow" }]
 
 [window]
 level = "AlwaysOnTop"
