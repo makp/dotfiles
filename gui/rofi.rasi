@@ -1,0 +1,10 @@
+
+//@theme "/usr/share/rofi/themes/gruvbox-dark.rasi"
+
+@theme "/usr/share/rofi/themes/gruvbox-dark-soft.rasi"
+
+configuration {
+    kb-secondary-copy: "";
+    kb-cancel: "Control-c,Escape";
+}
+

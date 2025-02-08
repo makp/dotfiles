@@ -19,6 +19,8 @@ CONFIG_MAP = {
     "gui/sway-config": "~/.config/sway/config",
     "gui/xinitrc": "~/.xinitrc",
     "gui/zathurarc": "~/.config/zathura/zathurarc",
+    "gui/rofi.rasi": "~/.config/rofi/config.rasi",
+    "gui/wezterm": "~/.config/wezterm",
     "nvim/": "~/.config/nvim",
     "yazi/": None,
     "aichat-config.yaml": "~/.config/aichat/config.yaml",
