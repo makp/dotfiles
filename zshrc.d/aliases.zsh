@@ -121,7 +121,12 @@ alias pi='yay -Qi' # Info about a pkg
 
 # Convert between file formats
 alias cmh="convert_md_to_html.py"
-alias cms="pandoc -i -t revealjs -s "
+alias cmsh="pandoc -i -t revealjs -s "
+alias cmsb="pandoc -i -t beamer \
+  -V colortheme:beaver \
+  -V theme:CambridgeUS \
+  -V header-includes:'\usepackage{graphicx}\setkeys{Gin}{width=\textwidth,height=0.6\textheight,keepaspectratio}' \
+  -o output.pdf "
 alias cmn="jupytext --to notebook "
 alias com="pandoc -t gfm -f org "
 alias cpt="pdftotext "
