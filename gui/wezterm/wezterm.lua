@@ -50,6 +50,16 @@ config.ssh_domains = {
 		-- username on the remote host
 		username = "makmiller",
 	},
+	{
+		name = "turing",
+		remote_address = "turing.local",
+		username = "makmiller",
+	},
+	{
+		name = "leibniz",
+		remote_address = "leibniz.local",
+		username = "makmiller",
+	},
 }
 
 -- Return the configuration to wezterm
