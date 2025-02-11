@@ -64,6 +64,54 @@ return {
 		end,
 	},
 
+	-- Misc UI improvements
+	{
+		"folke/snacks.nvim",
+		priority = 1000,
+		lazy = false,
+		---@type snacks.Config
+		opts = {
+			animate = { enabled = true },
+			bigfile = { enabled = true },
+			bufdelete = { enabled = true },
+			dashboard = { enabled = false },
+			debug = { enabled = false },
+			dim = { enabled = true },
+			explorer = { enabled = false },
+			git = { enabled = false },
+			gitbrowse = { enabled = false },
+			image = { enabled = false },
+			indent = { enabled = true },
+			input = { enabled = true }, -- `vim.ui.input`
+			layout = { enabled = false },
+			lazygit = { enabled = false },
+			notifier = { enabled = false },
+			notify = { enabled = false },
+			picker = { enabled = false },
+			profiler = { enabled = false },
+			quickfile = { enabled = true },
+			rename = { enabled = true },
+			scope = { enabled = true },
+			scratch = { enabled = false },
+			scroll = { enabled = true },
+			statuscolumn = { enabled = true },
+			terminal = { enabled = false },
+			toggle = { enabled = true },
+			win = { enabled = false },
+			words = { enabled = true },
+			zen = { enabled = true },
+		},
+		init = function()
+			vim.api.nvim_create_autocmd("User", {
+				pattern = "OilActionsPost",
+				callback = function(event)
+					if event.data.actions.type == "move" then
+						Snacks.rename.on_rename_file(event.data.actions.src_url, event.data.actions.dest_url)
+					end
+				end,
+			})
+		end,
+	},
 	-- Status line
 	{
 		"nvim-lualine/lualine.nvim",
