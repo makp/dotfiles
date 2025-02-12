@@ -84,7 +84,7 @@ return {
 			bufdelete = { enabled = true },
 			dashboard = { enabled = false },
 			debug = { enabled = false },
-			dim = { enabled = true },
+			dim = { enabled = false },
 			explorer = { enabled = false },
 			git = { enabled = false },
 			gitbrowse = { enabled = false },
@@ -93,8 +93,8 @@ return {
 			input = { enabled = false }, -- `vim.ui.input` but not `vim.ui.select`
 			layout = { enabled = false },
 			lazygit = { enabled = false },
-			notifier = { enabled = false },
-			notify = { enabled = false },
+			notifier = { enabled = false }, -- `vim.notify`
+			notify = { enabled = false }, -- utils for `vim.notify`
 			picker = { enabled = false },
 			profiler = { enabled = false },
 			quickfile = { enabled = true },
@@ -104,10 +104,26 @@ return {
 			scroll = { enabled = true },
 			statuscolumn = { enabled = true },
 			terminal = { enabled = false },
-			toggle = { enabled = true },
+			toggle = { enabled = false },
 			win = { enabled = false },
 			words = { enabled = true },
 			zen = { enabled = true },
+		},
+		keys = {
+			{
+				"<C-w>z",
+				function()
+					Snacks.zen.zoom()
+				end,
+				desc = "Maximize window",
+			},
+			{
+				"<C-w>Z",
+				function()
+					Snacks.zen()
+				end,
+				desc = "Zen mode",
+			},
 		},
 		init = function()
 			vim.api.nvim_create_autocmd("User", {

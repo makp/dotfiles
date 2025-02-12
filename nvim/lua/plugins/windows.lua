@@ -1,18 +1,4 @@
 return {
-	-- Add func for toggling window maximization
-	{
-		"declancm/maximize.nvim",
-		keys = {
-			{
-				"<C-w>z",
-				function()
-					require("maximize").toggle()
-				end,
-				desc = "Toggle maximize window",
-			},
-		},
-	},
-
 	-- Edit text areas in web browsers with Neovim
 	-- {
 	-- 	"glacambre/firenvim",
