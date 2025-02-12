@@ -20,6 +20,7 @@ return {
 			"vimdoc",
 			"query",
 			"python",
+			"regex",
 			"latex",
 		},
 		-- Autoinstall languages that are not installed
