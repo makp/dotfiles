@@ -64,6 +64,14 @@ return {
 		end,
 	},
 
+	-- Improved `vim.ui.input` (text input) and `vim.ui.select` (select one
+	-- option)
+	{
+		"stevearc/dressing.nvim",
+		event = "VeryLazy",
+		opts = {},
+	},
+
 	-- Misc UI improvements
 	{
 		"folke/snacks.nvim",
@@ -82,7 +90,7 @@ return {
 			gitbrowse = { enabled = false },
 			image = { enabled = false },
 			indent = { enabled = true },
-			input = { enabled = true }, -- `vim.ui.input`
+			input = { enabled = false }, -- `vim.ui.input` but not `vim.ui.select`
 			layout = { enabled = false },
 			lazygit = { enabled = false },
 			notifier = { enabled = false },
