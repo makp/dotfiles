@@ -84,6 +84,7 @@ return {
 				fzflua.oldfiles({ cwd_only = true, prompt = "History (CWD)❯ " })
 			end, { desc = "[r]ecent files in cwd" })
 			vim.keymap.set("n", "<localleader>uR", fzflua.oldfiles, { desc = "[r]ecent files" })
+			vim.keymap.set("n", "<localleader>u/", fzflua.zoxide, { desc = "zoxide" })
 
 			-- Search
 			vim.keymap.set("n", "<localleader>ab", fzflua.lgrep_curbuf, { desc = "current [b]uffer" })
