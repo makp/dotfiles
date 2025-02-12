@@ -14,56 +14,56 @@ return {
 	},
 	keys = {
 		{
-			"<localleader>ds",
+			"<leader>ds",
 			function()
 				require("dap").continue()
 			end,
 			desc = "Debug: Start/Continue",
 		},
 		{
-			"<localleader>di",
+			"<leader>di",
 			function()
 				require("dap").step_into()
 			end,
 			desc = "Debug: Step Into",
 		},
 		{
-			"<localleader>dn",
+			"<leader>dn",
 			function()
 				require("dap").step_over()
 			end,
 			desc = "Debug: Step Over",
 		},
 		{
-			"<localleader>do",
+			"<leader>do",
 			function()
 				require("dap").step_out()
 			end,
 			desc = "Debug: Step Out",
 		},
 		{
-			"<localleader>db",
+			"<leader>db",
 			function()
 				require("dap").toggle_breakpoint()
 			end,
 			desc = "Debug: Toggle Breakpoint",
 		},
 		{
-			"<localleader>dB",
+			"<leader>dB",
 			function()
 				require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
 			end,
 			desc = "Debug: Set Breakpoint",
 		},
 		{
-			"<localleader>dr",
+			"<leader>dr",
 			function()
 				require("dap").repl.open()
 			end,
 			desc = "Debug: Open REPL",
 		},
 		{
-			"<localleader>dt",
+			"<leader>dt",
 			function()
 				require("dapui").toggle()
 			end,

@@ -10,7 +10,7 @@ return {
 			"<localleader>u",
 			"<localleader>a",
 			"<leader>o",
-			"<leader>d",
+			"<localleader>d",
 			"<localleader>e",
 			"z=",
 			"<C-\\>",
@@ -105,8 +105,8 @@ return {
 			vim.keymap.set("n", "<leader>oj", fzflua.jumps, { desc = "[j]umplist" })
 
 			-- Diagnostics
-			vim.keymap.set("n", "<leader>db", fzflua.diagnostics_document, { desc = "jump in current [b]uffer" })
-			vim.keymap.set("n", "<leader>dw", fzflua.diagnostics_workspace, { desc = "jump in [w]orkspace" })
+			vim.keymap.set("n", "<localleader>db", fzflua.diagnostics_document, { desc = "jump in current [b]uffer" })
+			vim.keymap.set("n", "<localleader>dw", fzflua.diagnostics_workspace, { desc = "jump in [w]orkspace" })
 
 			-- Spell
 			vim.keymap.set("n", "z=", fzflua.spell_suggest, { desc = "spell check" })

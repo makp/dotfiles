@@ -13,8 +13,8 @@ vim.keymap.set("n", "[q", "<cmd>cprev<CR>", { desc = "Go to the *previous* item 
 vim.keymap.set("n", "[Q", "<cmd>cfirst<CR>", { desc = "Go to the *first* item quickfix list" })
 
 -- Diagnostic keymaps
-vim.keymap.set("n", "<leader>ds", vim.diagnostic.open_float, { desc = "[s]how diagnostic messages" })
-vim.keymap.set("n", "<leader>dq", vim.diagnostic.setloclist, { desc = "diagnostic [q]uickfix list" })
+vim.keymap.set("n", "<localleader>ds", vim.diagnostic.open_float, { desc = "[s]how diagnostic messages" })
+vim.keymap.set("n", "<localleader>dq", vim.diagnostic.setloclist, { desc = "diagnostic [q]uickfix list" })
 
 -- Use a easier keybinding for exiting terminal mode
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
@@ -183,6 +183,6 @@ function CopyPathToClipboard()
 	end)
 end
 
-vim.keymap.set("n", "<leader>fy", function()
+vim.keymap.set("n", "<leader>iy", function()
 	CopyPathToClipboard()
 end, { desc = "Copy file info" })

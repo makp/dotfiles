@@ -125,11 +125,11 @@ return {
 				desc = "Zen mode",
 			},
 			{
-				"<leader>fr",
+				"<leader>ir",
 				function()
 					Snacks.rename.rename_file()
 				end,
-				desc = "Rename File",
+				desc = "[r]ename file (LSP-aware)",
 			},
 		},
 		init = function()
@@ -197,10 +197,9 @@ return {
 				{ "<leader>o", group = "[o]pen" },
 				{ "<leader>e", group = "h[e]lp" },
 				{ "<leader>u", group = "r[u]n" },
-				-- { "<leader>i", group = "[i]nsert" },
+				{ "<leader>i", group = "f[i]le" },
 
-				{ "<leader>f", group = "[f]ile" },
-				{ "<leader>d", group = "[d]iagnose" },
+				{ "<leader>d", group = "[d]ebug" },
 
 				-- localleader key chains
 				{ "<localleader>a", group = "se[a]rch" },
@@ -210,7 +209,7 @@ return {
 				{ "<localleader>i", group = "nav[i]gate" },
 
 				{ "<localleader>h", group = "[h]unk" },
-				{ "<localleader>d", group = "[d]ebug" },
+				{ "<localleader>d", group = "[d]iagnose" },
 				{ "<localleader>s", group = "[s]end" },
 			},
 		},
