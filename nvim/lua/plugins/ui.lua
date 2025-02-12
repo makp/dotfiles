@@ -79,35 +79,37 @@ return {
 		lazy = false,
 		---@type snacks.Config
 		opts = {
+			-- Appearance
 			animate = { enabled = true },
-			bigfile = { enabled = true },
-			bufdelete = { enabled = true },
-			dashboard = { enabled = false },
-			debug = { enabled = false },
-			dim = { enabled = false },
-			explorer = { enabled = false },
-			git = { enabled = false },
-			gitbrowse = { enabled = false },
-			image = { enabled = false },
-			indent = { enabled = true },
 			input = { enabled = false }, -- `vim.ui.input` but not `vim.ui.select`
-			layout = { enabled = false },
-			lazygit = { enabled = false },
+			statuscolumn = { enabled = true },
+			scroll = { enabled = true },
+			scope = { enabled = true },
+
+			-- Notifications
 			notifier = { enabled = false }, -- `vim.notify`
 			notify = { enabled = false }, -- utils for `vim.notify`
-			picker = { enabled = false },
-			profiler = { enabled = false },
+
+			-- Files
 			quickfile = { enabled = true },
-			rename = { enabled = true }, -- LSP-integrated rename
-			scope = { enabled = true },
-			scratch = { enabled = false },
-			scroll = { enabled = true },
-			statuscolumn = { enabled = true },
-			terminal = { enabled = false },
-			toggle = { enabled = false },
+			bigfile = { enabled = true },
+
+			-- Window mgmt
+			bufdelete = { enabled = true }, -- `:bd` but keep layout
+			layout = { enabled = false },
 			win = { enabled = false },
-			words = { enabled = true },
 			zen = { enabled = true },
+
+			-- LSP-related
+			rename = { enabled = true }, -- LSP-integrated rename
+			words = { enabled = true }, -- LSP references
+
+			-- Misc
+			lazygit = { enabled = false },
+			profiler = { enabled = false }, -- Neovim profiler
+			scratch = { enabled = false },
+			terminal = { enabled = false },
+			toggle = { enabled = true }, -- toggle mappings
 		},
 		keys = {
 			{
@@ -131,6 +133,36 @@ return {
 				end,
 				desc = "[r]ename file (LSP-aware)",
 			},
+			{
+				"]]",
+				function()
+					Snacks.words.jump(vim.v.count1)
+				end,
+				desc = "Next Reference",
+				mode = { "n", "t" },
+			},
+			{
+				"]]",
+				function()
+					Snacks.words.jump(-vim.v.count1)
+				end,
+				desc = "Previous Reference",
+				mode = { "n", "t" },
+			},
+			{
+				"<leader>bd",
+				function()
+					Snacks.bufdelete()
+				end,
+				desc = "[d]elete buffer while keeping layout",
+			},
+			{
+				"<leader>bD",
+				function()
+					Snacks.bufdelete.other()
+				end,
+				desc = "[D]elete other buffers while keeping layout",
+			},
 		},
 		init = function()
 			vim.api.nvim_create_autocmd("User", {
@@ -141,8 +173,32 @@ return {
 					end
 				end,
 			})
+
+			vim.api.nvim_create_autocmd("User", {
+				pattern = "VeryLazy",
+				callback = function()
+					-- Setup some globals for debugging (lazy-loaded)
+					_G.dd = function(...)
+						Snacks.debug.inspect(...)
+					end
+					_G.bt = function()
+						Snacks.debug.backtrace()
+					end
+					vim.print = _G.dd -- Override print to use snacks for `:=` command
+
+					-- Toggle mappings
+					Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>tw")
+					Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>tz")
+					Snacks.toggle.diagnostics():map("<leader>td")
+					Snacks.toggle.dim():map("<leader>td")
+					Snacks.toggle
+						.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
+						:map("<leader>tc")
+				end,
+			})
 		end,
 	},
+
 	-- Status line
 	{
 		"nvim-lualine/lualine.nvim",
@@ -199,7 +255,9 @@ return {
 				{ "<leader>u", group = "r[u]n" },
 				{ "<leader>i", group = "f[i]le" },
 
+				{ "<leader>b", group = "[b]uffer" },
 				{ "<leader>d", group = "[d]ebug" },
+				{ "<leader>t", group = "[t]oggle" },
 
 				-- localleader key chains
 				{ "<localleader>a", group = "se[a]rch" },
