@@ -98,7 +98,7 @@ return {
 			picker = { enabled = false },
 			profiler = { enabled = false },
 			quickfile = { enabled = true },
-			rename = { enabled = true },
+			rename = { enabled = true }, -- LSP-integrated rename
 			scope = { enabled = true },
 			scratch = { enabled = false },
 			scroll = { enabled = true },
@@ -123,6 +123,13 @@ return {
 					Snacks.zen()
 				end,
 				desc = "Zen mode",
+			},
+			{
+				"<leader>fr",
+				function()
+					Snacks.rename.rename_file()
+				end,
+				desc = "Rename File",
 			},
 		},
 		init = function()
