@@ -365,8 +365,8 @@ set $term alacritty
 set $term_other kitty
 set $switch_win rofi -show window
 set $run_app rofi -show drun
-set $browser brave
-set $browser_class Brave-browser
+set $browser zen-browser
+set $browser_appid zen
 set $music_player youtube-music
 set $music_player_class com.github.th_ch.youtube_music
 
@@ -378,8 +378,6 @@ bindsym $mod+t [title="term_scratchpad"] scratchpad show
 # Show certain windows from the scratchpad
 bindsym $mod+0 [title="^(?!term_scratchpad)" class="^(?!$music_player_class)(?!$browser_class)"] scratchpad show
 
-
-
 # Switch windows
 bindsym $mod+slash exec $switch_win
 
@@ -389,7 +387,7 @@ bindsym $mod+Control+t exec $term
 
 # Default browser
 bindsym $mod+Control+w exec $browser
-bindsym $mod+w [class=$browser_class] scratchpad show
+bindsym $mod+w [app_id=$browser_appid] scratchpad show
 
 # Music
 bindsym $mod+Control+m exec $music_player
