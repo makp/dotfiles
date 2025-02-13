@@ -40,7 +40,6 @@ return {
 		opts = {},
 		dependencies = {
 			"MunifTanjim/nui.nvim",
-			"rcarriga/nvim-notify",
 		},
 		config = function()
 			require("noice").setup({
@@ -52,7 +51,6 @@ return {
 						["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
 					},
 				},
-				-- you can enable a preset for easier configuration
 				presets = {
 					bottom_search = true, -- use a classic bottom cmdline for search
 					command_palette = true, -- position the cmdline and popupmenu together
@@ -87,7 +85,7 @@ return {
 			scope = { enabled = true },
 
 			-- Notifications
-			notifier = { enabled = false }, -- `vim.notify`
+			notifier = { enabled = true, timeout = 2000 }, -- `vim.notify`
 			notify = { enabled = false }, -- utils for `vim.notify`
 
 			-- Files
@@ -162,6 +160,22 @@ return {
 					Snacks.bufdelete.other()
 				end,
 				desc = "[D]elete other buffers while keeping layout",
+			},
+
+			{
+				"<leader>ms",
+				function()
+					Snacks.notifier.show_history()
+				end,
+				desc = "[s]how history",
+			},
+
+			{
+				"<leader>md",
+				function()
+					Snacks.notifier.hide()
+				end,
+				desc = "[d]ismiss notifications",
 			},
 		},
 		init = function()
@@ -258,6 +272,7 @@ return {
 				{ "<leader>b", group = "[b]uffer" },
 				{ "<leader>d", group = "[d]ebug" },
 				{ "<leader>t", group = "[t]oggle" },
+				{ "<leader>m", group = "[m]essage" },
 
 				-- localleader key chains
 				{ "<localleader>a", group = "se[a]rch" },
