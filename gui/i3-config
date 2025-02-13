@@ -229,7 +229,7 @@ bindsym $mod+$meta+b bar hidden_state toggle
 set $term alacritty
 set $other_term kitty
 set $browser zen-browser
-set $browser_class Brave-browser
+set $browser_class zen
 set $music_player youtube-music
 set $music_player_class com.github.th_ch.youtube_music
 
