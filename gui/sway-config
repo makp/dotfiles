@@ -376,7 +376,7 @@ for_window [title="term_scratchpad"] floating enable, move to scratchpad, border
 bindsym $mod+t [title="term_scratchpad"] scratchpad show
 
 # Show certain windows from the scratchpad
-bindsym $mod+0 [title="^(?!term_scratchpad)" class="^(?!$music_player_class)(?!$browser_class)"] scratchpad show
+bindsym $mod+0 [title="^(?!term_scratchpad)" class="^(?!$music_player_class)" app_id="^(?!$browser_appid)"] scratchpad show
 
 # Switch windows
 bindsym $mod+slash exec $switch_win
