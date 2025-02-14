@@ -85,6 +85,20 @@ return {
 			end, { desc = "[r]ecent files in cwd" })
 			vim.keymap.set("n", "<localleader>uR", fzflua.oldfiles, { desc = "[r]ecent files" })
 			vim.keymap.set("n", "<localleader>u/", fzflua.zoxide, { desc = "zoxide" })
+			vim.keymap.set("n", "<localleader>ud", function()
+				fzflua.files({
+					cmd = "fd -t d",
+					previewer = {
+						_ctor = require("fzf-lua.previewer").fzf.cmd,
+						cmd = "eza -l --color=always --icons --git --no-permissions --no-user --no-filesize --time-style relative",
+					},
+					prompt = "Directories> ",
+				})
+			end, { desc = "[d]irectories in cwd" })
+			vim.keymap.set("n", "<localleader>uh", function()
+				local current_dir = vim.fn.expand("%:p:h")
+				fzflua.files({ cwd = current_dir })
+			end, { desc = "files in [h]ere" })
 
 			-- Search
 			vim.keymap.set("n", "<localleader>ab", fzflua.lgrep_curbuf, { desc = "current [b]uffer" })
