@@ -193,8 +193,8 @@ bindsym $mod+$meta+9 move container to workspace 9
 
 # resize window
 bindsym $mod+$meta+h resize shrink width 100 px or 1 ppt
-bindsym $mod+$meta+k resize grow height 100 px or 1 ppt
-bindsym $mod+$meta+j resize shrink height 100 px or 1 ppt
+bindsym $mod+$meta+j resize grow height 100 px or 1 ppt
+bindsym $mod+$meta+k resize shrink height 100 px or 1 ppt
 bindsym $mod+$meta+l resize grow width 100 px or 1 ppt
 
 
