@@ -5,8 +5,6 @@
 # focuses on processes that should happen at the start of the login
 # shell session.
 
-echo "Running .zlogin..."
-
 ## OpenSSH KEYS PASSPHRASES -------
 
 # This portion assumes that the ssh-agent is running. You can set it up by
