@@ -362,7 +362,7 @@ bindsym $mod+$meta+b bar hidden_state toggle
 
 # Preferred applications
 set $term alacritty
-set $term_other kitty
+set $term_other wezterm
 set $switch_win rofi -show window
 set $run_app rofi -show drun
 set $browser zen-browser

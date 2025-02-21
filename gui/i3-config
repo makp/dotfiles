@@ -227,7 +227,7 @@ bindsym $mod+$meta+b bar hidden_state toggle
 
 # Set default programs
 set $term alacritty
-set $other_term kitty
+set $other_term wezterm
 set $browser zen-browser
 set $browser_class zen
 set $music_player youtube-music
