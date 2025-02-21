@@ -5,7 +5,7 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
 -- Font
-config.font_size = 10
+config.font_size = 12
 config.font = wezterm.font("Hack Nerd Font")
 -- config.line_height = 1.2
 
@@ -22,6 +22,46 @@ config.window_padding = {
 	right = 0,
 	top = 0,
 	bottom = 0,
+}
+
+-- Keybindings
+config.keys = {
+	{
+		key = "v",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+	},
+	{
+		key = "s",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
+	},
+	{
+		key = "c",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.CloseCurrentPane({ confirm = true }),
+	},
+	-- Pane navigation
+	{
+		key = "h",
+		mods = "META|SHIFT",
+		action = wezterm.action.ActivatePaneDirection("Left"),
+	},
+	{
+		key = "j",
+		mods = "META|SHIFT",
+		action = wezterm.action.ActivatePaneDirection("Down"),
+	},
+	{
+		key = "k",
+		mods = "META|SHIFT",
+		action = wezterm.action.ActivatePaneDirection("Up"),
+	},
+	{
+		key = "l",
+		mods = "META|SHIFT",
+		action = wezterm.action.ActivatePaneDirection("Right"),
+	},
 }
 
 -- Tabs
