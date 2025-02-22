@@ -21,6 +21,10 @@ local function run_cmd_async(cmd, cmd_args, callback)
 	local stdout = uv.new_pipe()
 	local stderr = uv.new_pipe()
 
+	if not stdout or not stderr then
+		return callback("Error: Could not create pipes")
+	end
+
 	-- Create process handle
 	local handle
 
@@ -35,10 +39,14 @@ local function run_cmd_async(cmd, cmd_args, callback)
 
 	local on_exit = function(_)
 		-- Close and stop reading pipes
-		uv.read_stop(stdout)
-		uv.close(stdout)
-		uv.read_stop(stderr)
-		uv.close(stderr)
+		if stdout then
+			uv.read_stop(stdout)
+			uv.close(stdout)
+		end
+		if stderr then
+			uv.read_stop(stderr)
+			uv.close(stderr)
+		end
 
 		-- Close the process if running
 		if handle then
@@ -51,6 +59,9 @@ local function run_cmd_async(cmd, cmd_args, callback)
 	end
 
 	handle = uv.spawn(cmd, options, on_exit)
+	if not handle then
+		return callback("Error: Could not spawn process")
+	end
 
 	-- Read from stdout and stderr
 	local on_read = function(_, data)
@@ -60,8 +71,12 @@ local function run_cmd_async(cmd, cmd_args, callback)
 		end
 	end
 
-	uv.read_start(stdout, on_read)
-	uv.read_start(stderr, on_read)
+	if stdout then
+		uv.read_start(stdout, on_read)
+	end
+	if stderr then
+		uv.read_start(stderr, on_read)
+	end
 end
 
 -- Create a buffer and display the output
