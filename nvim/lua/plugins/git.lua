@@ -79,13 +79,13 @@ return {
 					vim.cmd.normal("]h")
 				end)
 				map("n", "<localleader>hs", gitsigns.stage_hunk, { desc = "stage hunk" })
-				map("n", "<localleader>hu", gitsigns.undo_stage_hunk, { desc = "undo stage hunk" })
 				map("n", "<localleader>hr", gitsigns.reset_hunk, { desc = "reset hunk" })
 				map("n", "<localleader>hS", gitsigns.stage_buffer, { desc = "stage buffer" })
 				map("n", "<localleader>hR", gitsigns.reset_buffer, { desc = "reset buffer" })
 
 				-- Diffs
 				map("n", "<localleader>hp", gitsigns.preview_hunk, { desc = "git [p]review hunk" })
+				map("n", "<localleader>hl", gitsigns.preview_hunk_inline, { desc = "git [p]review hunk inline" })
 				map("n", "<localleader>hd", gitsigns.diffthis, { desc = "git [d]iff against index" })
 				map("n", "<localleader>hD", function()
 					gitsigns.diffthis("@")
@@ -98,7 +98,6 @@ return {
 
 				-- Toggles
 				map("n", "<localleader>htb", gitsigns.toggle_current_line_blame, { desc = "toggle [b]lame line" })
-				map("n", "<localleader>htd", gitsigns.toggle_deleted, { desc = "toggle [d]eleted" })
 				map("n", "<localleader>htw", gitsigns.toggle_word_diff, { desc = "toggle [w]ord diff" })
 
 				-- Hunk object
