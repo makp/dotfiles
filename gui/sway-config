@@ -384,6 +384,7 @@ bindsym $mod+slash exec $switch_win
 # Open terminal
 bindsym $mod+Return exec term_interactive-zoxide.sh
 bindsym $mod+Control+t exec $term
+bindsym $mod+Shift+t exec $term_other
 
 # Default browser
 bindsym $mod+Control+w exec $browser
