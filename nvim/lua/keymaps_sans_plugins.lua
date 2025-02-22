@@ -45,6 +45,14 @@ vim.keymap.set({ "n", "v" }, "<A-n>", "<C-w>w", { noremap = true })
 -- Load helper functions
 local hf = require("helper_funcs")
 
+-- Open external terminal in current buffer's directory
+function OpenTerminal()
+	local cmd = "alacritty"
+	local dir = vim.fn.expand("%:p:h")
+	vim.fn.jobstart(cmd .. " --working-directory " .. dir)
+end
+vim.keymap.set("n", "<leader>ot", "<cmd>lua OpenTerminal()<CR>", { desc = "open [t]erminal" })
+
 -- Open or switch to scratch file
 function SwitchToScratch()
 	local scratch_file = "~/OneDrive/computer_files/scratch_shared.md"
