@@ -91,7 +91,7 @@ vim.keymap.set({ "n", "v" }, "<leader>up", function()
 end, { desc = "Check prose writing" })
 
 -- Inspect code with GPT in a repl
-local function inspect_code_with_gpt(model, filepath)
+--[[ local function inspect_code_with_gpt(model, filepath)
 	-- Del past sgpt chat if it exists
 	local chat_name = "code_chat"
 	local chat_path = "/tmp/chat_cache/" .. chat_name
@@ -102,9 +102,9 @@ local function inspect_code_with_gpt(model, filepath)
 	-- Run sgpt --repl in a terminal buffer
 	local cmd = string.format("sgpt --model %s --temperature 1 --repl %s < %s", model, chat_name, filepath)
 	hf.run_cmd_in_tmux_pane(cmd)
-end
+end ]]
 
-function InspectCode()
+--[[ function InspectCode()
 	-- Write code to a file
 	local filepath = "/tmp/temp_code.md"
 	hf.write_code_to_file(filepath)
@@ -120,11 +120,11 @@ function InspectCode()
 			print("No model selected!")
 		end
 	end)
-end
+end ]]
 
-vim.keymap.set({ "n", "v" }, "<leader>ui", function()
+--[[ vim.keymap.set({ "n", "v" }, "<leader>ui", function()
 	InspectCode()
-end, { desc = "Inspect code" })
+end, { desc = "Inspect code" }) ]]
 
 -- Run code assistant
 local function run_code_assistant(mode, buffer_txt)
@@ -164,6 +164,7 @@ vim.keymap.set({ "n", "v" }, "<localleader>oe", function()
 	code_explain_light()
 end, { desc = "Code [e]xplain light" })
 
+-- Copy file path to clipboard
 function CopyPathToClipboard()
 	-- See :help filename-modifiers
 	local opts = { "absolute path", "absolute dir", "filename", "relative path", "relative dir" }

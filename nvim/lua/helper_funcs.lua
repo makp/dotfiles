@@ -235,7 +235,7 @@ function H.run_cmd_in_term_buf(cmd)
 	vim.cmd("startinsert")
 end
 
-function H.run_cmd_in_tmux_pane(cmd)
+--[[ function H.run_cmd_in_tmux_pane(cmd)
 	-- Check if `cmd` is valid
 	if type(cmd) ~= "string" or cmd == "" then
 		print("Error: Invalid command")
@@ -251,7 +251,7 @@ function H.run_cmd_in_tmux_pane(cmd)
 	local escaped_cmd = vim.fn.shellescape(cmd .. "; tmux kill-pane -t " .. new_pane_id)
 	local tmux_cmd = string.format("tmux send-keys -t %s %s Enter", new_pane_id, escaped_cmd)
 	vim.fn.system(tmux_cmd)
-end
+end ]]
 
 function H.run_cmd_in_alacritty(cmd)
 	-- Check if `cmd` is valid
