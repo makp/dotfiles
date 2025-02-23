@@ -388,5 +388,25 @@ function H.run_cmd_async_and_display_floating_win(cmd, args)
 	end)
 end -- vim.keymap.set("n", "<localleader>t", move_to_next_code_line)
 
+function H.center_terminal_window()
+	-- Save current window ID
+	local current_window = vim.api.nvim_get_current_win()
+
+	-- Get list of visible windows
+	local visible_windows = vim.api.nvim_list_wins()
+
+	-- Find and center visible terminal window
+	for _, win in ipairs(visible_windows) do
+		local buftype = vim.bo[vim.api.nvim_win_get_buf(win)].buftype
+		if buftype == "terminal" then
+			vim.api.nvim_set_current_win(win)
+			vim.cmd("normal! G")
+			vim.cmd("normal! zz")
+		end
+	end
+	-- Restore focus to the original window
+	vim.api.nvim_set_current_win(current_window)
+end
+
 -- Return the table
 return H
