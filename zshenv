@@ -29,8 +29,7 @@ export VISUAL=/usr/bin/nvim
 export ALTERNATE_EDITOR=vim
 
 # Use `bat` as a pager for `man`
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-export MANROFFOPT="-c"
+export MANPAGER="nvim +Man!"
 
 # Git
 export GIT_AUTHOR_NAME="mak-$(hostname)"
