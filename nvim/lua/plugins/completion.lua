@@ -171,41 +171,34 @@ return {
 		end,
 	},
 
-	-- Enable Copilot completions
 	{
-		"github/copilot.vim",
-		-- event = "InsertEnter",
-		-- cmd = "Copilot",
-
+		-- Enable Copilot completions
 		-- Type `# q:` for asking questions
-		-- M-]/[ : cycle through suggestions
-		-- M-\ : request a suggestion
-		-- M-Right / M-C-Right : accept next word/line
-		-- Invoke :Copilot status to check the status of the plugin
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+		event = "InsertEnter",
 		config = function()
-			vim.g.copilot_no_mappings = true
-			-- Open copilot panel with completions
-			vim.keymap.set("i", "<C-\\>cc", "<cmd>Copilot panel<CR>")
-			-- Don't use <Tab> to accept suggestion
-			vim.g.copilot_no_tab_map = true
-			vim.g.copilot_filetypes = {
-				gitcommit = true,
-			}
-			-- Select a keybinding other than <Tab> to accept suggestion
-			-- The argument to copilot#Accept() is the fallback for when no suggestion is
-			-- displayed.
-			-- vim.keymap.set("i", "<C-M-S-f>", 'copilot#Accept("\\<CR>")', {
-			-- 	expr = true,
-			-- 	replace_keycodes = false,
-			-- })
-			vim.keymap.set("i", "<C-f>", "<Plug>(copilot-accept-line)")
-			vim.keymap.set("i", "<C-M-f>", "<Plug>(copilot-accept-word)")
+			require("copilot").setup({
+				suggestion = {
+					auto_trigger = true,
+					keymap = {
+						accept_word = "<C-M-f>",
+						accept_line = "<C-f>",
+					},
+				},
+				filetypes = {
+					markdown = true,
+					gitcommit = true,
+				},
+			})
 		end,
 	},
+
 	{
+		-- Github Copilot chat
 		"CopilotC-Nvim/CopilotChat.nvim",
 		dependencies = {
-			{ "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
+			{ "zbirenbaum/copilot.lua" },
 			{ "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
 		},
 		build = "make tiktoken", -- Only on MacOS or Linux
