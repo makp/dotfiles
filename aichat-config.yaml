@@ -19,3 +19,4 @@ clients:
       - name: sonar-pro
       - name: sonar-reasoning
       - name: sonar-reasoning-pro
+      - name: r1-1776
