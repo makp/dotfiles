@@ -1,24 +1,25 @@
 -- Routines after LSP attaches to a buffer
 
--- LSP keybindings
+-- Function for setting LSP keybindings
 local function setup_mappings(buf)
 	local fzflua = require("fzf-lua")
 
-	local function map(keys, func, desc)
-		vim.keymap.set("n", keys, func, { buffer = buf, desc = "LSP: " .. desc })
+	local function map(keys, func, desc, mode)
+		mode = mode or "n"
+		vim.keymap.set(mode, keys, func, { buffer = buf, desc = "LSP: " .. desc })
 	end
 
 	local mappings = {
 		--  Press <C-t> to jump back
 		{ "gd", vim.lsp.buf.definition, "Jump to [d]efinition" },
 
+		-- Find refs word under cursor
 		{ "gr", fzflua.lsp_references, "List [r]eferences" },
 
-		-- Fuzzy find all the symbols in your current document.
-		-- Symbols are things like variables, functions, types, etc.
+		-- Find all the symbols in current doc (vars, funcs, types, etc.)
 		{ "<localleader>os", fzflua.lsp_document_symbols, "[s]ymbols in current buffer" },
 
-		-- Fuzzy find all the symbols in your current workspace.
+		-- Find all the symbols in your current workspace.
 		{ "<localleader>oS", fzflua.lsp_live_workspace_symbols, "[S]ymbols in workspace" },
 
 		-- Jump to the declaration of the word under your cursor
@@ -44,10 +45,10 @@ local function setup_mappings(buf)
 	end
 end
 
--- The following autocommands are used to highlight references of the word
--- under your cursor when your cursor rests there for a little. When you move
--- your cursor, the highlights will be cleared (the second autocommand). See
--- `:help cursorhold` for information about when this is executed
+-- Function to highlight references of the word under your cursor when your
+-- cursor rests there for a little. When you move your cursor, the highlights
+-- will be cleared (the second autocommand).
+-- See `:help cursorhold` for information about when this is executed
 local function highlight_references(buf)
 	local highlight_augroup = vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
 
@@ -75,8 +76,10 @@ end
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
 	callback = function(event)
+		-- Set up keybindings for the LSP
 		setup_mappings(event.buf)
 
+		-- Highlight references
 		local client = vim.lsp.get_client_by_id(event.data.client_id)
 		if client then
 			if client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then

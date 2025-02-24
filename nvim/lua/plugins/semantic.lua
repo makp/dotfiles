@@ -5,11 +5,15 @@ return {
 		-- Configure LSP servers
 		"neovim/nvim-lspconfig",
 		dependencies = {
-			"williamboman/mason.nvim",
+			-- `opts = {}` is the same as calling `require('mason').setup({})`
+			{ "williamboman/mason.nvim", opts = {} },
 			"williamboman/mason-lspconfig.nvim",
 			"hrsh7th/cmp-nvim-lsp",
 		},
 		config = function()
+			-- Run certain routines after LSP attach
+			require("lsp_after_attach")
+
 			-- Enable the following language servers
 			-- See `:help lspconfig-all` for a list of all the pre-configured LSPs
 			local servers = {
@@ -49,12 +53,12 @@ return {
 				},
 			}
 
-			local servers_to_install = vim.tbl_keys(servers or {})
 
 			-- Have LSPs play nicely with cmp
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
+			local servers_to_install = vim.tbl_keys(servers or {})
 			require("mason-lspconfig").setup({
 				ensure_installed = servers_to_install,
 				automatic_installation = true,
