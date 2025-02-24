@@ -49,6 +49,7 @@ local hf = require("helper_funcs")
 function OpenTerminal()
 	local cmd = "alacritty"
 	local dir = vim.fn.expand("%:p:h")
+	dir = string.gsub(dir, "oil://", "") -- Remove "oil://" prefix if present
 	vim.fn.jobstart(cmd .. " --working-directory " .. dir)
 end
 vim.keymap.set("n", "<leader>ot", "<cmd>lua OpenTerminal()<CR>", { desc = "open [t]erminal" })
