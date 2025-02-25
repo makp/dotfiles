@@ -196,17 +196,19 @@ return {
 			-- https://github.com/tecfu/.vim/blob/5555e2973a1d27f4ebbf0c21e53b64ba4a148d06/viml/copilot.lua.nvim
 			-- https://github.com/zbirenbaum/copilot.lua/issues/279
 			-- https://github.com/CheesyChocolate/nvim/commit/dd20a290864379e8170815f42775d089775dc85f
+			DELAY = 200
 			vim.api.nvim_create_autocmd("BufEnter", {
 				group = vim.api.nvim_create_augroup("CopilotToggle", { clear = true }),
 				callback = function(ev)
 					local buf = ev.buf
-					if vim.bo[buf].filetype == "copilot-chat" and not vim.b[buf].copilot_toggle_ran then
-						vim.b[buf].copilot_toggle_ran = true
-						vim.notify("CopilotToggle condition met")
+					local is_copilot_chat = vim.bo[buf].filetype == "copilot-chat"
+					local is_not_initialized = vim.b[buf].copilot_chat_initialized == nil
+
+					if is_copilot_chat and is_not_initialized then
+						vim.b[buf].copilot_chat_initialized = true
 						vim.defer_fn(function()
-							vim.notify("copilotToggle ran")
 							vim.cmd("Copilot! toggle")
-						end, 200)
+						end, DELAY)
 					end
 				end,
 			})
