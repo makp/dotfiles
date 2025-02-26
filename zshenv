@@ -44,7 +44,7 @@ export PPLX_BASIC="sonar"
 export PPLX_ADVANCED="sonar-pro"
 export PPLX_REASON_BASIC="sonar-reasoning"
 export PPLX_REASON_ADVANCED="sonar-reasoning-pro"
-export ANTHROPIC_MODEL="claude-3-5-sonnet-latest"
+export ANTHROPIC_MODEL="claude-3-7-sonnet-latest"
 
 # CUDA vars
 if command -v nvcc >/dev/null 2>&1; then
