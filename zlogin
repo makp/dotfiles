@@ -46,6 +46,6 @@ fi
 if [ "$(tty)" = "/dev/tty1" ]; then
   case "$(hostname)" in
     leibniz) exec sway ;;
-    turing) exec startx turing ;;
+    turing) exec startx ;;
   esac
 fi
