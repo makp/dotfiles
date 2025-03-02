@@ -33,6 +33,7 @@ CONFIG_MAP = {
     "zshrc": "~/.zshrc",
     "zshenv": "~/.zshenv",
     "lazygit.yml": "~/.config/lazygit/config.yml",
+    "scripts/batsignal.service.d": "~/.config/systemd/user/batsignal.service.d/options.conf",
 }
 
 
