@@ -34,6 +34,7 @@ CONFIG_MAP = {
     "zshenv": "~/.zshenv",
     "lazygit.yml": "~/.config/lazygit/config.yml",
     "scripts/batsignal.service.d": "~/.config/systemd/user/batsignal.service.d/options.conf",
+    "scripts/headless_insync.service": "/etc/systemd/system/headless_insync@.service",
 }
 
 

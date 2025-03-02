@@ -1,0 +1,17 @@
+[Unit]
+Description=Headless Insync with Xvfb
+After=network.target
+
+[Service]
+Type=forking
+User=%i
+Environment=DISPLAY=:1
+ExecStartPre=/bin/sh -c "/usr/bin/Xvfb :1 -screen 0 1024x768x24 -ac &"
+ExecStart=/usr/bin/insync start
+ExecStop=/usr/bin/insync quit
+ExecStop=/usr/bin/pkill -f "Xvfb :1"
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
