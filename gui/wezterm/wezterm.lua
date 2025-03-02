@@ -25,21 +25,29 @@ config.window_padding = {
 }
 
 -- Keybindings
+config.key_tables = {
+	windows = {
+		{
+			key = "c",
+			action = wezterm.action.CloseCurrentPane({ confirm = true }),
+		},
+		{
+			key = "v",
+			action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+		},
+		{
+			key = "s",
+			action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
+		},
+	},
+}
+
 config.keys = {
+	-- Window operations
 	{
-		key = "v",
+		key = "w",
 		mods = "CTRL|SHIFT",
-		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
-	},
-	{
-		key = "s",
-		mods = "CTRL|SHIFT",
-		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
-	},
-	{
-		key = "c",
-		mods = "CTRL|SHIFT",
-		action = wezterm.action.CloseCurrentPane({ confirm = true }),
+		action = wezterm.action.ActivateKeyTable({ name = "windows", one_short = true }),
 	},
 	-- Pane navigation
 	{
