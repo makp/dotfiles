@@ -137,3 +137,11 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.opt_local.formatoptions:remove({ "o" })
 	end,
 })
+
+-- Set filetype for systemd files
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+	pattern = { "*.service", "*.socket", "*.timer", "*.target" },
+	callback = function()
+		vim.bo.filetype = "systemd"
+	end,
+})
