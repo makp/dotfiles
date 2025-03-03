@@ -145,3 +145,11 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 		vim.bo.filetype = "systemd"
 	end,
 })
+
+-- Set filetype for .envrc files
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+	pattern = ".envrc",
+	callback = function()
+		vim.bo.filetype = "sh"
+	end,
+})
