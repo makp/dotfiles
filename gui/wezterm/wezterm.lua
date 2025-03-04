@@ -94,18 +94,18 @@ config.ssh_domains = {
 		-- Domain name
 		name = "lovelace",
 		-- Address of the remote host
-		remote_address = "lovelace.local",
+		remote_address = "lovelace",
 		-- username on the remote host
 		username = "makmiller",
 	},
 	{
 		name = "turing",
-		remote_address = "turing.local",
+		remote_address = "turing",
 		username = "makmiller",
 	},
 	{
 		name = "leibniz",
-		remote_address = "leibniz.local",
+		remote_address = "leibniz",
 		username = "makmiller",
 	},
 }
