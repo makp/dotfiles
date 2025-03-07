@@ -38,6 +38,16 @@ CONFIG_MAP = {
 }
 
 
+def check_configs_not_symlinked():
+    """Check which config files are not symlinked, and return their source
+    paths."""
+    return [
+        (src, dst)
+        for src, dst in CONFIG_MAP.items()
+        if dst is not None and not Path(dst).expanduser().is_symlink()
+    ]
+
+
 def create_symlinks(config_file):
     value = CONFIG_MAP.get(config_file)
 
