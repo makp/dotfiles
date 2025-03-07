@@ -227,7 +227,7 @@ return {
 		config = function()
 			require("CopilotChat").setup({
 				system_prompt = require("CopilotChat.config.prompts").COPILOT_EXPLAIN.system_prompt,
-				model = "claude-3.7-sonnet",
+				model = "claude-3.7-sonnet-thought",
 			})
 		end,
 		keys = {
