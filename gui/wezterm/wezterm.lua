@@ -25,6 +25,10 @@ config.window_padding = {
 }
 
 -- Keybindings
+
+-- Leader key
+config.leader = { key = "b", mods = "CTRL" }
+
 config.key_tables = {
 	windows = {
 		{
@@ -64,6 +68,12 @@ config.key_tables = {
 }
 
 config.keys = {
+	{
+		key = "b",
+		mods = "LEADER|CTRL",
+		action = wezterm.action.SendKey({ key = "b", mods = "CTRL" }),
+	},
+
 	-- Window operations
 	{
 		key = "w",
