@@ -32,6 +32,27 @@ config.key_tables = {
 			action = wezterm.action.CloseCurrentPane({ confirm = true }),
 		},
 		{
+			key = "o",
+			action = wezterm.action_callback(function(window, pane)
+				--
+				local tab = window:active_tab()
+				local current_pane_id = pane:pane_id()
+				local panes = tab:panes()
+
+				if #panes == 1 then
+					return
+				end
+
+				-- Close all panes except the current one
+				for _, other_pane in ipairs(panes) do
+					if other_pane:pane_id() ~= current_pane_id then
+						other_pane:activate()
+						window:perform_action(wezterm.action.CloseCurrentPane({ confirm = false }), other_pane)
+					end
+				end
+			end),
+		},
+		{
 			key = "v",
 			action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
 		},
