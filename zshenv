@@ -12,23 +12,23 @@ fi
 # Path to config files
 export CONFIG_FILES="$HOME/Documents/mydocs/config_files"
 
-# Set PATH
+# PATH
 # `/usr/bin/vendor_perl`: biber
-PATH="$PATH:/usr/bin/vendor_perl:$CONFIG_FILES/scripts:$HOME/Documents/mydocs/teaching/teaching_struct/teaching_utils:$HOME/.luarocks/bin:"
+PATH="$PATH:/usr/bin/vendor_perl:$CONFIG_FILES/scripts:$HOME/Documents/mydocs/teaching/teaching_admin/teaching_utils:$HOME/.luarocks/bin:"
 if [ -d /opt/cuda/bin ]; then
 	PATH="$PATH:/opt/cuda/bin"
 fi
 export PATH
 
 
-# Set default editors for ZSH
-# EDITOR is for programs that expect a line editor. VISUAL is for
-# screen-oriented programs.
+# Default editors for ZSH
+# EDITOR is for programs that expect a line editor.
+# VISUAL is for screen-oriented programs.
 export EDITOR=/usr/bin/nvim
 export VISUAL=/usr/bin/nvim
 export ALTERNATE_EDITOR=vim
 
-# Use `bat` as a pager for `man`
+# Pager for `man`
 export MANPAGER="nvim +Man!"
 
 # Git
