@@ -31,6 +31,9 @@ export ALTERNATE_EDITOR=vim
 # Pager for `man`
 export MANPAGER="nvim +Man!"
 
+# rclone
+export RCLONE_FAST_LIST=true
+
 # Git
 export GIT_AUTHOR_NAME="mak-$(hostname)"
 export GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
