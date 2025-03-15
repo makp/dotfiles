@@ -24,7 +24,7 @@ return {
 				lua = { "stylua" },
 				python = { "ruff_format", "ruff_organize_imports" },
 				json = { "jq" },
-				markdown = { "markdownlint", "injected" },
+				markdown = { "markdownlint" },
 				-- tex = { "latexindent" }, -- texlab already does this
 				bib = { "bibtex-tidy" }, -- `bibtex-tidy` times out on large files
 				-- Run `trim_whitespace` on all files
@@ -103,7 +103,7 @@ return {
 
 			-- Get all formatters
 			local formatters = require("conform").formatters_by_ft
-			local formatters_to_ignore = { "injected", "trim_whitespace", "ruff_organize_imports", "ruff_format" }
+			local formatters_to_ignore = { "trim_whitespace", "ruff_organize_imports", "ruff_format" }
 
 			for _, tbl in pairs(formatters) do
 				---@diagnostic disable-next-line: param-type-mismatch
