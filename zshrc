@@ -21,7 +21,7 @@ PATH_OMZ=/usr/share/oh-my-zsh/plugins # Oh My Zsh plugins
 PATH_PLUGINS=/usr/share/zsh/plugins
 
 # Source config files in zshrc.d
-for config_file ($CONFIG_FILES/zshrc.d/*.zsh(N)) ; do
+for config_file ($USER_CONFIG_FILES/zshrc.d/*.zsh(N)) ; do
  source "$config_file"
 done
 

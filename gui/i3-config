@@ -201,7 +201,7 @@ bindsym $mod+$meta+l resize grow width 100 px or 1 ppt
 # Status bar
 bar {
   mode hide
-  status_command i3status --config $CONFIG_FILES/x-configs/i3status-$(hostname).conf
+  status_command i3status --config $USER_CONFIG_FILES/x-configs/i3status-$(hostname).conf
 	tray_output primary
 	i3bar_command i3bar
   font -misc-fixed-medium-r-normal--14-120-75-75-C-70-iso10646-1

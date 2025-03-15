@@ -338,7 +338,7 @@ bindsym Print exec grim
 bar {
     mode hide
     position bottom
-    status_command i3status --config $CONFIG_FILES/x-configs/i3status-$(hostname).conf
+    status_command i3status --config $USER_CONFIG_FILES/x-configs/i3status-$(hostname).conf
     # status_command while date +'%Y-%m-%d %X'; do sleep 1; done
     font -misc-fixed-medium-r-normal--14-120-75-75-C-70-iso10646-1
     font pango:Hack Nerd Font Mono 10

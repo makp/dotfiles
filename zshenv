@@ -10,11 +10,11 @@ if [[ -f ~/.zsh_private ]]; then
 fi
 
 # Path to config files
-export CONFIG_FILES="$HOME/Documents/mydocs/config_files"
+export USER_CONFIG_FILES="$HOME/Documents/mydocs/config_files"
 
 # PATH
 # `/usr/bin/vendor_perl`: biber
-PATH="$PATH:/usr/bin/vendor_perl:$CONFIG_FILES/scripts:$HOME/Documents/mydocs/teaching/teaching_admin/teaching_utils:$HOME/.luarocks/bin:"
+PATH="$PATH:/usr/bin/vendor_perl:$USER_CONFIG_FILES/scripts:$HOME/Documents/mydocs/teaching/teaching_admin/teaching_utils:$HOME/.luarocks/bin:"
 if [ -d /opt/cuda/bin ]; then
 	PATH="$PATH:/opt/cuda/bin"
 fi
